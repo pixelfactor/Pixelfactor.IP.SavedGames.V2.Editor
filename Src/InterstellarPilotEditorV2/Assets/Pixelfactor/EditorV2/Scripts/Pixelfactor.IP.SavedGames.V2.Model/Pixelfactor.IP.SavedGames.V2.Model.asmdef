@@ -1,0 +1,16 @@
+{
+    "name": "Pixelfactor.IP.SavedGames.V2.Model",
+    "rootNamespace": "Pixelfactor.IP.SavedGames.V2.Model",
+    "references": [
+        "GUID:84f6d0a72cee5b64b81ac94d6a0641a7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

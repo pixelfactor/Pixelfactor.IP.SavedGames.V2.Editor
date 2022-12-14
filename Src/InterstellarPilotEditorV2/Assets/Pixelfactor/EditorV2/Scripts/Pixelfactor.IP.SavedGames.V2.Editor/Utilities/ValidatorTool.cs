@@ -1,0 +1,24 @@
+﻿using UnityEditor;
+using UnityEngine;
+
+namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
+{
+    public class ValidatorTool : MonoBehaviour
+    {
+        [MenuItem("Window/IP Editor V2/Export/Validate only")]
+        public static void ValidateMenuItem()
+        {
+            // Find the saved game
+            var editorSavedGame = GameObject.FindObjectOfType<EditorSavedGame>();
+            if (editorSavedGame == null)
+            {
+                Debug.LogError("No editor saved game found"); return;
+            }
+
+            Validator.Validate(editorSavedGame, false);
+
+            Debug.Log("Validation complete");
+
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "name": "Pixelfactor.IP.SavedGames.V2.Editor",
+    "rootNamespace": "Pixelfactor.IP.SavedGames.V2.Editor",
+    "references": [
+        "GUID:7d6b703991f41e44b8add7da9df73bf1",
+        "GUID:d3b74106c2fc26d47a748e9441b74997",
+        "GUID:84f6d0a72cee5b64b81ac94d6a0641a7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

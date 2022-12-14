@@ -1,0 +1,14 @@
+{
+    "name": "Pixelfactor.IP.Common",
+    "rootNamespace": "Pixelfactor.IP.Common",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
