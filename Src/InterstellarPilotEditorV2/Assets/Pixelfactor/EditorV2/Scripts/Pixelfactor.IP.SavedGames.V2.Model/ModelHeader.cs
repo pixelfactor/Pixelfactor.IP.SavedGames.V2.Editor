@@ -70,6 +70,21 @@ namespace Pixelfactor.IP.SavedGames.V2.Model
         /// </summary>
         public double SecondsElapsed { get; set; }
 
+        /// <summary>
+        /// Optional custom name of the scenario
+        /// </summary>
         public string ScenarioTitle { get; set; }
+
+        /// <summary>
+        /// Optional author of the scenario
+        /// </summary>
+        public string ScenarioAuthor { get; set; }
+
+        /// <summary>
+        /// Optional tool that authored the scenario
+        /// </summary>
+        public string ScenarioAuthoringTool { get; set; }
+
+        public string ScenarioDescription { get; set; }
     }
 }

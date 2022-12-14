@@ -1087,6 +1087,9 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
             {
                 var delayedMessage = new ModelPlayerDelayedMessage();
                 delayedMessage.ShowTime = reader.ReadDouble();
+                delayedMessage.Important = reader.ReadBoolean();
+                delayedMessage.Notifications = reader.ReadBoolean();
+
                 delayedMessage.Message = ReadPlayerMessage(reader);
                 player.DelayedMessages.Add(delayedMessage);
             }

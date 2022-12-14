@@ -10,5 +10,8 @@
         /// The scenario time in seconds when to show the message
         /// </summary>
         public double ShowTime { get; set; }
+
+        public bool Important { get; set; } = false;
+        public bool Notifications { get; set; } = true;
     }
 }

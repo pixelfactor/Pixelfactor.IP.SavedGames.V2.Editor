@@ -25,6 +25,9 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
             writer.Write(header.SecondsElapsed);
             writer.Write(header.GameStartDate.ToString(Constants.HeaderDateFormat));
             writer.WriteStringOrEmpty(header.ScenarioTitle);
+            writer.WriteStringOrEmpty(header.ScenarioAuthor);
+            writer.WriteStringOrEmpty(header.ScenarioAuthoringTool);
+            writer.WriteStringOrEmpty(header.ScenarioDescription);
         }
     }
 }

@@ -282,7 +282,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 ScenarioInfoId = 100000, // Don't change this
                 TimeStamp = System.DateTime.Now,
                 Version = new System.Version(2, 0, 43), // Should be tied to the binary writer package being used
-                ScenarioTitle = editorSavedGame.Title
+                ScenarioTitle = editorSavedGame.Title,
+                ScenarioAuthor = editorSavedGame.Author,
+                ScenarioAuthoringTool = $"IP2 Unity Editor {Application.version}",
+                ScenarioDescription = editorSavedGame.Description,
+                GameStartDate = new System.DateTime(editorSavedGame.DateYear, editorSavedGame.DateMonth, editorSavedGame.DateDay, editorSavedGame.DateHour, editorSavedGame.DateMinute, 0),
             };
         }
 

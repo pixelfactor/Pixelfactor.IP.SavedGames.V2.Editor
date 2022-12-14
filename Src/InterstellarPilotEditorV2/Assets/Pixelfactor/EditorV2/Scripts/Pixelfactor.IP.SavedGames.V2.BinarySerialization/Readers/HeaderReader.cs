@@ -29,13 +29,16 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
             header.SecondsElapsed = reader.ReadDouble();
             header.GameStartDate = DateTime.ParseExact(reader.ReadString(), Constants.HeaderDateFormat, new CultureInfo("en-GB"));
             header.ScenarioTitle = reader.ReadString();
+            header.ScenarioAuthor = reader.ReadString();
+            header.ScenarioAuthoringTool = reader.ReadString();
+            header.ScenarioDescription = reader.ReadString();
 
             return header;
         }
 
         public static Version ReadVersionOnly(BinaryReader reader)
         {
-            return(reader.ReadVersion());
+            return (reader.ReadVersion());
         }
     }
 }

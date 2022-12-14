@@ -699,7 +699,7 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
         {
             var unitsToWrite = units.Where(e => e.ComponentUnitData != null && e.ComponentUnitData.AutoTurretFireMode.HasValue).ToList();
             writer.Write(unitsToWrite.Count);
-            foreach (var  modelUnit in unitsToWrite)
+            foreach (var modelUnit in unitsToWrite)
             {
                 writer.WriteUnitId(modelUnit);
                 writer.Write((int)modelUnit.ComponentUnitData.AutoTurretFireMode);
@@ -732,7 +732,7 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
 
         private void PrintStatus(string message, BinaryWriter writer, Action<string> logger)
         {
-            if (logger != null) 
+            if (logger != null)
                 logger($"{message} - {writer.BaseStream.Position - 1} bytes wrote");
         }
 
@@ -838,6 +838,9 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
             foreach (var delayedMessage in player.DelayedMessages)
             {
                 writer.Write(delayedMessage.ShowTime);
+                writer.Write(delayedMessage.Important);
+                writer.Write(delayedMessage.Notifications);
+
                 WritePlayerMessage(writer, delayedMessage.Message);
             }
 
@@ -849,7 +852,7 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
         }
 
         private void WritePlayerStats(
-            BinaryWriter writer, 
+            BinaryWriter writer,
             ModelPlayerStats stats)
         {
             writer.Write(stats.SectorsVisited.Count);
@@ -1184,7 +1187,7 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
 
             writer.Write(fleet.HomeBase != null);
             if (fleet.HomeBase != null)
-            { 
+            {
                 SectorTargetWriter.Write(writer, fleet.HomeBase);
             }
 
@@ -1426,7 +1429,7 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
 
         private void WritePoweredDownComponents(BinaryWriter writer, IEnumerable<ModelUnit> units)
         {
-            var poweredDownUnits = units.Where(e => e.ComponentUnitData != null && 
+            var poweredDownUnits = units.Where(e => e.ComponentUnitData != null &&
                 e.ComponentUnitData.PoweredDownBayIds != null &&
                 e.ComponentUnitData.PoweredDownBayIds.Count > 0).ToList();
 
@@ -1739,7 +1742,7 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
         {
             var factionOpinions = factions
                 .Where(e => e.Opinions?.Items.Count > 0)
-                .Select(e => new { Faction = e, Items = e.Opinions.Items.Where(item => item.OtherFaction != e ).ToList() }) // Filter out invalid ones where faction has opinion with itself. This will crash the game's reader
+                .Select(e => new { Faction = e, Items = e.Opinions.Items.Where(item => item.OtherFaction != e).ToList() }) // Filter out invalid ones where faction has opinion with itself. This will crash the game's reader
                 .ToList();
             writer.Write(factionOpinions.SelectMany(e => e.Items).Count());
             foreach (var faction in factionOpinions)
