@@ -46,11 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AllowCombatInterception: 1
   AllowAttack: 1
-  AttackTargetScoreThreshold: 25
-  ControllersCanCollectCargo: 1
-  ControllersCollectOnlyEquipment: 1
+  Aggression: 0.5
+  CargoCollectionPreference: 1
   TargetInterceptionLowerDistance: 1300
   TargetInterceptionUpperDistance: 1500
-  PreferCloak: 1
+  PreferCloak: 0
   PreferToDock: 0
-  MaxJumpDistance: 8
+  MaxJumpDistance: 99

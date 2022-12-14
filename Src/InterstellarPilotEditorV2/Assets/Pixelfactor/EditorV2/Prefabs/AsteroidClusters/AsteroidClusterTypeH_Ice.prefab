@@ -48,7 +48,7 @@ MonoBehaviour:
   Id: -1
   Class: 200010
   Faction: {fileID: 0}
-  RpProvision: 0
+  RpProvision: 1
   Name: 
 --- !u!1 &5507963291060157466
 GameObject:

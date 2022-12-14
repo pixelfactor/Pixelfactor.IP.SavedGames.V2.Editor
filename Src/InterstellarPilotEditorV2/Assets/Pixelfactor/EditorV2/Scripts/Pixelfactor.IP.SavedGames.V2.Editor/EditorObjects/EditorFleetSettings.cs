@@ -18,7 +18,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// Fleet will allow pilots to interecept targets that have a better score than this<br />
         /// Set the value very high if the group should ignore targets
         /// </summary>
-        public float Aggression = 13.0f;
+        [Range(0.0f, 1.0f)]
+        public float Aggression = 0.5f;
 
         /// <summary>
         /// When true, controllers will collect cargo
@@ -28,11 +29,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// <summary>
         /// Distance at which fleet members will be allowed to intercept targets
         /// </summary>
+        [Range(500.0f, 16000.0f)]
         public float TargetInterceptionLowerDistance = 1300.0f;
 
         /// <summary>
         /// Distance at which fleet members will be allowed to intercept targets
         /// </summary>
+        [Range(500.0f, 16000.0f)]
         public float TargetInterceptionUpperDistance = 1500.0f;
 
         /// <summary>
@@ -49,6 +52,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// Defines how far this fleet can travel from its home base (if it is assigned)<br />
         /// Applies only if restrict max jumps is true
         /// </summary>
-        public int MaxJumpDistance = 8;
+        [Range(0, 99)]
+        public int MaxJumpDistance = 99;
     }
 }

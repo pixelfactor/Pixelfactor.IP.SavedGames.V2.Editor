@@ -44,25 +44,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8bababd92ec1eb4ea29420010d60dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: -1
+  Id: 0
   GeneratedNameId: -1
   GeneratedSuffixId: -1
-  CustomName: Player
-  CustomShortName: P1
-  Credits: 10000
-  Description: This is you
+  CustomName: 
+  CustomShortName: 
+  Credits: 0
+  Description: 
   IsCivilian: 0
-  FactionType: 0
+  FactionType: 16384
   Aggression: 0.5
   Virtue: 0.5
   Greed: 0.5
   TradeEfficiency: 0.5
-  DynamicRelations: 0
+  DynamicRelations: 1
   ShowJobBoards: 0
   CreateJobs: 0
-  RequisitionPointMultiplier: 0
-  DestroyWhenNoUnits: 0
+  RequisitionPointMultiplier: 1
+  DestroyWhenNoUnits: 1
   MinNpcCombatEfficiency: 0
-  MaxNpcCombatEfficiency: 0
+  MaxNpcCombatEfficiency: 1
   AdditionalRpProvision: 0
   TradeIllegalGoods: 0
