@@ -348,7 +348,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                     player.DelayedMessages.Add(new ModelPlayerDelayedMessage
                     {
                         Message = message,
-                        ShowTime = editorMessage.ShowTime
+                        ShowTime = editorMessage.ShowTime,
+                        Important = editorMessage.Important,
+                        Notifications = editorMessage.Notifications,
                     });
                 }
                 else

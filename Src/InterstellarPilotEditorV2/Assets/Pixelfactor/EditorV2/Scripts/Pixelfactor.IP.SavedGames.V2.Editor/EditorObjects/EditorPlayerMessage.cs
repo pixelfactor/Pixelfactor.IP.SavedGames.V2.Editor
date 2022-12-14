@@ -19,5 +19,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         public string MessageText;
         public string SubjectText;
         public float ShowTime = -1.0f;
+
+        /// <summary>
+        /// Determines whether player is notified when message received<br />
+        /// Applies to delayed messages where <see cref="ShowTime"/> greater than zero
+        /// </summary>
+        public bool Notifications = true;
+
+        /// <summary>
+        /// Determines whether player gets alert when message is received
+        /// Applies to delayed messages where <see cref="ShowTime"/> greater than zero
+        /// </summary>
+        public bool Important = true;
     }
 }
