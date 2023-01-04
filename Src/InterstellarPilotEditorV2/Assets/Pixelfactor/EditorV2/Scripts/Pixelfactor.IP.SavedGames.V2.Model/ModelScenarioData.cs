@@ -23,5 +23,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Model
 
         public float AsteroidRespawnTime { get; set; } = 0.5f;
         public float NextProcessOtherEventsTime { get; set; } = 0.0f;
+
+        public bool AllowStationCapture { get; set; } = true;
+        public bool AllowAbandonShip { get; set; } = true;
     }
 }

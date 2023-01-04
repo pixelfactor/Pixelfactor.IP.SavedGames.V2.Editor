@@ -1023,6 +1023,8 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
             scenarioData.AsteroidRespawningEnabled = reader.ReadBoolean();
             scenarioData.AsteroidRespawnTime = reader.ReadSingle();
             scenarioData.NextProcessOtherEventsTime = reader.ReadSingle();
+            scenarioData.AllowStationCapture = reader.ReadBoolean();
+            scenarioData.AllowAbandonShip = reader.ReadBoolean();
 
             return scenarioData;
         }

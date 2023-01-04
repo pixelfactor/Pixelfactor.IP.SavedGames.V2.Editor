@@ -28,7 +28,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             ExportUnits(editorSavedGame, savedGame);
             ExportWormholes(editorSavedGame, savedGame);
             ExportFleets(editorSavedGame, savedGame);
-            AssignFleetDesignations(editorSavedGame, savedGame);
             ExportPeople(editorSavedGame, savedGame);
             ExportPlayer(editorSavedGame, savedGame);
             ExportScenarioData(editorSavedGame, savedGame);
@@ -48,30 +47,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
 
             return savedGame;
 
-        }
-
-        /// <summary>
-        /// The 1.6.x has no concept of named fleets, but we can achieve the same effect by overwriting Unit.Name
-        /// </summary>
-        /// <param name="editorSavedGame"></param>
-        /// <param name="savedGame"></param>
-        private static void AssignFleetDesignations(EditorSavedGame editorSavedGame, SavedGame savedGame)
-        {
-            foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
-            {
-                foreach (var editorFleet in editorSector.GetComponentsInChildren<EditorFleet>())
-                {
-                    if (!string.IsNullOrWhiteSpace(editorFleet.Designation))
-                    { 
-                        var editorUnits = editorFleet.GetComponentsInChildren<EditorUnit>();
-                        foreach (var editorUnit in editorUnits)
-                        {
-                            var unit = savedGame.Units.Single(e => e.Id == editorUnit.Id);
-                            unit.Name = editorFleet.Designation;
-                        }
-                    }
-                }
-            }
         }
 
         private static void ExportFleets(EditorSavedGame editorSavedGame, SavedGame savedGame)
@@ -99,7 +74,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                         IsActive = true,
                         HomeBase = ModelSectorTargetUtil.FromTransform(editorFleet.transform, savedGame),
                         Position = editorFleet.transform.localPosition.ToVec3_ZeroY(),
-                        Sector = sector
+                        Sector = sector,
+                        Name =  editorFleet.Designation
                     };
 
                     var editorFleetSettings = editorFleet.GetComponentInChildren<EditorFleetSettings>();

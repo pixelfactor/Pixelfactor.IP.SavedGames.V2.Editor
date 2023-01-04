@@ -38,7 +38,7 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
 
         public static Version ReadVersionOnly(BinaryReader reader)
         {
-            return (reader.ReadVersion());
+            return(reader.ReadVersion());
         }
     }
 }

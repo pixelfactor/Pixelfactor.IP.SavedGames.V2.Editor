@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c12d3279f5ae2f419ae288278d9d753, type: 3}
   m_Name: IP2EditorSettings
   m_EditorClassIdentifier: 
-  gameExecutablePath: 
+  gameExecutablePath: C:\dev\pixelfactor\bin\2.0.50_win\Interstellar Pilot 2.exe
+  defaultExportPath: 

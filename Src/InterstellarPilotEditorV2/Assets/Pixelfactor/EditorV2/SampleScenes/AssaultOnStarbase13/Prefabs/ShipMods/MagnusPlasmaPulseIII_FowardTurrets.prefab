@@ -123,5 +123,5 @@ Transform:
   - {fileID: 4271353713067831345}
   - {fileID: 4271353713539314128}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
