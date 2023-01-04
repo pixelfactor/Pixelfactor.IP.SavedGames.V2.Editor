@@ -488,6 +488,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                         RpProvision = editorUnit.RpProvision,
                         Name = editorUnit.Name, // Set the unit name here but it may later be overriden
                         Sector = savedGame.Sectors.FirstOrDefault(e => e.Id == editorSector.Id),
+                        // Radius is only relevant to some units like gas clouds and asteroid clusters
+                        Radius = editorUnit.Radius >= 0.0f ? editorUnit.Radius : null,
                     };
 
                     unit.Rotation = editorUnit.transform.localRotation.ToVec3();

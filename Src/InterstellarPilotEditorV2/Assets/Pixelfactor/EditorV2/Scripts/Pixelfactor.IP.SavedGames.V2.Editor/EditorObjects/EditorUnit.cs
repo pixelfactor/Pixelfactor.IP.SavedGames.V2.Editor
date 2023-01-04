@@ -23,6 +23,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// </summary>
         public string Name;
 
+        /// <summary>
+        /// Optional custom radius. Only relevant to gas clouds and asteroid clusters
+        /// </summary>
+        public float Radius = -1.0f;
+
         void OnDrawGizmosSelected()
         {
             if (SelectionHelper.IsSelected(this) || SelectionHelper.IsSelected(this.transform.parent))

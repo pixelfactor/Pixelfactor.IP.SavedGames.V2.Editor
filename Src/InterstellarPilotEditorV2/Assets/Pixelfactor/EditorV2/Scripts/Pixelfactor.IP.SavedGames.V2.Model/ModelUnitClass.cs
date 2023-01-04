@@ -123,5 +123,8 @@
         Station_SmallSatellite = 60000,
         Station_Bar1 = 4100,
         Station_SectorHQ = 37000,
+        GasCloud_Grey = 300300,
+        GasCloud_ExtremeDark = 300200,
+        GasCloud_CoolBlue = 300100
     }
 }

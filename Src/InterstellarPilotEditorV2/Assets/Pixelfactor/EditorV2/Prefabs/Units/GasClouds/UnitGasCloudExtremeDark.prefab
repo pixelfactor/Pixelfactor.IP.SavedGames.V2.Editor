@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4656951364488765979}
   - component: {fileID: 5033624439146972838}
   m_Layer: 0
-  m_Name: UnitAsteroidClusterTypeB_Rock
+  m_Name: UnitGasCloudExtremeDark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
-  EditorUnitClassRef: {fileID: 2544603334889176812, guid: c9867d855264c2b4393e216139f70f58, type: 3}
+  EditorUnitClassRef: {fileID: 2544603334889176812, guid: f83f1ac4f4a6ba24cbd943562eb2a688, type: 3}
   Faction: {fileID: 0}
   RpProvision: 1
   Name: 
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 7083160346427600529}
   - component: {fileID: 110015727869442431}
   - component: {fileID: 1740507421157960580}
-  - component: {fileID: 2140077347707132020}
+  - component: {fileID: 29541370460974280}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -79,7 +79,7 @@ Transform:
   m_GameObject: {fileID: 2166436130356841712}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 3000, y: 3000, z: 3000}
+  m_LocalScale: {x: 1500, y: 1500, z: 1500}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4656951364488765979}
@@ -113,7 +113,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bae2cf9772ea0d64aa1078280bb0339f, type: 2}
+  - {fileID: 2100000, guid: 86be8f60d7eb50d4791dbc7092bff029, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,7 +135,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2140077347707132020
+--- !u!114 &29541370460974280
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
