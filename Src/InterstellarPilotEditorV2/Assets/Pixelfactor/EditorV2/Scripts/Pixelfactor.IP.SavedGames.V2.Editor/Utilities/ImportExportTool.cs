@@ -12,15 +12,20 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         {
             var editorSavedGame = Util.FindSavedGameOrErrorOut();
 
+            QuickFixSavedGame(editorSavedGame);
+
+            var path = GetExportPath(editorSavedGame.Title);
+            ValidateAndExport(editorSavedGame, path);
+        }
+
+        public static void QuickFixSavedGame(EditorSavedGame editorSavedGame)
+        {
             FixUpUnitOwnership.SetFleetChildrenToSameFaction(editorSavedGame);
             FixUpUnitOwnership.SetUnitFactionsToPilotFactions(editorSavedGame);
 
             // Blitz all ids to ensure uniqueness
             AutoAssignIdsTool.ClearAllIds(editorSavedGame);
             AutoAssignIdsTool.AutoAssignIds(editorSavedGame);
-
-            var path = GetExportPath(editorSavedGame.Title);
-            ValidateAndExport(editorSavedGame, path);
         }
 
         public static string GetExportPath(string scenarioTitle = "")
@@ -49,6 +54,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             catch (System.Exception ex)
             {
                 Debug.LogException(new System.Exception("Validation failed. Export will not continue. Please contact Pixelfactor for support.", ex));
+                EditorUtility.DisplayDialog("Failed validation", "Validation failed. See the console for more details", "OK");
                 return;
             }
 
@@ -60,6 +66,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             catch (System.Exception ex)
             {
                 Debug.LogException(new System.Exception("SaveFile Export failed. Please contact Pixelfactor for support.", ex));
+                EditorUtility.DisplayDialog("Failed export", "Export failed. See the console for more details", "OK");
                 return;
             }
 
@@ -74,6 +81,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             catch (System.Exception ex)
             {
                 Debug.LogException(new System.Exception("SaveFile Write failed. Please contact Pixelfactor for support.", ex));
+                EditorUtility.DisplayDialog("Failed file write", "Failed to write file. See the console for more details", "OK");
             }
         }
     }

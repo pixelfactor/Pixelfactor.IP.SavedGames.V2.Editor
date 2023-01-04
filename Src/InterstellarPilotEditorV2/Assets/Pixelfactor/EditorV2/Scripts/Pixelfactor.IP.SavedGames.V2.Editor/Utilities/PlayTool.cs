@@ -9,26 +9,40 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         [MenuItem("Window/IP Editor V2/Play")]
         public static void Play()
         {
+            var editorSavedGame = Util.FindSavedGameOrErrorOut();
+            if (editorSavedGame == null)
+                return;
+
+            ImportExportTool.QuickFixSavedGame(editorSavedGame);
+
+            // Validate first
+            try
+            {
+                Validator.Validate(editorSavedGame, true);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogException(new System.Exception("Validation failed. Export will not continue. Please contact Pixelfactor for support.", ex));
+                EditorUtility.DisplayDialog("Failed validation", "Validation failed. See the console for more details", "OK");
+                return;
+            }
+
             if (TryGetExePath(out string exePath))
             {
                 try
                 {
                     Debug.Log("Attempting to export and run scenario");
 
-                    var editorSavedGame = Util.FindSavedGameOrErrorOut();
-                    if (editorSavedGame != null)
-                    {
-                        var savedGame = SavedGameExporter.Export(editorSavedGame);
-                        var exportPath = ImportExportTool.GetExportPath(editorSavedGame.Title);
+                    var savedGame = SavedGameExporter.Export(editorSavedGame);
+                    var exportPath = ImportExportTool.GetExportPath(editorSavedGame.Title);
 
-                        BinarySerialization.Writers.SaveGameWriter.WriteToPath(savedGame, exportPath);
+                    BinarySerialization.Writers.SaveGameWriter.WriteToPath(savedGame, exportPath);
 
-                        Debug.Log($"Save file successfully wrote to {exportPath}");
-                        
-                        var arguments = $"-scenarioPath \"{exportPath}\"";
-                        var processStartInfo = new System.Diagnostics.ProcessStartInfo(exePath, arguments);
-                        System.Diagnostics.Process.Start(processStartInfo);
-                    }
+                    Debug.Log($"Save file successfully wrote to {exportPath}");
+
+                    var arguments = $"-scenarioPath \"{exportPath}\"";
+                    var processStartInfo = new System.Diagnostics.ProcessStartInfo(exePath, arguments);
+                    System.Diagnostics.Process.Start(processStartInfo);
                 }
                 catch (System.Exception ex)
                 {

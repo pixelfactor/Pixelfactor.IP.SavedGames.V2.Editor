@@ -45,7 +45,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         private static void ValidateDuplicateIds(EditorSavedGame editorSavedGame, bool throwOnError)
         {
             ValidateMessageIds(editorSavedGame, throwOnError);
-            ValidateUnitIds(editorSavedGame, throwOnError);
+            ValidateUnits(editorSavedGame, throwOnError);
             ValidateFactionIds(editorSavedGame, throwOnError);
             ValidatePersonIds(editorSavedGame, throwOnError);
             ValidateSectorIds(editorSavedGame, throwOnError);
@@ -80,13 +80,18 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             }
         }
 
-        private static void ValidateUnitIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateUnits(EditorSavedGame editorSavedGame, bool throwOnError)
         {
             foreach (var unit in editorSavedGame.GetComponentsInChildren<EditorUnit>())
             {
                 if (unit.Id < 0)
                 {
                     OnError("All units require a valid (>0) id", unit, throwOnError);
+                }
+
+                if ((int)unit.Class < 0)
+                {
+                    OnError($"Unit \"{unit}\" does not have a class id", unit, throwOnError);
                 }
             }
         }

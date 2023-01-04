@@ -45,9 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4150b2f3c81293b4e80d166bee8db2bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsUnderConstruction: 0
+  ConstructionState: 0
   ConstructionProgress: 0
-  StationUnitClassNumber: 0
   CapacitorCharge: -1
   IsCloaked: 0
   EngineThrottle: -1
@@ -99,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
-  Class: 55500
+  EditorUnitClassRef: {fileID: 2544603334889176812, guid: abd05d28f1836174db05907d6abf8555, type: 3}
   Faction: {fileID: 0}
   RpProvision: 0
   Name: 
@@ -191,6 +190,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2818396943555392176}
     m_Modifications:
     - target: {fileID: 5123266666204138070, guid: ab3d2cd9e2e19484b958610fbeff2c54, type: 3}
@@ -246,6 +246,7 @@ PrefabInstance:
       value: ShipCargoECMandMinesSmall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ab3d2cd9e2e19484b958610fbeff2c54, type: 3}
 --- !u!4 &6453388977050438776 stripped
 Transform:
