@@ -1,3 +1,4 @@
+using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -18,10 +19,28 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             AutoAssignIdsTool.ClearAllIds(editorSavedGame);
             AutoAssignIdsTool.AutoAssignIds(editorSavedGame);
 
-            ValidateAndExport(editorSavedGame);
+            var path = GetExportPath(editorSavedGame.Title);
+            ValidateAndExport(editorSavedGame, path);
         }
 
-        private static void ValidateAndExport(EditorSavedGame editorSavedGame)
+        public static string GetExportPath(string scenarioTitle = "")
+        {
+            var preferredPath = CustomSettings.GetOrCreateSettings().DefaultExportPath;
+
+            if (string.IsNullOrWhiteSpace(preferredPath))
+            {
+                preferredPath = System.IO.Path.GetDirectoryName(FileUtil.GetUniqueTempPathInProject());
+            }
+
+            var name = !string.IsNullOrEmpty(scenarioTitle) ? scenarioTitle : "NewEditorSavedGame";
+
+            var fileName = $"{name}.dat";
+            var path = Path.Combine(preferredPath, fileName);
+
+            return path;
+        }
+
+        private static void ValidateAndExport(EditorSavedGame editorSavedGame, string path)
         {
             try
             {
@@ -46,16 +65,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
 
             try
             {
-                // TODO: Move path to settings
-                var preferredPath = @"";
-                var name = !string.IsNullOrEmpty(savedGame.Header.ScenarioTitle) ? savedGame.Header.ScenarioTitle : "NewEditorSavedGame";
-
-                var fileName = $"{name}.dat";
-                var path = Path.Combine(preferredPath, fileName);
-
                 BinarySerialization.Writers.SaveGameWriter.WriteToPath(savedGame, path);
 
-                Debug.Log($"Save file successfully exported to {Path.GetFullPath(fileName)}");
+                Debug.Log($"Save file successfully wrote to {path}");
 
                 EditorUtility.RevealInFinder(path);
             }
