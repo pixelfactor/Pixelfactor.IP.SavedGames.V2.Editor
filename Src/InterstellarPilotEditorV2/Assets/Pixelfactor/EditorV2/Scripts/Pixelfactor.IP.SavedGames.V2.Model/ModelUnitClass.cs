@@ -52,15 +52,15 @@
         WormholeUnstable = 20010,
         Station_Laboratory = 37055,
         Projectile_Lancer = 29300,
-        Station_LaserIII = 37206,
-        Station_LaserV = 37205,
+        Station_LightWeaponsPlatform = 37206,
+        Station_MediumWeaponsPlatform = 37205,
         Station_LightArmsFactory = 21000,
         Projectile_LS1Test = 29350,
         Ship_Magnus = 22010,
         Ship_MagnusA = 22000,
         Ship_MagnusEQ = 22050,
         Ship_MagnusX = 22005,
-        Station_MilitaryOutpost = 23000,
+        Station_EquipmentShop = 23000,
         Projectile_Mine1 = 30800,
         Projectile_Mine2 = 30820,
         Moon1 = 100136,
@@ -120,6 +120,8 @@
         Station_SmallOutpost = 37000,
         Station_Shipyard = 44100,
         Station_RationsFactory = 31000,
-        Station_SmallSatellite = 60000
+        Station_SmallSatellite = 60000,
+        Station_Bar1 = 4100,
+        Station_SectorHQ = 37000,
     }
 }

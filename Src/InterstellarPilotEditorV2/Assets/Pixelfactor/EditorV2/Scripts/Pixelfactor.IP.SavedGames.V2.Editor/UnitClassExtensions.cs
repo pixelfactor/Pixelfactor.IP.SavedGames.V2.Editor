@@ -21,7 +21,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
 
         public static bool IsTurret(this ModelUnitClass unitClass)
         {
-            return unitClass == ModelUnitClass.Station_LaserIII || unitClass == ModelUnitClass.Station_LaserV;
+            return unitClass == ModelUnitClass.Station_MediumWeaponsPlatform || unitClass == ModelUnitClass.Station_LightWeaponsPlatform;
         }
 
         public static bool IsWormhole(this ModelUnitClass unitClass)

@@ -10,10 +10,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
     {
         public int Id = -1;
 
-        /// <summary>
-        /// Defines the type of unit this is
-        /// </summary>
-        public ModelUnitClass Class = ModelUnitClass.None;
+        public EditorUnitClassRef EditorUnitClassRef = null;
 
         public EditorFaction Faction;
         /// <summary>
@@ -31,6 +28,19 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
             if (SelectionHelper.IsSelected(this) || SelectionHelper.IsSelected(this.transform.parent))
             { 
                 DrawString.Draw(this.gameObject.name, this.transform.position, Color.white);
+            }
+        }
+
+        public ModelUnitClass Class
+        {
+            get
+            {
+                if (this.EditorUnitClassRef != null)
+                {
+                    return this.EditorUnitClassRef.UnitClass;
+                }
+
+                return ModelUnitClass.None;
             }
         }
     }
