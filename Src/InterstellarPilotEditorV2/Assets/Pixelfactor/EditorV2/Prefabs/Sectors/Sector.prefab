@@ -129,9 +129,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
-  Resource: 0
   Name: Unknown Sector
   Description: 
-  GateDistanceMultiplier: 1
+  WormholeDistanceMultiplier: 1
   RandomSeed: 1
   BackgroundRotation: {x: 0, y: 0, z: 0}
+  DirectionLightRotation: {x: 0, y: 0, z: 0}
+  AmbientLightColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+  DirectionLightColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+  LightRotation: {x: 45, y: 45, z: 0}
+  LightDirectionFudge: 0

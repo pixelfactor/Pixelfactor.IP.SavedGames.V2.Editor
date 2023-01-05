@@ -650,7 +650,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         {
             foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
             {
-                savedGame.Sectors.Add(new ModelSector
+                var modelSector = new ModelSector
                 {
                     Id = editorSector.Id,
                     Name = editorSector.Name,
@@ -662,7 +662,24 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                     DirectionLightColor = editorSector.DirectionLightColor.ToVec3(),
                     AmbientLightColor = editorSector.AmbientLightColor.ToVec3(),
                     LightDirectionFudge = editorSector.LightDirectionFudge,
-                });
+                };
+
+                var editorSectorSky = editorSector.GetComponentInChildren<EditorSectorSky>();
+                if (editorSectorSky != null)
+                {
+                    modelSector.CustomAppearance = new ModelSectorAppearance
+                    {
+                        NebulaBrightness = editorSectorSky.NebulaBrightness,
+                        NebulaColors = editorSectorSky.NebulaColors,
+                        NebulaCount = editorSectorSky.NebulaCount,
+                        NebulaStyles = editorSectorSky.NebulaStyles,
+                        NebulaTextureCount = editorSectorSky.NebulaTextureCount,
+                        StarsCount = editorSectorSky.StarsCount,
+                        StarsIntensity = editorSectorSky.StarsIntensity
+                    };
+                }
+
+                savedGame.Sectors.Add(modelSector);
             }
         }
 
