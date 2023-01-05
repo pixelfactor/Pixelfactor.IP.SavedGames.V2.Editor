@@ -45,9 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4150b2f3c81293b4e80d166bee8db2bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsUnderConstruction: 0
+  ConstructionState: 0
   ConstructionProgress: 0
-  StationUnitClassNumber: 0
   CapacitorCharge: -1
   IsCloaked: 0
   EngineThrottle: -1
@@ -99,15 +98,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
-  Class: 22000
+  EditorUnitClassRef: {fileID: 2544603334889176812, guid: 51d0d6642b213844fae0f45c4c573321, type: 3}
   Faction: {fileID: 0}
   RpProvision: 0
   Name: 
+  Radius: -1
 --- !u!1001 &3813773311349399962
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1499588013825266274}
     m_Modifications:
     - target: {fileID: 4149686029241126606, guid: ff8615f766f2422479bc4a0f2ff64ba0, type: 3}
@@ -159,6 +160,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ff8615f766f2422479bc4a0f2ff64ba0, type: 3}
 --- !u!4 &5480010458139245453 stripped
 Transform:
@@ -170,6 +172,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2818396943555392176}
     m_Modifications:
     - target: {fileID: 6251594947460254175, guid: 405f9c6de021de44eb19dcf8208f4fe3, type: 3}
@@ -221,6 +224,7 @@ PrefabInstance:
       value: ShipCargoMagnusStandard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 405f9c6de021de44eb19dcf8208f4fe3, type: 3}
 --- !u!4 &2373081227046776198 stripped
 Transform:

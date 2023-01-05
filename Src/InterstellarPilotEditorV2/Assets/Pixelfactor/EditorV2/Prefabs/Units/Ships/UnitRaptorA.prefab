@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
-  EditorUnitClassRef: {fileID: 0}
+  EditorUnitClassRef: {fileID: 2544603334889176812, guid: b0972f1a546133345b73b497b3dc8742, type: 3}
   Faction: {fileID: 0}
   RpProvision: 0
   Name: 
