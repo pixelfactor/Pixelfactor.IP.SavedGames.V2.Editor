@@ -261,7 +261,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 PlayerSectorName = savedGame.Player?.Person?.CurrentUnit?.Sector?.Name ?? null,
                 ScenarioInfoId = 100000, // Don't change this
                 TimeStamp = System.DateTime.Now,
-                Version = new System.Version(2, 0, 43), // Should be tied to the binary writer package being used
+                Version = new System.Version(2, 0, 50), // Should be tied to the binary writer package being used
+                CreatedVersion = new System.Version(2, 0, 50),
                 ScenarioTitle = editorSavedGame.Title,
                 ScenarioAuthor = editorSavedGame.Author,
                 ScenarioAuthoringTool = $"IP2 Unity Editor {Application.version}",
@@ -502,12 +503,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                         if (unit.IsShipOrStation())
                         {
                             localSectorPosition.y = 0.0f;
-                        }
-
-                        // HACK: Planets are draw a bit weirdly in the engine with a different camera. Scale down the location position
-                        if (unit.Class.ToString().StartsWith("Planet"))
-                        {
-                            localSectorPosition /= 1000.0f;
                         }
 
                         unit.Position = localSectorPosition.ToVec3();
