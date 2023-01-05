@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4836303000731141347}
   m_Layer: 0
-  m_Name: SmallSatelliteModel
+  m_Name: ModelSmallSatellite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
