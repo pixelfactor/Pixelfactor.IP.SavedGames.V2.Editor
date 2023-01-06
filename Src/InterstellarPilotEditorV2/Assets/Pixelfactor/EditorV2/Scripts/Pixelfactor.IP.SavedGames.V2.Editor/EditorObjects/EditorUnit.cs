@@ -16,7 +16,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         [UnityEngine.Serialization.FormerlySerializedAs("Class")]
         public ModelUnitClass LegacyUnitClass = ModelUnitClass.None;
 
-        public EditorUnitClassRef EditorUnitClassRef = null;
+        [UnityEngine.Serialization.FormerlySerializedAs("EditorUnitClassRef")]
+        public EditorUnitClassRef UnitClass = null;
 
         public EditorFaction Faction;
         /// <summary>
@@ -46,14 +47,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         {
             get
             {
-                if (System.Enum.IsDefined(typeof(ModelCargoClass), this.LegacyUnitClass))
+                if (System.Enum.IsDefined(typeof(ModelUnitClass), this.LegacyUnitClass) && this.LegacyUnitClass != ModelUnitClass.None)
                 {
                     return this.LegacyUnitClass;
                 }
 
-                if (this.EditorUnitClassRef != null)
+                if (this.UnitClass != null)
                 {
-                    return this.EditorUnitClassRef.UnitClass;
+                    return this.UnitClass.UnitClass;
                 }
 
                 return ModelUnitClass.None;

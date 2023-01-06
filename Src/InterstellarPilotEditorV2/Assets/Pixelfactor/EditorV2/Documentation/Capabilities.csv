@@ -21,6 +21,7 @@ Units,Components,Edit ship/station component mods,Yes,
 Units,Components,Edit energy charge,No,
 People,General,Rename people,Yes,
 People,General,Create people inside stations,No,
+People,Ranks,Edit person rank,No,
 People,NPC,Create NPC pilots,Yes,
 People,NPC,Custom NPC pilot settings,Yes*,Some settings now out of date
 Passengers,General,Create passenger groups in stations,No,

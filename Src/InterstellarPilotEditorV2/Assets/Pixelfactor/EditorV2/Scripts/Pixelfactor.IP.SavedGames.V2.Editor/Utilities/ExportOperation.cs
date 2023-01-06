@@ -827,15 +827,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 unit.ComponentUnitData.ModData = new ModelComponentUnitModData();
                 foreach (var editorComponentBayMod in editorComponentBayMods)
                 {
-                    if (!System.Enum.IsDefined(typeof(ModelComponentClass), editorComponentBayMod.ModdedComponentClass))
+                    if (!System.Enum.IsDefined(typeof(ModelComponentClass), editorComponentBayMod.LegacyComponentClass))
                     {
                         LogAndThrow("Unknown component type", editorComponentBayMod);
                     }
 
                     unit.ComponentUnitData.ModData.Items.Add(new ModelComponentUnitModDataItem
                     {
-                        BayId = editorComponentBayMod.BayId,
-                        ComponentClass = editorComponentBayMod.ModdedComponentClass
+                        BayId = editorComponentBayMod.LegacyBayId,
+                        ComponentClass = editorComponentBayMod.LegacyComponentClass
                     });
                 }
             }

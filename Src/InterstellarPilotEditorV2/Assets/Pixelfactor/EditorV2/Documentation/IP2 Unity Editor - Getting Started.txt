@@ -29,5 +29,11 @@ A dat file should be created and the editor should automatically open the folder
 If you have configured the game executable, use "Window -> IP2 Editor -> Play" to launch the game and run the scenario.
 
 ### Best practices
-Do not edit any of the files in this package (under Pixelfactor\EditorV2).
-If you install a newer version of the package, these edits will be overwritten. However, you can create objects/prefabs that are based on the prefabs in this directory.
+- Do not edit any of the files in this package (under Pixelfactor\EditorV2). If you install a newer version of the package, these edits will be overwritten. However, you can create objects/prefabs that are based on the prefabs in this directory.
+- Base your templates on the sample scenes by saving a copy into your own folder location. This will save a lot of initial setup time.
+- Design single-sector or small universes initally
+- Create your own prefabs to save time e.g. mixed fleet of ships, a faction with certain settings, a sector with custom appearance.
+- Read the capabilities file (alongside this one) to discover what is currently possible using the editor.
+- When you find a part of the editor lacking, post feedback on the Discord server so that improvements can be made
+
+Join the IP2 Editor Discord

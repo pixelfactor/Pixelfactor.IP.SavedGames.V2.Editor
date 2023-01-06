@@ -6,12 +6,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
     public class EditorUnitCargoData : MonoBehaviour
     {
         /// <summary>
-        /// Obsolete - avoid use and switch over to <see cref="CargoClassRef"/>
+        /// Obsolete - avoid use and switch over to <see cref="CargoClass"/>
         /// </summary>
         [UnityEngine.Serialization.FormerlySerializedAs("CargoClass")]
         public ModelCargoClass LegacyCargoClass;
 
-        public EditorCargoClassRef CargoClassRef;
+        [UnityEngine.Serialization.FormerlySerializedAs("CargoClassRef")]
+        public EditorCargoClassRef CargoClass;
+
         public int Quantity = 1;
         public bool Expires = false;
         public double SpawnTime = 0d;
@@ -20,14 +22,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         {
             get
             {
-                if (System.Enum.IsDefined(typeof(ModelCargoClass), this.LegacyCargoClass))
+                if (System.Enum.IsDefined(typeof(ModelCargoClass), this.LegacyCargoClass) && this.LegacyCargoClass != ModelCargoClass.None)
                 {
                     return this.LegacyCargoClass;
                 }
 
-                if (this.CargoClassRef != null)
+                if (this.CargoClass != null)
                 {
-                    return this.CargoClassRef.CargoClass;
+                    return this.CargoClass.CargoClass;
                 }
 
                 return ModelCargoClass.None;
