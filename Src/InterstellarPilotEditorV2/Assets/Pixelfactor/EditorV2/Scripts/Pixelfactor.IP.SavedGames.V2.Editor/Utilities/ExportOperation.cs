@@ -714,7 +714,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                     var unit = new ModelUnit
                     {
                         Id = editorUnit.Id,
-                        Class = editorUnit.Class,
+                        Class = editorUnit.ModelUnitClass,
                         Faction = savedGame.Factions.FirstOrDefault(e => e.Id == editorUnit.Faction?.Id),
                         RpProvision = editorUnit.RpProvision,
                         Name = editorUnit.Name, // Set the unit name here but it may later be overriden
@@ -765,9 +765,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                     LogAndThrow("This type of unit does not support being a cargo container", editorCargoContainerData);
                 }
 
-                if (!System.Enum.IsDefined(typeof(ModelCargoClass), editorCargoContainerData.CargoClass))
+                if (!System.Enum.IsDefined(typeof(ModelCargoClass), editorCargoContainerData.ModelCargoClass))
                 {
-                    LogAndThrow($"Found unknown cargo type on {editorCargoContainerData.name}: {editorCargoContainerData.CargoClass}", editorCargoContainerData);
+                    LogAndThrow($"Found unknown cargo type on {editorCargoContainerData.name}: {editorCargoContainerData.ModelCargoClass}", editorCargoContainerData);
                 }
 
                 if (editorCargoContainerData.Quantity < 0)
@@ -777,7 +777,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
 
                 unit.CargoData = new ModelUnitCargoData
                 {
-                    CargoClass = editorCargoContainerData.CargoClass,
+                    CargoClass = editorCargoContainerData.ModelCargoClass,
                     Expires = editorCargoContainerData.Expires,
                     SpawnTime = editorCargoContainerData.SpawnTime,
                     Quantity = editorCargoContainerData.Quantity

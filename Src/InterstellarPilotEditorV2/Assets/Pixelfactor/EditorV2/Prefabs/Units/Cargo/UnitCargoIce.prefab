@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3585806800839264951}
   - component: {fileID: 7856581251997153304}
   m_Layer: 0
-  m_Name: CargoIce
+  m_Name: UnitCargoIce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,10 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
-  Class: 6000
+  LegacyUnitClass: 6000
+  EditorUnitClassRef: {fileID: 2669058712696016960, guid: e92c1a2e332d7374d82d5e1bae326687, type: 3}
   Faction: {fileID: 0}
   RpProvision: 0
   Name: 
+  Radius: -1
 --- !u!114 &7856581251997153304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,8 +65,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbd29376b4e6e7419d7256ebc1e857c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CargoClass: 5001
-  Quantity: 4
+  LegacyCargoClass: 5001
+  CargoClassRef: {fileID: 2871602870005307940, guid: 59278abea1a5eaa48bd048dfe4e5f0aa, type: 3}
+  Quantity: 1
   Expires: 0
   SpawnTime: 0
 --- !u!1 &8234934650978750726

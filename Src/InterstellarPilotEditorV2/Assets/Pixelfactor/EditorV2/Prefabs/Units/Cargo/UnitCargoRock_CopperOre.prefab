@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3585806800839264951}
   - component: {fileID: 7856581251997153304}
   m_Layer: 0
-  m_Name: CargoRock_IronOre
+  m_Name: UnitCargoRock_CopperOre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,10 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
-  Class: 7000
+  LegacyUnitClass: 7000
+  EditorUnitClassRef: {fileID: 5324093783107529889, guid: 82a9bddc9f478db48919afed1aa9c892, type: 3}
   Faction: {fileID: 0}
   RpProvision: 0
   Name: 
+  Radius: -1
 --- !u!114 &7856581251997153304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +65,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbd29376b4e6e7419d7256ebc1e857c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CargoClass: 7000
+  LegacyCargoClass: 3000
+  CargoClassRef: {fileID: 4987238425991606270, guid: 0a232bca32fd56d48a159fcf49bda369, type: 3}
   Quantity: 1
   Expires: 0
   SpawnTime: 0

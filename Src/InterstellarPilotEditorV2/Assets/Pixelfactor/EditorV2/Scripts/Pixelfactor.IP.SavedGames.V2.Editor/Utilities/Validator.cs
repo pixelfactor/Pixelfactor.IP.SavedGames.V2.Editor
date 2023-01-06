@@ -21,7 +21,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 .Where(e =>
                 {
                     var unit = e.GetComponentInParent<EditorUnit>();
-                    return unit.Class.IsShipOrStation() && !unit.Class.IsTurret() && !string.IsNullOrWhiteSpace(unit.Name);
+                    return unit.ModelUnitClass.IsShipOrStation() && !unit.ModelUnitClass.IsTurret() && !string.IsNullOrWhiteSpace(unit.Name);
                 }).GroupBy(e => e.GetComponentInParent<EditorUnit>().Name).Where(e => e.Count() > 1);
             foreach (var shipGroup in shipGroups)
             {
@@ -130,7 +130,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                     OnError("All units require a valid (>0) id", unit, throwOnError);
                 }
 
-                if ((int)unit.Class < 0)
+                if ((int)unit.ModelUnitClass < 0)
                 {
                     OnError($"Unit \"{unit}\" does not have a class id", unit, throwOnError);
                 }

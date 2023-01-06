@@ -10,6 +10,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
     {
         public int Id = -1;
 
+        /// <summary>
+        /// Obsolete - use <see cref="EditorCargoClassRef"/> now
+        /// </summary>
+        [UnityEngine.Serialization.FormerlySerializedAs("Class")]
+        public ModelUnitClass LegacyUnitClass = ModelUnitClass.None;
+
         public EditorUnitClassRef EditorUnitClassRef = null;
 
         public EditorFaction Faction;
@@ -36,10 +42,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
             }
         }
 
-        public ModelUnitClass Class
+        public ModelUnitClass ModelUnitClass
         {
             get
             {
+                if (System.Enum.IsDefined(typeof(ModelCargoClass), this.LegacyUnitClass))
+                {
+                    return this.LegacyUnitClass;
+                }
+
                 if (this.EditorUnitClassRef != null)
                 {
                     return this.EditorUnitClassRef.UnitClass;

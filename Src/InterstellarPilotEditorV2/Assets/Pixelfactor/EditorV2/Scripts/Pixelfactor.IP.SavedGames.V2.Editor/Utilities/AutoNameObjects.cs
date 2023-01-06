@@ -64,8 +64,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
 
             // Get the most common unit
             // TODO: It might be better here to get the most powerful unit
-            var commonUnitGrouping = units.GroupBy(e => e.Class).OrderByDescending(e => e.Count()).First();
-            var name = $"{commonUnitGrouping.First().Class.ToString()}";
+            var commonUnitGrouping = units.GroupBy(e => e.ModelUnitClass).OrderByDescending(e => e.Count()).First();
+            var name = $"{commonUnitGrouping.First().ModelUnitClass.ToString()}";
             var count = commonUnitGrouping.Count();
             if (count > 1)
             {
@@ -134,7 +134,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
 
         private static string GetEditorUnitName(EditorUnit editorUnit)
         {
-            if (editorUnit.Class.IsWormhole())
+            if (editorUnit.ModelUnitClass.IsWormhole())
             {
                 var wormholeData = editorUnit.GetComponent<EditorUnitWormholeData>();
                 if (wormholeData != null)
@@ -151,12 +151,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 factionPostfix = $"_{(editorUnit.Faction != null ? editorUnit.Faction.CustomShortName : "NoFactionName")}";
             }
 
-            if (editorUnit.Class.IsCargo())
+            if (editorUnit.ModelUnitClass.IsCargo())
             {
                 var cargo = editorUnit.GetComponent<EditorUnitCargoData>();
                 if (cargo != null)
                 {
-                    return $"Cargo_{cargo.CargoClass}_{cargo.Quantity}{factionPostfix}";
+                    return $"Cargo_{cargo.ModelCargoClass}_{cargo.Quantity}{factionPostfix}";
                 }
                 else
                 {
@@ -164,17 +164,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 }
             }
 
-            if (editorUnit.Class.IsShipOrStation())
+            if (editorUnit.ModelUnitClass.IsShipOrStation())
             {
                 if (editorUnit.Faction != null)
                 {
-                    return $"{editorUnit.Class.ToString()}{factionPostfix}";
+                    return $"{editorUnit.ModelUnitClass.ToString()}{factionPostfix}";
                 }
 
-                return $"Abandoned_{editorUnit.Class.ToString()}";
+                return $"Abandoned_{editorUnit.ModelUnitClass.ToString()}";
             }
 
-            return $"{editorUnit.Class.ToString()}";
+            return $"{editorUnit.ModelUnitClass.ToString()}";
         }
 
         public static void AutoNameWormhole(EditorUnitWormholeData wormholeData)
