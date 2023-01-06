@@ -1,4 +1,6 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
+using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions;
+using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Scripting;
 using System.Linq;
 using UnityEngine;
 
@@ -50,12 +52,18 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             ValidatePersonIds(editorSavedGame, throwOnError);
             ValidateSectorIds(editorSavedGame, throwOnError);
             ValidateFleetIds(editorSavedGame, throwOnError);
+            ValidateMissionIds(editorSavedGame, throwOnError);
+            ValidateTriggerGroupIds(editorSavedGame, throwOnError);
+            ValidateMissionObjectiveIds(editorSavedGame, throwOnError);
 
             ValidateDuplicateSectors(editorSavedGame, throwOnError);
             ValidateDuplicateFactions(editorSavedGame, throwOnError);
             ValidateDuplicatePeople(editorSavedGame, throwOnError);
             ValidateDuplicateUnits(editorSavedGame, throwOnError);
             ValidateDuplicateMessageIds(editorSavedGame, throwOnError);
+            ValidateDuplicateMissionIds(editorSavedGame, throwOnError);
+            ValidateDuplicateTriggerGroupIds(editorSavedGame, throwOnError);
+            ValidateDuplicateMissionObjectiveIds(editorSavedGame, throwOnError);
         }
 
         private static void ValidateMessageIds(EditorSavedGame editorSavedGame, bool throwOnError)
@@ -65,6 +73,39 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 if (message.Id < 0)
                 {
                     OnError("All messages require a valid (>0) id", message, throwOnError);
+                }
+            }
+        }
+
+        private static void ValidateTriggerGroupIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        {
+            foreach (var triggerGroup in editorSavedGame.GetComponentsInChildren<EditorTriggerGroup>())
+            {
+                if (triggerGroup.Id < 0)
+                {
+                    OnError("All trigger groups require a valid (>0) id", triggerGroup, throwOnError);
+                }
+            }
+        }
+
+        private static void ValidateMissionIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        {
+            foreach (var mission in editorSavedGame.GetComponentsInChildren<EditorMission>())
+            {
+                if (mission.Id < 0)
+                {
+                    OnError("All missions require a valid (>0) id", mission, throwOnError);
+                }
+            }
+
+        }
+        private static void ValidateMissionObjectiveIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        {
+            foreach (var missionObjective in editorSavedGame.GetComponentsInChildren<EditorMissionObjective>())
+            {
+                if (missionObjective.Id < 0)
+                {
+                    OnError("All mission objectives require a valid (>0) id", missionObjective, throwOnError);
                 }
             }
         }
@@ -166,6 +207,36 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             if (duplicates.Any())
             {
                 OnError("Duplicate message ids found", duplicates.First().First(), throwOnError);
+            }
+        }
+
+        private static void ValidateDuplicateMissionIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        {
+            var missions = editorSavedGame.GetComponentsInChildren<EditorMission>();
+            var duplicates = missions.Where(e => e.Id > -1).GroupBy(e => e.Id).Where(e => e.Count() > 1);
+            if (duplicates.Any())
+            {
+                OnError("Duplicate mission ids found", duplicates.First().First(), throwOnError);
+            }
+        }
+
+        private static void ValidateDuplicateTriggerGroupIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        {
+            var triggerGroups = editorSavedGame.GetComponentsInChildren<EditorTriggerGroup>();
+            var duplicates = triggerGroups.Where(e => e.Id > -1).GroupBy(e => e.Id).Where(e => e.Count() > 1);
+            if (duplicates.Any())
+            {
+                OnError("Duplicate trigger group ids found", duplicates.First().First(), throwOnError);
+            }
+        }
+
+        private static void ValidateDuplicateMissionObjectiveIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        {
+            var missionObjectives = editorSavedGame.GetComponentsInChildren<EditorMissionObjective>();
+            var duplicates = missionObjectives.Where(e => e.Id > -1).GroupBy(e => e.Id).Where(e => e.Count() > 1);
+            if (duplicates.Any())
+            {
+                OnError("Duplicate mission objective ids found", duplicates.First().First(), throwOnError);
             }
         }
 

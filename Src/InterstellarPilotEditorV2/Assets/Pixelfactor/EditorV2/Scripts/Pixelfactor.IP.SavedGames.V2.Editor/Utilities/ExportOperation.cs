@@ -121,6 +121,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
 
                         return modelTrigger;
                     }
+                case EditorTrigger_PlayerHoHostileFactions:
+                    {
+                        return new ModelTrigger_Player_NoHostileFactions();
+                    }
                 default:
                     throw new NotSupportedException($"Unknown trigger type: {trigger.GetType()}");
             }
@@ -148,6 +152,42 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
 
                         return modelAction;
                     }
+                case EditorAction_MissionChangeStage editorAction_MissionChangeStage:
+                    {
+                        var editorMission = editorAction_MissionChangeStage.EditorMissionStage.GetComponentInParent<EditorMission>();
+                        var stages = editorMission.GetComponentsInChildren<EditorMissionStage>();
+
+                        var stageIndex = UnityEditor.ArrayUtility.IndexOf(stages, editorAction_MissionChangeStage.EditorMissionStage);
+
+                        var modelMission = GetModelMission(editorMission);
+                        var modelStage = modelMission.Stages[stageIndex];
+
+                        var modelAction = new ModelAction_Mission_ChangeStage
+                        {
+                            Stage = modelStage,
+                        };
+
+                        return modelAction;
+                    }
+                case EditorAction_MissionCompleteObjective editorAction_MissionCompleteObjective:
+                    {
+                        var editorMission = editorAction_MissionCompleteObjective.MissionObjective.GetComponentInParent<EditorMission>();
+                        var objectives = editorMission.GetComponentsInChildren<EditorMissionObjective>();
+
+                        var objectiveIndex = UnityEditor.ArrayUtility.IndexOf(objectives, editorAction_MissionCompleteObjective.MissionObjective);
+
+                        var modelMission = GetModelMission(editorMission);
+                        var modelObjective = modelMission.Objectives[objectiveIndex];
+
+                        var modelAction = new ModelAction_Mission_CompleteObjective
+                        {
+                            MissionObjective = modelObjective,
+                            Success = editorAction_MissionCompleteObjective.Success
+                        };
+
+                        return modelAction;
+                    }
+
                 default:
                     throw new NotSupportedException($"Unknown action type: {action.GetType()}");
             }

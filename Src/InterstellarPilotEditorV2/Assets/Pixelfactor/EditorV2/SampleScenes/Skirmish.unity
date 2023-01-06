@@ -231,6 +231,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2062436459}
+  - {fileID: 598981103}
   m_Father: {fileID: 1884125942}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -573,12 +574,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1971c455139f9f4baeb3d3ff4869736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UniqueId: -1
+  Id: 100001
   Title: Destroy enemy units
   Description: Hostile ships have been detected in this sector. Engage and destroy
     all enemy ships.
   IsActive: 1
-  ShowInLog: 1
   IsOptional: 0
   IsComplete: 0
   WasSuccessful: 0
@@ -716,6 +716,100 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e8450728973704d9c77e5206950a74, type: 3}
+--- !u!1 &598981102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 598981103}
+  - component: {fileID: 598981107}
+  - component: {fileID: 598981106}
+  - component: {fileID: 598981105}
+  - component: {fileID: 598981104}
+  m_Layer: 0
+  m_Name: TriggerGroup_PlayerDestroysHostiles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &598981103
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598981102}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 53002362}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &598981104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598981102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b1d85757e2fcf4fa97175fed46e1ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MissionObjective: {fileID: 427563112}
+  Success: 1
+--- !u!114 &598981105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598981102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c50ccb42f4d264745adb14fee2613563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EditorMissionStage: {fileID: 1009318053}
+--- !u!114 &598981106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598981102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0a3024131165e4fbcdb85a0f83cacd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Invert: 0
+--- !u!114 &598981107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598981102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ebad89f3b51eea44b884962f60c4cd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EvaluateDuringIntroState: 0
+  EvaluateFrequency: 2
+  FireAndDisable: 1
+  Id: 100002
+  MaxFireCount: 1
+  MaxFiredAction: 1
+  IsActive: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1184,16 +1278,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84eb53478da3ca64dba47f3864e81e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsActive: 1
-  UniqueId: -1
+  IsActive: 0
+  Id: 100001
   Title: Clean Sweep
   MissionGiverFaction: {fileID: 0}
   CompletionOpinionChange: 0
   FailureOpinionChange: 0
   RewardCredits: 0
   NotifactionsEnabled: 1
-  IsPrimaryMission: 0
-  ShowInLog: 1
+  IsPrimaryMission: 1
   IsFinished: 0
 --- !u!1001 &1350180810
 PrefabInstance:
@@ -1738,8 +1831,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2062436459}
+  - component: {fileID: 2062436462}
+  - component: {fileID: 2062436461}
+  - component: {fileID: 2062436460}
   m_Layer: 0
-  m_Name: TriggerGroup_PlayerDestroysHostiles
+  m_Name: TriggerGroup_DelayedMissionActivate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1760,6 +1856,52 @@ Transform:
   m_Father: {fileID: 53002362}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2062436460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062436458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e922da35e968046baf22bb4b99eef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mission: {fileID: 1327081868}
+--- !u!114 &2062436461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062436458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f351ad991a056a14f8b696dd71e0d75e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Invert: 0
+  Time: 2
+--- !u!114 &2062436462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062436458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ebad89f3b51eea44b884962f60c4cd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EvaluateDuringIntroState: 0
+  EvaluateFrequency: 2
+  FireAndDisable: 1
+  Id: 100001
+  MaxFireCount: 1
+  MaxFiredAction: 1
+  IsActive: 1
 --- !u!114 &5733813827815111819 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1724664696237471513, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
