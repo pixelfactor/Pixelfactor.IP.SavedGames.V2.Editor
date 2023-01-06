@@ -28,7 +28,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Scripting
         /// <summary>
         /// 
         /// </summary>
-        public int UniqueId = -1;
+        public int Id = -1;
 
         /// <summary>
         /// The maximum number of times the trigger group can fire before the max fire action occurs<br />

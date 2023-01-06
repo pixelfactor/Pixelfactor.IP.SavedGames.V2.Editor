@@ -1,6 +1,7 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.FleetOrders;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions;
+using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Scripting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +57,26 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 {
                     mission.Id = NewMissionId(missions);
                     EditorUtility.SetDirty(mission);
+                }
+            }
+
+            var missionObjectives = editorSavedGame.GetComponentsInChildren<EditorMissionObjective>();
+            foreach (var missionObjective in missionObjectives)
+            {
+                if (missionObjective.Id < 0)
+                {
+                    missionObjective.Id = NewMissionObjectiveId(missionObjectives);
+                    EditorUtility.SetDirty(missionObjective);
+                }
+            }
+
+            var triggerGroups = editorSavedGame.GetComponentsInChildren<EditorTriggerGroup>();
+            foreach (var triggerGroup in triggerGroups)
+            {
+                if (triggerGroup.Id < 0)
+                {
+                    triggerGroup.Id = NewTriggerGroupId(triggerGroups);
+                    EditorUtility.SetDirty(triggerGroup);
                 }
             }
 
@@ -202,7 +223,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             return Mathf.Max(BASE_ID, units.Select(e => e.Id).DefaultIfEmpty().Max()) + 1;
         }
 
+        public static int NewTriggerGroupId(IEnumerable<EditorTriggerGroup> units)
+        {
+            return Mathf.Max(BASE_ID, units.Select(e => e.Id).DefaultIfEmpty().Max()) + 1;
+        }
+
         public static int NewMissionId(IEnumerable<EditorMission> missions)
+        {
+            return Mathf.Max(BASE_ID, missions.Select(e => e.Id).DefaultIfEmpty().Max()) + 1;
+        }
+
+        public static int NewMissionObjectiveId(IEnumerable<EditorMissionObjective> missions)
         {
             return Mathf.Max(BASE_ID, missions.Select(e => e.Id).DefaultIfEmpty().Max()) + 1;
         }

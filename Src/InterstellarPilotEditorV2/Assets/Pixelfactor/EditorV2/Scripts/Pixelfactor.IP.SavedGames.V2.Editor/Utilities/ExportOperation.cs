@@ -1,8 +1,13 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.FleetOrders.OrderTypes;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions;
+using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Scripting;
+using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Scripting.Actions;
+using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Scripting.Triggers;
 using Pixelfactor.IP.SavedGames.V2.Model;
+using Pixelfactor.IP.SavedGames.V2.Model.Actions;
 using Pixelfactor.IP.SavedGames.V2.Model.Jobs;
+using Pixelfactor.IP.SavedGames.V2.Model.Triggers;
 using System;
 using System.Linq;
 using UnityEngine;
@@ -38,6 +43,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             this.ExportScenarioData();
             this.ExportFleetSpawners();
             this.ExportMissions();
+            this.ExportTriggers();
 
             savedGame.EngineData = new ModelEngineData();
 
@@ -50,6 +56,101 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             this.SeedFactionIntel();
 
             return savedGame;
+        }
+
+        private void ExportTriggers()
+        {
+            foreach (var triggerGroup in this.editorSavedGame.GetComponentsInChildren<EditorTriggerGroup>())
+            {
+                var modelTriggerGroup = new ModelTriggerGroup
+                {
+                    Id = triggerGroup.Id,
+                    IsActive = triggerGroup.IsActive,
+                    EvaluateFrequency = triggerGroup.EvaluateFrequency,
+                    FireAndDisable = triggerGroup.FireAndDisable,
+                    FireCount = 0,
+                    MaxFireCount = triggerGroup.MaxFireCount,
+                    MaxFiredAction = triggerGroup.MaxFiredAction,
+                };
+
+                var triggers = triggerGroup.GetComponentsInChildren<EditorTrigger_Base>();
+                if (triggers.Length == 0)
+                {
+                    Debug.LogWarning($"Trigger group {triggerGroup.Id} does not have any triggers so will never fire", triggerGroup);
+                }
+
+                foreach (var trigger in triggers)
+                {
+                    var modelTrigger = ExportTrigger(trigger);
+                    modelTriggerGroup.Triggers.Add(modelTrigger);
+                }
+
+                var actions = triggerGroup.GetComponentsInChildren<EditorAction_Base>();
+                if (actions.Length == 0)
+                {
+                    Debug.LogWarning($"Trigger group {triggerGroup.Id} does not have any actions so will not do anything", triggerGroup);
+                }
+
+                foreach (var action in actions)
+                {
+                    var modelAction = ExportAction(action);
+                    modelTriggerGroup.Actions.Add(modelAction);
+                }
+
+                savedGame.TriggerGroups.Add(modelTriggerGroup);
+            }
+        }
+
+        private ModelTrigger ExportTrigger(EditorTrigger_Base trigger)
+        {
+            var specializedModelTrigger = GetSpecializedModelTrigger(trigger);
+            specializedModelTrigger.Invert = trigger.Invert;
+            return specializedModelTrigger;
+        }
+
+        private ModelTrigger GetSpecializedModelTrigger(EditorTrigger_Base trigger)
+        {
+            switch (trigger)
+            {
+                case EditorTrigger_ScenarioTimeElapsed editorTrigger_ScenarioTimeElapsed:
+                    {
+                        var modelTrigger = new ModelTrigger_Scenario_TimeElapsed
+                        {
+                            Time = editorTrigger_ScenarioTimeElapsed.Time
+                        };
+
+                        return modelTrigger;
+                    }
+                default:
+                    throw new NotSupportedException($"Unknown trigger type: {trigger.GetType()}");
+            }
+        }
+
+        private ModelAction ExportAction(EditorAction_Base action)
+        {
+            var specializedModelAction = GetSpecializedModelAction(action);
+
+            // No common properties for actions yet but they would be assigned here..
+
+            return specializedModelAction;
+        }
+
+        private ModelAction GetSpecializedModelAction(EditorAction_Base action)
+        {
+            switch (action)
+            {
+                case EditorAction_MissionActivate editorAction_missionActivate:
+                    {
+                        var modelAction = new ModelAction_Mission_Activate
+                        {
+                            Mission = GetModelMission(editorAction_missionActivate.Mission)
+                        };
+
+                        return modelAction;
+                    }
+                default:
+                    throw new NotSupportedException($"Unknown action type: {action.GetType()}");
+            }
         }
 
         private void ExportMissions()
@@ -66,7 +167,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                     NotificationsEnabled = editorMission.NotifactionsEnabled,
                     IsPrimary = editorMission.IsPrimaryMission,
                     IsActive = editorMission.IsActive,
-                    ShowInJournal = editorMission.ShowInLog,
+                    ShowInJournal = editorMission.IsActive,
                     IsFinished = editorMission.IsFinished,
                     MissionGiverFaction = GetModelFaction(editorMission.MissionGiverFaction),
                     // Currently only player missions are supported so we can just assign this automatically
@@ -96,14 +197,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 {
                     var modelMissionObjective = new ModelMissionObjective
                     {
-                        Id = editorMissionObjective.UniqueId,
+                        Id = editorMissionObjective.Id,
                         Title = editorMission.Title,
                         Description = editorMissionObjective.Description,
                         IsActive = editorMissionObjective.IsActive,
+                        ShowInJournal = editorMissionObjective.IsActive,
                         IsComplete = editorMissionObjective.IsComplete,
                         IsOptional = editorMissionObjective.IsOptional,
                         Order = ++objectiveOrder,
-                        ShowInJournal = editorMission.ShowInLog,
                         Success = editorMissionObjective.WasSuccessful
                     };
 
@@ -123,6 +224,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 return null;
 
             return savedGame.Factions.FirstOrDefault(e => e.Id == editorFaction.Id);
+        }
+
+        private ModelMission GetModelMission(EditorMission editorMission)
+        {
+            if (editorMission == null)
+                return null;
+
+            return savedGame.Missions.FirstOrDefault(e => e.Id == editorMission.Id);
         }
 
         private void ExportFleets()

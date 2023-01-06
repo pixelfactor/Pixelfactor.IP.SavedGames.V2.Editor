@@ -7,7 +7,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions
         /// <summary>
         /// Whether an id is given, this should be globally unique, not just to the parent mission.
         /// </summary>
-        public int UniqueId = -1;
+        public int Id = -1;
 
         /// <summary>
         /// Title of the mission that will be displayed in mission log
@@ -25,11 +25,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions
         /// This can be turned off if objectives aren't relevant until some other event occurs.
         /// </summary>
         public bool IsActive = true;
-
-        /// <summary>
-        /// Whether to show the mission objective in the mission log.<br />
-        /// </summary>
-        public bool ShowInLog = true;
 
         /// <summary>
         /// Whether the player can choose to disregard this objective

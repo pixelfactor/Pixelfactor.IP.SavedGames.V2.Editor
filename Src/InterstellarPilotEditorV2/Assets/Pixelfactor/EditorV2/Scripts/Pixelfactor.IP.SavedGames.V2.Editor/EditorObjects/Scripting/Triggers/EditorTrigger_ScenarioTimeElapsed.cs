@@ -9,6 +9,6 @@
         /// <summary>
         /// The time before evaluation in seconds
         /// </summary>
-        public double Time = 2.0;
+        public float Time = 2.0f;
     }
 }

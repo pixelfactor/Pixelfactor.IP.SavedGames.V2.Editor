@@ -52,12 +52,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions
         /// </summary>
         public bool IsPrimaryMission = false;
 
-        /// <summary>
-        /// Whether to allow the player to view the mission in the mission log. Generally this should be true.<br />
-        /// Turning this off can allow for a hidden/secret mission
-        /// </summary>
-        public bool ShowInLog = true;
-
         public bool IsFinished = false;
     }
 }
