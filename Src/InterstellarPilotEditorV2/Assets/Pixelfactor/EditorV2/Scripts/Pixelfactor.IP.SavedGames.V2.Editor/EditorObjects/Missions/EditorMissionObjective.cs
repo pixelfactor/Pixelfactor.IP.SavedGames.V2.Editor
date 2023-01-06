@@ -21,8 +21,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions
         public string Description = "";
 
         /// <summary>
-        /// Whether to show the mission objective in the mission log.<br />
+        /// Whether the mission has been given to the player<br />
         /// This can be turned off if objectives aren't relevant until some other event occurs.
+        /// </summary>
+        public bool IsActive = true;
+
+        /// <summary>
+        /// Whether to show the mission objective in the mission log.<br />
         /// </summary>
         public bool ShowInLog = true;
 

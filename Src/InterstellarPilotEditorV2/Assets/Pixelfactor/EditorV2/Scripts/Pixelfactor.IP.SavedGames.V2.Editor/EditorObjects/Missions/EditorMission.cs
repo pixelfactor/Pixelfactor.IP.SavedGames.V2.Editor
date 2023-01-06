@@ -8,7 +8,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions
     /// </summary>
     public class EditorMission : MonoBehaviour
     {
-        public int UniqueId = -1;
+        /// <summary>
+        /// Whether the player has been given this mission.
+        /// </summary>
+        public bool IsActive = true;
+
+        public int Id = -1;
 
         /// <summary>
         /// Title is displayed in the player's log
@@ -18,7 +23,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions
         /// <summary>
         /// Optional faction that is the source of the mission
         /// </summary>
-        public EditorFaction MissionGiver;
+        public EditorFaction MissionGiverFaction;
 
         /// <summary>
         /// Change in faction relation when the mission is completed
@@ -35,12 +40,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions
         /// <summary>
         /// Optional credits givenn to the player when completing the mission
         /// </summary>
-        public int MissionRewardCredits = 0;
+        public int RewardCredits = 0;
 
         /// <summary>
         /// Whether the show notifications to the player when the mission state changes (e.g. "Mission complete" message)
         /// </summary>
-        public bool BroadcastMessages = true;
+        public bool NotifactionsEnabled = true;
 
         /// <summary>
         /// When true, completion or failure of this mission will automatically complete or fail the scenario
@@ -52,5 +57,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions
         /// Turning this off can allow for a hidden/secret mission
         /// </summary>
         public bool ShowInLog = true;
+
+        public bool IsFinished = false;
     }
 }

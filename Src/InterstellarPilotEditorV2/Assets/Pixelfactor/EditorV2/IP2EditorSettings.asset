@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: IP2EditorSettings
   m_EditorClassIdentifier: 
   gameExecutablePath: C:\dev\pixelfactor\bin\2.0.51_win\Interstellar Pilot 2.exe
-  defaultExportPath: 
+  defaultExportPath: C:\Users\gsdat\AppData\LocalLow\Pixelfactor Ltd_\Interstellar
+    Pilot 2\SaveGames

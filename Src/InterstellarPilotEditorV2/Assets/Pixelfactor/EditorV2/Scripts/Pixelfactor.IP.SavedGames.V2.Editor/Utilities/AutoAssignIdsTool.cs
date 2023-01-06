@@ -1,5 +1,6 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.FleetOrders;
+using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,16 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
 
         public static void AutoAssignIds(EditorSavedGame editorSavedGame)
         {
+            var missions = editorSavedGame.GetComponentsInChildren<EditorMission>();
+            foreach (var mission in missions)
+            {
+                if (mission.Id < 0)
+                {
+                    mission.Id = NewMissionId(missions);
+                    EditorUtility.SetDirty(mission);
+                }
+            }
+
             var units = editorSavedGame.GetComponentsInChildren<EditorUnit>();
             foreach (var unit in units)
             {
@@ -189,6 +200,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         public static int NewUnitId(IEnumerable<EditorUnit> units)
         {
             return Mathf.Max(BASE_ID, units.Select(e => e.Id).DefaultIfEmpty().Max()) + 1;
+        }
+
+        public static int NewMissionId(IEnumerable<EditorMission> missions)
+        {
+            return Mathf.Max(BASE_ID, missions.Select(e => e.Id).DefaultIfEmpty().Max()) + 1;
         }
 
         public static int NewFactionId(IEnumerable<EditorFaction> factions)

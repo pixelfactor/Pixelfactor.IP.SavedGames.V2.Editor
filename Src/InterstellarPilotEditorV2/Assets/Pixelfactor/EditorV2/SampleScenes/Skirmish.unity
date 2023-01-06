@@ -577,6 +577,7 @@ MonoBehaviour:
   Title: Destroy enemy units
   Description: Hostile ships have been detected in this sector. Engage and destroy
     all enemy ships.
+  IsActive: 1
   ShowInLog: 1
   IsOptional: 0
   IsComplete: 0
@@ -627,6 +628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Person: {fileID: 1246386234}
+  ActiveMission: {fileID: 1327081868}
 --- !u!1001 &530045500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1182,15 +1184,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84eb53478da3ca64dba47f3864e81e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsActive: 1
   UniqueId: -1
   Title: Clean Sweep
-  MissionGiver: {fileID: 0}
+  MissionGiverFaction: {fileID: 0}
   CompletionOpinionChange: 0
   FailureOpinionChange: 0
-  MissionRewardCredits: 0
-  BroadcastMessages: 1
+  RewardCredits: 0
+  NotifactionsEnabled: 1
   IsPrimaryMission: 0
   ShowInLog: 1
+  IsFinished: 0
 --- !u!1001 &1350180810
 PrefabInstance:
   m_ObjectHideFlags: 0
