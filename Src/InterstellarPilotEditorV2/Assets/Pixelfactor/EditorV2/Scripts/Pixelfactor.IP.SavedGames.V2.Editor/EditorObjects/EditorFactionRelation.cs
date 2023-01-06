@@ -29,5 +29,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// 0 - 1, 0 = worst, 1 = best
         /// </summary>
         public float Opinion = 0.5f;
+
+        public bool ApplyTwoWay = true;
     }
 }

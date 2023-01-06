@@ -9,18 +9,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         public int Id = 0;
 
         /// <summary>
-        /// The id of the name that was generated for this faction. Stops duplicates being generated<br />
-        /// Applies when <see cref="HasGeneratedName"/>
-        /// </summary>
-        public int GeneratedNameId = -1;
-
-        /// <summary>
-        /// The id of the name that was generated for this faction. Stops duplicates being generated<br />
-        /// Applies when <see cref="HasGeneratedName"/>
-        /// </summary>
-        public int GeneratedSuffixId = -1;
-
-        /// <summary>
         /// Applies when <see cref="HasCustomName"/>
         /// </summary>
         public string CustomName;

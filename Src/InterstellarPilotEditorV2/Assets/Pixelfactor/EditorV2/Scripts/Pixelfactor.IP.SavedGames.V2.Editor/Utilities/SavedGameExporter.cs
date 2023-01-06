@@ -664,12 +664,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 {
                     modelSector.CustomAppearance = new ModelSectorAppearance
                     {
-                        NebulaBrightness = editorSectorSky.NebulaBrightness,
                         NebulaColors = editorSectorSky.NebulaColors,
                         NebulaCount = editorSectorSky.NebulaCount,
-                        NebulaStyles = editorSectorSky.NebulaStyles,
-                        NebulaTextureCount = editorSectorSky.NebulaTextureCount,
-                        StarsCount = editorSectorSky.StarsCount,
                         StarsIntensity = editorSectorSky.StarsIntensity
                     };
                 }
@@ -764,27 +760,55 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                         LogAndThrow("Faction relation points to same faction", editorFactionRelation);
                     }
 
-                    var otherFaction = savedGame.Factions.Single(e => e.Id == editorFactionRelation.OtherFaction.Id);
-
-                    var factionOpinionDataItem = new ModelFactionOpinionDataItem
-                    {
-                        Opinion = editorFactionRelation.Opinion,
-                        OtherFaction = otherFaction
-                    };
-
-                    faction.Opinions.Items.Add(factionOpinionDataItem);
-
-                    var factionRelationDataItem = new ModelFactionRelationDataItem
-                    {
-                        HostilityEndTime = editorFactionRelation.HostilityEndTime,
-                        Neutrality = editorFactionRelation.Neutrality,
-                        OtherFaction = otherFaction,
-                        PermanentPeace = editorFactionRelation.PermanentPeace,
-                        RestrictHostilityTimeout = editorFactionRelation.RestrictHostilityTimeout
-                    };
-
-                    faction.Relations.Items.Add(factionRelationDataItem);
+                    ApplyFactionRelation(savedGame, editorFactionRelation, faction);
                 }
+            }
+        }
+
+        private static void ApplyFactionRelation(SavedGame savedGame, EditorFactionRelation editorFactionRelation, ModelFaction faction)
+        {
+            var otherFaction = savedGame.Factions.Single(e => e.Id == editorFactionRelation.OtherFaction.Id);
+
+            var factionOpinionDataItem = new ModelFactionOpinionDataItem
+            {
+                Opinion = editorFactionRelation.Opinion,
+                OtherFaction = otherFaction
+            };
+
+            faction.Opinions.Items.Add(factionOpinionDataItem);
+
+            var factionRelationDataItem = new ModelFactionRelationDataItem
+            {
+                HostilityEndTime = editorFactionRelation.HostilityEndTime,
+                Neutrality = editorFactionRelation.Neutrality,
+                OtherFaction = otherFaction,
+                PermanentPeace = editorFactionRelation.PermanentPeace,
+                RestrictHostilityTimeout = editorFactionRelation.RestrictHostilityTimeout
+            };
+
+            faction.Relations.Items.Add(factionRelationDataItem);
+
+            // Do the same thing for the opposing faction if necessary
+            if (editorFactionRelation.ApplyTwoWay)
+            {
+                var otherFactionOpinionDataItem = new ModelFactionOpinionDataItem
+                {
+                    Opinion = editorFactionRelation.Opinion,
+                    OtherFaction = faction
+                };
+
+                otherFaction.Opinions.Items.Add(otherFactionOpinionDataItem);
+
+                var otherFactionRelationDataItem = new ModelFactionRelationDataItem
+                {
+                    HostilityEndTime = editorFactionRelation.HostilityEndTime,
+                    Neutrality = editorFactionRelation.Neutrality,
+                    OtherFaction = faction,
+                    PermanentPeace = editorFactionRelation.PermanentPeace,
+                    RestrictHostilityTimeout = editorFactionRelation.RestrictHostilityTimeout
+                };
+
+                otherFaction.Relations.Items.Add(otherFactionRelationDataItem);
             }
         }
     }
