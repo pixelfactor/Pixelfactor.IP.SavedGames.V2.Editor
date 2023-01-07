@@ -6,7 +6,7 @@ Units,General,Create cargo containers,?,Not tested
 Units,General,Edit ship names,Yes,
 Units,Cargo,Edit ship/station cargo,Yes,
 Units,Wormholes,Create wormholes,Yes,
-Units,Wormholes,Create unstable wormholes,?,Not tested
+Units,Wormholes,Create unstable wormholes,Yes,
 Units,General,Create planets,Yes,
 Units,Planets,Orbit moon around planets,No,
 Units,Planets,Edit radius,No,
@@ -43,7 +43,7 @@ Speech,General,Script NPC speech/chatter,No,I.e. on-screen speech in tutorial mi
 General,Import/export,Export the scenario to a folder location based on project settings,Yes,
 General,Import/export,Export to a folder location on-demand,No,
 General,Import/export,Import a save file,No,
-General,Import/export,Export to a specific save version,No,Editor version is always tied to a specific save version
+General,Import/export,Export to a specific save version,No,Editor version is always tied to the latest released save version
 General,Import/export,Import IP1 save files,No,
 General,Run,Run the scenario from the editor,Yes,Standalone version 2.0.60 or higher required
 Scripting,Triggers,Completion (win) trigger,Yes,

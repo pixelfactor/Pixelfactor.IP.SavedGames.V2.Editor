@@ -129,7 +129,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
-  Class: 1000
+  LegacyUnitClass: 1000
+  UnitClass: {fileID: 2544603334889176812, guid: 1425f1938d56cea46bf9a169b66d1a9c, type: 3}
   Faction: {fileID: 0}
   RpProvision: 0
   Name: 
+  Radius: -1
