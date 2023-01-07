@@ -1,2 +1,4 @@
 Date,Version,Comment
-2023-1-6,0.01,Initial pre-alpha version with capability to create a simple scenario (e.g. a skirmish) with win trigger
+06/01/2023,0.01,Initial pre-alpha version with capability to create a simple scenario (e.g. a skirmish) with win trigger
+07/01/2023,0.02,Added support for unstable wormholes. Tidied up wormhole export. Added asteroid models
+,,

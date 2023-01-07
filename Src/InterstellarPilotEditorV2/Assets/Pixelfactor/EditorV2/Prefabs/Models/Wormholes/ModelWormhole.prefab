@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8186587054771122481}
   - component: {fileID: 3183899441938978}
   m_Layer: 0
-  m_Name: WormholeModel
+  m_Name: ModelWormhole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

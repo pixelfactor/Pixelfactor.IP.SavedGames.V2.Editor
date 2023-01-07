@@ -45,10 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: 0
-  GeneratedNameId: -1
-  GeneratedSuffixId: -1
-  CustomName: 
-  CustomShortName: 
+  CustomName: Player
+  CustomShortName: Player
   Credits: 0
   Description: 
   IsCivilian: 0
