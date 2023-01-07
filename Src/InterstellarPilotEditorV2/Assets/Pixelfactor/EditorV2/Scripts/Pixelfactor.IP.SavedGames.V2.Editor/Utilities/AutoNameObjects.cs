@@ -166,12 +166,19 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
 
             if (editorUnit.ModelUnitClass.IsShipOrStation())
             {
-                if (editorUnit.Faction != null)
+                var name = editorUnit.ModelUnitClass.ToString();
+
+                if (editorUnit.GetComponentInParent<EditorHangarBay>() != null)
                 {
-                    return $"{editorUnit.ModelUnitClass.ToString()}{factionPostfix}";
+                    name += " (Docked)";
                 }
 
-                return $"Abandoned_{editorUnit.ModelUnitClass.ToString()}";
+                if (editorUnit.Faction != null)
+                {
+                    return $"{name}{factionPostfix}";
+                }
+
+                return $"Abandoned_{name}";
             }
 
             return $"{editorUnit.ModelUnitClass.ToString()}";

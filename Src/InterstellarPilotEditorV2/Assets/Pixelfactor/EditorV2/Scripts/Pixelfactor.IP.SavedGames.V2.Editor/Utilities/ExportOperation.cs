@@ -36,6 +36,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             this.ExportFactions();
             this.ExportFactionRelations();
             this.ExportUnits();
+            this.ExportDockedUnits();
             this.ExportWormholes();
             this.ExportFleets();
             this.ExportPeople();
@@ -280,6 +281,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 return null;
 
             return savedGame.Missions.FirstOrDefault(e => e.Id == editorMission.Id);
+        }
+
+        private ModelUnit GetModelUnit(EditorUnit editorUnit)
+        {
+            if (editorUnit == null)
+                return null;
+
+            return savedGame.Units.FirstOrDefault(e => e.Id == editorUnit.Id);
         }
 
         private void ExportFleets()
@@ -788,6 +797,42 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                     ExportCargoContainerData(editorUnit, unit);
 
                     savedGame.Units.Add(unit);
+                }
+            }
+        }
+
+        private void ExportDockedUnits()
+        {
+            foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
+            {
+                foreach (var editorUnit in editorSector.GetComponentsInChildren<EditorUnit>())
+                {
+                    var hangarBay = editorUnit.GetComponentInParent<EditorHangarBay>();
+                    if (hangarBay != null)
+                    {
+                        var editorDockUnit = hangarBay.GetComponentInParent<EditorUnit>();
+                        if (editorDockUnit != null)
+                        {
+                            var modelUnit = GetModelUnit(editorUnit);
+                            var modelDockUnit = GetModelUnit(editorDockUnit);
+
+                            if (modelDockUnit.ComponentUnitData == null)
+                            {
+                                LogAndThrow($"A unit {editorUnit} is docked at another unit {editorDockUnit} that doesn't support a hangar", editorUnit);
+                            }
+
+                            if (modelDockUnit.ComponentUnitData.DockData == null)
+                            {
+                                modelDockUnit.ComponentUnitData.DockData = new ModelComponentUnitDockData();
+                            }
+
+                            modelDockUnit.ComponentUnitData.DockData.Items.Add(new ModelComponentUnitDockDataItem
+                            {
+                                BayId = hangarBay.BayId,
+                                DockedUnit   = modelUnit
+                            });
+                        }
+                    }
                 }
             }
         }
