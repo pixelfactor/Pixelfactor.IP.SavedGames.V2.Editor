@@ -258,6 +258,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             }
         }
 
+        private ModelSector GetModelSector(EditorSector editorSector)
+        {
+            if (editorSector == null)
+                return null;
+
+            return savedGame.Sectors.FirstOrDefault(e => e.Id == editorSector.Id);
+        }
+
         private ModelFaction GetModelFaction(EditorFaction editorFaction)
         {
             if (editorFaction == null)
@@ -421,24 +429,58 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                         LogAndThrow("Wormhole must be child of a unit", editorWormholeData);
                     }
 
-                    if (editorWormholeData.TargetWormholeUnit == null)
-                    {
-                        LogAndThrow("Wormhole must have a target", editorWormholeData);
-                    }
-
                     var unit = savedGame.Units.FirstOrDefault(e => e.Id == editorUnit.Id);
                     if (unit == null)
                     {
                         LogAndThrow("Unit already exist in the saved game", editorWormholeData);
                     }
 
-                    var targetUnit = savedGame.Units.FirstOrDefault(e =>
-                        e.Id == editorWormholeData.TargetWormholeUnit.Id);
-
                     unit.WormholeData = new ModelUnitWormholeData
                     {
-                        TargetWormholeUnit = targetUnit
+                        IsUnstable = editorWormholeData.IsUnstable,
+                        UnstableNextChangeTargetTime = editorWormholeData.UnstableNextChangeTargetTime,
                     };
+
+                    if (editorWormholeData.IsUnstable)
+                    {
+                        if (editorWormholeData.UnstableTarget != null)
+                        {
+                            var targetSector = editorWormholeData.UnstableTarget.GetComponentInParent<EditorSector>();
+                            if (targetSector == null)
+                            {
+                                LogAndThrow("Wormhole has a target transform that isn't a child of a sector", editorWormholeData);
+                            }
+
+                            unit.WormholeData.UnstableTargetSector = GetModelSector(targetSector);
+                            unit.WormholeData.UnstableTargetRotation = editorWormholeData.UnstableTarget.rotation.ToVec3();
+
+                            var targetSectorPosition = (editorWormholeData.UnstableTarget.position - targetSector.transform.position).ToVec3();
+                            targetSectorPosition.Y = 0.0f;
+                            unit.WormholeData.UnstableTargetPosition = targetSectorPosition;
+                        }
+                        else
+                        {
+                            Debug.LogWarning("Unstable wormhole should have a target", editorWormholeData);
+                        }
+                    }
+                    else
+                    {
+                        if (editorWormholeData.TargetWormholeUnit == null)
+                        {
+                            Debug.LogWarning("Wormhole should have a target", editorWormholeData);
+                        }
+                        else
+                        {
+                            ModelUnit targetUnit = null;
+                            if (editorWormholeData.TargetWormholeUnit != null)
+                            {
+                                targetUnit = savedGame.Units.FirstOrDefault(e =>
+                                    e.Id == editorWormholeData.TargetWormholeUnit.Id);
+                            }
+
+                            unit.WormholeData.TargetWormholeUnit = targetUnit;
+                        }
+                    }
                 }
             }
         }
@@ -698,6 +740,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                         Sector = person.CurrentUnit.Sector,
                         IsActive = true, // Again, should be autoset by model
                     };
+
+                    // Older game version have trouble loading when this is null
+                    person.NpcPilot.Fleet.FleetSettings = new ModelFleetSettings();
 
                     savedGame.Fleets.Add(person.NpcPilot.Fleet);
                     person.NpcPilot.Fleet.Npcs.Add(person.NpcPilot);
