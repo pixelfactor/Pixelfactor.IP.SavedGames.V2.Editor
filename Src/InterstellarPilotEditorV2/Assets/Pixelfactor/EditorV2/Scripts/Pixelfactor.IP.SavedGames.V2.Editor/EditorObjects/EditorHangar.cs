@@ -4,6 +4,9 @@
     using System.Linq;
     using UnityEngine;
 
+    /// <summary>
+    /// Defines a hangar where other units can dock in
+    /// </summary>
     public class EditorHangar : MonoBehaviour
     {
     }

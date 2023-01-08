@@ -13,12 +13,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 
         public bool UpgradeShips = true;
 
+        [Range(0f, 1f)]
         public float RepairMinHullDamage = 0.2f;
 
         public int RepairMinCreditsBeforeRepair = 2000;
 
+        [Range(0f, 1f)]
         public float PreferenceToPlaceBounty = 0.5f;
 
+        [Range(0f, 1f)]
         public float LargeShipPreference = 0.25f;
 
         /// <summary>
@@ -31,19 +34,24 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// <summary>
         /// Should ideally be 1-6 in 1.6.2
         /// </summary>
+        [Range(0, 8)]
         public int MinFleetUnitCount = 1;
 
         /// <summary>
         /// Should ideally be 1-6 in 1.6.2
         /// </summary>
+        [Range(0, 8)]
         public int MaxFleetUnitCount = 6;
 
+        [Range(0f, 1f)]
         public float OffensiveStance = 0.5f;
 
         public bool AllowOtherFactionToUseDocks = true;
 
+        [Range(0f, 1f)]
         public float PreferenceToBuildTurrets = 0.5f;
 
+        [Range(0f, 1f)]
         public float PreferenceToBuildStations = 0.5f;
 
 

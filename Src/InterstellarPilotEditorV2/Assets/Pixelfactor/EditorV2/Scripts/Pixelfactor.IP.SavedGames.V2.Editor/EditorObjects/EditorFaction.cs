@@ -19,7 +19,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         public string CustomShortName;
 
         /// <summary>
-        /// Money
+        /// Current number of credits the faction has
         /// </summary>
         public int Credits;
 
@@ -35,21 +35,25 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// <summary>
         /// 0 - 1
         /// </summary>
+        [Range(0f, 1f)]
         public float Aggression = 0.5f;
 
         /// <summary>
         /// 0 - 1
         /// </summary>
+        [Range(0f, 1f)]
         public float Virtue = 0.5f;
 
         /// <summary>
         /// 0 - 1
         /// </summary>
+        [Range(0f, 1f)]
         public float Greed = 0.5f;
 
         /// <summary>
         /// 0 - 1
         /// </summary>
+        [Range(0f, 1f)]
         public float TradeEfficiency = 0.5f;
 
         /// <summary>
@@ -70,6 +74,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// <summary>
         /// The RP is a limit on how many ships/stations the faction can build. Increasing this will increase the factions potential power
         /// </summary>
+        [Range(0f, 1f)]
         public float RequisitionPointMultiplier = 1.0f;
 
         /// <summary>
@@ -81,12 +86,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// 0 - 1<br />
         /// Determines strength of NPCs when pilotting. Not used for much in v1.6.2
         /// </summary>
+        [Range(0f, 1f)]
         public float MinNpcCombatEfficiency = 0.0f;
 
         /// <summary>
         /// 0 - 1<br />
         /// Determines strength of NPCs when pilotting. Not used for much in v1.6.2
         /// </summary>
+        [Range(0f, 1f)]
         public float MaxNpcCombatEfficiency = 1.0f;
 
         /// <summary>

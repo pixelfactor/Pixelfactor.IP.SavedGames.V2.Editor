@@ -8,6 +8,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
     /// </summary>
     public class EditorCargoClassRef : MonoBehaviour
     {
+        [Tooltip("Unique ID of this cargo class. Should not be changed from the prefab")]
         public int CargoClassId = -1;
 
         public ModelCargoClass CargoClass => (ModelCargoClass)this.CargoClassId;

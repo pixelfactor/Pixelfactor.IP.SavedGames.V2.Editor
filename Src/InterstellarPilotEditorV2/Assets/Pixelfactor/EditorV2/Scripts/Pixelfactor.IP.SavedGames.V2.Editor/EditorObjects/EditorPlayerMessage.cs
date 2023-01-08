@@ -2,6 +2,9 @@
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 {
+    /// <summary>
+    /// Defines a message sent to the player. E.g. distress calls, news
+    /// </summary>
     public class EditorPlayerMessage : MonoBehaviour
     {
         public int Id = -1;

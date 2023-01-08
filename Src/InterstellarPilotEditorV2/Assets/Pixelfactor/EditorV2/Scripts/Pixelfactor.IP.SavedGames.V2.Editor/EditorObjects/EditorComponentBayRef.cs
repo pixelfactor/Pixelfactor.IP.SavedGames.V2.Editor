@@ -7,6 +7,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
     /// </summary>
     public class EditorComponentBayRef : MonoBehaviour
     {
+        [Tooltip("The ID of this component bay, unique to the ship/station. Do not change this from the prefab value")]
         public int BayId = -1;
     }
 }

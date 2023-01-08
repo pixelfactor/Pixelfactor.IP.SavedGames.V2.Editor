@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 {
+    /// <summary>
+    /// Defines a cargo container that can be tractored by a ship
+    /// </summary>
     public class EditorUnitCargoData : MonoBehaviour
     {
         /// <summary>

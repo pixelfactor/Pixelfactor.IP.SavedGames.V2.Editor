@@ -55,3 +55,7 @@ Fleets,General,Edit fleet names,Yes,
 Fleets,General,Edit fleet settings,Yes,
 Scenario options,General,Modify scenario options (e.g. disable faction spawning),Yes,
 Scenario options,General,Disable god mode,No,No engine support yet
+Fleets,Orders,Patrol order,No,
+Fleets,Orders,Create station order,No,
+Fleets,Orders,Claim ship/station order,No,
+Misc,Fleet Spawner,Spawns fleets on a timer,?,Not tested - likely to be broken
