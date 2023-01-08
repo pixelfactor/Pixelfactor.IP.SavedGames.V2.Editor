@@ -13,5 +13,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         public int NebulaCount = 28;
         [Range(0.0f, 2.0f)]
         public float StarsIntensity = 1.0f;
+        public StarsCount StarsCount = StarsCount.MEDIUM | StarsCount.HIGH;
+        [Range(1, 20)]
+        public int NebulaTextureCount = 10;
     }
 }

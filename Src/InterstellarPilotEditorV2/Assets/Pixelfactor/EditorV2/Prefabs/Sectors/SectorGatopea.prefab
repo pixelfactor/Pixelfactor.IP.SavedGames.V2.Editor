@@ -29,6 +29,18 @@ PrefabInstance:
       value: 0.16862746
       objectReference: {fileID: 0}
     - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      propertyPath: BackgroundRotation.x
+      value: -0.0000059764157
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      propertyPath: BackgroundRotation.y
+      value: 239.76999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      propertyPath: BackgroundRotation.z
+      value: 18.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: DirectionLightColor.b
       value: 0.77254903
       objectReference: {fileID: 0}
@@ -41,12 +53,16 @@ PrefabInstance:
       value: 0.8666667
       objectReference: {fileID: 0}
     - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      propertyPath: DirectionLightRotation.x
+      value: 67.304
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: DirectionLightRotation.y
-      value: 239.77
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: DirectionLightRotation.z
-      value: 18.82
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: m_RootOrder
@@ -116,10 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a514bc4db5d50499ea8eaf6cb7a346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NebulaBrightness: 31
   NebulaColors: 65
-  NebulaStyles: 15
   NebulaCount: 30
-  NebulaTextureCount: 16
   StarsIntensity: 0.8
   StarsCount: 4
+  NebulaTextureCount: 16

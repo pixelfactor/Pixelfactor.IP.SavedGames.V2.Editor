@@ -2,7 +2,7 @@ Category,Sub-category,Description,Supported,Notes
 Units,General,Create ships / stations,Yes,
 Units,General,Create asteroid clusters,Yes,
 Units,General,Create gas clouds,Yes,
-Units,General,Create cargo containers,?,Not tested
+Units,General,Create cargo containers,Yes,
 Units,General,Edit ship names,Yes,
 Units,Cargo,Edit ship/station cargo,Yes,
 Units,Wormholes,Create wormholes,Yes,
@@ -12,8 +12,9 @@ Units,Planets,Orbit moon around planets,No,
 Units,Planets,Edit radius,No,
 Units,Gas clouds,Edit radius,Yes,
 Units,Asteroid clusters,Edit radius,Yes,
-Units,General,Docked ships,No,
-Units,General,Create asteroids,?,Not tested
+Units,General,Docked ships,Yes,
+Units,General,Custom hangars,No,Not supported in engine. Do not change the existing hangar prefabs
+Units,General,Create asteroids,Yes,
 Units,General,Abandoned ships/stations,Yes,
 Units,General,Edit ship/station health,No,
 Units,Components,Edit component health,No,

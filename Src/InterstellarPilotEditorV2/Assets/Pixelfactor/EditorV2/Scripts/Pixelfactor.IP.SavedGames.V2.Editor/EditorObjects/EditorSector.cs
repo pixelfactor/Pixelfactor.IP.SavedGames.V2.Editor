@@ -41,8 +41,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// </summary>
         public Color DirectionLightColor = new Color(0.8f, 0.8f, 0.8f, 1.0f);
 
-        public Vector3 LightRotation = new Vector3(45.0f, 45.0f, 0.0f);
-
         /// <summary>
         /// Changes the initial light direction at the start of the game
         /// </summary>

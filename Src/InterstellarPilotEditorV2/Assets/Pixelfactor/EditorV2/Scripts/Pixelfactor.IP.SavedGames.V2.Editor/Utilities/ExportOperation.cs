@@ -772,6 +772,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                         Faction = savedGame.Factions.FirstOrDefault(e => e.Id == editorUnit.Faction?.Id),
                         RpProvision = editorUnit.RpProvision,
                         Name = editorUnit.Name, // Set the unit name here but it may later be overriden
+                        Seed = editorUnit.Seed,
                         Sector = savedGame.Sectors.FirstOrDefault(e => e.Id == editorSector.Id),
                         // Radius is only relevant to some units like gas clouds and asteroid clusters
                         Radius = editorUnit.Radius >= 0.0f ? editorUnit.Radius : null,
@@ -986,7 +987,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                     {
                         NebulaColors = editorSectorSky.NebulaColors,
                         NebulaCount = editorSectorSky.NebulaCount,
-                        StarsIntensity = editorSectorSky.StarsIntensity
+                        NebulaTextureCount = editorSectorSky.NebulaTextureCount,
+                        StarsIntensity = editorSectorSky.StarsIntensity,
+                        StarsCount = editorSectorSky.StarsCount,
                     };
                 }
 

@@ -8,9 +8,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
     {
         public const string k_MyCustomSettingsPath = "Assets/Pixelfactor/EditorV2/IP2EditorSettings.asset";
 
+        [Tooltip("The full path including file name of the Interstellar Pilot 2 executable file")]
         [SerializeField]
         private string gameExecutablePath;
 
+        [Tooltip("The folder path where save games are exported to. Leave blank to export to Unity's temporary area")]
         [SerializeField]
         private string defaultExportPath;
 

@@ -11,6 +11,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         public int Id = -1;
 
         /// <summary>
+        /// Where a unit is randomized at runtime, you can use this value to get guaranteed data.<br />
+        /// Used for: asteroid cluster appearance, gas cloud appearance, unit "designations" e.g. Rations Factory BX-1
+        /// </summary>
+        public int Seed = -1;
+
+        /// <summary>
         /// Obsolete - use <see cref="EditorCargoClassRef"/> now
         /// </summary>
         [UnityEngine.Serialization.FormerlySerializedAs("Class")]
