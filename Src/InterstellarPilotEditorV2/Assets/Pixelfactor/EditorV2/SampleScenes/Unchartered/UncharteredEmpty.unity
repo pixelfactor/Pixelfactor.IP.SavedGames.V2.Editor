@@ -5047,14 +5047,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PreferredWormholeDistance: 5000
-  Title: Testing 1
+  Title: Unchartered Space
   Author: Pixelfactor
   Description: A scenario with a battle between two ships
-  DateYear: 2236
-  DateMonth: 8
-  DateDay: 4
-  DateHour: 15
-  DateMinute: 36
+  DateYear: 2230
+  DateMonth: 1
+  DateDay: 1
+  DateHour: 12
+  DateMinute: 0
 --- !u!114 &1884125944
 MonoBehaviour:
   m_ObjectHideFlags: 0
