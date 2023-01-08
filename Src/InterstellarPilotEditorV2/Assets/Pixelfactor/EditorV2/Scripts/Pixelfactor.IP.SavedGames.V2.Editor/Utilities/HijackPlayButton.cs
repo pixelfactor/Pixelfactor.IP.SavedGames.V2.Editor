@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
+using UnityEditor;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
 {
@@ -15,6 +16,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
 
         private static void LogPlayModeState(PlayModeStateChange state)
         {
+            var settings = CustomSettings.GetOrCreateSettings();
+            if (!settings.RunScenarioOnPlayMode)
+                return;
+
             if (EditorApplication.isPlaying)
             { 
                 PlayTool.Play();

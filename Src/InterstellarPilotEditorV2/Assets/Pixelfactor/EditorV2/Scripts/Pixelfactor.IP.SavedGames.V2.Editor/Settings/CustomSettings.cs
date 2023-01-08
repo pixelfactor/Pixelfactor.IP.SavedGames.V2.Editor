@@ -16,6 +16,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private string defaultExportPath;
 
+        [Tooltip("Whether clicking the Unity play button will run the scenario")]
+        [SerializeField]
+        private bool runScenarioOnPlayMode = true;
+
         internal static CustomSettings GetOrCreateSettings()
         {
             var settings = AssetDatabase.LoadAssetAtPath<CustomSettings>(k_MyCustomSettingsPath);
@@ -24,6 +28,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                 settings = ScriptableObject.CreateInstance<CustomSettings>();
                 settings.gameExecutablePath = "";
                 settings.defaultExportPath = "";
+                settings.runScenarioOnPlayMode = true;
                 AssetDatabase.CreateAsset(settings, k_MyCustomSettingsPath);
                 AssetDatabase.SaveAssets();
             }
@@ -43,6 +48,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         public string GameExecutablePath
         {
             get { return this.gameExecutablePath; }
+        }
+
+        public bool RunScenarioOnPlayMode
+        {
+            get { return this.runScenarioOnPlayMode; }
         }
     }
 
@@ -64,6 +74,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     var settings = CustomSettings.GetSerializedSettings();
                     EditorGUILayout.PropertyField(settings.FindProperty("gameExecutablePath"), new GUIContent("Game executable path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("defaultExportPath"), new GUIContent("Export path"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("runScenarioOnPlayMode"), new GUIContent("Use Unity play button"));
                     settings.ApplyModifiedPropertiesWithoutUndo();
                 },
 

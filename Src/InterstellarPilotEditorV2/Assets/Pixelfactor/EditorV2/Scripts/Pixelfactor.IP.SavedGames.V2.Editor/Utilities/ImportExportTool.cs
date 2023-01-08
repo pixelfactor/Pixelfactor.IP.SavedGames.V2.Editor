@@ -7,7 +7,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
 {
     public class ImportExportTool : MonoBehaviour
     {
-        [MenuItem("Window/IP Editor V2/Export/Quick Export")]
+        [MenuItem("Window/IP Editor V2/Quick Export")]
         public static void FixUpValidateAndExportMenuItem()
         {
             var editorSavedGame = Util.FindSavedGameOrErrorOut();
@@ -15,6 +15,22 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             QuickFixSavedGame(editorSavedGame);
 
             var path = GetExportPath(editorSavedGame.Title);
+            ValidateAndExport(editorSavedGame, path);
+        }
+
+        [MenuItem("Window/IP Editor V2/Export to...")]
+        public static void FixUpAndExportTo()
+        {
+            var editorSavedGame = Util.FindSavedGameOrErrorOut();
+
+            QuickFixSavedGame(editorSavedGame);
+
+            var path = EditorUtility.SaveFilePanel(
+                     "Save scenario to..",
+                     "",
+                     $"{editorSavedGame.Title}.dat",
+                     "dat");
+
             ValidateAndExport(editorSavedGame, path);
         }
 
