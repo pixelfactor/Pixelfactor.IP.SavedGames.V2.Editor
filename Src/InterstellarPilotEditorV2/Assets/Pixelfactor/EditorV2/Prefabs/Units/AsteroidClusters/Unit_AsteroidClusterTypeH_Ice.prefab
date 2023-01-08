@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4656951364488765979}
   - component: {fileID: 5033624439146972838}
+  - component: {fileID: -7740353057320373423}
   m_Layer: 0
   m_Name: Unit_AsteroidClusterTypeH_Ice
   m_TagString: Untagged
@@ -46,11 +47,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
-  EditorUnitClassRef: {fileID: 2544603334889176812, guid: 091d21979db482a4cac9e0953a4edc14, type: 3}
+  Seed: -1
+  LegacyUnitClass: -1
+  UnitClass: {fileID: 2544603334889176812, guid: 091d21979db482a4cac9e0953a4edc14, type: 3}
   Faction: {fileID: 0}
-  RpProvision: 1
   Name: 
+  ShortName: 
   Radius: 1500
+  VariantName: 
+  Mass: -1
+  AllowDestruction: 1
+  IsInvulnerable: 0
+--- !u!114 &-7740353057320373423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292402053928738505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 633aa355725dcde4b9cd16816bbbb02f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5507963291060157466
 GameObject:
   m_ObjectHideFlags: 0

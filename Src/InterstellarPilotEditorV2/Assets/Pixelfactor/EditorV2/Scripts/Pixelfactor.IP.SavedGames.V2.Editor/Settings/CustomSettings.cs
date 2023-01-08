@@ -109,10 +109,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                 guiHandler = (searchContext) =>
                 {
                     var settings = CustomSettings.GetSerializedSettings();
+                    EditorGUILayout.LabelField("General", EditorStyles.boldLabel);
                     EditorGUILayout.PropertyField(settings.FindProperty("gameExecutablePath"), new GUIContent("Game executable path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("defaultExportPath"), new GUIContent("Export path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("runScenarioOnPlayMode"), new GUIContent("Use Unity play button"));
-                    EditorGUILayout.LabelField("Advanced system options");
+                    EditorGUILayout.Space();
+                    EditorGUILayout.LabelField("Advanced", EditorStyles.boldLabel);
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorSize"), new GUIContent("Sector size"));
                     EditorGUILayout.PropertyField(settings.FindProperty("maxUnitDistanceFromOriginLowerBound"), new GUIContent("Max unit sector distance (lower)"));
                     EditorGUILayout.PropertyField(settings.FindProperty("maxUnitDistanceFromOriginUpperBound"), new GUIContent("Max unit sector distance (upper)"));

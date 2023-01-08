@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 281928334902145842}
   - component: {fileID: 6029716177475390603}
+  - component: {fileID: 4592367923055880873}
   m_Layer: 0
   m_Name: Unit_AsteroidTypeB_Rock
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   - {fileID: 446355697815887550}
   - {fileID: 6547043378992979146}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6029716177475390603
 MonoBehaviour:
@@ -47,12 +48,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
+  Seed: -1
   LegacyUnitClass: 2000
   UnitClass: {fileID: 2544603334889176812, guid: e7b85e362c1c16b488ab964ae9542dbd, type: 3}
   Faction: {fileID: 0}
-  RpProvision: 0
   Name: 
+  ShortName: 
   Radius: -1
+  VariantName: 
+  Mass: -1
+  AllowDestruction: 1
+  IsInvulnerable: 0
+--- !u!135 &4592367923055880873
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897587888585231384}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8.93
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8158067126185828009
 GameObject:
   m_ObjectHideFlags: 0

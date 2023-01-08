@@ -16,3 +16,7 @@ MonoBehaviour:
     Pilot 2.exe
   defaultExportPath: C:\Users\gsdat\AppData\LocalLow\Pixelfactor Ltd_\Interstellar
     Pilot 2\SaveGames
+  runScenarioOnPlayMode: 1
+  sectorSize: 16000
+  maxUnitDistanceFromOriginLowerBound: 6500
+  maxUnitDistanceFromOriginUpperBound: 7000

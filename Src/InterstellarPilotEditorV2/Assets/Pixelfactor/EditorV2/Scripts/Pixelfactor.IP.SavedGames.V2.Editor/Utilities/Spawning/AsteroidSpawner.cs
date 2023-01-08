@@ -20,14 +20,18 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Spawning
         public string AsteroidTypeBPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Units/Asteroids/Unit_AsteroidTypeB_Rock.prefab";
         public string AsteroidTypeHPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Units/Asteroids/Unit_AsteroidTypeH_Ice.prefab";
 
-        public void CreateAsteroids()
+        /// <summary>
+        /// Create asteroids in all sectors
+        /// </summary>
+        public int CreateAsteroids(EditorSavedGame editorSavedGame)
         {
-            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
-
+            var count = 0;
             foreach (var asteroidCluster in editorSavedGame.GetComponentsInChildren<EditorAsteroidCluster>())
             {
-                PopulateAsteroidsAroundCluster(asteroidCluster);
+                count += PopulateAsteroidsAroundCluster(asteroidCluster);
             }
+
+            return count;
         }
 
         private EditorUnit GetAsteroidPrefab(EditorAsteroidCluster asteroidCluster)
@@ -59,21 +63,19 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Spawning
             throw new System.Exception($"Cannot create asteroids in asteroid cluster {asteroidCluster}. No asteroid prefab defined for this asteroid cluster");
         }
 
-        public void PopulateAsteroidsAroundCluster(EditorAsteroidCluster asteroidCluster)
+        public int PopulateAsteroidsAroundCluster(EditorAsteroidCluster asteroidCluster)
         {
             var asteroidPrefab = GetAsteroidPrefab(asteroidCluster); ;
 
             if (asteroidPrefab != null)
             {
-                PopulateAsteroidsAroundCluster(asteroidCluster, asteroidPrefab);
+                return PopulateAsteroidsAroundCluster(asteroidCluster, asteroidPrefab);
             }
-            else
-            {
-                throw new System.Exception($"Cannot create asteroids in asteroid cluster {asteroidCluster}. No asteroid prefabs for asteroid cluster found");
-            }
+
+            throw new System.Exception($"Cannot create asteroids in asteroid cluster {asteroidCluster}. No asteroid prefabs for asteroid cluster found");
         }
 
-        public void PopulateAsteroidsAroundCluster(EditorAsteroidCluster asteroidCluster, EditorUnit asteroidPrefab)
+        public int PopulateAsteroidsAroundCluster(EditorAsteroidCluster asteroidCluster, EditorUnit asteroidPrefab)
         {
             var sector = asteroidCluster.GetComponentInParent<EditorSector>();
 
@@ -85,10 +87,18 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Spawning
 
             var count = Random.Range(min, max + 1);
 
+            var actualCreatedCount = 0;
+
             for (int i = 0; i < count; i++)
             {
                 var asteroid = TryGenerateAsteroid(asteroidCluster, sector, asteroidPrefab);
+                if (asteroid != null)
+                {
+                    actualCreatedCount++;
+                }
             }
+
+            return actualCreatedCount;
         }
 
         public int GetMinDesiredAsteroids(EditorAsteroidCluster asteroidCluster)
@@ -117,11 +127,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Spawning
 
         public EditorUnit CreateAsteroid(EditorUnit prefab, EditorSector sector, Vector3 position)
         {
-            var asteroid = GameObject.Instantiate(prefab);
-            asteroid.transform.SetParent(sector.transform, true);
+            var asteroid = PrefabUtility.InstantiatePrefab(prefab.gameObject, sector.transform) as GameObject;
             asteroid.transform.position = position;
             asteroid.transform.localRotation = Random.rotationUniform;
-            return asteroid;
+            return asteroid.GetComponent<EditorUnit>();
         }
 
         public Vector3? TryGenerateAsteroidSectorPosition(EditorAsteroidCluster asteroidCluster, EditorSector sector)
