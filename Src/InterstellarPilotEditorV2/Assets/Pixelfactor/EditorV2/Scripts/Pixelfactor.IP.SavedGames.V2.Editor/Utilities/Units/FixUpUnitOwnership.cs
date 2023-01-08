@@ -11,7 +11,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         [MenuItem("Window/IP Editor V2/Tools/Units/Set unit factions to pilot factions")]
         public static void SetUnitFactionsToPilotFactionsMenuItem()
         {
-            var editorSavedGame = Util.FindSavedGameOrErrorOut();
+            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
 
             SetUnitFactionsToPilotFactions(editorSavedGame);
 
@@ -21,7 +21,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         [MenuItem("Window/IP Editor V2/Tools/Fleets/Set fleet children to same faction")]
         public static void SetFleetChildrenToSameFactionMenuItem()
         {
-            var editorSavedGame = Util.FindSavedGameOrErrorOut();
+            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
 
             SetFleetChildrenToSameFaction(editorSavedGame);
 

@@ -1,15 +1,17 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
+using Pixelfactor.IP.SavedGames.V2.Editor.Utilities;
+using Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Export;
 using UnityEditor;
 using UnityEngine;
 
-namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
+namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 {
     public class PlayTool : MonoBehaviour
     {
         [MenuItem("Window/IP Editor V2/Play")]
         public static void Play()
         {
-            var editorSavedGame = Util.FindSavedGameOrErrorOut();
+            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
             if (editorSavedGame == null)
                 return;
 

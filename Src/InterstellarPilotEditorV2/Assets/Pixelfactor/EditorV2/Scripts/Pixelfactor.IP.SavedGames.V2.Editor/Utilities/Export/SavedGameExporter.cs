@@ -1,12 +1,10 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Model;
 using UnityEngine;
 
-namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
+namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Export
 {
     public static class SavedGameExporter
     {
-        public const float SECTOR_SIZE = 16000f;
-
         public static SavedGame Export(EditorSavedGame editorSavedGame)
         {
             Debug.Log($"Exporting scenario [{(!string.IsNullOrEmpty(editorSavedGame.Title) ? editorSavedGame.Title : "Unnamed")}]");

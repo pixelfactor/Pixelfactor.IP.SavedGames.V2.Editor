@@ -2,13 +2,13 @@
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.FleetOrders;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Scripting;
-using System;
+using Pixelfactor.IP.SavedGames.V2.Editor.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
+namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 {
     public class AutoAssignIdsTool
     {
@@ -20,7 +20,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         [MenuItem("Window/IP Editor V2/Tools/Ids/Auto-assign object Ids")]
         public static void AutoAssignIdsMenuItem()
         {
-            var editorSavedGame = Util.FindSavedGameOrErrorOut();
+            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
 
             AutoAssignIds(editorSavedGame);
 
@@ -30,7 +30,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         [MenuItem("Window/IP Editor V2/Tools/Ids/Clear all Ids")]
         public static void ClearIdsMenuItem()
         {
-            var editorSavedGame = Util.FindSavedGameOrErrorOut();
+            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
 
             ClearAllIds(editorSavedGame);
 
@@ -40,7 +40,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         [MenuItem("Window/IP Editor V2/Tools/Ids/Reassign all Ids")]
         public static void ReassignIdsMenuItem()
         {
-            var editorSavedGame = Util.FindSavedGameOrErrorOut();
+            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
 
             ClearAllIds(editorSavedGame);
             AutoAssignIds(editorSavedGame);

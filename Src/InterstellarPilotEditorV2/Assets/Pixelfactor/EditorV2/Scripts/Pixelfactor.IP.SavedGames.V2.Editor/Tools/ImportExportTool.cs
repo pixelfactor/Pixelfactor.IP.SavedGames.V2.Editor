@@ -1,16 +1,18 @@
 using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
+using Pixelfactor.IP.SavedGames.V2.Editor.Utilities;
+using Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Export;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
+namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 {
     public class ImportExportTool : MonoBehaviour
     {
         [MenuItem("Window/IP Editor V2/Quick Export")]
         public static void FixUpValidateAndExportMenuItem()
         {
-            var editorSavedGame = Util.FindSavedGameOrErrorOut();
+            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
 
             QuickFixSavedGame(editorSavedGame);
 
@@ -21,7 +23,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         [MenuItem("Window/IP Editor V2/Export to...")]
         public static void FixUpAndExportTo()
         {
-            var editorSavedGame = Util.FindSavedGameOrErrorOut();
+            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
 
             QuickFixSavedGame(editorSavedGame);
 

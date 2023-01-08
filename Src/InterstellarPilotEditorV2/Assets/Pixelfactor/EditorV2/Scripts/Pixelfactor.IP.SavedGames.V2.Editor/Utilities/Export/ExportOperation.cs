@@ -12,7 +12,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
+namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Export
 {
     public class ExportOperation
     {
@@ -562,7 +562,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 CreatedVersion = new System.Version(2, 0, 50),
                 ScenarioTitle = editorSavedGame.Title,
                 ScenarioAuthor = editorSavedGame.Author,
-                ScenarioAuthoringTool = $"IP2 Unity Editor {Application.version}",
+                ScenarioAuthoringTool = $"IP2 Unity Editor {Versioning.Version}",
                 ScenarioDescription = editorSavedGame.Description,
                 GameStartDate = new System.DateTime(editorSavedGame.DateYear, editorSavedGame.DateMonth, editorSavedGame.DateDay, editorSavedGame.DateHour, editorSavedGame.DateMinute, 0),
             };

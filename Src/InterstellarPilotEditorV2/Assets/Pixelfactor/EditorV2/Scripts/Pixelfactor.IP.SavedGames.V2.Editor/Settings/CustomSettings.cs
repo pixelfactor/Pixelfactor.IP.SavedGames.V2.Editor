@@ -20,6 +20,28 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private bool runScenarioOnPlayMode = true;
 
+        /// <summary>
+        /// The width and height of each scene
+        /// </summary>
+        [SerializeField]
+        private float sectorSize = 16000;
+
+        /// <summary>
+        /// The max distance a unit can traverse from the center of a sector
+        /// This should be roughly just less than SectorSize / 2
+        /// </summary>
+        [Tooltip("The max distance a unit can traverse from the center of a sector. This should be roughly just less than SectorSize / 2")]
+        [SerializeField]
+        private float maxUnitDistanceFromOriginLowerBound = 6500.0f;
+
+        /// <summary>
+        /// The max distance a unit can traverse from the center of a sector
+        /// This should be roughly just less than SectorSize / 2
+        /// </summary>
+        [Tooltip("The max distance a unit can traverse from the center of a sector. This should be roughly just less than SectorSize / 2")]
+        [SerializeField]
+        private float maxUnitDistanceFromOriginUpperBound = 7000.0f;
+
         internal static CustomSettings GetOrCreateSettings()
         {
             var settings = AssetDatabase.LoadAssetAtPath<CustomSettings>(k_MyCustomSettingsPath);
@@ -54,6 +76,21 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         {
             get { return this.runScenarioOnPlayMode; }
         }
+
+        public float SectorSize
+        {
+            get { return this.sectorSize; }
+        }
+
+        public float MaxUnitDistanceFromOriginLowerBound
+        {
+            get { return this.maxUnitDistanceFromOriginLowerBound; }
+        }
+
+        public float MaxUnitDistanceFromOriginUpperBound
+        {
+            get { return this.maxUnitDistanceFromOriginUpperBound; }
+        }
     }
 
     // Register a SettingsProvider using IMGUI for the drawing framework:
@@ -75,6 +112,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("gameExecutablePath"), new GUIContent("Game executable path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("defaultExportPath"), new GUIContent("Export path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("runScenarioOnPlayMode"), new GUIContent("Use Unity play button"));
+                    EditorGUILayout.LabelField("Advanced system options");
+                    EditorGUILayout.PropertyField(settings.FindProperty("sectorSize"), new GUIContent("Sector size"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("maxUnitDistanceFromOriginLowerBound"), new GUIContent("Max unit sector distance (lower)"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("maxUnitDistanceFromOriginUpperBound"), new GUIContent("Max unit sector distance (upper)"));
+
                     settings.ApplyModifiedPropertiesWithoutUndo();
                 },
 

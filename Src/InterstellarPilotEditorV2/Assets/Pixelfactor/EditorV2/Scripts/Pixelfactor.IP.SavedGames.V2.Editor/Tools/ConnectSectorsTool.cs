@@ -1,10 +1,11 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
+using Pixelfactor.IP.SavedGames.V2.Editor.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
+namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 {
     public class ConnectSectorsTool
     {
@@ -19,7 +20,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         [MenuItem("Window/IP Editor V2/Tools/Sectors/Connect selected sectors with wormholes")]
         public static void ConnectSelectedSectorsWithWormholesMenuItem()
         {
-            var editorSavedGame = Util.FindSavedGameOrErrorOut();
+            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
 
             ConnectSelectedSectorsWithWormholes(editorSavedGame.PreferredWormholeDistance);
         }

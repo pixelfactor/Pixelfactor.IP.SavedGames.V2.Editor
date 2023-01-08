@@ -1,4 +1,5 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
+using Pixelfactor.IP.SavedGames.V2.Editor.Tools;
 using UnityEditor;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities

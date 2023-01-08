@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
 {
-    public static class Util
+    public static class SavedGameUtil
     {
         public static EditorSavedGame FindSavedGameOrErrorOut()
         {

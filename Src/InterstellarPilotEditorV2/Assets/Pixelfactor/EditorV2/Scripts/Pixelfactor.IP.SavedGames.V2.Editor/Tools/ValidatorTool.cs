@@ -1,7 +1,8 @@
-﻿using UnityEditor;
+﻿using Pixelfactor.IP.SavedGames.V2.Editor.Utilities;
+using UnityEditor;
 using UnityEngine;
 
-namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
+namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 {
     public class ValidatorTool : MonoBehaviour
     {
