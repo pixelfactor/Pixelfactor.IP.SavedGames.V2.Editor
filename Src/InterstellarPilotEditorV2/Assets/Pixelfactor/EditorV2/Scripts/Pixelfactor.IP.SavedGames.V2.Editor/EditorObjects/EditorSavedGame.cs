@@ -4,8 +4,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
 {
     public class EditorSavedGame : MonoBehaviour
     {
-        public bool RandomEventsEnabled = true;
-
         /// <summary>
         /// The distance from sector origin<br />
         /// Applies when connecting sectors

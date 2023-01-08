@@ -518,10 +518,31 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         {
             savedGame.ScenarioData = new ModelScenarioData
             {
-
-                HasRandomEvents = editorSavedGame.RandomEventsEnabled,
                 NextRandomEventTime = 240d
             };
+
+            var customScenarioOptions = this.editorSavedGame.GetComponentInChildren<EditorScenarioOptions>();
+            if (customScenarioOptions != null)
+            {
+                savedGame.ScenarioData.HasRandomEvents = customScenarioOptions.RandomEventsEnabled;
+
+                if (customScenarioOptions.FactionSpawningEnabled)
+                {
+                    savedGame.ScenarioData.FactionSpawner = new ModelFactionSpawner
+                    {
+                        NextUpdate = customScenarioOptions.MinTimeBeforeFactionSpawn
+                    };
+                }
+
+                savedGame.ScenarioData.AllowAbandonShip = customScenarioOptions.AllowAbandonShip;
+                savedGame.ScenarioData.AllowStationCapture = customScenarioOptions.AllowStationCapture;
+                savedGame.ScenarioData.AllowTeleporting = customScenarioOptions.AllowTeleporting;
+                savedGame.ScenarioData.AsteroidRespawningEnabled = customScenarioOptions.AsteroidRespawningEnabled;
+                savedGame.ScenarioData.AsteroidRespawnTime = customScenarioOptions.AsteroidRespawnTime;
+                savedGame.ScenarioData.Permadeath = customScenarioOptions.Permadeath;
+                savedGame.ScenarioData.RespawnOnDeath = customScenarioOptions.RespawnOnDeath;
+
+            }
         }
 
         private void ExportHeader()
