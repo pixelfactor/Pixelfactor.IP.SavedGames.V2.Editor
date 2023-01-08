@@ -28,5 +28,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
         {
             return unit.Class.IsCargo();
         }
+
+        public static bool IsTurret(this ModelUnit unit)
+        {
+            return unit.Class.IsTurret();
+        }
     }
 }
