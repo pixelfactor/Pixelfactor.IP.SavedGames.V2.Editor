@@ -38,14 +38,29 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// <summary>
         /// A custom name for this unit. If null/empty the game displays the unit name based on other rules.
         /// </summary>
-        [Tooltip("A custom name given to the unit. E.g. ship name or bar name")]
+        [Tooltip("A optional custom name given to the unit. E.g. ship name or bar name. Note that if left blank for ships, the engine will assign a ship name randomly")]
         public string Name;
+
+        [Tooltip("An optional custom short name given to the unit. Currently only used by stations")]
+        public string ShortName;
 
         /// <summary>
         /// Optional custom radius. Only relevant to gas clouds and asteroid clusters
         [Tooltip("Defines the radius of gas clouds and asteroid clusters. Ignored when less than zero")]
         /// </summary>
         public float Radius = -1.0f;
+
+        [Tooltip("Optional name of this unit's custom variant. Currently only applies to ships. Likely to be used for stations in the future")]
+        public string VariantName = null;
+
+        [Tooltip("Optional mass of the unit. Leave at -1 to use the default. Currently only applies to ships")]
+        public float Mass = -1.0f;
+
+        [Tooltip("When false the engine will not allow the unit to be killed during normal gameplay. The unit could still be damaged")]
+        public bool AllowDestruction = true;
+
+        [Tooltip("Whether the unit can be damaged during normal gameplay")]
+        public bool IsInvulnerable = false;
 
         void OnDrawGizmosSelected()
         {

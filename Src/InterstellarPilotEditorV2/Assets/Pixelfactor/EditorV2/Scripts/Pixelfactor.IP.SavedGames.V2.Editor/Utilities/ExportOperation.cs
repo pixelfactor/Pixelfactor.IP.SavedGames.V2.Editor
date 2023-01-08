@@ -792,10 +792,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                         Class = editorUnit.ModelUnitClass,
                         Faction = savedGame.Factions.FirstOrDefault(e => e.Id == editorUnit.Faction?.Id),
                         Name = editorUnit.Name, // Set the unit name here but it may later be overriden
+                        ShortName = editorUnit.ShortName,
                         Seed = editorUnit.Seed,
                         Sector = savedGame.Sectors.FirstOrDefault(e => e.Id == editorSector.Id),
                         // Radius is only relevant to some units like gas clouds and asteroid clusters
                         Radius = editorUnit.Radius >= 0.0f ? editorUnit.Radius : null,
+                        CustomClassName = !string.IsNullOrWhiteSpace(editorUnit.VariantName) ? editorUnit.VariantName : null,
+                        Mass = editorUnit.Mass > 0.0f ? editorUnit.Mass : null,
+                        IsInvulnerable = editorUnit.IsInvulnerable,
+                        AvoidDestruction = !editorUnit.AllowDestruction,
                     };
 
                     // HACK: Requisition Point weirdness
@@ -934,7 +939,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                     ConstructionState = editorComponentData.ConstructionState,
                     ConstructionProgress = editorComponentData.ConstructionProgress,
                     IsCloaked = editorComponentData.IsCloaked,
-                    EngineThrottle = editorComponentData.EngineThrottle >= 0.0f ? editorComponentData.EngineThrottle : null,
+                    CargoCapacity = editorComponentData.CargoCapacity >= 0.0f ? editorComponentData.CargoCapacity : null,
+                    EngineThrottle = editorComponentData.EngineThrottle > 0.0f ? editorComponentData.EngineThrottle : null,
                 };
 
                 ExportComponentUnitCargo(unit, editorComponentData);
