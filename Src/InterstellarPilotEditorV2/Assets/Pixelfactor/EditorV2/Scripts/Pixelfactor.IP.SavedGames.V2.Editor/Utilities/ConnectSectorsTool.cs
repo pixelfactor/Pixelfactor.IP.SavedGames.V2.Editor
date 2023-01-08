@@ -8,7 +8,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
 {
     public class ConnectSectorsTool
     {
-        const string wormholePrefabPath = "Assets/IPEditor/Prefabs/Wormholes/Wormhole.prefab";
+        /// <summary>
+        /// TODO: Move this to settings
+        /// </summary>
+        const string wormholePrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Units/Wormholes/Unit_Wormhole.prefab";
 
         /// <summary>
         /// TODO: This tool will always create two new wormholes, it won't look for existing ones first.
@@ -50,6 +53,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             float wormholeDistance)
         {
             var wormholePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(wormholePrefabPath);
+
+            if (wormholePrefab == null)
+            {
+                throw new System.Exception($"Unable to load wormhole prefab. Check that the asset exists at path: \"{wormholePrefabPath}\"");
+            }
+
             var newWormhole = (GameObject)PrefabUtility.InstantiatePrefab(wormholePrefab.gameObject);
             newWormhole.transform.SetParent(editorSector1.transform, false);
 

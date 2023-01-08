@@ -57,10 +57,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5033624439146972838, guid: bd1e23702ea9485499d42321007e5fb9, type: 3}
-      propertyPath: Id
-      value: 100003
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033624439146972838, guid: bd1e23702ea9485499d42321007e5fb9, type: 3}
       propertyPath: Seed
       value: 1093591506
       objectReference: {fileID: 0}
@@ -141,10 +137,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5033624439146972838, guid: c7e5df85e9937d24f9fc4cb9b4deab53, type: 3}
-      propertyPath: Id
-      value: 100006
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033624439146972838, guid: c7e5df85e9937d24f9fc4cb9b4deab53, type: 3}
       propertyPath: Seed
       value: 852266277
       objectReference: {fileID: 0}
@@ -213,10 +205,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5033624439146972838, guid: bd1e23702ea9485499d42321007e5fb9, type: 3}
-      propertyPath: Id
-      value: 100005
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033624439146972838, guid: bd1e23702ea9485499d42321007e5fb9, type: 3}
       propertyPath: Seed
       value: 1316108467
       objectReference: {fileID: 0}
@@ -282,7 +270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -433,10 +421,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5033624439146972838, guid: c7e5df85e9937d24f9fc4cb9b4deab53, type: 3}
-      propertyPath: Id
-      value: 100004
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033624439146972838, guid: c7e5df85e9937d24f9fc4cb9b4deab53, type: 3}
       propertyPath: Seed
       value: 1099376256
       objectReference: {fileID: 0}
@@ -505,10 +489,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5033624439146972838, guid: c7e5df85e9937d24f9fc4cb9b4deab53, type: 3}
-      propertyPath: Id
-      value: 100002
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033624439146972838, guid: c7e5df85e9937d24f9fc4cb9b4deab53, type: 3}
       propertyPath: Seed
       value: 1115145895
       objectReference: {fileID: 0}
@@ -575,10 +555,6 @@ PrefabInstance:
     - target: {fileID: 4656951364488765979, guid: bd1e23702ea9485499d42321007e5fb9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033624439146972838, guid: bd1e23702ea9485499d42321007e5fb9, type: 3}
-      propertyPath: Id
-      value: 100001
       objectReference: {fileID: 0}
     - target: {fileID: 5033624439146972838, guid: bd1e23702ea9485499d42321007e5fb9, type: 3}
       propertyPath: Seed
