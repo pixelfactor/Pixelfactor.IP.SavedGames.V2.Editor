@@ -1,6 +1,7 @@
 using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export;
+using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Wormholes;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -36,8 +37,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 
         public static void QuickFixSavedGame(EditorSavedGame editorSavedGame)
         {
+            var settings = CustomSettings.GetOrCreateSettings();
+
             FixUpUnitOwnership.SetFleetChildrenToSameFaction(editorSavedGame);
             FixUpUnitOwnership.SetUnitFactionsToPilotFactions(editorSavedGame);
+
+            if (settings.Export_RemoveUntargettedWormholes)
+            { 
+                RemoveUntargettedWormholesTool.Remove(editorSavedGame);
+            }
 
             SeedTool.AutosetSeedsIfPreferred(editorSavedGame);
 

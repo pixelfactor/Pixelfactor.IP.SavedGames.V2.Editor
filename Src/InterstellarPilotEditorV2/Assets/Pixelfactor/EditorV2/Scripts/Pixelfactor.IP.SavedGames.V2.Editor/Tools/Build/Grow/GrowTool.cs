@@ -27,12 +27,19 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow
             float distanceBetweenSectors,
             float minAngleBetweenWormholes)
         {
+            var allSectors = existingSector.GetSavedGame().GetSectors();
+
             for (int i = 0; i < MaxIterations; i++)
             {
                 var newPosition = existingSector.transform.position + Geometry.RandomXZUnitVector() * distanceBetweenSectors;
 
                 if (existingSector.ConnectionExistsAtPosition(newPosition, minAngleBetweenWormholes))
                     continue;
+
+                if (GrowHelper.PositionTooCloseToSectors(allSectors, newPosition, distanceBetweenSectors))
+                {
+                    continue;
+                }
 
                 var newInstance = (GameObject)PrefabUtility.InstantiatePrefab(sectorPrefab.gameObject, existingSector.transform.parent);
                 var sector = newInstance.GetComponent<EditorSector>();

@@ -66,6 +66,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private bool export_AutosetIds = true;
 
+        [Tooltip("Whether to remove wormholes without a target on export")]
+        [SerializeField]
+        private bool export_RemoveUntargettedWormholes = true;
+
         [Tooltip("Determines the spacing between sectors on the unvierse map")]
         [SerializeField]
         private float universeMapScaleFactor = 0.005f;
@@ -172,6 +176,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         {
             get { return this.minAngleBetweenWormholes; }
         }
+
+        public bool Export_RemoveUntargettedWormholes
+        {
+            get { return this.export_RemoveUntargettedWormholes; }
+        }
     }
 
     // Register a SettingsProvider using IMGUI for the drawing framework:
@@ -201,6 +210,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("export_AutosetSectorSeed"), new GUIContent("Autoset sector seeds"));
                     EditorGUILayout.PropertyField(settings.FindProperty("export_AutosetUnitSeed"), new GUIContent("Autoset unit seeds"));
                     EditorGUILayout.PropertyField(settings.FindProperty("export_AutosetIds"), new GUIContent("Autoset unique ids"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("export_RemoveUntargettedWormholes"), new GUIContent("Remove untargetted wormholes"));
                     EditorGUILayout.Space();
 
                     EditorGUILayout.LabelField("Universe Build", EditorStyles.boldLabel);
