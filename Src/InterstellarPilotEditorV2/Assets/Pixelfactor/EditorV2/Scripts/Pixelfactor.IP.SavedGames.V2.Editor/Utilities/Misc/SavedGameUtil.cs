@@ -7,7 +7,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
     {
         public static EditorSavedGame FindSavedGameOrErrorOut()
         {
-            var editorSavedGame = GameObject.FindObjectOfType<EditorSavedGame>();
+            var editorSavedGame = FindSavedGame();
             if (editorSavedGame == null)
             {
                 EditorUtility.DisplayDialog("IP Editor", $"Cannot find a {nameof(EditorSavedGame)} type object in the current scene", "Ok");
@@ -15,6 +15,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             }
 
             return editorSavedGame;
+        }
+
+        public static EditorSavedGame FindSavedGame()
+        {
+            return GameObject.FindObjectOfType<EditorSavedGame>();
         }
     }
 }

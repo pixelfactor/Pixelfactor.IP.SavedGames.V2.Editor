@@ -1019,7 +1019,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Export
                     Name = editorSector.Name,
                     Description = editorSector.Description,
                     GateDistanceMultiplier = editorSector.WormholeDistanceMultiplier,
-                    RandomSeed = editorSector.RandomSeed,
+                    RandomSeed = editorSector.Seed,
                     BackgroundRotation = editorSector.BackgroundRotation.ToVec3(),
                     DirectionLightRotation = editorSector.DirectionLightRotation.ToVec3(),
                     DirectionLightColor = editorSector.DirectionLightColor.ToVec3(),

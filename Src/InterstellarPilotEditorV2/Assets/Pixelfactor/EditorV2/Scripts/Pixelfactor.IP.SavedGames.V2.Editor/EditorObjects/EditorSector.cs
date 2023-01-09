@@ -32,7 +32,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// Something to do with the appearance of asteroid clusters
         /// </summary>
         [Tooltip("A seed used to determine the appearance of the sector e.g. procedural sky. When unset, a seed will be assigned randomly at runtime. Set a value to have a consistent appearance on each play.")]
-        public int RandomSeed = -1;
+        [UnityEngine.Serialization.FormerlySerializedAs("RandomSeed")]
+        public int Seed = -1;
 
         /// <summary>
         /// Skybox rotation

@@ -9,7 +9,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 {
     public class ImportExportTool : MonoBehaviour
     {
-        [MenuItem("Window/IP Editor V2/Quick Export")]
         public static void FixUpValidateAndExportMenuItem()
         {
             var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
@@ -20,7 +19,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             ValidateAndExport(editorSavedGame, path);
         }
 
-        [MenuItem("Window/IP Editor V2/Export to...")]
         public static void FixUpAndExportTo()
         {
             var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
@@ -40,6 +38,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         {
             FixUpUnitOwnership.SetFleetChildrenToSameFaction(editorSavedGame);
             FixUpUnitOwnership.SetUnitFactionsToPilotFactions(editorSavedGame);
+
+            SeedTool.AutosetSeedsIfPreferred(editorSavedGame);
 
             // Blitz all ids to ensure uniqueness
             AutoAssignIdsTool.ClearAllIds(editorSavedGame);

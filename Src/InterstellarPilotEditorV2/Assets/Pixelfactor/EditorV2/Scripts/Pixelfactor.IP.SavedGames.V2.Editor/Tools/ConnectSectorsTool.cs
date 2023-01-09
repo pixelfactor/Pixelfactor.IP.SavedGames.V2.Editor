@@ -25,15 +25,18 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             ConnectSelectedSectorsWithWormholes(editorSavedGame.PreferredWormholeDistance);
         }
 
+        public static bool CanConnectSelectedSectorsWithWormholes()
+        {
+            return TryGetSelectedSectors(out _);
+        }
+
         private static void ConnectSelectedSectorsWithWormholes(float wormholeDistance)
         {
-            var selectedSectors = GetSelectedSectorsOrThrow().ToList();
-            if (selectedSectors.Count != 2)
+            if (!TryGetSelectedSectors(out List<EditorSector> sectors))
             {
                 Logging.LogAndThrow("Expected to have 2 selected sectors");
             }
-
-            ConnectSectors(selectedSectors, wormholeDistance);
+            ConnectSectors(sectors, wormholeDistance);
         }
 
         private static void ConnectSectors(List<EditorSector> selectedSectors, float wormholeDistance)
@@ -71,8 +74,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             return newWormholeData;
         }
 
-        public static IEnumerable<EditorSector> GetSelectedSectorsOrThrow()
+        public static bool TryGetSelectedSectors(out List<EditorSector> sectors)
         {
+            sectors = new List<EditorSector>();
+
+            if (Selection.objects.Length != 2)
+            {
+                return false;
+            }
+
             foreach (var obj in Selection.objects)
             {
                 if (obj is GameObject gameObject)
@@ -80,18 +90,20 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                     var editorSector = gameObject.GetComponent<EditorSector>();
                     if (editorSector != null)
                     {
-                        yield return editorSector;
+                        sectors.Add(editorSector);
                     }
                     else
                     {
-                        Logging.LogAndThrow("Must select sectors");
+                        return false;
                     }
                 }
                 else
                 {
-                    Logging.LogAndThrow("Selection is invalid");
+                    return false;
                 }
             }
+
+            return true;
         }
     }
 }

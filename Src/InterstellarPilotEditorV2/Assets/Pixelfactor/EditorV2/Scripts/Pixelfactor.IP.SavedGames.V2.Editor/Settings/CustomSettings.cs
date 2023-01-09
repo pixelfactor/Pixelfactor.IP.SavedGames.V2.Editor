@@ -42,6 +42,18 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private float maxUnitDistanceFromOriginUpperBound = 7000.0f;
 
+        [Tooltip("The path to the prefab that is used to create a new scenario")]
+        [SerializeField]
+        private string defaultScenePrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/SceneTemplates/EmptySector.prefab";
+
+        [Tooltip("Whether a sector is given a unique seed automatically on export (if left on the default)")]
+        [SerializeField]
+        private bool export_AutosetSectorSeed = true;
+
+        [Tooltip("Whether a unit is given a unique seed automatically on export (if left on the default)")]
+        [SerializeField]
+        private bool export_AutosetUnitSeed = true;
+
         internal static CustomSettings GetOrCreateSettings()
         {
             var settings = AssetDatabase.LoadAssetAtPath<CustomSettings>(k_MyCustomSettingsPath);
@@ -91,17 +103,33 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         {
             get { return this.maxUnitDistanceFromOriginUpperBound; }
         }
+
+        public string DefaultScenePrefabPath
+        {
+            get { return this.defaultScenePrefabPath; }
+        }
+
+        public bool Export_AutosetSectorSeed
+        {
+            get { return this.export_AutosetSectorSeed; }
+        }
+
+        public bool Export_AutosetUnitSeed
+        {
+            get { return this.export_AutosetUnitSeed; }
+        }
     }
 
     // Register a SettingsProvider using IMGUI for the drawing framework:
     static class MyCustomSettingsIMGUIRegister
     {
+        public const string SettingsProviderPath = "Project/IP2EditorSetings";
         [SettingsProvider]
         public static SettingsProvider CreateMyCustomSettingsProvider()
         {
             // First parameter is the path in the Settings window.
             // Second parameter is the scope of this setting: it only appears in the Project Settings window.
-            var provider = new SettingsProvider("Project/IP2EditorSetings", SettingsScope.Project)
+            var provider = new SettingsProvider(SettingsProviderPath, SettingsScope.Project)
             {
                 // By default the last token of the path is used as display name if no label is provided.
                 label = "IP2 Editor",
@@ -114,10 +142,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("defaultExportPath"), new GUIContent("Export path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("runScenarioOnPlayMode"), new GUIContent("Use Unity play button"));
                     EditorGUILayout.Space();
+                    EditorGUILayout.LabelField("Export", EditorStyles.boldLabel);
+                    EditorGUILayout.PropertyField(settings.FindProperty("export_AutosetSectorSeed"), new GUIContent("Autoset sector seeds"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("export_AutosetUnitSeed"), new GUIContent("Autoset unit seeds"));
+                    EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Advanced", EditorStyles.boldLabel);
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorSize"), new GUIContent("Sector size"));
                     EditorGUILayout.PropertyField(settings.FindProperty("maxUnitDistanceFromOriginLowerBound"), new GUIContent("Max unit sector distance (lower)"));
                     EditorGUILayout.PropertyField(settings.FindProperty("maxUnitDistanceFromOriginUpperBound"), new GUIContent("Max unit sector distance (upper)"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("defaultScenePrefabPath"), new GUIContent("The prefab that is instantiated when creating a new scenario"));
 
                     settings.ApplyModifiedPropertiesWithoutUndo();
                 },
