@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
+namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 {
     public class AutoNameObjects
     {
@@ -83,9 +83,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         {
             foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
             {
-                editorSector.gameObject.name = $"Sector_{(!string.IsNullOrWhiteSpace(editorSector.Name) ? editorSector.Name : "Unnamed")}";
-                EditorUtility.SetDirty(editorSector);
+                AutoNameSector(editorSector);
             }
+        }
+
+        public static void AutoNameSector(EditorSector editorSector)
+        {
+            editorSector.gameObject.name = $"Sector_{(!string.IsNullOrWhiteSpace(editorSector.Name) ? editorSector.Name : "Unnamed")}";
+            EditorUtility.SetDirty(editorSector);
         }
 
         private static void AutoNameUnits(EditorSavedGame editorSavedGame)

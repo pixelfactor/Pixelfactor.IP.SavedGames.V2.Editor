@@ -16,7 +16,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             var hasSectors = sectors.Any();
 
             EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.TextField("Sectors", GetSectorLabel(sectors));
+            EditorGUILayout.TextField("Sectors", WindowHelper.DescribeSectors(sectors));
             EditorGUI.EndDisabledGroup();
 
             EditorGUI.BeginDisabledGroup(!hasSectors);
@@ -35,26 +35,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             }
 
             EditorGUI.EndDisabledGroup();
-        }
-
-        private string GetSectorLabel(IEnumerable<EditorSector> sectors)
-        {
-            if (sectors.Count() == 0)
-            {
-                return "[None]";
-            }
-
-            if (sectors.Count() == 1)
-            {
-                return sectors.First().Name;
-            }
-
-            if (sectors.Count() < 4)
-            {
-                return string.Join(", ", sectors.Select(e => e.Name));
-            }
-
-            return $"{sectors.Count()} sectors";
         }
     }
 }

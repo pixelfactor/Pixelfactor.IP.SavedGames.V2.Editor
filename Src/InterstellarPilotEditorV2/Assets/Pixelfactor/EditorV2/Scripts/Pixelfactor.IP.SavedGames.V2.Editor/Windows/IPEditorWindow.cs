@@ -45,6 +45,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                         new SpawnWindow().Draw();
                     }
                     break;
+                case EditWindowId:
+                    {
+                        new EditWindow().Draw();
+                    }
+                    break;
                 case RefineWindowId:
                     {
                         new RefineWindow().Draw();

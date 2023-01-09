@@ -1,6 +1,6 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
-using Pixelfactor.IP.SavedGames.V2.Editor.Utilities;
-using Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Spawning;
+using Pixelfactor.IP.SavedGames.V2.Editor.Tools;
+using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;

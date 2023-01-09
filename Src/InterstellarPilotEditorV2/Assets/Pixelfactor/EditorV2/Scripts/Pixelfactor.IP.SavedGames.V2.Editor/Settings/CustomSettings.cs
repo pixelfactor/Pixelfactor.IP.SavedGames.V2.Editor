@@ -46,6 +46,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private string defaultScenePrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/SceneTemplates/EmptySector.prefab";
 
+        [Tooltip("The path to the prefab that is used to create new sectors")]
+        [SerializeField]
+        private string sectorPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Sectors/Sector.prefab";
+
+        [Tooltip("The path to the text asset where sector names are defined")]
+        [SerializeField]
+        private string sectorNamesPath = "Assets/Pixelfactor/EditorV2/Data/SectorNameList1.txt";
+
         [Tooltip("Whether a sector is given a unique seed automatically on export")]
         [SerializeField]
         private bool export_AutosetSectorSeed = true;
@@ -113,6 +121,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
             get { return this.defaultScenePrefabPath; }
         }
 
+        public string SectorPrefabPath
+        {
+            get { return this.sectorPrefabPath; }
+        }
+
         public bool Export_AutosetSectorSeed
         {
             get { return this.export_AutosetSectorSeed; }
@@ -126,6 +139,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         public bool Export_AutosetIds
         {
             get { return export_AutosetIds; }
+        }
+
+        public string SectorNamesPath
+        {
+            get { return this.sectorNamesPath; }
         }
     }
 
@@ -158,9 +176,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Advanced", EditorStyles.boldLabel);
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorSize"), new GUIContent("Sector size"));
-                    EditorGUILayout.PropertyField(settings.FindProperty("maxUnitDistanceFromOriginLowerBound"), new GUIContent("Max unit sector distance (lower)"));
-                    EditorGUILayout.PropertyField(settings.FindProperty("maxUnitDistanceFromOriginUpperBound"), new GUIContent("Max unit sector distance (upper)"));
-                    EditorGUILayout.PropertyField(settings.FindProperty("defaultScenePrefabPath"), new GUIContent("The prefab that is instantiated when creating a new scenario"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("maxUnitDistanceFromOriginLowerBound"), new GUIContent("Max sector distance (lower)"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("maxUnitDistanceFromOriginUpperBound"), new GUIContent("Max sector distance (upper)"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("defaultScenePrefabPath"), new GUIContent("Default scenario prefab path"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("sectorPrefabPath"), new GUIContent("Sector prefab path"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("sectorNamesPath"), new GUIContent("Sector names path"));
 
                     settings.ApplyModifiedPropertiesWithoutUndo();
                 },
