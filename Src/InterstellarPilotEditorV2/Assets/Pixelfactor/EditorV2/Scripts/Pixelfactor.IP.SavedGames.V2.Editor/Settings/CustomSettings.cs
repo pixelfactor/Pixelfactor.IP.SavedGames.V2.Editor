@@ -72,7 +72,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
 
         [Tooltip("Determines how far away to place new sectors")]
         [SerializeField]
-        public float minDistanceBetweenSectors = 45000.0f;
+        private float minDistanceBetweenSectors = 45000.0f;
+
+        [Tooltip("Determines the min angle between wormholes. Determines how far apart wormholes are. In degrees.")]
+        [SerializeField]
+        private float minAngleBetweenWormholes = 60.0f;
 
         internal static CustomSettings GetOrCreateSettings()
         {
@@ -163,6 +167,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         {
             get { return this.minDistanceBetweenSectors; }
         }
+
+        public float MinAngleBetweenWormholes
+        {
+            get { return this.minAngleBetweenWormholes; }
+        }
     }
 
     // Register a SettingsProvider using IMGUI for the drawing framework:
@@ -187,11 +196,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("defaultExportPath"), new GUIContent("Export path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("runScenarioOnPlayMode"), new GUIContent("Use Unity play button"));
                     EditorGUILayout.Space();
+
                     EditorGUILayout.LabelField("Export", EditorStyles.boldLabel);
                     EditorGUILayout.PropertyField(settings.FindProperty("export_AutosetSectorSeed"), new GUIContent("Autoset sector seeds"));
                     EditorGUILayout.PropertyField(settings.FindProperty("export_AutosetUnitSeed"), new GUIContent("Autoset unit seeds"));
                     EditorGUILayout.PropertyField(settings.FindProperty("export_AutosetIds"), new GUIContent("Autoset unique ids"));
                     EditorGUILayout.Space();
+
+                    EditorGUILayout.LabelField("Universe Build", EditorStyles.boldLabel);
+                    EditorGUILayout.PropertyField(settings.FindProperty("minAngleBetweenWormholes"), new GUIContent("Min wormhole angle"));
+                    EditorGUILayout.Space();
+
                     EditorGUILayout.LabelField("Advanced", EditorStyles.boldLabel);
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorSize"), new GUIContent("Sector size"));
                     EditorGUILayout.PropertyField(settings.FindProperty("maxUnitDistanceFromOriginLowerBound"), new GUIContent("Max sector distance (lower)"));

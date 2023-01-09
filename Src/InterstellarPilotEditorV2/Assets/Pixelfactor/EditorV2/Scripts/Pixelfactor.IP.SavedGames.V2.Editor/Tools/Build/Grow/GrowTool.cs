@@ -12,25 +12,48 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow
     public static class GrowTool
     {
         /// <summary>
+        /// Max iterations before giving up trying to create a new wormhole
+        /// </summary>
+        public const int MaxIterations = 10;
+
+        /// <summary>
         /// Adds a new connection to the existing sector. Returns null if there's no space
         /// </summary>
         /// <param name="editorSector"></param>
         /// <returns></returns>
-        public static EditorSector GrowOnce(EditorSector existingSector, EditorSector sectorPrefab, float distance)
+        public static EditorSector GrowOnce(
+            EditorSector existingSector,
+            EditorSector sectorPrefab, 
+            float distanceBetweenSectors,
+            float minAngleBetweenWormholes)
         {
-            var newInstance = (GameObject)PrefabUtility.InstantiatePrefab(sectorPrefab.gameObject, existingSector.transform.parent);
-            var sector = newInstance.GetComponent<EditorSector>();
+            for (int i = 0; i < MaxIterations; i++)
+            {
+                var newPosition = existingSector.transform.position + Geometry.RandomXZUnitVector() * distanceBetweenSectors;
 
-            sector.transform.position = Geometry.RandomXZUnitVector() * distance;
+                if (existingSector.ConnectionExistsAtPosition(newPosition, minAngleBetweenWormholes))
+                    continue;
 
-            EditSectorTool.Randomize(sector);
+                var newInstance = (GameObject)PrefabUtility.InstantiatePrefab(sectorPrefab.gameObject, existingSector.transform.parent);
+                var sector = newInstance.GetComponent<EditorSector>();
 
-            return sector;
+                sector.transform.position = newPosition;
+
+                EditSectorTool.Randomize(sector);
+
+                return sector;
+            }
+
+            return null;
         }
 
-        public static EditorSector GrowOnceAndConnect(EditorSector existingSector, EditorSector sectorPrefab, float distance)
+        public static EditorSector GrowOnceAndConnect(
+            EditorSector existingSector,
+            EditorSector sectorPrefab,
+            float distanceBetweenSectors,
+            float minAngleBetweenWormhole)
         {
-            var newSector = GrowOnce(existingSector, sectorPrefab, distance);
+            var newSector = GrowOnce(existingSector, sectorPrefab, distanceBetweenSectors, minAngleBetweenWormhole);
             if (newSector != null)
             {
                 ConnectSectorsTool.ConnectSectors(existingSector, newSector, existingSector.GetSavedGame().PreferredWormholeDistance);

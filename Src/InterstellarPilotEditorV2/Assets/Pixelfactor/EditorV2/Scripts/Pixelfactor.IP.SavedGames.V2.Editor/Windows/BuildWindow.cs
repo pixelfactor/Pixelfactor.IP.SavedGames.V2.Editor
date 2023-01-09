@@ -15,6 +15,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         private EditorSector newSectorPrefab = null;
         private float expandMultiplier = 2.0f;
         private GrowSectorSelectionMode growSectorSelectionMode = GrowSectorSelectionMode.Retain;
+        private int growMaxWormholeConnections = 8;
 
         public void Draw()
         {
@@ -73,25 +74,37 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 System.Enum.GetNames(typeof(GrowSectorSelectionMode)),
                 System.Enum.GetNames(typeof(GrowSectorSelectionMode)).Length);
 
+            EditorGUILayout.LabelField("Max wormholes");
+            this.growMaxWormholeConnections = EditorGUILayout.IntSlider(this.growMaxWormholeConnections, 2, 8);
+
             EditorGUI.BeginDisabledGroup(!hasSectors && newSectorPrefab != null);
 
             EditorGUILayout.Space();
 
-            if (GUILayout.Button(new GUIContent(
-                "Grow once",
-                "Adds a single sector to the existing selection")))
+            if (GUILayout.Button(
+                new GUIContent(
+                    "Grow once",
+                    "Adds a single sector to the existing selection"),
+                Styles.Button))
             {
                 var newSectors = new List<EditorSector>();
 
-                var minDistanceBetweenSectors = CustomSettings.GetOrCreateSettings().MinDistanceBetweenSectors;
+                var settings = CustomSettings.GetOrCreateSettings();
 
                 foreach (var sector in sectors)
                 {
-                    var newSector = GrowTool.GrowOnceAndConnect(sector, newSectorPrefab, minDistanceBetweenSectors);
-
-                    if (newSector != null)
+                    if (sector.GetStableWormholeCount() < this.growMaxWormholeConnections)
                     {
-                        newSectors.Add(newSector);
+                        var newSector = GrowTool.GrowOnceAndConnect(
+                            sector, 
+                            newSectorPrefab,
+                            settings.MinDistanceBetweenSectors,
+                            settings.MinAngleBetweenWormholes);
+
+                        if (newSector != null)
+                        {
+                            newSectors.Add(newSector);
+                        }
                     }
                 }
 
@@ -126,9 +139,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             EditorGUI.BeginDisabledGroup(!enabled);
 
-            if (GUILayout.Button(new GUIContent(
-                "Expand",
-                "Grows or shrinks the distance between existing sectors")))
+            if (GUILayout.Button(
+                new GUIContent(
+                    "Expand",
+                    "Grows or shrinks the distance between existing sectors"),
+                Styles.Button))
             {
                 ExpandTool.Expand(this.expandMultiplier);
             }

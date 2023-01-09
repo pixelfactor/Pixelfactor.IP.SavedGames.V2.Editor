@@ -23,9 +23,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             EditorGUI.BeginDisabledGroup(!canPlay);
 
-            if (GUILayout.Button(new GUIContent(
-                "Play",
-                "Plays the scenario. If the button is disabled, configure the exe path in Settings")))
+            if (GUILayout.Button(
+                new GUIContent(
+                    "Play",
+                    "Plays the scenario. If the button is disabled, configure the exe path in Settings"),
+                Styles.Button))
             {
                 PlayTool.Play();
             }
@@ -34,23 +36,29 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             EditorGUI.BeginDisabledGroup(!hasScenario);
 
-            if (GUILayout.Button(new GUIContent(
-    "Quick export",
-    "Exports the scenario to the location defined in project settings")))
+            if (GUILayout.Button(
+                new GUIContent(
+                    "Quick export",
+                    "Exports the scenario to the location defined in project settings"),
+                Styles.Button))
             {
                 ImportExportTool.FixUpValidateAndExport();
             }
 
-            if (GUILayout.Button(new GUIContent(
-                "Export to...",
-                "Exports the scenario to a specific location")))
+            if (GUILayout.Button(
+                new GUIContent(
+                    "Export to...",
+                    "Exports the scenario to a specific location"),
+                Styles.Button))
             {
                 ImportExportTool.FixUpAndExportTo();
             }
 
-            if (GUILayout.Button(new GUIContent(
+            if (GUILayout.Button(
+                new GUIContent(
                 "Validate",
-                "Ensures that the scenario is valid for import into the game engine")))
+                "Ensures that the scenario is valid for import into the game engine"),
+                Styles.Button))
             {
                 Validator.Validate(editorSavedGame, false);
             }
@@ -61,14 +69,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             if (GUILayout.Button(new GUIContent(
                 "Create new...",
-                "Creates a new scenario")))
+                "Creates a new scenario"),
+                Styles.Button))
             {
                 CreateNewScenarioTool.CreateNew();
             }
 
-            if (GUILayout.Button(new GUIContent(
+            if (GUILayout.Button(
+                new GUIContent(
                 "Settings",
-                "Opens up the settings window")))
+                "Opens up the settings window"),
+                Styles.Button))
             {
                 SettingsService.OpenProjectSettings(MyCustomSettingsIMGUIRegister.SettingsProviderPath);
             }
