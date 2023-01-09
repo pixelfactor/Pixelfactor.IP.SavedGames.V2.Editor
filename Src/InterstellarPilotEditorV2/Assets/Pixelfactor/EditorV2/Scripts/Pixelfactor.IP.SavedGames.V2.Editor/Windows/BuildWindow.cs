@@ -66,6 +66,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             newSectorPrefab = (EditorSector)EditorGUILayout.ObjectField("Sector prefab", newSectorPrefab, typeof(EditorSector), allowSceneObjects: false);
 
+            EditorGUILayout.LabelField("Selection mode");
+
             this.growSectorSelectionMode = (GrowSectorSelectionMode)GUILayout.SelectionGrid(
                 (int)this.growSectorSelectionMode,
                 System.Enum.GetNames(typeof(GrowSectorSelectionMode)),
@@ -73,15 +75,19 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             EditorGUI.BeginDisabledGroup(!hasSectors && newSectorPrefab != null);
 
+            EditorGUILayout.Space();
+
             if (GUILayout.Button(new GUIContent(
                 "Grow once",
                 "Adds a single sector to the existing selection")))
             {
                 var newSectors = new List<EditorSector>();
 
+                var minDistanceBetweenSectors = CustomSettings.GetOrCreateSettings().MinDistanceBetweenSectors;
+
                 foreach (var sector in sectors)
                 {
-                    var newSector = GrowTool.GrowOnceAndConnect(sector, newSectorPrefab);
+                    var newSector = GrowTool.GrowOnceAndConnect(sector, newSectorPrefab, minDistanceBetweenSectors);
 
                     if (newSector != null)
                     {

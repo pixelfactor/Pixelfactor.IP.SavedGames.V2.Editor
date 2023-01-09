@@ -20,10 +20,11 @@ MonoBehaviour:
   sectorSize: 16000
   maxUnitDistanceFromOriginLowerBound: 6500
   maxUnitDistanceFromOriginUpperBound: 7000
-  defaultScenePrefabPath: Assets/Pixelfactor/EditorV2/Prefabs/SceneTemplates/EmptySector.prefab
+  defaultScenePrefabPath: Assets/Pixelfactor/EditorV2/Prefabs/SceneTemplates/SingleSectorScenarioTemplate.prefab
   sectorPrefabPath: Assets/Pixelfactor/EditorV2/Prefabs/Sectors/Sector.prefab
   sectorNamesPath: Assets/Pixelfactor/EditorV2/Data/SectorNameList1.txt
   export_AutosetSectorSeed: 1
   export_AutosetUnitSeed: 1
   export_AutosetIds: 1
   universeMapScaleFactor: 0.005
+  minDistanceBetweenSectors: 45000

@@ -70,6 +70,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private float universeMapScaleFactor = 0.005f;
 
+        [Tooltip("Determines how far away to place new sectors")]
+        [SerializeField]
+        public float minDistanceBetweenSectors = 45000.0f;
+
         internal static CustomSettings GetOrCreateSettings()
         {
             var settings = AssetDatabase.LoadAssetAtPath<CustomSettings>(k_MyCustomSettingsPath);
@@ -154,6 +158,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         {
             get { return this.universeMapScaleFactor; }
         }
+
+        public float MinDistanceBetweenSectors
+        {
+            get { return this.minDistanceBetweenSectors; }
+        }
     }
 
     // Register a SettingsProvider using IMGUI for the drawing framework:
@@ -190,6 +199,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("defaultScenePrefabPath"), new GUIContent("Default scenario prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorPrefabPath"), new GUIContent("Sector prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorNamesPath"), new GUIContent("Sector names path"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("minDistanceBetweenSectors"), new GUIContent("Distance between sectors"));
                     EditorGUILayout.PropertyField(settings.FindProperty("universeMapScaleFactor"), new GUIContent("Universe scale factor"));
 
                     settings.ApplyModifiedPropertiesWithoutUndo();

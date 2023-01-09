@@ -37,5 +37,21 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
             selection.Add(gameObject);
             Selection.objects = selection.ToArray();
         }
+
+        public static bool TryGetTwoSelectedGameObjects(out GameObject a, out GameObject b)
+        {
+            a = null;
+            b = null;
+
+            if (Selection.gameObjects.Length != 2)
+            {
+                return false;
+            }
+
+            a = Selection.gameObjects[0];
+            b = Selection.gameObjects[1];
+
+            return true;
+        }
     }
 }

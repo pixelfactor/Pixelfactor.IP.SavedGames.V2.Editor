@@ -12,12 +12,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         public const int SpawnWindowId = 2;
         public const int EditWindowId = 3;
         public const int RefineWindowId = 4;
+        public const int MiscWindowId = 5;
 
         private BuildWindow buildWindow = new BuildWindow();
         private SpawnWindow spawnWindow = new SpawnWindow();
         private EditWindow editWindow = new EditWindow();
         private RefineWindow refineWindow = new RefineWindow();
         private MainWindow mainWindow = new MainWindow();
+        private MiscWindow miscWindow = new MiscWindow();
 
         [MenuItem("Window/IP Editor V2")]
         static void Init()
@@ -30,7 +32,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
         void OnGUI()
         {
-            currentTab = GUILayout.Toolbar(currentTab, new string[] { "Main", "Build", "Spawn", "Edit", "Refine" });
+            currentTab = GUILayout.Toolbar(currentTab, new string[] { "Main", "Build", "Spawn", "Edit", "Refine", "Misc" });
 
             EditorGUILayout.Space();
 
@@ -59,6 +61,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 case RefineWindowId:
                     {
                         this.refineWindow.Draw();
+                    }
+                    break;
+                case MiscWindowId:
+                    {
+                        this.miscWindow.Draw();
                     }
                     break;
             }
