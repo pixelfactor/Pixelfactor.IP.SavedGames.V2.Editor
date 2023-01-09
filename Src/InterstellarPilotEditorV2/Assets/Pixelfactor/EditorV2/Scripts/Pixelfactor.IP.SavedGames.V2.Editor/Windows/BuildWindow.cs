@@ -117,20 +117,33 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             return Mathf.Lerp(
                 customSettings.MinDistanceBetweenSectors,
                 customSettings.MaxDistanceBetweenSectors,
-                Mathf.Pow(Random.value, Mathf.Lerp(8.0f, 1.0f, this.sectorDistanceFuzziness)));
+                Mathf.Pow(Random.value, Mathf.Lerp(32.0f, 1.0f, this.sectorDistanceFuzziness)));
         }
 
         private void GrowOneRandomly(List<EditorSector> selectedSectors, CustomSettings settings)
         {
-            var randomSector = selectedSectors.Where(e => CanGrowSector(e)).GetRandom();
-            if (randomSector != null)
+            var availableSectors = selectedSectors.Where(e => CanGrowSector(e));
+            if (availableSectors.Count() > 0)
             {
-                var newSector = GrowTool.GrowOnceAndConnect(
-                    randomSector,
-                    newSectorPrefab,
-                    GetNewSectorDistance(settings),
-                    settings.MinDistanceBetweenSectors,
-                    settings.MinAngleBetweenWormholes);
+                EditorSector newSector = null;
+
+                // Keep trying until find a sector to generate from
+                for (int i = 0; i < 20; i++)
+                {
+                    var randomSector = availableSectors.GetRandom();
+                    if (randomSector != null)
+                    {
+                        newSector = GrowTool.GrowOnceAndConnect(
+                            randomSector,
+                            newSectorPrefab,
+                            GetNewSectorDistance(settings),
+                            settings.MinDistanceBetweenSectors,
+                            settings.MinAngleBetweenWormholes);
+
+                        if (newSector != null)
+                            break;
+                    }
+                }
 
                 if (newSector != null)
                 {

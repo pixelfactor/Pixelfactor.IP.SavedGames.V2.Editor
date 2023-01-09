@@ -26,6 +26,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                 }
 
                 PrefabUtility.InstantiatePrefab(templatePrefab.gameObject);
+
+                Selector.SelectFirstSector();
             }
         }
     }

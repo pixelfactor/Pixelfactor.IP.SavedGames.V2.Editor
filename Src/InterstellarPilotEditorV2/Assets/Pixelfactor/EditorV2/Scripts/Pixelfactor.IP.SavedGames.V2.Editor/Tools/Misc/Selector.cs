@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
+using Pixelfactor.IP.SavedGames.V2.Editor.Tools;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -36,6 +38,19 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
             var selection = Selection.objects.ToList();
             selection.Add(gameObject);
             Selection.objects = selection.ToArray();
+        }
+
+        public static void SelectFirstSector()
+        {
+            var savedGame = SavedGameUtil.FindSavedGame();
+            if (savedGame != null)
+            {
+                var sector = savedGame.GetComponentInChildren<EditorSector>();
+                if (sector != null)
+                {
+                    Selection.activeGameObject = sector.gameObject;
+                }
+            }
         }
 
         public static bool TryGetTwoSelectedGameObjects(out GameObject a, out GameObject b)

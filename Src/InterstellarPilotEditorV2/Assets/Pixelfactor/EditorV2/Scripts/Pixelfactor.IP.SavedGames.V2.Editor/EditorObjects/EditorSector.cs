@@ -73,7 +73,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
             if (SceneView.lastActiveSceneView.size < 100000.0f && SceneView.lastActiveSceneView.size > 20000.0f)
             {
                 GUIStyle style = new GUIStyle();
-                style.fontSize = 18;
+                style.fontSize = 14;
                 style.alignment = TextAnchor.MiddleCenter;
                 DrawString.Draw(this.gameObject.name, this.transform.position, new Color(1.0f, 1.0f, 1.0f), style, new Vector3(0.0f, 0.0f, 0.0f));
             }

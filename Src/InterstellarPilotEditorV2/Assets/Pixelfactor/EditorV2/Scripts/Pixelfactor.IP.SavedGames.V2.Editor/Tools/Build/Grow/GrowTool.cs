@@ -1,6 +1,7 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Edit;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -23,21 +24,44 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow
         /// <returns></returns>
         public static EditorSector GrowOnce(
             EditorSector existingSector,
-            EditorSector sectorPrefab, 
+            EditorSector sectorPrefab,
             float preferredDistance,
             float minDistanceBetweenSectors,
             float minAngleBetweenWormholes)
         {
-            var allSectors = existingSector.GetSavedGame().GetSectors();
+            var allSectors = existingSector.GetSavedGame().GetSectors().ToList();
+
+            List<Line> sectorLines = new List<Line>(allSectors.Count * 2);
+            foreach (var sector in allSectors)
+            {
+                var wormholes = sector.GetValidStableWormholes();
+                foreach (var wormhole in wormholes)
+                {
+                    var targetPosition = wormhole.GetActualTargetSector().transform.position;
+
+                    var line = new Line(
+                        new Vector2(sector.transform.position.x, sector.transform.position.z),
+                        new Vector2(targetPosition.x, targetPosition.z));
+
+                    sectorLines.Add(line);
+                }
+            }
 
             for (int i = 0; i < MaxIterations; i++)
             {
                 var newPosition = existingSector.transform.position + Geometry.RandomXZUnitVector() * preferredDistance;
 
                 if (existingSector.ConnectionExistsAtPosition(newPosition, minAngleBetweenWormholes))
+                { 
                     continue;
+                }
 
-                if (GrowHelper.PositionTooCloseToSectors(allSectors, newPosition, minDistanceBetweenSectors))
+                if (GrowHelper.IsPositionTooCloseToSectors(allSectors, newPosition, minDistanceBetweenSectors))
+                {
+                    continue;
+                }
+
+                if (GrowHelper.DoesNewConnectionIntersect(sectorLines, existingSector.transform.position, newPosition, 1000.0f, 0.0f))
                 {
                     continue;
                 }
