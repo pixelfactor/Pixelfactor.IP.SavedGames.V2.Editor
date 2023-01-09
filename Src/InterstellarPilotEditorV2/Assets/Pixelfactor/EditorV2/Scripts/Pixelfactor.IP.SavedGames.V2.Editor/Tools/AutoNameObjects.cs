@@ -10,7 +10,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         /// <summary>
         /// 
         /// </summary>
-        [MenuItem("Window/IP Editor V2/Tools/Naming/Auto-name objects")]
         public static void AutoNameAllObjects()
         {
             var editorSavedGame = GameObject.FindObjectOfType<EditorSavedGame>();
@@ -20,12 +19,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 return;
             }
 
+            AutoNameAllObjects(editorSavedGame);
+
+            Debug.Log("Finished auto-naming objects");
+        }
+
+        public static void AutoNameAllObjects(EditorSavedGame editorSavedGame)
+        {
             AutoNameSectors(editorSavedGame);
             AutoNameUnits(editorSavedGame);
             AutoNameFactions(editorSavedGame);
             AutoNameFleets(editorSavedGame);
-
-            Debug.Log("Finished auto-naming objects");
         }
 
         private static void AutoNameFleets(EditorSavedGame editorSavedGame)

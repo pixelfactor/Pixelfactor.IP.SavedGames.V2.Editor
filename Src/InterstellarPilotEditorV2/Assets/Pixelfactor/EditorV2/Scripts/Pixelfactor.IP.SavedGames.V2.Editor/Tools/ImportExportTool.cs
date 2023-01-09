@@ -9,7 +9,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 {
     public class ImportExportTool : MonoBehaviour
     {
-        public static void FixUpValidateAndExportMenuItem()
+        public static void FixUpValidateAndExport()
         {
             var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
 

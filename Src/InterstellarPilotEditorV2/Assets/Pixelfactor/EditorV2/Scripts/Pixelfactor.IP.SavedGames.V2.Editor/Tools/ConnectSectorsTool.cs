@@ -17,7 +17,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         /// <summary>
         /// TODO: This tool will always create two new wormholes, it won't look for existing ones first.
         /// </summary>
-        [MenuItem("Window/IP Editor V2/Tools/Sectors/Connect selected sectors with wormholes")]
         public static void ConnectSelectedSectorsWithWormholesMenuItem()
         {
             var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();

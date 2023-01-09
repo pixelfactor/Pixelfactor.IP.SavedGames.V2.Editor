@@ -8,7 +8,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 {
     public class PlayTool : MonoBehaviour
     {
-        [MenuItem("Window/IP Editor V2/Play")]
         public static void Play()
         {
             var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();

@@ -6,8 +6,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 {
     public class ValidatorTool : MonoBehaviour
     {
-        [MenuItem("Window/IP Editor V2/Validate")]
-        public static void ValidateMenuItem()
+        public static void Validate()
         {
             // Find the saved game
             var editorSavedGame = GameObject.FindObjectOfType<EditorSavedGame>();

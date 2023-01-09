@@ -39,7 +39,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
     "Quick export",
     "Exports the scenario to the location defined in project settings")))
             {
-                ImportExportTool.FixUpValidateAndExportMenuItem();
+                ImportExportTool.FixUpValidateAndExport();
             }
 
             if (GUILayout.Button(new GUIContent(

@@ -10,7 +10,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Factions
 {
     public class FactionRelationTool
     {
-        [MenuItem("Window/IP Editor V2/Tools/Factions/Set selected factions at permanent war")]
+        //[MenuItem("Window/IP Editor V2/Tools/Factions/Set selected factions at permanent war")]
         public static void SetSelectedFactionsAtPermanentWarMenuItem()
         {
             SetSelectedFactionsAtPermanentWar();
@@ -18,7 +18,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Factions
             Debug.Log("Finished setting selected factions at permanent war");
         }
 
-        [MenuItem("Window/IP Editor V2/Tools/Factions/Set selected factions at permanent alliance")]
+        //[MenuItem("Window/IP Editor V2/Tools/Factions/Set selected factions at permanent alliance")]
         public static void SetSelectedFactionsAtPermanentAllianceMenuItem()
         {
             SetSelectedFactionsAtPermanentAlliance();
@@ -26,7 +26,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Factions
             Debug.Log("Finished setting selected factions at permanent alliance");
         }
 
-        [MenuItem("Window/IP Editor V2/Tools/Factions/Set selected factions as neutral")]
+        //[MenuItem("Window/IP Editor V2/Tools/Factions/Set selected factions as neutral")]
         public static void SetSelectedFactionsAtNeutralMenuItem()
         {
             SetSelectedFactionsAtNeutral();
@@ -34,7 +34,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Factions
             Debug.Log("Finished setting selected factions as neutral");
         }
 
-        [MenuItem("Window/IP Editor V2/Tools/Factions/Set selected factions as neutral and best relations")]
+        //[MenuItem("Window/IP Editor V2/Tools/Factions/Set selected factions as neutral and best relations")]
         public static void SetSelectedFactionsAsBestRelationsMenuItem()
         {
             SetSelectedFactions(Neutrality.Neutral, 1.0f);
@@ -42,7 +42,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities.Factions
             Debug.Log("Finished setting selected factions as neutral/best relations");
         }
 
-        [MenuItem("Window/IP Editor V2/Tools/Factions/Set selected factions as neutral and worst relations")]
+        //[MenuItem("Window/IP Editor V2/Tools/Factions/Set selected factions as neutral and worst relations")]
         public static void SetSelectedFactionsAsWorstRelationsMenuItem()
         {
             SetSelectedFactions(Neutrality.Neutral, -1.0f);
