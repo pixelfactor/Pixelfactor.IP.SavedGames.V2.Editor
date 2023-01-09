@@ -13,6 +13,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         public const int EditWindowId = 3;
         public const int RefineWindowId = 4;
 
+        private BuildWindow buildWindow = new BuildWindow();
+        private SpawnWindow spawnWindow = new SpawnWindow();
+        private EditWindow editWindow = new EditWindow();
+        private RefineWindow refineWindow = new RefineWindow();
+        private MainWindow mainWindow = new MainWindow();
+
         [MenuItem("Window/IP Editor V2")]
         static void Init()
         {
@@ -32,27 +38,27 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             {
                 case MainWindowId:
                     {
-                        new MainWindow().Draw();
+                        this.mainWindow.Draw();
                     }
                     break;
                 case BuildWindowId:
                     {
-                        new BuildWindow().Draw();
+                        this.buildWindow.Draw();
                     }
                     break;
                 case SpawnWindowId:
                     {
-                        new SpawnWindow().Draw();
+                        this.spawnWindow.Draw();
                     }
                     break;
                 case EditWindowId:
                     {
-                        new EditWindow().Draw();
+                        this.editWindow.Draw();
                     }
                     break;
                 case RefineWindowId:
                     {
-                        new RefineWindow().Draw();
+                        this.refineWindow.Draw();
                     }
                     break;
             }

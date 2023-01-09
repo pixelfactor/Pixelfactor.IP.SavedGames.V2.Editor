@@ -1,4 +1,5 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Model;
+using UnityEditor;
 using UnityEngine;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
@@ -67,14 +68,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         [Tooltip("The direction of the sector's directional light at the start of the game")]
         public float LightDirectionFudge = 0.0f;
 
-        void OnDrawGizmosSelected()
+        void OnDrawGizmos()
         {
-            if (SelectionHelper.IsSelected(this) || SelectionHelper.IsSelected(this.transform.parent))
+            if (SceneView.lastActiveSceneView.size < 100000.0f && SceneView.lastActiveSceneView.size > 20000.0f)
             {
                 GUIStyle style = new GUIStyle();
                 style.fontSize = 18;
                 style.alignment = TextAnchor.MiddleCenter;
-                DrawString.Draw(this.gameObject.name, this.transform.position, new Color(0.3f, 0.3f, 1.0f), style, new Vector3(0.0f, -100.0f, 0.0f));
+                DrawString.Draw(this.gameObject.name, this.transform.position, new Color(1.0f, 1.0f, 1.0f), style, new Vector3(0.0f, 0.0f, 0.0f));
             }
         }
     }

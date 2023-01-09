@@ -8,5 +8,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
         {
             return editorSector.GetComponentInParent<EditorSavedGame>();
         }
+
+        public static int GetStableWormholeCount(this EditorSector editorSector)
+        {
+            return editorSector.GetComponentsInChildren<EditorUnitWormholeData>().Length;
+        }
     }
 }

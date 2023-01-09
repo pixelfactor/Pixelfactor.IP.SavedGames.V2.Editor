@@ -44,7 +44,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
 
         [Tooltip("The path to the prefab that is used to create a new scenario")]
         [SerializeField]
-        private string defaultScenePrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/SceneTemplates/EmptySector.prefab";
+        private string defaultScenePrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/SceneTemplates/SingleSectorScenarioTemplate.prefab";
 
         [Tooltip("The path to the prefab that is used to create new sectors")]
         [SerializeField]

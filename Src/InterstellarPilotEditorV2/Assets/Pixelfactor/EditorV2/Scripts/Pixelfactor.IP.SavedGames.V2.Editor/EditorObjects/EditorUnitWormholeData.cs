@@ -34,7 +34,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         [Tooltip("The target of the wormhole when it is unstable. The target should be a child of a sector. The target should be oriented for the direction the ship should face when exiting the wormhole")]
         public Transform UnstableTarget;
 
-        void OnDrawGizmosSelected()
+        void OnDrawGizmos()
         {
             if (this.TargetWormholeUnit != null)
             {

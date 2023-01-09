@@ -1,4 +1,5 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Model;
+using UnityEditor;
 using UnityEngine;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
@@ -62,11 +63,33 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         [Tooltip("Whether the unit can be damaged during normal gameplay")]
         public bool IsInvulnerable = false;
 
-        void OnDrawGizmosSelected()
+        void OnDrawGizmos()
         {
-            if (SelectionHelper.IsSelected(this) || SelectionHelper.IsSelected(this.transform.parent))
-            { 
+            if (SelectionHelper.IsSelected(this) || SceneView.lastActiveSceneView.size < GetDrawLabelSceneViewSize())
+            {
                 DrawString.Draw(this.gameObject.name, this.transform.position, Color.white);
+            }
+        }
+
+        public float GetDrawLabelSceneViewSize()
+        {
+            switch (this.ModelUnitClass)
+            {
+                case ModelUnitClass.Wormhole:
+                case ModelUnitClass.WormholeUnstable:
+                    return 20000.0f;
+                case ModelUnitClass.AsteroidCluster_TypeB:
+                case ModelUnitClass.AsteroidCluster_TypeH:
+                    return 10000.0f;
+                default:
+                    {
+                        if (this.ModelUnitClass.IsStation())
+                        {
+                            return 5000.0f;
+                        }
+
+                        return 1000.0f;
+                    }
             }
         }
 

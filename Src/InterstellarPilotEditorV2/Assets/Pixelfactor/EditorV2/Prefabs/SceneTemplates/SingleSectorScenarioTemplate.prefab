@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 7529907460713107571}
   - component: {fileID: 7529907460713107580}
   m_Layer: 0
-  m_Name: EmptySector
+  m_Name: SingleSectorScenarioTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

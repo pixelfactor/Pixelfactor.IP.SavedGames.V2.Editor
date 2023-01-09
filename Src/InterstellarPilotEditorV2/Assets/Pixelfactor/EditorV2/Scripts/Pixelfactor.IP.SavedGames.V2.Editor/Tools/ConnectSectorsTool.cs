@@ -38,6 +38,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             ConnectSectors(sectors, wormholeDistance);
         }
 
+        public static void ConnectSectors(EditorSector sector1, EditorSector sector2, float wormholeDistance)
+        {
+            ConnectSectors(new EditorSector[] { sector1, sector2 }.ToList(), wormholeDistance);
+        }
+
         private static void ConnectSectors(List<EditorSector> selectedSectors, float wormholeDistance)
         {
             var wormhole1 = ConnectSectorTo(selectedSectors[0], selectedSectors[1], wormholeDistance * selectedSectors[0].WormholeDistanceMultiplier);

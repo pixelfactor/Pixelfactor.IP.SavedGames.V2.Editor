@@ -26,9 +26,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow
             return sector;
         }
 
-        public static EditorSector GrowOnceAndConnect()
+        public static EditorSector GrowOnceAndConnect(EditorSector existingSector, EditorSector sectorPrefab)
         {
-            return null;
+            var newSector = GrowOnce(existingSector, sectorPrefab);
+            if (newSector != null)
+            {
+                ConnectSectorsTool.ConnectSectors(existingSector, newSector, existingSector.GetSavedGame().PreferredWormholeDistance);
+            }
+
+            return newSector;
         }
     }
 }
