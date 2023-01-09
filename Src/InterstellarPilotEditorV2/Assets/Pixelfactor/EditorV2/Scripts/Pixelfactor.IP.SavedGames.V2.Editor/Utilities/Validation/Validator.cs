@@ -1,6 +1,7 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Scripting;
+using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
 using System.Linq;
 using UnityEngine;
 
@@ -10,9 +11,22 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
     {
         public static void Validate(EditorSavedGame editorSavedGame, bool throwOnError)
         {
+            var settings = CustomSettings.GetOrCreateSettings();
+
+            // Only validate missing ids if they aren't set on export
+            if (!settings.Export_AutosetIds)
+            { 
+                ValidateMissingIds(editorSavedGame, throwOnError);
+            }
+
             ValidateDuplicateIds(editorSavedGame, throwOnError);
+
             ValidateDuplicatePilotNames(editorSavedGame);
             ValidateDuplicateShipNames(editorSavedGame);
+
+            ValidateUnits(editorSavedGame, throwOnError);
+
+            Debug.Log("Validation complete");
         }
 
         public static void ValidateDuplicateShipNames(EditorSavedGame editorSavedGame)
@@ -44,10 +58,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
                 }
             }
         }
-        private static void ValidateDuplicateIds(EditorSavedGame editorSavedGame, bool throwOnError)
+
+        private static void ValidateMissingIds(EditorSavedGame editorSavedGame, bool throwOnError)
         {
             ValidateMessageIds(editorSavedGame, throwOnError);
-            ValidateUnits(editorSavedGame, throwOnError);
+            ValidateUnitIds(editorSavedGame, throwOnError);
             ValidateFactionIds(editorSavedGame, throwOnError);
             ValidatePersonIds(editorSavedGame, throwOnError);
             ValidateSectorIds(editorSavedGame, throwOnError);
@@ -55,7 +70,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
             ValidateMissionIds(editorSavedGame, throwOnError);
             ValidateTriggerGroupIds(editorSavedGame, throwOnError);
             ValidateMissionObjectiveIds(editorSavedGame, throwOnError);
+        }
 
+        private static void ValidateDuplicateIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        {
             ValidateDuplicateSectors(editorSavedGame, throwOnError);
             ValidateDuplicateFactions(editorSavedGame, throwOnError);
             ValidateDuplicatePeople(editorSavedGame, throwOnError);
@@ -125,14 +143,20 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Utilities
         {
             foreach (var unit in editorSavedGame.GetComponentsInChildren<EditorUnit>())
             {
-                if (unit.Id < 0)
-                {
-                    OnError("All units require a valid (>0) id", unit, throwOnError);
-                }
-
                 if ((int)unit.ModelUnitClass < 0)
                 {
                     OnError($"Unit \"{unit}\" does not have a class id", unit, throwOnError);
+                }
+            }
+        }
+
+        private static void ValidateUnitIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        {
+            foreach (var unit in editorSavedGame.GetComponentsInChildren<EditorUnit>())
+            {
+                if (unit.Id < 0)
+                {
+                    OnError("All units require a valid (>0) id", unit, throwOnError);
                 }
             }
         }

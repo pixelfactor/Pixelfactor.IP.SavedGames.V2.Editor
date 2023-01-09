@@ -17,9 +17,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
 
             Validator.Validate(editorSavedGame, false);
-
-            Debug.Log("Validation complete");
-
         }
     }
 }

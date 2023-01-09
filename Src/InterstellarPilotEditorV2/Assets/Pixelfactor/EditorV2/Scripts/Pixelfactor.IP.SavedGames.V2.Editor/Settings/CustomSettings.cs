@@ -46,13 +46,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private string defaultScenePrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/SceneTemplates/EmptySector.prefab";
 
-        [Tooltip("Whether a sector is given a unique seed automatically on export (if left on the default)")]
+        [Tooltip("Whether a sector is given a unique seed automatically on export")]
         [SerializeField]
         private bool export_AutosetSectorSeed = true;
 
-        [Tooltip("Whether a unit is given a unique seed automatically on export (if left on the default)")]
+        [Tooltip("Whether a unit is given a unique seed automatically on export")]
         [SerializeField]
         private bool export_AutosetUnitSeed = true;
+
+        [Tooltip("Whether objects are given a unique id automatically on export")]
+        [SerializeField]
+        private bool export_AutosetIds = true;
 
         internal static CustomSettings GetOrCreateSettings()
         {
@@ -118,6 +122,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         {
             get { return this.export_AutosetUnitSeed; }
         }
+
+        public bool Export_AutosetIds
+        {
+            get { return export_AutosetIds; }
+        }
     }
 
     // Register a SettingsProvider using IMGUI for the drawing framework:
@@ -145,6 +154,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.LabelField("Export", EditorStyles.boldLabel);
                     EditorGUILayout.PropertyField(settings.FindProperty("export_AutosetSectorSeed"), new GUIContent("Autoset sector seeds"));
                     EditorGUILayout.PropertyField(settings.FindProperty("export_AutosetUnitSeed"), new GUIContent("Autoset unit seeds"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("export_AutosetIds"), new GUIContent("Autoset unique ids"));
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Advanced", EditorStyles.boldLabel);
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorSize"), new GUIContent("Sector size"));

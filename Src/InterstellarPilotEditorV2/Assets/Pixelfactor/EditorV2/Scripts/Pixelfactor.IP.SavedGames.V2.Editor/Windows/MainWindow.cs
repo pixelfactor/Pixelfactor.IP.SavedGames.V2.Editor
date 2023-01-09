@@ -12,12 +12,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         {
             EditorGUILayout.Space();
 
-            var currentScenario = SavedGameUtil.FindSavedGame();
-            var hasScenario = currentScenario != null;
+            var editorSavedGame = SavedGameUtil.FindSavedGame();
+            var hasScenario = editorSavedGame != null;
             var canPlay = hasScenario && !string.IsNullOrWhiteSpace(CustomSettings.GetOrCreateSettings().GameExecutablePath);
 
             EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.TextField("Current scenario", currentScenario != null ? currentScenario.Title : "[None]");
+            EditorGUILayout.TextField("Current scenario", editorSavedGame != null ? editorSavedGame.Title : "[None]");
             EditorGUI.EndDisabledGroup();
 
             EditorGUILayout.Space();
@@ -47,6 +47,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 "Exports the scenario to a specific location")))
             {
                 ImportExportTool.FixUpAndExportTo();
+            }
+
+            if (GUILayout.Button(new GUIContent(
+                "Validate",
+                "Ensures that the scenario is valid for import into the game engine")))
+            {
+                Validator.Validate(editorSavedGame, false);
             }
 
             EditorGUI.EndDisabledGroup();
