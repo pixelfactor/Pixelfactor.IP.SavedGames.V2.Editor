@@ -66,6 +66,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private bool export_AutosetIds = true;
 
+        [Tooltip("Determines the spacing between sectors on the unvierse map")]
+        [SerializeField]
+        private float universeMapScaleFactor = 0.005f;
+
         internal static CustomSettings GetOrCreateSettings()
         {
             var settings = AssetDatabase.LoadAssetAtPath<CustomSettings>(k_MyCustomSettingsPath);
@@ -145,6 +149,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         {
             get { return this.sectorNamesPath; }
         }
+
+        public float UniverseMapScaleFactor
+        {
+            get { return this.universeMapScaleFactor; }
+        }
     }
 
     // Register a SettingsProvider using IMGUI for the drawing framework:
@@ -181,6 +190,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("defaultScenePrefabPath"), new GUIContent("Default scenario prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorPrefabPath"), new GUIContent("Sector prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorNamesPath"), new GUIContent("Sector names path"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("universeMapScaleFactor"), new GUIContent("Universe scale factor"));
 
                     settings.ApplyModifiedPropertiesWithoutUndo();
                 },

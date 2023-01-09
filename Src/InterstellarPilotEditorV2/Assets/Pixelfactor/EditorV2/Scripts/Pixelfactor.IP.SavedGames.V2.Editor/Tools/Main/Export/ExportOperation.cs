@@ -4,6 +4,7 @@ using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Scripting;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Scripting.Actions;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Scripting.Triggers;
+using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
 using Pixelfactor.IP.SavedGames.V2.Model;
 using Pixelfactor.IP.SavedGames.V2.Model.Actions;
 using Pixelfactor.IP.SavedGames.V2.Model.Jobs;
@@ -502,14 +503,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
         private void SetSectorMapPositions()
         {
             // TODO: 
+            var scaleFactor = CustomSettings.GetOrCreateSettings().UniverseMapScaleFactor;
+
             foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
             {
-                var multiplier = 0.02f;
                 var sector = savedGame.Sectors.Single(e => e.Id == editorSector.Id);
                 sector.MapPosition = new Vec3
                 {
-                    X = editorSector.transform.position.x * multiplier,
-                    Z = editorSector.transform.position.z * multiplier
+                    X = editorSector.transform.position.x * scaleFactor,
+                    Z = editorSector.transform.position.z * scaleFactor
                 };
             }
         }
