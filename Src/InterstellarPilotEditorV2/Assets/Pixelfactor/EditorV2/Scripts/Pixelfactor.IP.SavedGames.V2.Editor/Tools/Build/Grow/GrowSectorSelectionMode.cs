@@ -8,7 +8,7 @@
         /// <summary>
         /// The selection will remain the same
         /// </summary>
-        Retain = 0,
+        Keep = 0,
         /// <summary>
         /// The new sectors will be selected
         /// </summary>

@@ -24,19 +24,20 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow
         public static EditorSector GrowOnce(
             EditorSector existingSector,
             EditorSector sectorPrefab, 
-            float distanceBetweenSectors,
+            float preferredDistance,
+            float minDistanceBetweenSectors,
             float minAngleBetweenWormholes)
         {
             var allSectors = existingSector.GetSavedGame().GetSectors();
 
             for (int i = 0; i < MaxIterations; i++)
             {
-                var newPosition = existingSector.transform.position + Geometry.RandomXZUnitVector() * distanceBetweenSectors;
+                var newPosition = existingSector.transform.position + Geometry.RandomXZUnitVector() * preferredDistance;
 
                 if (existingSector.ConnectionExistsAtPosition(newPosition, minAngleBetweenWormholes))
                     continue;
 
-                if (GrowHelper.PositionTooCloseToSectors(allSectors, newPosition, distanceBetweenSectors))
+                if (GrowHelper.PositionTooCloseToSectors(allSectors, newPosition, minDistanceBetweenSectors))
                 {
                     continue;
                 }
@@ -57,10 +58,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow
         public static EditorSector GrowOnceAndConnect(
             EditorSector existingSector,
             EditorSector sectorPrefab,
-            float distanceBetweenSectors,
+            float preferredDistance,
+            float minDistanceBetweenSectors,
             float minAngleBetweenWormhole)
         {
-            var newSector = GrowOnce(existingSector, sectorPrefab, distanceBetweenSectors, minAngleBetweenWormhole);
+            var newSector = GrowOnce(existingSector, sectorPrefab, preferredDistance, minDistanceBetweenSectors, minAngleBetweenWormhole);
             if (newSector != null)
             {
                 ConnectSectorsTool.ConnectSectors(existingSector, newSector, existingSector.GetSavedGame().PreferredWormholeDistance);

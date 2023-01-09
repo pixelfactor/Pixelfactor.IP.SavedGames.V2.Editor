@@ -74,9 +74,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private float universeMapScaleFactor = 0.005f;
 
-        [Tooltip("Determines how far away to place new sectors")]
+        [Tooltip("Determines the min distance between new sectors")]
         [SerializeField]
         private float minDistanceBetweenSectors = 45000.0f;
+
+        [Tooltip("Determines the max distance between new sectors")]
+        [SerializeField]
+        private float maxDistanceBetweenSectors = 100000.0f;
 
         [Tooltip("Determines the min angle between wormholes. Determines how far apart wormholes are. In degrees.")]
         [SerializeField]
@@ -172,6 +176,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
             get { return this.minDistanceBetweenSectors; }
         }
 
+        public float MaxDistanceBetweenSectors
+        {
+            get { return this.maxDistanceBetweenSectors; }
+        }
+
         public float MinAngleBetweenWormholes
         {
             get { return this.minAngleBetweenWormholes; }
@@ -215,6 +224,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
 
                     EditorGUILayout.LabelField("Universe Build", EditorStyles.boldLabel);
                     EditorGUILayout.PropertyField(settings.FindProperty("minAngleBetweenWormholes"), new GUIContent("Min wormhole angle"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("minDistanceBetweenSectors"), new GUIContent("Min distance between sectors"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("maxDistanceBetweenSectors"), new GUIContent("Max distance between sectors"));
                     EditorGUILayout.Space();
 
                     EditorGUILayout.LabelField("Advanced", EditorStyles.boldLabel);
@@ -224,7 +235,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("defaultScenePrefabPath"), new GUIContent("Default scenario prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorPrefabPath"), new GUIContent("Sector prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorNamesPath"), new GUIContent("Sector names path"));
-                    EditorGUILayout.PropertyField(settings.FindProperty("minDistanceBetweenSectors"), new GUIContent("Distance between sectors"));
                     EditorGUILayout.PropertyField(settings.FindProperty("universeMapScaleFactor"), new GUIContent("Universe scale factor"));
 
                     settings.ApplyModifiedPropertiesWithoutUndo();

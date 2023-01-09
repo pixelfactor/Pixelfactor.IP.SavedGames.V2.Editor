@@ -25,7 +25,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         static void Init()
         {
             IPEditorWindow window = EditorWindow.GetWindow<IPEditorWindow>();
-            window.minSize = new Vector2(600, 400);
+            window.minSize = new Vector2(1000, 800);
             var icon = AssetDatabase.LoadAssetAtPath<Texture>("Assets/Pixelfactor/EditorV2/Textures/DevLogoCentered256.png");
             window.titleContent = new GUIContent("IP Editor V2", icon);
         }
