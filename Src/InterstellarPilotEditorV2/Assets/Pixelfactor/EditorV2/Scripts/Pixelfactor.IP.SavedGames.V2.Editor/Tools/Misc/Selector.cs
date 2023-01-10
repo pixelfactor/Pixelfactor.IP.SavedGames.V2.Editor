@@ -58,6 +58,16 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
             }
         }
 
+        public static EditorSector GetSingleSelectedSectorOrNull()
+        {
+            if (Selection.activeGameObject != null)
+            {
+                return Selection.activeGameObject.GetComponentInParent<EditorSector>();
+            }
+
+            return null;
+        }
+
         public static bool TryGetTwoSelectedGameObjects(out GameObject a, out GameObject b)
         {
             a = null;

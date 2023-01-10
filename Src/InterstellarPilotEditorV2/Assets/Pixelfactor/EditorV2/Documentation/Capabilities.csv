@@ -16,7 +16,7 @@ Units,General,Docked ships,Yes,
 Units,General,Custom hangars,Not possible,Not supported in engine. Do not change the existing hangar prefabs
 Units,General,Create asteroids,Yes,
 Units,General,Abandoned ships/stations,Yes,
-Units,General,Edit ship/station health,No,To be implemented
+Units,General,Edit ship/station health,Yes,
 Units,Components,Edit component health,No,To be implemented
 Units,Components,Edit ship/station component mods,Yes,
 Units,Components,Edit energy charge,No,To be implemented

@@ -1,5 +1,7 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
+using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools;
+using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -21,9 +23,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             EditorGUI.BeginDisabledGroup(!hasSectors);
 
-            if (GUILayout.Button(new GUIContent(
-                "Spawn asteroids",
-                "Creates asteroids inside asteroid clusters")))
+            if (GUILayout.Button(
+                new GUIContent(
+                    "Spawn asteroids in all sectors",
+                    "Creates asteroids inside asteroid clusters of every sector"),
+                GuiHelper.ButtonLayout))
             {
                 var count = AsteroidSpawnTool.SpawnAsteroidsInSectors(sectors);
 
@@ -32,6 +36,39 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                     "No asteroids were created. Ensure the selected sectors have asteroid clusters or aren't already filled with asteroids";
 
                 EditorUtility.DisplayDialog("Spawn asteroids", message, "OK");
+            }
+
+            if (GUILayout.Button(
+                new GUIContent(
+                    "Spawn Shuttle A",
+                    "Creates a Shuttle A ship"),
+                GuiHelper.ButtonLayout))
+            {
+                var count = AsteroidSpawnTool.SpawnAsteroidsInSectors(sectors);
+                var sector = Selector.GetSingleSelectedSectorOrNull();
+
+                if (sector == null)
+                {
+                    EditorUtility.DisplayDialog("Spawn", "Select a sector first", "OK");
+                }
+                else
+                {
+                    var unit = Spawn.Unit(sector, Model.ModelUnitClass.Ship_ShuttleA, CustomSettings.GetOrCreateSettings().UnitPrefabsPath);
+                    var radius = 1.0f;
+                    var sphereCollider = unit.GetComponentInChildren<SphereCollider>();
+                    if (sphereCollider != null)
+                        radius = sphereCollider.radius;
+
+                    var newPosition = SpawnPositionFinder.FindPositionOrNull(sector, sector.transform.position, radius);
+                    if (newPosition.HasValue)
+                    {
+                        unit.transform.position = newPosition.Value;
+                    }
+                    else
+                    {
+                        unit.transform.localPosition = Vector3.zero;
+                    }
+                }
             }
 
             EditorGUI.EndDisabledGroup();

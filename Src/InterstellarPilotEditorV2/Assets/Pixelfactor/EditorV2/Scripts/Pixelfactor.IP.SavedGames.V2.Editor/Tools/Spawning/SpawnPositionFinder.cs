@@ -13,6 +13,29 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
 
         const float IncrementMultiplier = 1.5f;
 
+        public static bool IsPositionWithinBounds(EditorSector editorSector, Vector3 position, float maxDistance)
+        {
+            var localPosition = position - editorSector.transform.position;
+            return IsLocalPositionWithinBounds(maxDistance, localPosition);
+        }
+
+        public static bool IsLocalPositionWithinBounds(float maxDistance, Vector3 localPosition, bool checkYComponent = false)
+        {
+            if (checkYComponent)
+            {
+                if (Mathf.Abs(localPosition.y) > 0.1f)
+                    return false;
+            }
+
+            if (localPosition.x < -maxDistance || localPosition.x > maxDistance)
+                return false;
+
+            if (localPosition.z < -maxDistance || localPosition.z > maxDistance)
+                return false;
+
+            return true;
+        }
+
         public static Vector3? FindPositionOrNull(
             EditorSector sector,
             Vector3 checkPosition,
@@ -20,7 +43,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
             int iterations = 4)
         {
             var layerMask = ~0;
-            var maxSectorDistance = CustomSettings.GetOrCreateSettings().MaxUnitDistanceFromOriginUpperBound - radius;
+            var settings = CustomSettings.GetOrCreateSettings();
+            var maxSectorDistance = settings.MaxUnitDistanceFromOriginUpperBound - radius;
 
             // If not already overlapping then were done
             if (IsOverlapping(checkPosition, radius, layerMask))
@@ -42,9 +66,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
                         var newPos = checkPosition +
                             Quaternion.Euler(0.0f, directionIndex / (float)NumDirectionChecks * 360.0f, 0.0f) * (Vector3.forward * currentOffsetFromCheckPosition);
 
-                        // TODO: Check out of bounds
-                        //if (!UnitOutOfBoundsValidator.IsLocalPositionWithinBounds(maxSectorDistance, newPos))
-                        //    continue;
+                        if (!IsPositionWithinBounds(sector, newPos, maxSectorDistance))
+                            continue;
 
                         if (!IsOverlapping(newPos, radius, layerMask))
                         {
