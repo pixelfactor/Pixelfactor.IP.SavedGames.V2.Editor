@@ -78,8 +78,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         {
             switch (this.ModelUnitClass)
             {
-                case ModelUnitClass.Wormhole:
-                case ModelUnitClass.WormholeUnstable:
+                case ModelUnitClass.Wormhole_Default:
+                case ModelUnitClass.Wormhole_Unstable:
                     return 20000.0f;
                 case ModelUnitClass.AsteroidCluster_TypeB:
                 case ModelUnitClass.AsteroidCluster_TypeH:

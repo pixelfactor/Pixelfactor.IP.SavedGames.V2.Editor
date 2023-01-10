@@ -99,6 +99,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private string factionPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Factions/Faction.prefab";
 
+        [Tooltip("The path to the prefab used to create the player faction")]
+        [SerializeField]
+        private string playerFactionPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Factions/FactionPlayer.prefab";
+
         internal static CustomSettings GetOrCreateSettings()
         {
             var settings = AssetDatabase.LoadAssetAtPath<CustomSettings>(k_MyCustomSettingsPath);
@@ -219,6 +223,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
             get { return this.factionPrefabPath; }
         }
 
+        public string PlayerFactionPrefabPath
+        {
+            get { return this.playerFactionPrefabPath; }
+        }
+
         public string CargoClassPrefabsPath
         {
             get { return this.cargoClassPrefabsPath; }
@@ -271,6 +280,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("universeMapScaleFactor"), new GUIContent("Universe scale factor"));
                     EditorGUILayout.PropertyField(settings.FindProperty("unitPrefabsPath"), new GUIContent("Unit prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("factionPrefabPath"), new GUIContent("Faction prefab path"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("playerFactionPrefabPath"), new GUIContent("Player faction prefab path"));
 
                     settings.ApplyModifiedPropertiesWithoutUndo();
                 },

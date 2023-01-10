@@ -30,6 +30,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             AutoNameUnits(editorScenario);
             AutoNameFactions(editorScenario);
             AutoNameFleets(editorScenario);
+            AutoNamePeople(editorScenario);
         }
 
         private static void AutoNameFleets(EditorScenario editorScenario)
@@ -93,7 +94,21 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             EditorUtility.SetDirty(editorSector);
         }
 
-        private static void AutoNameUnits(EditorScenario editorScenario)
+        public static void AutoNamePeople(EditorScenario editorScenario)
+        {
+            foreach (var editorPerson in editorScenario.GetComponentsInChildren<EditorPerson>())
+            {
+                AutoNamePerson(editorPerson);
+                EditorUtility.SetDirty(editorPerson);
+            }
+        }
+
+        public static void AutoNamePerson(EditorPerson editorPerson)
+        {
+            editorPerson.gameObject.name = GetEditorPersonName(editorPerson);
+        }
+
+        public static void AutoNameUnits(EditorScenario editorScenario)
         {
             foreach (var editorSector in editorScenario.GetComponentsInChildren<EditorSector>())
             {
@@ -139,6 +154,18 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         private static string GetEditorFactionName(EditorFaction editorFaction)
         {
             return $"Faction_{(!string.IsNullOrWhiteSpace(editorFaction.CustomShortName) ? editorFaction.CustomShortName : "NoName")}";
+        }
+
+        private static string GetEditorPersonName(EditorPerson editorPerson)
+        {
+            var factionName = editorPerson.Faction != null ? editorPerson.Faction.CustomName : "NoFaction";
+
+            if (!string.IsNullOrEmpty(editorPerson.CustomName))
+            {
+                return $"Person_{editorPerson.CustomName}_{factionName}";
+            }
+
+            return $"Person_Unnamed_{factionName}";
         }
 
         private static string GetEditorUnitName(EditorUnit editorUnit)

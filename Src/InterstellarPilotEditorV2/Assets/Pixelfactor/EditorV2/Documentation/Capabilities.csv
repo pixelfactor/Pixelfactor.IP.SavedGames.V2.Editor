@@ -9,11 +9,11 @@ Units,Wormholes,Create wormholes,Yes,
 Units,Wormholes,Create unstable wormholes,Yes,
 Units,General,Create planets,Yes,
 Units,Planets,Orbit moon around planets,No,To be implemented
-Units,Planets,Edit radius,No,No engine support
+Units,Planets,Edit radius,Not possible,No engine support
 Units,Gas clouds,Edit radius,Yes,
 Units,Asteroid clusters,Edit radius,Yes,
 Units,General,Docked ships,Yes,
-Units,General,Custom hangars,No,Not supported in engine. Do not change the existing hangar prefabs
+Units,General,Custom hangars,Not possible,Not supported in engine. Do not change the existing hangar prefabs
 Units,General,Create asteroids,Yes,
 Units,General,Abandoned ships/stations,Yes,
 Units,General,Edit ship/station health,No,To be implemented
@@ -30,7 +30,7 @@ Passengers,General,Create passenger groups in ships,No,To be implemented
 Sectors,General,Create a sector,Yes,
 Sectors,General,Edit sector sky,Yes,
 Sectors,General,Edit ambient/directional light colour,Yes,
-Sectors,General,Create multiple directional lights,No,No engine support
+Sectors,General,Create multiple directional lights,Not possible,No engine support
 Factions,General,Create factions,Yes,
 Factions,Diplomacy,Edit faction relations / wars,Yes,
 Factions,Diplomacy,Edit faction opinions,Yes,
@@ -41,11 +41,56 @@ Player,Missions,Create a player mission with stages/objectives,Yes,
 Player,Messages,Create player messages,?,Previously supported but not tested
 Comms,General,Script comms with the player,No,I.e. pop-up dialog window in tutorial missions
 Speech,General,Script NPC speech/chatter,No,I.e. on-screen speech in tutorial missions
-Manage,Import/export,Export the scenario to a folder location based on project settings,Yes,
-Manage,Import/export,Export to a folder location on-demand,Yes,
-Manage,Import/export,Import a save file,No,
-Manage,Import/export,Export to a specific save version,No,Editor version is always tied to the latest released save version
-Manage,Import/export,Import IP1 save files,No,
+Manage,Export,Export the scenario to a folder location based on project settings,Yes,
+Manage,Export,Export to a folder location on-demand,Yes,
+Manage,Import,Import an IP2 save file,Yes*,Partial support
+Manage,Import,Import sectors,Yes,
+Manage,Import,Import wormholes,Yes,
+Manage,Import,Import unstable wormholes,Yes,
+Manage,Import,Import gas clouds,Yes,
+Manage,Import,Import asteroid clusters,Yes,
+Manage,Import,Import asteroids,Yes*,Partial support
+Manage,Import,Import planets,Yes*,Partial support
+Manage,Import,Import factions,Yes*,Partial support (no faction settings)
+Manage,Import,Import moons,Yes*,Partial support
+Manage,Import,Import people,No,
+Manage,Import,Import NPCs,No,
+Manage,Import,Import ships,Yes*,
+Manage,Import,Import extended unit properties,No,"Cargo capacity, mass etc"
+Manage,Import,Import modded components,No,
+Manage,Import,Import unit hull damage,No,
+Manage,Import,Import component damage,No,
+Manage,Import,Import shield charge,No,
+Manage,Import,Import component energy charge,No,
+Manage,Import,Import cloak state,No,
+Manage,Import,Import projectiles,No,
+Manage,Import,Import docked ships,No,
+Manage,Import,Import fleets,No,
+Manage,Import,Import fleet custom settings,No,
+Manage,Import,Import fleet orders,No,
+Manage,Import,Import cargo containers,No,
+Manage,Import,Import ship/station cargo,No,
+Manage,Import,Import faction relations,No,
+Manage,Import,Import ship traders,No,
+Manage,Import,Import player messages,No,
+Manage,Import,Import passengers,No,
+Manage,Import,Import station jobs,No,
+Manage,Import,Import triggers,No,
+Manage,Import,Import player missions,No,
+Manage,Import,Import bounty boards,No,
+Manage,Import,Import faction transactions,No,
+Manage,Import,Import intel,No,
+Manage,Import,Import player waypoint,No,
+Manage,Import,Import faction AI state,No,
+Manage,Import,Import faction stats,No,
+Manage,Import,Import legacy fleet spawners,No,
+Manage,Import,Import scenario options,No,
+Manage,Import,Import named units,No,
+Manage,Import,Import mercenary data,No,
+Manage,Import,Import engine internal data,No,
+Manage,Import,Import HUD data,No,
+Manage,Export,Export to a specific save version,No,Editor version is always tied to the latest released save version
+Manage,Import,Import IP1 save files,No,
 Manage,Run,Run the scenario from the editor,Yes,Standalone version 2.0.60 or higher required
 Scripting,Triggers,Completion (win) trigger,Yes,
 Fleets,General,Create fleets,Yes,

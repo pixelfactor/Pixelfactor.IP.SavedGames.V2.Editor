@@ -78,8 +78,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUILayout.Space();
 
             if (GUILayout.Button(new GUIContent(
-                "Create new single-sector...",
-                "Creates a new scenario"),
+                "Create new...",
+                "Creates a new scenario with a single sector and player"),
                 GuiHelper.ButtonLayout))
             {
                 CreateNewScenarioTool.CreateNewSingleSector();

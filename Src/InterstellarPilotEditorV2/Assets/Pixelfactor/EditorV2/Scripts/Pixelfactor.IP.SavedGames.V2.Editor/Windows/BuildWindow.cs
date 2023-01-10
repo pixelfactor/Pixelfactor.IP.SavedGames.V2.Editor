@@ -221,7 +221,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             var newSavedGame = CreateNewScenarioTool.InstantiateSavedGame(settings.EmptyScenePrefabPath);
 
-            Spawn.NewSector(newSavedGame, settings.SectorPrefabPath);
+            Spawn.Sector(newSavedGame, settings.SectorPrefabPath);
 
             Selector.SelectFirstSector(newSavedGame);
 
