@@ -26,7 +26,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// Determines the distance of the wormholes from the sector origin. Should be ~1.0
         /// </summary>
         [Tooltip("Determines the size of the playing area of the sector. This value is used extensively by the engine when determining where to place units. Use 0 to make the smallest sector possible. This value is respected when using the 'connect tool' to create wormholes.")]
-        [Range(0f, 1f)]
+        [Range(0.4f, 1f)]
         public float WormholeDistanceMultiplier = 1.0f;
 
         /// <summary>

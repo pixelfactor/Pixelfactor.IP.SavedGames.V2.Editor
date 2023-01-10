@@ -16,7 +16,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow
         /// <summary>
         /// Max iterations before giving up trying to create a new wormhole
         /// </summary>
-        public const int MaxIterations = 10;
+        public const int MaxIterations = 32;
 
         /// <summary>
         /// Adds a new connection to the existing sector. Returns null if there's no space
@@ -75,7 +75,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow
             var newSector = GrowOnce(existingSector, sectorPrefab, preferredDistance, minDistanceBetweenSectors, minAngleBetweenWormhole);
             if (newSector != null)
             {
-                ConnectSectorsTool.ConnectSectors(existingSector, newSector, existingSector.GetSavedGame().PreferredWormholeDistance);
+                ConnectSectorsTool.ConnectSectors(existingSector, newSector, existingSector.GetSavedGame().MaxWormholeDistance);
             }
 
             return newSector;

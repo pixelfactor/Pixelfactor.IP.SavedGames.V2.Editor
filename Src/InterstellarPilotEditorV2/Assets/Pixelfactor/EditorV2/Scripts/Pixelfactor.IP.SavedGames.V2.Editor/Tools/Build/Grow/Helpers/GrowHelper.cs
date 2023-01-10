@@ -35,6 +35,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow
             float lengthAddition,
             float otherLineLengthAddition)
         {
+            var dir = Vector3.Normalize(pos2 - pos1);
+
+            // Give a bit of tolerance to the start and end position to avoid other lines that start in the same position but don't necesarily intersect
+            pos1 += dir * 1.0f;
+            pos2 -= dir * 1.0f;
+
             var p1 = new Vector2(pos1.x, pos1.z);
             var p2 = new Vector2(pos2.x, pos2.z);
 

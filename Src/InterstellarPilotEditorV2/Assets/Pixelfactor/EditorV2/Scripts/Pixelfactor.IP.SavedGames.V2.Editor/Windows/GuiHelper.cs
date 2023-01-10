@@ -49,7 +49,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
             {
                 return new GUILayoutOption[]
                 {
-                    GUILayout.Width(180),
+                    GUILayout.Width(200),
                     GUILayout.Height(30)
                 };
             }

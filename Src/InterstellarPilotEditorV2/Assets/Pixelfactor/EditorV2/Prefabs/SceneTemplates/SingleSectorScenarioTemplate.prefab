@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2e99e66bdc3b444aff8e3200f18b58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PreferredWormholeDistance: 2000
+  PreferredWormholeDistance: 5000
   Title: Custom scenario
   Author: 
   Description: 

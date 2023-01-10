@@ -103,6 +103,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Connect
                         continue;
                     }
 
+                    if (sector.ConnectionExistsAtPosition(otherSector.transform.position, minAngleBetweenWormholes))
+                    {
+                        continue;
+                    }
+
                     if (GrowHelper.DoesNewConnectionIntersect(
                         sectorLines,
                         sector.transform.position, 
@@ -131,7 +136,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Connect
         {
             var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
 
-            ConnectSelectedSectorsWithWormholes(editorSavedGame.PreferredWormholeDistance);
+            ConnectSelectedSectorsWithWormholes(editorSavedGame.MaxWormholeDistance);
         }
 
         public static bool CanConnectSelectedSectorsWithWormholes()
@@ -139,13 +144,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Connect
             return TryGetSelectedSectors(out _);
         }
 
-        private static void ConnectSelectedSectorsWithWormholes(float wormholeDistance)
+        private static void ConnectSelectedSectorsWithWormholes(float maxWormholeDistance)
         {
             if (!TryGetSelectedSectors(out List<EditorSector> sectors))
             {
                 Logging.LogAndThrow("Expected to have 2 selected sectors");
             }
-            ConnectSectors(sectors, wormholeDistance);
+            ConnectSectors(sectors, maxWormholeDistance);
         }
 
         public static void ConnectSectors(EditorSector sector1, EditorSector sector2, float wormholeDistance)
