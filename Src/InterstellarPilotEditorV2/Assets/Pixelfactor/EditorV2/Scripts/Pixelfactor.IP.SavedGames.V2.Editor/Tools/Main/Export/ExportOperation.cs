@@ -549,6 +549,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
         private void ExportHeader()
         {
+            var saveVersion = CustomSettings.GetOrCreateSettings().SaveVersion;
+
             savedGame.Header = new ModelHeader
             {
                 Credits = savedGame.Player?.Faction?.Credits ?? 0,
@@ -560,8 +562,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 PlayerSectorName = savedGame.Player?.Person?.CurrentUnit?.Sector?.Name ?? null,
                 ScenarioInfoId = 100000, // Don't change this
                 TimeStamp = System.DateTime.Now,
-                Version = new System.Version(2, 0, 50), // Should be tied to the binary writer package being used
-                CreatedVersion = new System.Version(2, 0, 50),
+                Version = saveVersion, // This is the save file version (different from game)
+                CreatedVersion = saveVersion, // This is the game version
                 ScenarioTitle = editorSavedGame.Title,
                 ScenarioAuthor = editorSavedGame.Author,
                 ScenarioAuthoringTool = $"IP2 Unity Editor {Versioning.Version}",
@@ -582,69 +584,72 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
             if (editorPlayer == null)
             {
-                throw new System.Exception("A player object is required");
+                Debug.LogWarning("No player object found");
             }
-
-            var modelPlayer = new ModelPlayer
+            else
             {
-                Person = savedGame.People.FirstOrDefault(e => e.Id == editorPlayer.Person?.Id),
-            };
-
-            if (modelPlayer.Person == null)
-            {
-                LogAndThrow("A player object is missing a person reference", editorPlayer);
-            }
-
-            if (modelPlayer.Faction == null)
-            {
-                LogAndThrow("A player object's person object must have a faction", editorPlayer.Person);
-            }
-
-            this.modelPlayer = modelPlayer;
-            this.player = editorPlayer;
-            this.playerFaction = editorPlayer.Person.Faction;
-            this.playerModelFaction = GetModelFaction(editorPlayer.Person.Faction);
-
-            if (string.IsNullOrWhiteSpace(editorPlayer.Person.CustomName))
-            {
-                Debug.LogWarning("Player person should have a name", editorPlayer.Person);
-            }
-
-            var editorMessages = editorPlayer.GetComponentsInChildren<EditorPlayerMessage>();
-            foreach (var editorMessage in editorMessages)
-            {
-                var message = new ModelPlayerMessage
+                var modelPlayer = new ModelPlayer
                 {
-                    AllowDelete = editorMessage.AllowDelete,
-                    EngineTimeStamp = editorMessage.EngineTimeStamp,
-                    FromText = editorMessage.FromText,
-                    Id = editorMessage.Id,
-                    MessageTemplateId = editorMessage.MessageTemplateId,
-                    MessageText = editorMessage.MessageText,
-                    Opened = editorMessage.Opened,
-                    SenderUnit = savedGame.Units.FirstOrDefault(e => e.Id == editorMessage.SenderUnit?.Id),
-                    SubjectUnit = savedGame.Units.FirstOrDefault(e => e.Id == editorMessage.SubjectUnit?.Id),
-                    SubjectText = editorMessage.SubjectText,
-                    ToText = editorMessage.ToText,
+                    Person = savedGame.People.FirstOrDefault(e => e.Id == editorPlayer.Person?.Id),
                 };
 
-                if (editorMessage.ShowTime >= 0.0f)
+                if (modelPlayer.Person == null)
                 {
-                    modelPlayer.DelayedMessages.Add(new ModelPlayerDelayedMessage
+                    LogAndThrow("A player object is missing a person reference", editorPlayer);
+                }
+
+                if (modelPlayer.Faction == null)
+                {
+                    LogAndThrow("A player object's person object must have a faction", editorPlayer.Person);
+                }
+
+                this.modelPlayer = modelPlayer;
+                this.player = editorPlayer;
+                this.playerFaction = editorPlayer.Person.Faction;
+                this.playerModelFaction = GetModelFaction(editorPlayer.Person.Faction);
+
+                if (string.IsNullOrWhiteSpace(editorPlayer.Person.CustomName))
+                {
+                    Debug.LogWarning("Player person should have a name", editorPlayer.Person);
+                }
+
+                var editorMessages = editorPlayer.GetComponentsInChildren<EditorPlayerMessage>();
+                foreach (var editorMessage in editorMessages)
+                {
+                    var message = new ModelPlayerMessage
                     {
-                        Message = message,
-                        ShowTime = editorMessage.ShowTime,
-                        Important = editorMessage.Important,
-                        Notifications = editorMessage.Notifications,
-                    });
+                        AllowDelete = editorMessage.AllowDelete,
+                        EngineTimeStamp = editorMessage.EngineTimeStamp,
+                        FromText = editorMessage.FromText,
+                        Id = editorMessage.Id,
+                        MessageTemplateId = editorMessage.MessageTemplateId,
+                        MessageText = editorMessage.MessageText,
+                        Opened = editorMessage.Opened,
+                        SenderUnit = savedGame.Units.FirstOrDefault(e => e.Id == editorMessage.SenderUnit?.Id),
+                        SubjectUnit = savedGame.Units.FirstOrDefault(e => e.Id == editorMessage.SubjectUnit?.Id),
+                        SubjectText = editorMessage.SubjectText,
+                        ToText = editorMessage.ToText,
+                    };
+
+                    if (editorMessage.ShowTime >= 0.0f)
+                    {
+                        modelPlayer.DelayedMessages.Add(new ModelPlayerDelayedMessage
+                        {
+                            Message = message,
+                            ShowTime = editorMessage.ShowTime,
+                            Important = editorMessage.Important,
+                            Notifications = editorMessage.Notifications,
+                        });
+                    }
+                    else
+                    {
+                        modelPlayer.Messages.Add(message);
+                    }
                 }
-                else
-                {
-                    modelPlayer.Messages.Add(message);
-                }
+
+                savedGame.Player = modelPlayer;
             }
 
-            savedGame.Player = modelPlayer;
         }
 
         private void LogAndThrow(string error, UnityEngine.Object context)
@@ -1013,7 +1018,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
         private void ExportSectors()
         {
-            foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
+            var sectors = editorSavedGame.GetSectors();
+
+            if (sectors.Count() == 0)
+            {
+                throw new Exception("A scenario must have at least one sector");
+            }
+
+            foreach (var editorSector in sectors)
             {
                 var modelSector = new ModelSector
                 {

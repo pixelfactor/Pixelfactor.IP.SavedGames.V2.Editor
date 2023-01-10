@@ -42,9 +42,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private float maxUnitDistanceFromOriginUpperBound = 7000.0f;
 
-        [Tooltip("The path to the prefab that is used to create a new scenario")]
+        [Tooltip("The path to the prefab that is used to create a new scenario with no sectors")]
         [SerializeField]
-        private string defaultScenePrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/SceneTemplates/SingleSectorScenarioTemplate.prefab";
+        private string emptyScenePrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/ScenarioTemplates/ScenarioTemplate.prefab";
 
         [Tooltip("The path to the prefab that is used to create new sectors")]
         [SerializeField]
@@ -70,7 +70,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private bool export_RemoveUntargettedWormholes = true;
 
-        [Tooltip("Determines the spacing between sectors on the unvierse map")]
+        [Tooltip("Determines how the spacing between sectors is converted to the spacing on the universe map")]
         [SerializeField]
         private float universeMapScaleFactor = 0.005f;
 
@@ -85,6 +85,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [Tooltip("Determines the min angle between wormholes. Determines how far apart wormholes are. In degrees.")]
         [SerializeField]
         private float minAngleBetweenWormholes = 60.0f;
+
+        [Tooltip("The save version that the editor works with")]
+        private System.Version saveVersion = new System.Version(2, 0, 50);
 
         internal static CustomSettings GetOrCreateSettings()
         {
@@ -136,9 +139,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
             get { return this.maxUnitDistanceFromOriginUpperBound; }
         }
 
-        public string DefaultScenePrefabPath
+        public string EmptyScenePrefabPath
         {
-            get { return this.defaultScenePrefabPath; }
+            get { return this.emptyScenePrefabPath; }
         }
 
         public string SectorPrefabPath
@@ -190,6 +193,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         {
             get { return this.export_RemoveUntargettedWormholes; }
         }
+
+        public System.Version SaveVersion
+        {
+            get { return this.saveVersion; }
+        }
     }
 
     // Register a SettingsProvider using IMGUI for the drawing framework:
@@ -232,7 +240,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorSize"), new GUIContent("Sector size"));
                     EditorGUILayout.PropertyField(settings.FindProperty("maxUnitDistanceFromOriginLowerBound"), new GUIContent("Max sector distance (lower)"));
                     EditorGUILayout.PropertyField(settings.FindProperty("maxUnitDistanceFromOriginUpperBound"), new GUIContent("Max sector distance (upper)"));
-                    EditorGUILayout.PropertyField(settings.FindProperty("defaultScenePrefabPath"), new GUIContent("Default scenario prefab path"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("emptyScenePrefabPath"), new GUIContent("Empty scenario path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorPrefabPath"), new GUIContent("Sector prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorNamesPath"), new GUIContent("Sector names path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("universeMapScaleFactor"), new GUIContent("Universe scale factor"));

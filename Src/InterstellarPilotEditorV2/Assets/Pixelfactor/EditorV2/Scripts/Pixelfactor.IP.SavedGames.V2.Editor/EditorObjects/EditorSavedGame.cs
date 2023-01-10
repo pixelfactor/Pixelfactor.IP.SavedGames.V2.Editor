@@ -32,5 +32,23 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
         public int DateDay = 1;
         public int DateHour = 0;
         public int DateMinute = 0;
+
+        /// <summary>
+        /// The editor will create sectors underneath this object
+        /// </summary>
+        public Transform SectorsRoot = null;
+
+        /// <summary>
+        /// The editor will create factions underneath this object
+        /// </summary>
+        public Transform FactionsRoot = null;
+
+        public Transform GetSectorsRoot()
+        {
+            if (this.SectorsRoot != null) 
+                return this.SectorsRoot;
+
+            return this.transform;
+        }
     }
 }

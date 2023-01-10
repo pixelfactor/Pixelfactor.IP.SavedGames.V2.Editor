@@ -13,6 +13,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         {
             var settings = CustomSettings.GetOrCreateSettings();
 
+            if (editorSavedGame.GetSectors().Length == 0)
+            {
+                OnError("A scenario must have at least one sector", editorSavedGame, throwOnError);
+
+            }
             // Only validate missing ids if they aren't set on export
             if (!settings.Export_AutosetIds)
             { 

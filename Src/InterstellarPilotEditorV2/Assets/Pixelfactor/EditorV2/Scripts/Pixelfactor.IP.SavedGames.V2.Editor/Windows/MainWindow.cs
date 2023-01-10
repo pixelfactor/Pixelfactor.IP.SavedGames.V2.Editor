@@ -19,8 +19,18 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUILayout.TextField("Current scenario", editorSavedGame != null ? editorSavedGame.Title : "[None]");
             EditorGUI.EndDisabledGroup();
 
-            EditorGUILayout.Space();
+            EditorGUILayout.Space(30);
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            EditorGUILayout.BeginVertical();
+            DrawButtons(editorSavedGame, hasScenario, canPlay);
+            EditorGUILayout.EndVertical();
+            GUILayout.FlexibleSpace();
+            EditorGUILayout.EndHorizontal();
+        }
 
+        private static void DrawButtons(EditorSavedGame editorSavedGame, bool hasScenario, bool canPlay)
+        {
             EditorGUI.BeginDisabledGroup(!canPlay);
 
             if (GUILayout.Button(
@@ -68,12 +78,29 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUILayout.Space();
 
             if (GUILayout.Button(new GUIContent(
-                "Create new...",
+                "Create new single-sector...",
                 "Creates a new scenario"),
                 GuiHelper.ButtonLayout))
             {
-                CreateNewScenarioTool.CreateNew();
+                CreateNewScenarioTool.CreateNewSingleSector();
                 GUIUtility.ExitGUI();
+            }
+
+            if (GUILayout.Button(new GUIContent(
+                "Create new empty...",
+                "Creates a new empty scenario"),
+                GuiHelper.ButtonLayout))
+            {
+                CreateNewScenarioTool.CreateNewEmpty();
+                GUIUtility.ExitGUI();
+            }
+
+            if (GUILayout.Button(new GUIContent(
+                "Import...",
+                "Imports a scenario"),
+                GuiHelper.ButtonLayout))
+            {
+                ImportWindow.ShowNew();
             }
 
             if (GUILayout.Button(

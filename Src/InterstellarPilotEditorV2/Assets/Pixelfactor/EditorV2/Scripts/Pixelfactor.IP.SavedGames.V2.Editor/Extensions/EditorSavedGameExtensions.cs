@@ -5,9 +5,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
 {
     public static class EditorSavedGameExtensions
     {
-        public static IEnumerable<EditorSector> GetSectors(this EditorSavedGame editorSavedGame)
+        public static EditorSector[] GetSectors(this EditorSavedGame editorSavedGame)
         {
-            return editorSavedGame.GetComponentsInChildren<EditorSector>();
+            if (editorSavedGame == null) 
+                return new EditorSector[0];
+
+            return editorSavedGame.GetSectorsRoot().GetComponentsInChildren<EditorSector>();
         }
     }
 }

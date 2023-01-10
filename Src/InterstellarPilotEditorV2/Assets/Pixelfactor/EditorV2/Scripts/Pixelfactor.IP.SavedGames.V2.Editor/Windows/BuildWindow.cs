@@ -4,6 +4,7 @@ using Pixelfactor.IP.SavedGames.V2.Editor.Tools;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Connect;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Expand;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow;
+using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -183,9 +184,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             EditorGUI.EndDisabledGroup();
 
-            GUILayout.Space(200.0f);
-            //EditorGUILayout.Space(200.0f, false);
-
             var oldColor = GUI.backgroundColor;
             GUI.backgroundColor = Color.yellow;
 
@@ -221,7 +219,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             var savedGame = SavedGameUtil.FindSavedGame();
             GameObject.DestroyImmediate(savedGame.gameObject);
 
-            var newSavedGame = CreateNewScenarioTool.InstantiateScenePrefab(settings);
+            var newSavedGame = CreateNewScenarioTool.InstantiateSavedGame(settings.EmptyScenePrefabPath);
+
+            Spawn.NewSector(newSavedGame, settings.SectorPrefabPath);
+
+            Selector.SelectFirstSector(newSavedGame);
 
             return newSavedGame;
         }

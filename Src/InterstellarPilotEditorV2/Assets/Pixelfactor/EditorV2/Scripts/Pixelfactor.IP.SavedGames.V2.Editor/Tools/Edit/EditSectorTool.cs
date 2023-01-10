@@ -9,13 +9,21 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Edit
     {
         public static void RandomizeAll(EditorSavedGame editorSavedGame)
         {
-            foreach (var sector in editorSavedGame.GetComponentsInChildren<EditorSector>())
+            foreach (var sector in editorSavedGame.GetSectors())
             {
                 Randomize(sector);
             }
         }
 
-        public static void Randomize(EditorSector editorSector)
+        public static void RandomizeAllWithoutDirty(EditorSavedGame editorSavedGame)
+        {
+            foreach (var sector in editorSavedGame.GetSectors())
+            {
+                RandomizeWithoutDirty(sector);
+            }
+        }
+
+        public static void RandomizeWithoutDirty(EditorSector editorSector)
         {
             editorSector.Seed = Random.Range(0, int.MaxValue);
 
@@ -24,6 +32,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Edit
             editorSector.WormholeDistanceMultiplier = Random.Range(0.6f, 1.0f);
 
             AutoNameObjects.AutoNameSector(editorSector);
+        }
+
+        public static void Randomize(EditorSector editorSector)
+        {
+            RandomizeWithoutDirty(editorSector);
 
             EditorUtility.SetDirty(editorSector);
         }
