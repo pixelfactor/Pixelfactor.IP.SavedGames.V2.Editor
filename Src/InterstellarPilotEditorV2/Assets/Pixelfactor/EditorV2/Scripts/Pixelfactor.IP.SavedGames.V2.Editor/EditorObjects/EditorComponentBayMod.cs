@@ -26,7 +26,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         {
             get
             {
-                if (this.ComponentBay == null)
+                if (this.ComponentBay != null)
                 {
                     return this.ComponentBay.BayId;
                 }

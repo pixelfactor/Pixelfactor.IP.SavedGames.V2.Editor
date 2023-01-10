@@ -16,11 +16,11 @@ MonoBehaviour:
     Pilot 2.exe
   defaultExportPath: C:\Users\gsdat\AppData\LocalLow\Pixelfactor Ltd_\Interstellar
     Pilot 2\SaveGames
-  runScenarioOnPlayMode: 1
+  runScenarioOnPlayMode: 0
   sectorSize: 16000
   maxUnitDistanceFromOriginLowerBound: 6500
   maxUnitDistanceFromOriginUpperBound: 7000
-  defaultScenePrefabPath: Assets/Pixelfactor/EditorV2/Prefabs/SceneTemplates/SingleSectorScenarioTemplate.prefab
+  emptyScenePrefabPath: Assets/Pixelfactor/EditorV2/Prefabs/ScenarioTemplates/ScenarioTemplate.prefab
   sectorPrefabPath: Assets/Pixelfactor/EditorV2/Prefabs/Sectors/Sector.prefab
   sectorNamesPath: Assets/Pixelfactor/EditorV2/Data/SectorNameList1.txt
   export_AutosetSectorSeed: 1
@@ -31,3 +31,6 @@ MonoBehaviour:
   minDistanceBetweenSectors: 40000
   maxDistanceBetweenSectors: 125000
   minAngleBetweenWormholes: 60
+  unitPrefabsPath: Assets/Pixelfactor/EditorV2/Prefabs/Units
+  factionPrefabPath: Assets/Pixelfactor/EditorV2/Prefabs/Factions/Faction.prefab
+  playerFactionPrefabPath: Assets/Pixelfactor/EditorV2/Prefabs/Factions/FactionPlayer.prefab

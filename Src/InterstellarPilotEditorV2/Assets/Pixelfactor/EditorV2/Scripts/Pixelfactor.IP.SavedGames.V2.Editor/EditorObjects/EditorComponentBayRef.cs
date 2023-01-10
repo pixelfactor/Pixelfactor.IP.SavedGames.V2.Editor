@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Pixelfactor.IP.SavedGames.V2.Model;
+using UnityEngine;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 {
@@ -9,5 +10,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
     {
         [Tooltip("The ID of this component bay, unique to the ship/station. Do not change this from the prefab value")]
         public int BayId = -1;
+        [Tooltip("The name of the bay - for info only")]
+        public string Name;
+        [Tooltip("The component type of the bay - for info only")]
+        public ModelComponentBayType BayType;
     }
 }

@@ -987,7 +987,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
                     unit.ComponentUnitData.ModData.Items.Add(new ModelComponentUnitModDataItem
                     {
-                        BayId = editorComponentBayMod.LegacyBayId,
+                        BayId = editorComponentBayMod.ComponentBayId,
                         ComponentClass = editorComponentBayMod.LegacyComponentClass
                     });
                 }
