@@ -157,6 +157,21 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
                     modelSector.MapPosition.Z / settings.UniverseMapScaleFactor);
 
                 this.editorSectorsById.Add(modelSector.Id, editorSector);
+
+                // Sky
+                if (modelSector.CustomAppearance != null)
+                {
+                    var editorSky = editorSector.gameObject.AddComponent<EditorSectorSky>();
+                    editorSky.NebulaColors = modelSector.CustomAppearance.NebulaColors;
+                    editorSky.NebulaCount = modelSector.CustomAppearance.NebulaCount;
+                    editorSky.NebulaComplexity = modelSector.CustomAppearance.NebulaComplexity;
+                    editorSky.NebulaBrightness = modelSector.CustomAppearance.NebulaBrightness;
+                    editorSky.NebulaStyles = modelSector.CustomAppearance.NebulaStyles;
+                    editorSky.NebulaTextureCount = modelSector.CustomAppearance.NebulaTextureCount;
+
+                    editorSky.StarsCount = modelSector.CustomAppearance.StarsCount;
+                    editorSky.StarsIntensity = modelSector.CustomAppearance.StarsIntensity;
+                }
             }
         }
     }

@@ -25,5 +25,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         [Tooltip("Determines the range of different textures used for the nebulae")]
         [Range(1, 20)]
         public int NebulaTextureCount = 10;
+
+        [Tooltip("Determines the range of different textures used for the nebulae")]
+        public NebulaBrightness NebulaBrightness = NebulaBrightness.BRIGHT | NebulaBrightness.DARK | NebulaBrightness.MEDIUM | NebulaBrightness.VERY_BRIGHT | NebulaBrightness.VERY_DARK;
+
+        /// <summary>
+        /// Not currently used
+        /// </summary>
+        [HideInInspector]
+        public float NebulaComplexity = 0.6f;
+
+        [Tooltip("Determines the range of different textures used for the nebulae")]
+        public NebulaStyle NebulaStyles = NebulaStyle.CLOUDY | NebulaStyle.DARKMATTER | NebulaStyle.GLITTERY | NebulaStyle.STREAKY;
     }
 }
