@@ -15,7 +15,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
         private Transform sectorsTransform = null;
         private CustomSettings settings = null;
         private bool exitOnError = false;
+
         private Dictionary<ModelUnitClass, EditorUnit> cachedUnitPrefabs = new Dictionary<ModelUnitClass, EditorUnit>(200);
+        private Dictionary<ModelCargoClass, EditorCargoClassRef> cachedCargoClassPrefabs = new Dictionary<ModelCargoClass, EditorCargoClassRef>(200);
+
         private Dictionary<int, EditorSector> editorSectorsById = new Dictionary<int, EditorSector>(64);
         private Dictionary<int, EditorFaction> editorFactionsById = new Dictionary<int, EditorFaction>(64);
         private Dictionary<int, EditorUnit> editorUnitsById = new Dictionary<int, EditorUnit>(64);
@@ -44,6 +47,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
             this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Ships");
             this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Stations");
             this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Wormholes");
+
+            this.CacheCargoClassPrefabs(settings.CargoClassPrefabsPath);
 
             this.editorSectorsById.Clear();
             this.editorFactionsById.Clear();
@@ -256,9 +261,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 
             editorUnit.RpProvision = modelUnit.RpProvision;
 
-            // TODO: Cargo data
-
-            // TODO: debris data (obsolete)
+            if (modelUnit.CargoData != null)
+            {
+                ImportUnitCargoData(editorUnit, modelUnit.CargoData);
+            }
 
             // TODO: Asteroid data
 
@@ -267,6 +273,32 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
             // TODO: Projectile data
 
             this.editorUnitsById.Add(modelUnit.Id, editorUnit);
+        }
+
+        private void ImportUnitCargoData(EditorUnit editorUnit, ModelUnitCargoData cargoData)
+        {
+            var editorData = editorUnit.gameObject.GetOrAddComponent<EditorUnitCargoData>();
+
+            editorData.CargoClass = GetCargoClass(cargoData.CargoClass);
+            editorData.Quantity = cargoData.Quantity;
+            editorData.Expires = cargoData.Expires;
+            editorData.SpawnTime = cargoData.SpawnTime;
+        }
+
+        private EditorCargoClassRef GetCargoClass(ModelCargoClass modelCargoClass)
+        {
+            if ((int)modelCargoClass < 0)
+                return null;
+
+            var cargoClass = this.cachedCargoClassPrefabs.GetValueOrDefault(modelCargoClass);
+            if (cargoClass != null)
+                return cargoClass;
+
+            var message = $"Importer couldn't find a prefab for cargo class \"{modelCargoClass}\". Check that a prefab exists for this cargo class";
+            Debug.LogError(message);
+            OnError(message);
+
+            return null;
         }
 
         private EditorSector GetEditorSector(ModelSector modelSector)
@@ -358,6 +390,21 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
                     continue;
                 }
                 this.cachedUnitPrefabs.Add(unit.ModelUnitClass, unit);
+            }
+        }
+
+        private void CacheCargoClassPrefabs(string path)
+        {
+            var cargos = TryGetUnityObjectsOfTypeFromPath<EditorCargoClassRef>(path);
+            foreach (var cargoClass in cargos)
+            {
+                if (this.cachedCargoClassPrefabs.TryGetValue(cargoClass.CargoClass, out EditorCargoClassRef existingCargoClass))
+                {
+                    Debug.LogError($"Found a duplicate prefab cargo class \"{existingCargoClass.name}\". " +
+                        $"All prefabs in these folders should have a unique class ID", existingCargoClass);
+                    continue;
+                }
+                this.cachedCargoClassPrefabs.Add(cargoClass.CargoClass, cargoClass);
             }
         }
 

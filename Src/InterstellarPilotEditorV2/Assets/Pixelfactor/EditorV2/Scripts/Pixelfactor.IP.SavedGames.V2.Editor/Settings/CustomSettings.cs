@@ -93,6 +93,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private string unitPrefabsPath = "Assets/Pixelfactor/EditorV2/Prefabs/Units";
 
+        private string cargoClassPrefabsPath = "Assets/Pixelfactor/EditorV2/Prefabs/CargoClasses";
+
         [Tooltip("The path to the prefab used to create new factions")]
         [SerializeField]
         private string factionPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Factions/Faction.prefab";
@@ -215,6 +217,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         public string FactionPrefabPath
         {
             get { return this.factionPrefabPath; }
+        }
+
+        public string CargoClassPrefabsPath
+        {
+            get { return this.cargoClassPrefabsPath; }
         }
     }
 
