@@ -91,7 +91,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
 
         [Tooltip("The root folder of where units are found")]
         [SerializeField]
-        private string unitPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Units";
+        private string unitPrefabsPath = "Assets/Pixelfactor/EditorV2/Prefabs/Units";
+
+        [Tooltip("The path to the prefab used to create new factions")]
+        [SerializeField]
+        private string factionPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Factions/Faction.prefab";
 
         internal static CustomSettings GetOrCreateSettings()
         {
@@ -203,9 +207,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
             get { return this.saveVersion; }
         }
 
-        public string UnitPrefabPath
+        public string UnitPrefabsPath
         {
-            get { return this.unitPrefabPath; }
+            get { return this.unitPrefabsPath; }
+        }
+
+        public string FactionPrefabPath
+        {
+            get { return this.factionPrefabPath; }
         }
     }
 
@@ -253,7 +262,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorPrefabPath"), new GUIContent("Sector prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorNamesPath"), new GUIContent("Sector names path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("universeMapScaleFactor"), new GUIContent("Universe scale factor"));
-                    EditorGUILayout.PropertyField(settings.FindProperty("unitPrefabPath"), new GUIContent("Unit prefab path"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("unitPrefabsPath"), new GUIContent("Unit prefab path"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("factionPrefabPath"), new GUIContent("Faction prefab path"));
 
                     settings.ApplyModifiedPropertiesWithoutUndo();
                 },

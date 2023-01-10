@@ -17,6 +17,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
         private bool exitOnError = false;
         private Dictionary<ModelUnitClass, EditorUnit> cachedUnitPrefabs = new Dictionary<ModelUnitClass, EditorUnit>(200);
         private Dictionary<int, EditorSector> editorSectorsById = new Dictionary<int, EditorSector>(64);
+        private Dictionary<int, EditorFaction> editorFactionsById = new Dictionary<int, EditorFaction>(64);
+        private Dictionary<int, EditorUnit> editorUnitsById = new Dictionary<int, EditorUnit>(64);
+        private EditorFaction factionPrefab = null;
 
         public ImportOperation(SavedGame savedGameModel, EditorScenario editorScenario, bool exitOnError)
         {
@@ -29,65 +32,130 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 
             this.settings = CustomSettings.GetOrCreateSettings();
 
-            this.CacheUnitPrefabs(settings.UnitPrefabPath.TrimEnd('/') + "/Asteroids");
-            this.CacheUnitPrefabs(settings.UnitPrefabPath.TrimEnd('/') + "/AsteroidClusters");
-            this.CacheUnitPrefabs(settings.UnitPrefabPath.TrimEnd('/') + "/Cargo");
-            this.CacheUnitPrefabs(settings.UnitPrefabPath.TrimEnd('/') + "/GasClouds");
-            this.CacheUnitPrefabs(settings.UnitPrefabPath.TrimEnd('/') + "/Misc");
-            this.CacheUnitPrefabs(settings.UnitPrefabPath.TrimEnd('/') + "/Planets");
-            this.CacheUnitPrefabs(settings.UnitPrefabPath.TrimEnd('/') + "/Ships");
-            this.CacheUnitPrefabs(settings.UnitPrefabPath.TrimEnd('/') + "/Stations");
-            this.CacheUnitPrefabs(settings.UnitPrefabPath.TrimEnd('/') + "/Wormholes");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Asteroids");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/AsteroidClusters");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Cargo");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/GasClouds");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Misc");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Planets");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Ships");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Stations");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Wormholes");
 
             this.editorSectorsById.Clear();
+            this.editorFactionsById.Clear();
+            this.editorUnitsById.Clear();
+
+            this.factionPrefab = AssetDatabase.LoadAssetAtPath<EditorFaction>(settings.FactionPrefabPath);
         }
 
         public void Import()
         {
             this.ImportSectors();
-            this.ImportsUnits();
+            this.ImportFactions();
+            this.ImportUnits();
         }
 
-        private void CacheUnitPrefabs(string path)
+        private void ImportSectors()
         {
-            var units = TryGetUnityObjectsOfTypeFromPath<EditorUnit>(path);
-            foreach (var unit in units)
+            var sectorPrefab = AssetDatabase.LoadAssetAtPath<EditorSector>(this.settings.SectorPrefabPath);
+
+            foreach (var modelSector in this.model.Sectors)
             {
-                if (this.cachedUnitPrefabs.TryGetValue(unit.ModelUnitClass, out EditorUnit existingUnit))
+                var editorSector = PrefabHelper.Instantiate(sectorPrefab, this.sectorsTransform);
+                editorSector.Id = modelSector.Id;
+                editorSector.Name = modelSector.Name;
+                editorSector.WormholeDistanceMultiplier = modelSector.GateDistanceMultiplier;
+                editorSector.BackgroundRotation = modelSector.BackgroundRotation.ToVector3();
+                editorSector.Seed = modelSector.RandomSeed;
+                editorSector.AmbientLightColor = modelSector.AmbientLightColor.ToColor();
+                editorSector.DirectionLightColor = modelSector.DirectionLightColor.ToColor();
+                editorSector.LightDirectionFudge = modelSector.LightDirectionFudge;
+
+                editorSector.transform.localPosition = new Vector3(
+                    modelSector.MapPosition.X / settings.UniverseMapScaleFactor,
+                    0.0f,
+                    modelSector.MapPosition.Z / settings.UniverseMapScaleFactor);
+
+                this.editorSectorsById.Add(modelSector.Id, editorSector);
+
+                // Sky
+                if (modelSector.CustomAppearance != null)
                 {
-                    Debug.LogError($"Found a duplicate prefab unit \"{existingUnit.name}\". All prefabs in these folders should have a unique class ID", existingUnit);
-                    continue;
+                    var editorSky = editorSector.gameObject.AddComponent<EditorSectorSky>();
+                    editorSky.NebulaColors = modelSector.CustomAppearance.NebulaColors;
+                    editorSky.NebulaCount = modelSector.CustomAppearance.NebulaCount;
+                    editorSky.NebulaComplexity = modelSector.CustomAppearance.NebulaComplexity;
+                    editorSky.NebulaBrightness = modelSector.CustomAppearance.NebulaBrightness;
+                    editorSky.NebulaStyles = modelSector.CustomAppearance.NebulaStyles;
+                    editorSky.NebulaTextureCount = modelSector.CustomAppearance.NebulaTextureCount;
+
+                    editorSky.StarsCount = modelSector.CustomAppearance.StarsCount;
+                    editorSky.StarsIntensity = modelSector.CustomAppearance.StarsIntensity;
                 }
-                this.cachedUnitPrefabs.Add(unit.ModelUnitClass, unit);
             }
         }
 
-        /// <summary>
-        /// Adds newly (if not already in the list) found assets.
-        /// Returns how many found (not how many added)
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="path"></param>
-        /// <param name="assetsFound">Adds to this list if it is not already there</param>
-        /// <returns></returns>
-        public static IEnumerable<T> TryGetUnityObjectsOfTypeFromPath<T>(string path) where T : UnityEngine.Object
+        private void ImportFactions()
         {
-            string[] filePaths = System.IO.Directory.GetFiles(path);
-
-            if (filePaths != null && filePaths.Length > 0)
+            foreach (var modelFaction in this.model.Factions)
             {
-                for (int i = 0; i < filePaths.Length; i++)
+                var editorFaction = PrefabHelper.Instantiate(this.factionPrefab, this.editorScenario.GetFactionsRoot());
+
+                this.editorFactionsById.Add(modelFaction.Id, editorFaction);
+                editorFaction.Id = modelFaction.Id;
+                editorFaction.CustomName = modelFaction.CustomName;
+                editorFaction.CustomShortName = modelFaction.CustomShortName;
+
+                editorFaction.GeneratedNameId = modelFaction.GeneratedNameId;
+                editorFaction.GeneratedSuffixId = modelFaction.GeneratedSuffixId;
+
+                ImportFactionHomeSector(modelFaction, editorFaction);
+
+                editorFaction.Credits = modelFaction.Credits;
+                editorFaction.Description = modelFaction.Description;
+                editorFaction.IsCivilian = modelFaction.IsCivilian;
+                editorFaction.FactionType = modelFaction.FactionType;
+                editorFaction.Aggression = modelFaction.Aggression;
+                editorFaction.Virtue = modelFaction.Virtue;
+                editorFaction.Greed = modelFaction.Greed;
+                editorFaction.Cooperation = modelFaction.Cooperation;
+                editorFaction.TradeEfficiency = modelFaction.TradeEfficiency;
+                editorFaction.DynamicRelations = modelFaction.DynamicRelations;
+                editorFaction.ShowJobBoards = modelFaction.ShowJobBoards;
+                editorFaction.CreateJobs = modelFaction.CreateJobs;
+                editorFaction.RequisitionPointMultiplier = modelFaction.RequisitionPointMultiplier;
+                editorFaction.DestroyWhenNoUnits = modelFaction.DestroyWhenNoUnits;
+                editorFaction.MinNpcCombatEfficiency = modelFaction.MinNpcCombatEfficiency;
+                editorFaction.MaxNpcCombatEfficiency = modelFaction.MaxNpcCombatEfficiency;
+                editorFaction.AdditionalRpProvision = modelFaction.AdditionalRpProvision;
+                editorFaction.TradeIllegalGoods = modelFaction.TradeIllegalGoods;
+                editorFaction.SpawnTime = modelFaction.SpawnTime;
+                editorFaction.HighestEverNetWorth = modelFaction.HighestEverNetWorth;
+                editorFaction.PilotRankingSystemId = modelFaction.RankingSystemId;
+                editorFaction.PreferredFormationId = modelFaction.PreferredFormationId;
+            }
+        }
+
+        private void ImportFactionHomeSector(ModelFaction modelFaction, EditorFaction editorFaction)
+        {
+            var editorHomeSector = GetEditorSector(modelFaction.HomeSector);
+            if (editorHomeSector != null)
+            {
+                if (modelFaction.HomeSectorPosition.HasValue)
                 {
-                    UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(filePaths[i], typeof(T));
-                    if (obj is T asset)
-                    {
-                        yield return asset;
-                    }
+                    var homeSector = new GameObject($"{editorFaction.CustomName}_HomeSector");
+                    homeSector.transform.SetParent(editorHomeSector.transform);
+                    homeSector.transform.localPosition = modelFaction.HomeSectorPosition.Value.ToVector3();
+                }
+                else
+                {
+                    editorFaction.HomeSectorTransform = editorHomeSector.transform;
                 }
             }
         }
 
-        private void ImportsUnits()
+        private void ImportUnits()
         {
             foreach (var modelUnit in this.model.Units)
             {
@@ -152,6 +220,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
             // TODO: Ship trader data
 
             // TODO: Projectile data
+
+            this.editorUnitsById.Add(modelUnit.Id, editorUnit);
         }
 
         private EditorSector GetEditorSector(ModelSector modelSector)
@@ -184,42 +254,41 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
                 throw new System.Exception(message);
         }
 
-        private void ImportSectors()
+        private void CacheUnitPrefabs(string path)
         {
-            var sectorPrefab = AssetDatabase.LoadAssetAtPath<EditorSector>(this.settings.SectorPrefabPath);
-
-            foreach (var modelSector in this.model.Sectors)
+            var units = TryGetUnityObjectsOfTypeFromPath<EditorUnit>(path);
+            foreach (var unit in units)
             {
-                var editorSector = PrefabHelper.Instantiate(sectorPrefab, this.sectorsTransform);
-                editorSector.Id = modelSector.Id;
-                editorSector.Name = modelSector.Name;
-                editorSector.WormholeDistanceMultiplier = modelSector.GateDistanceMultiplier;
-                editorSector.BackgroundRotation = modelSector.BackgroundRotation.ToVector3();
-                editorSector.Seed = modelSector.RandomSeed;
-                editorSector.AmbientLightColor = modelSector.AmbientLightColor.ToColor();
-                editorSector.DirectionLightColor = modelSector.DirectionLightColor.ToColor();
-                editorSector.LightDirectionFudge = modelSector.LightDirectionFudge;
-
-                editorSector.transform.localPosition = new Vector3(
-                    modelSector.MapPosition.X / settings.UniverseMapScaleFactor,
-                    0.0f,
-                    modelSector.MapPosition.Z / settings.UniverseMapScaleFactor);
-
-                this.editorSectorsById.Add(modelSector.Id, editorSector);
-
-                // Sky
-                if (modelSector.CustomAppearance != null)
+                if (this.cachedUnitPrefabs.TryGetValue(unit.ModelUnitClass, out EditorUnit existingUnit))
                 {
-                    var editorSky = editorSector.gameObject.AddComponent<EditorSectorSky>();
-                    editorSky.NebulaColors = modelSector.CustomAppearance.NebulaColors;
-                    editorSky.NebulaCount = modelSector.CustomAppearance.NebulaCount;
-                    editorSky.NebulaComplexity = modelSector.CustomAppearance.NebulaComplexity;
-                    editorSky.NebulaBrightness = modelSector.CustomAppearance.NebulaBrightness;
-                    editorSky.NebulaStyles = modelSector.CustomAppearance.NebulaStyles;
-                    editorSky.NebulaTextureCount = modelSector.CustomAppearance.NebulaTextureCount;
+                    Debug.LogError($"Found a duplicate prefab unit \"{existingUnit.name}\". All prefabs in these folders should have a unique class ID", existingUnit);
+                    continue;
+                }
+                this.cachedUnitPrefabs.Add(unit.ModelUnitClass, unit);
+            }
+        }
 
-                    editorSky.StarsCount = modelSector.CustomAppearance.StarsCount;
-                    editorSky.StarsIntensity = modelSector.CustomAppearance.StarsIntensity;
+        /// <summary>
+        /// Adds newly (if not already in the list) found assets.
+        /// Returns how many found (not how many added)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="path"></param>
+        /// <param name="assetsFound">Adds to this list if it is not already there</param>
+        /// <returns></returns>
+        public static IEnumerable<T> TryGetUnityObjectsOfTypeFromPath<T>(string path) where T : UnityEngine.Object
+        {
+            string[] filePaths = System.IO.Directory.GetFiles(path);
+
+            if (filePaths != null && filePaths.Length > 0)
+            {
+                for (int i = 0; i < filePaths.Length; i++)
+                {
+                    UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(filePaths[i], typeof(T));
+                    if (obj is T asset)
+                    {
+                        yield return asset;
+                    }
                 }
             }
         }

@@ -1065,8 +1065,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 var modelFaction = new ModelFaction
                 {
                     Id = editorFaction.Id,
-                    CustomName = editorFaction.CustomName,
-                    CustomShortName = editorFaction.CustomShortName,
                     Credits = editorFaction.Credits,
                     Description = editorFaction.Description,
                     IsCivilian = editorFaction.IsCivilian,
@@ -1075,6 +1073,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                     Virtue = editorFaction.Virtue,
                     Greed = editorFaction.Greed,
                     TradeEfficiency = editorFaction.TradeEfficiency,
+                    Cooperation = editorFaction.Cooperation,
                     DynamicRelations = editorFaction.DynamicRelations,
                     ShowJobBoards = editorFaction.ShowJobBoards,
                     CreateJobs = editorFaction.CreateJobs,
@@ -1083,7 +1082,31 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                     MaxNpcCombatEfficiency = editorFaction.MaxNpcCombatEfficiency,
                     AdditionalRpProvision = editorFaction.AdditionalRpProvision,
                     TradeIllegalGoods = editorFaction.TradeIllegalGoods,
+                    RankingSystemId = editorFaction.PilotRankingSystemId,
+                    SpawnTime = editorFaction.SpawnTime,
+                    HighestEverNetWorth = editorFaction.HighestEverNetWorth,
+                    GeneratedNameId = editorFaction.GeneratedNameId,
+                    GeneratedSuffixId = editorFaction.GeneratedSuffixId,
+                    PreferredFormationId = editorFaction.PreferredFormationId,
+                    DestroyWhenNoUnits = editorFaction.DestroyWhenNoUnits,
                 };
+
+                // We only export a custom name when need be.
+                if (editorFaction.GeneratedNameId < -1)
+                {
+                    modelFaction.CustomName = editorFaction.CustomName;
+                    modelFaction.CustomShortName = editorFaction.CustomShortName;
+                }
+
+                if (editorFaction.HomeSectorTransform != null)
+                {
+                    var editorHomeSector = editorFaction.HomeSectorTransform.GetComponentInParent<EditorSector>();
+                    if (editorHomeSector != null)
+                    {
+                        modelFaction.HomeSector = GetModelSector(editorHomeSector);
+                        modelFaction.HomeSectorPosition = (editorFaction.HomeSectorTransform.position - editorHomeSector.transform.position).ToVec3_ZeroY();
+                    }
+                }
 
                 var editorFactionSettings = editorFaction.GetComponentInChildren<EditorFactionCustomSettings>();
                 if (editorFactionSettings != null)

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor
 {
@@ -47,6 +48,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
         {
             if (this.SectorsRoot != null) 
                 return this.SectorsRoot;
+
+            return this.transform;
+        }
+
+        public Transform GetFactionsRoot()
+        {
+            if (this.FactionsRoot != null)
+                return this.FactionsRoot;
 
             return this.transform;
         }
