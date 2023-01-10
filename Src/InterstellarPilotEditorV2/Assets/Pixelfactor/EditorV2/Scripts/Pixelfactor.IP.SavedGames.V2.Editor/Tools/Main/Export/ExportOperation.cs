@@ -809,6 +809,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                         AvoidDestruction = !editorUnit.AllowDestruction,
                     };
 
+                    if (editorUnit.Health >= 0.0f || editorUnit.IsDestroyed)
+                    {
+                        unit.HealthData = new ModelUnitHealthData
+                        {
+                            Health = editorUnit.Health,
+                            IsDestroyed = editorUnit.IsDestroyed
+                        };
+                    }
+
                     // HACK: Requisition Point weirdness
                     // Only stations provide RP
                     // I can't be arsed to populate all the RP values. But it must be exported
@@ -1092,7 +1101,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 };
 
                 // We only export a custom name when need be.
-                if (editorFaction.GeneratedNameId < -1)
+                if (editorFaction.GeneratedNameId < 0)
                 {
                     modelFaction.CustomName = editorFaction.CustomName;
                     modelFaction.CustomShortName = editorFaction.CustomShortName;

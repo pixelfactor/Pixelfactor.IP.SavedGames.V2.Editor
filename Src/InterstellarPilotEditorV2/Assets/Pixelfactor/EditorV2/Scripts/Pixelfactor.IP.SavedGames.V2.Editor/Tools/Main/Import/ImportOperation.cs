@@ -38,15 +38,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 
             this.settings = CustomSettings.GetOrCreateSettings();
 
-            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Asteroids");
-            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/AsteroidClusters");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Asteroid");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/AsteroidCluster");
             this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Cargo");
-            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/GasClouds");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/GasCloud");
             this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Misc");
-            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Planets");
-            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Ships");
-            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Stations");
-            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Wormholes");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Planet");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Ship");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Station");
+            this.CacheUnitPrefabs(settings.UnitPrefabsPath.TrimEnd('/') + "/Wormhole");
 
             this.CacheCargoClassPrefabs(settings.CargoClassPrefabsPath);
 
@@ -264,6 +264,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
             if (modelUnit.CargoData != null)
             {
                 ImportUnitCargoData(editorUnit, modelUnit.CargoData);
+            }
+
+            editorUnit.AllowDestruction = !modelUnit.AvoidDestruction;
+            editorUnit.IsInvulnerable = modelUnit.IsInvulnerable;
+
+            if (modelUnit.HealthData != null)
+            {
+                editorUnit.IsDestroyed = modelUnit.HealthData.IsDestroyed;
+                editorUnit.Health = modelUnit.HealthData.Health;
             }
 
             // TODO: Asteroid data

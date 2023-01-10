@@ -66,6 +66,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         [HideInInspector]
         public int RpProvision = 0;
 
+        [Tooltip("The current health of the unit. When the value is < 0, the unit has full health")]
+        public float Health = -1.0f;
+
+        [Header("Advanced")]
+        [Tooltip("Whether the unit has already been destroyed. Generally this will not be the case.")]
+        public bool IsDestroyed = false;
+
         void OnDrawGizmos()
         {
             if (SelectionHelper.IsSelected(this) || SceneView.lastActiveSceneView.size < GetDrawLabelSceneViewSize())
