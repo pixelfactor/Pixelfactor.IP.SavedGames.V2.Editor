@@ -357,3 +357,5 @@ Src/InterstellarPilotEditorV2/*.dat
 Src/InterstellarPilotEditorV2/Assets/Pixelfactor/EditorV2/SampleScenes/Temp/*
 Src/InterstellarPilotEditorV2/Assets/Pixelfactor/EditorV2/SampleScenes/Temp.meta
 .vsconfig
+Src/InterstellarPilotEditorV2/Assets/Pixelfactor/EditorV2/Scripts/Temp/*
+Src/InterstellarPilotEditorV2/Assets/Pixelfactor/EditorV2/Scripts/Temp.meta

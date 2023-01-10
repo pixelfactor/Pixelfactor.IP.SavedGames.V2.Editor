@@ -117,6 +117,7 @@
         Ship_VentureA = 710,
         Ship_VentureP = 720,
         Ship_VentureH = 730,
+        Ship_VentureX = 712,
         Misc_StorageLocker = 38900,
         Ship_Debris = 34000,
         Misc_RequisitionPoints = 33000,
