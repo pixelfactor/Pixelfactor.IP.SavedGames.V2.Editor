@@ -91,24 +91,73 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
         {
             foreach (var modelUnit in this.model.Units)
             {
-                var prefab = this.cachedUnitPrefabs.GetValueOrDefault(modelUnit.Class);
-                if (prefab == null)
-                {
-                    var message = $"Importer couldn't find a prefab to create unit \"{modelUnit.Class}\". Check that there is a prefab inside the prefabs folder that matches the same unit class";
-                    Debug.LogError(message);
-                    OnError(message);
-
-                    continue;
-                }
-
-                var editorSector = GetEditorSector(modelUnit.Sector);
-                var editorUnit = PrefabHelper.Instantiate(prefab, editorSector != null ? editorSector.transform : this.editorScenario.transform);
+                ImportUnit(modelUnit);
             }
         }
+
+        private void ImportUnit(ModelUnit modelUnit)
+        {
+            var prefab = this.cachedUnitPrefabs.GetValueOrDefault(modelUnit.Class);
+            if (prefab == null)
+            {
+                var message = $"Importer couldn't find a prefab to create unit \"{modelUnit.Class}\". Check that there is a prefab inside the prefabs folder that matches the same unit class";
+                Debug.LogError(message);
+                OnError(message);
+
+                return;
+            }
+
+            var editorSector = GetEditorSector(modelUnit.Sector);
+            var editorUnit = PrefabHelper.Instantiate(prefab, editorSector != null ? editorSector.transform : this.editorScenario.transform);
+
+            editorUnit.Seed = modelUnit.Seed;
+            editorUnit.transform.localPosition = modelUnit.Position.ToVector3();
+            editorUnit.transform.localRotation = modelUnit.Rotation.ToQuaternion();
+
+            if (modelUnit.Radius.HasValue)
+            {
+                editorUnit.Radius = modelUnit.Radius.Value;
+            }
+
+            if (modelUnit.Mass.HasValue)
+            {
+                editorUnit.Mass = modelUnit.Mass.Value;
+            }
+
+            if (!string.IsNullOrEmpty(modelUnit.CustomClassName))
+            {
+                editorUnit.VariantName = modelUnit.CustomClassName;
+            }
+
+            if (!string.IsNullOrWhiteSpace(modelUnit.Name))
+            {
+                editorUnit.Name = modelUnit.Name;
+            }
+
+            if (!string.IsNullOrWhiteSpace(modelUnit.CustomClassName))
+            {
+                editorUnit.ShortName = modelUnit.ShortName;
+            }
+
+            // TODO: Faction
+
+            editorUnit.RpProvision = modelUnit.RpProvision;
+
+            // TODO: Cargo data
+
+            // TODO: debris data (obsolete)
+
+            // TODO: Asteroid data
+
+            // TODO: Ship trader data
+
+            // TODO: Projectile data
+        }
+
         private EditorSector GetEditorSector(ModelSector modelSector)
         {
             if (modelSector == null)
-                return  null;
+                return null;
 
             return GetEditorSector(modelSector.Id);
         }

@@ -63,6 +63,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         [Tooltip("Whether the unit can be damaged during normal gameplay")]
         public bool IsInvulnerable = false;
 
+        [HideInInspector]
+        public int RpProvision = 0;
+
         void OnDrawGizmos()
         {
             if (SelectionHelper.IsSelected(this) || SceneView.lastActiveSceneView.size < GetDrawLabelSceneViewSize())

@@ -88,5 +88,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
         {
             return new Color(vec3.X, vec3.Y, vec3.Z);
         }
+
+        public static Quaternion ToQuaternion(this Vec3 vec3)
+        {
+            return Quaternion.Euler(vec3.ToVector3());
+        }
     }
 }
