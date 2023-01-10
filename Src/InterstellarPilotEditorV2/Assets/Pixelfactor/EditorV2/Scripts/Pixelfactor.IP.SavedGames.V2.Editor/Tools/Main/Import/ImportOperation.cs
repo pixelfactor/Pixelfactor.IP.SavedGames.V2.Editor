@@ -21,7 +21,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
         private Dictionary<int, EditorUnit> editorUnitsById = new Dictionary<int, EditorUnit>(64);
         private EditorFaction factionPrefab = null;
 
-        public ImportOperation(SavedGame savedGameModel, EditorScenario editorScenario, bool exitOnError)
+        public ImportOperation(
+            SavedGame savedGameModel, 
+            EditorScenario editorScenario,
+            bool exitOnError)
         {
             this.editorScenario = editorScenario;
             this.model = savedGameModel;
@@ -54,6 +57,48 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
             this.ImportSectors();
             this.ImportFactions();
             this.ImportUnits();
+            this.ImportWormholes();
+        }
+
+        private void ImportWormholes()
+        {
+            foreach (var modelUnit in this.model.Units)
+            {
+                if (modelUnit.WormholeData != null)
+                {
+                    var editorUnit = GetEditorUnit(modelUnit);
+
+                    this.ImportWormhole(editorUnit, modelUnit.WormholeData);
+                }
+            }
+        }
+
+        private void ImportWormhole(EditorUnit editorUnit, ModelUnitWormholeData modelUnitWormholeData)
+        {
+            var editorWormhole = editorUnit.gameObject.GetOrAddComponent<EditorUnitWormholeData>();
+
+            editorWormhole.IsUnstable = modelUnitWormholeData.IsUnstable;
+            editorWormhole.UnstableNextChangeTargetTime = modelUnitWormholeData.UnstableNextChangeTargetTime;
+
+            if (editorWormhole.IsUnstable)
+            {
+                var unstableTargetSector = GetEditorSector(modelUnitWormholeData.UnstableTargetSector);
+                if (unstableTargetSector != null)
+                {
+                    var homeSector = new GameObject($"Wormhole_{editorUnit.Id}_Target");
+                    homeSector.transform.SetParent(unstableTargetSector.transform);
+                    homeSector.transform.localPosition = modelUnitWormholeData.UnstableTargetPosition.ToVector3();
+                    homeSector.transform.localRotation = modelUnitWormholeData.UnstableTargetRotation.ToQuaternion();
+                }
+            }
+            else
+            {
+                editorWormhole.TargetWormholeUnit = GetEditorUnit(modelUnitWormholeData.TargetWormholeUnit);
+                if (modelUnitWormholeData.TargetWormholeUnit == null)
+                {
+                    Debug.LogWarning($"Wormhole {editorUnit.Id} does not have a target wormhole", editorUnit);
+                }
+            }
         }
 
         private void ImportSectors()
@@ -207,7 +252,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
                 editorUnit.ShortName = modelUnit.ShortName;
             }
 
-            // TODO: Faction
+            editorUnit.Faction = GetEditorFaction(modelUnit.Faction);
 
             editorUnit.RpProvision = modelUnit.RpProvision;
 
@@ -246,6 +291,54 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
             }
 
             return sector;
+        }
+
+        private EditorUnit GetEditorUnit(ModelUnit modelUnit)
+        {
+            if (modelUnit == null)
+                return null;
+
+            return GetEditorUnit(modelUnit.Id);
+        }
+
+        private EditorUnit GetEditorUnit(int id)
+        {
+            if (id < 0)
+                return null;
+
+            var unit = this.editorUnitsById.GetValueOrDefault(id);
+            if (unit == null)
+            {
+                var message = $"Missing unit with id: {id}";
+                Debug.LogError(message);
+                OnError(message);
+            }
+
+            return unit;
+        }
+
+        private EditorFaction GetEditorFaction(ModelFaction modelFaction)
+        {
+            if (modelFaction == null)
+                return null;
+
+            return GetEditorFaction(modelFaction.Id);
+        }
+
+        private EditorFaction GetEditorFaction(int id)
+        {
+            if (id < 0)
+                return null;
+
+            var faction = this.editorFactionsById.GetValueOrDefault(id);
+            if (faction == null)
+            {
+                var message = $"Missing faction with id: {id}";
+                Debug.LogError(message);
+                OnError(message);
+            }
+
+            return faction;
         }
 
         private void OnError(string message)

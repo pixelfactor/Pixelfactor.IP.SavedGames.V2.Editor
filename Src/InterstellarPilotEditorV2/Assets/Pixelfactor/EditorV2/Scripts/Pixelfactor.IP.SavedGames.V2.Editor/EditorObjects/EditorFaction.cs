@@ -31,8 +31,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 
         public string Description;
 
-        public bool IsCivilian = false;
-
         /// <summary>
         /// Trader, miner etc
         /// </summary>
@@ -125,5 +123,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         [Range(0f, 10f)]
         [Tooltip("Determines the amount of requisition points the faction has. RP are an artificial limiter to AI faction power")]
         public float RequisitionPointMultiplier = 1.0f;
+
+        /// <summary>
+        /// Determines whether the faction is a civilian faction
+        /// </summary>
+        [Tooltip("Determines whether the faction is a civilian faction. This is only relevant for 'Generic' type of faction. The AI interact with civilian factions slightly differently and there are harsher punishments for attacking them.")]
+        public bool IsCivilian = false;
     }
 }
