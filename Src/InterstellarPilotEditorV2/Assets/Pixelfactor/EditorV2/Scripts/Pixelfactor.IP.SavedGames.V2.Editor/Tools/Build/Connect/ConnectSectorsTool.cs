@@ -1,5 +1,7 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
+using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow;
+using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -9,11 +11,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Connect
 {
     public class ConnectSectorsTool
     {
-        /// <summary>
-        /// TODO: Move this to settings
-        /// </summary>
-        const string wormholePrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Units/Wormholes/Unit_Wormhole.prefab";
-
         public static void ConnectSectorsToOthers(
             IEnumerable<EditorSector> sectorsToConnect,
             IEnumerable<EditorSector> allSectors,
@@ -175,15 +172,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Connect
             EditorSector editorSector2,
             float wormholeDistance)
         {
-            var wormholePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(wormholePrefabPath);
-
-            if (wormholePrefab == null)
-            {
-                throw new System.Exception($"Unable to load wormhole prefab. Check that the asset exists at path: \"{wormholePrefabPath}\"");
-            }
-
-            var newWormhole = (GameObject)PrefabUtility.InstantiatePrefab(wormholePrefab.gameObject);
-            newWormhole.transform.SetParent(editorSector1.transform, false);
+            var newWormhole = Spawn.Unit(editorSector1, Model.ModelUnitClass.Wormhole_Default, CustomSettings.GetOrCreateSettings().UnitPrefabsPath);
 
             var direction = (editorSector2.transform.position - editorSector1.transform.position).normalized;
             newWormhole.transform.position = editorSector1.transform.position + (direction * wormholeDistance);
