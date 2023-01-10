@@ -43,6 +43,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
         public static void SelectFirstSector()
         {
             var savedGame = SavedGameUtil.FindSavedGame();
+            SelectFirstSector(savedGame);
+        }
+
+        public static void SelectFirstSector(EditorSavedGame savedGame)
+        {
             if (savedGame != null)
             {
                 var sector = savedGame.GetComponentInChildren<EditorSector>();

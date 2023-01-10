@@ -15,11 +15,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
     {
         private EditorSector newSectorPrefab = null;
         private float expandMultiplier = 2.0f;
-        private GrowSectorSelectionMode growSectorSelectionMode = GrowSectorSelectionMode.Keep;
+        private GrowSectorSelectionMode growSectorSelectionMode = GrowSectorSelectionMode.Combined;
         private int growMaxWormholeConnections = 8;
         private float sectorDistanceFuzziness = 0.5f;
         private bool autoConnect = true;
         private float autoConnectLikelihood = 0.5f;
+        private int autoGrowSectorCount = 32;
+        private bool hasConfirmedAutoGrowTrash = false;
 
         public void Draw()
         {
@@ -45,7 +47,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 new GUIContent(
                     "Connect selected sectors",
                     "Connects the currently selected sectors with wormholes"),
-                Styles.Button))
+                GuiHelper.ButtonLayout))
             {
                 ConnectSectorsTool.ConnectSelectedSectorsWithWormholesMenuItem();
             }
@@ -57,14 +59,16 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         {
             var settings = CustomSettings.GetOrCreateSettings();
 
-            var sectors = Selector.GetInParents<EditorSector>().ToList();
+            var allSectors = SavedGameUtil.FindSavedGame().GetSectors().ToList();
+            var selectedSectors = Selector.GetInParents<EditorSector>().ToList();
 
-            var hasSectors = sectors.Any();
+            var hasSectors = selectedSectors.Any();
 
             GuiHelper.Subtitle("Grow", "Create new sectors");
 
             EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.TextField("Selected sectors", WindowHelper.DescribeSectors(sectors));
+            EditorGUILayout.TextField("Total sectors", $"{allSectors.Count:N0}");
+            EditorGUILayout.TextField("Selected sectors", WindowHelper.DescribeSectors(selectedSectors));
             EditorGUI.EndDisabledGroup();
 
             if (newSectorPrefab == null)
@@ -104,25 +108,96 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             if (GUILayout.Button(
                 new GUIContent(
-                    "Grow each once",
+                    "Grow",
                     "Adds a single sector to each of the selected sectors"),
-                Styles.Button))
+                GuiHelper.ButtonLayout))
             {
-                GrowEachOnce(sectors, settings);
+                GrowEachOnce(selectedSectors, settings);
             }
 
             if (GUILayout.Button(
                 new GUIContent(
-                    "Grow once randomly",
+                    "Grow just once",
                     "Adds a sector to one of the selected sectors"),
-                Styles.Button))
+                GuiHelper.ButtonLayout))
             {
-                GrowOneRandomly(sectors, settings);
+                var newSector = GrowOneRandomly(selectedSectors, settings);
+
+                if (newSector != null)
+                {
+                    ApplyAutoConnect(newSector, settings);
+
+                    ApplyGrowSelectionMode(selectedSectors, newSector);
+                }
+
+                if (newSector == null)
+                {
+                    EditorUtility.DisplayDialog("Grow sectors", "None of the selected sectors could be grown", "OK");
+                }
             }
 
             EditorGUILayout.EndHorizontal();
 
             EditorGUI.EndDisabledGroup();
+
+            DrawAutoGrow(settings, allSectors, selectedSectors);
+        }
+
+        private void DrawAutoGrow(CustomSettings settings, List<EditorSector> allSectors, List<EditorSector> selectedSectors)
+        {
+            GuiHelper.Subtitle("Auto-grow", "Create many new sectors");
+
+            EditorGUI.BeginDisabledGroup(!selectedSectors.Any());
+
+            EditorGUILayout.PrefixLabel(new GUIContent("Auto-grow count", "The sector count to grow to"));
+            this.autoGrowSectorCount = EditorGUILayout.IntSlider(this.autoGrowSectorCount, 8, 256, GUILayout.ExpandWidth(false));
+
+            EditorGUILayout.BeginHorizontal();
+
+            if (GUILayout.Button(
+                new GUIContent(
+                    "Auto-grow",
+                    "Keeps adding sectors to the selected sectors until a sector count is reached"),
+                GuiHelper.ButtonLayout))
+            {
+                AutoGrow(selectedSectors, allSectors, settings, this.autoGrowSectorCount);
+            }
+
+            EditorGUI.EndDisabledGroup();
+
+            EditorGUILayout.Space(100.0f);
+
+            if (GUILayout.Button(
+                new GUIContent(
+                    "Delete and Auto-grow",
+                    "Deletes everything and grows a new universe"),
+                GuiHelper.ButtonLayout))
+            {
+                if (this.hasConfirmedAutoGrowTrash || EditorUtility.DisplayDialog("Are you sure?", "Are you sure you want to delete everything?", "Yes", "No"))
+                {
+                    this.hasConfirmedAutoGrowTrash = true;
+
+                    Selection.objects = new Object[0];
+                    var savedGame = TrashAndRecreateScene(settings);
+
+                    allSectors = savedGame.GetSectors().ToList();
+                    selectedSectors = Selector.GetInParents<EditorSector>().ToList();
+
+                    AutoGrow(selectedSectors, allSectors, settings, this.autoGrowSectorCount - 1);
+                }
+            }
+
+            EditorGUILayout.EndHorizontal();
+        }
+
+        private EditorSavedGame TrashAndRecreateScene(CustomSettings settings)
+        {
+            var savedGame = SavedGameUtil.FindSavedGame();
+            GameObject.DestroyImmediate(savedGame.gameObject);
+
+            var newSavedGame = CreateNewScenarioTool.InstantiateScenePrefab(settings);
+
+            return newSavedGame;
         }
 
         private float GetNewSectorDistance(CustomSettings customSettings)
@@ -133,13 +208,39 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 Mathf.Pow(Random.value, Mathf.Lerp(32.0f, 1.0f, this.sectorDistanceFuzziness)));
         }
 
-        private void GrowOneRandomly(List<EditorSector> selectedSectors, CustomSettings settings)
+        private void AutoGrow(List<EditorSector> selectedSectors, List<EditorSector> allSectors, CustomSettings settings, int autoGrowCount)
         {
+            var sectorCount = allSectors.Count;
+            var createdCount = 0;
+
+            const int maxFailedIterations = 64;
+            int i =  0;
+            while (createdCount < autoGrowCount && i < maxFailedIterations)
+            {
+                var newSector = GrowOneRandomly(selectedSectors, settings);
+                if (newSector != null)
+                {
+                    ApplyAutoConnect(newSector, settings);
+
+                    selectedSectors.Add(newSector);
+
+                    createdCount++;
+                    sectorCount++;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+        }
+
+        private EditorSector GrowOneRandomly(List<EditorSector> selectedSectors, CustomSettings settings)
+        {
+            EditorSector newSector = null;
+
             var availableSectors = selectedSectors.Where(e => CanGrowSector(e));
             if (availableSectors.Count() > 0)
             {
-                EditorSector newSector = null;
-
                 // Keep trying until find a sector to generate from
                 for (int i = 0; i < 20; i++)
                 {
@@ -159,22 +260,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                         }
                     }
                 }
-
-                if (newSector != null)
-                {
-                    ApplyAutoConnect(newSector, settings);
-
-                    ApplyGrowSelectionMode(selectedSectors, newSector);
-                }
-                else
-                {
-                    EditorUtility.DisplayDialog("Grow sectors", "None of the selected sectors could be grown", "OK");
-                }
             }
-            else
-            {
-                EditorUtility.DisplayDialog("Grow sectors", "None of the selected sectors could be grown", "OK");
-            }
+
+            return newSector;
         }
 
         private void ApplyAutoConnect(
@@ -263,7 +351,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 new GUIContent(
                     "Expand",
                     "Grows or shrinks the distance between existing sectors"),
-                Styles.Button))
+                GuiHelper.ButtonLayout))
             {
                 ExpandTool.Expand(this.expandMultiplier);
             }

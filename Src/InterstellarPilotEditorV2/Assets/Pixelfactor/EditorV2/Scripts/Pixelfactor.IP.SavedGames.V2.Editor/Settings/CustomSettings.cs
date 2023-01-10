@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
 {
-    class CustomSettings : ScriptableObject
+    public class CustomSettings : ScriptableObject
     {
         public const string k_MyCustomSettingsPath = "Assets/Pixelfactor/EditorV2/IP2EditorSettings.asset";
 

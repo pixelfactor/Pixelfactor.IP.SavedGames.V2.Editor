@@ -22,13 +22,37 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
         {
             var labelStyle = new GUIStyle(GUI.skin.label);
             labelStyle.normal.textColor = Color.grey;
-            labelStyle.fontSize = 30;
+            labelStyle.fontSize = 24;
             labelStyle.fontStyle = FontStyle.Bold;
 
             EditorGUILayout.LabelField(text, labelStyle, GUILayout.Height(30));
             HelpPrompt(helpPrompt);
 
             EditorGUILayout.Space(15);
+        }
+
+        public static GUILayoutOption[] BigButtonLayout
+        {
+            get
+            {
+                return new GUILayoutOption[]
+                {
+                    GUILayout.Width(200),
+                    GUILayout.Height(50)
+                };
+            }
+        }
+
+        public static GUILayoutOption[] ButtonLayout
+        {
+            get
+            {
+                return new GUILayoutOption[]
+                {
+                    GUILayout.Width(180),
+                    GUILayout.Height(30)
+                };
+            }
         }
     }
 }
