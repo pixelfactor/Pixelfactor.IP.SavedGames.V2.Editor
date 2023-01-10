@@ -68,6 +68,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                     {
                         unit.transform.localPosition = Vector3.zero;
                     }
+
+                    Selection.objects = new GameObject[] { unit.gameObject };
+                    SceneView.lastActiveSceneView.Frame(new Bounds(unit.transform.position, new Vector3(10.0f, 10.0f, 10.0f)), true);
                 }
             }
 
