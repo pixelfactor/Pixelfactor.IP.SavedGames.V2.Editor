@@ -89,6 +89,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [Tooltip("The save version that the editor works with")]
         private System.Version saveVersion = new System.Version(2, 0, 50);
 
+        [Tooltip("The root folder of where units are found")]
+        [SerializeField]
+        private string unitPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Units";
+
         internal static CustomSettings GetOrCreateSettings()
         {
             var settings = AssetDatabase.LoadAssetAtPath<CustomSettings>(k_MyCustomSettingsPath);
@@ -198,6 +202,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         {
             get { return this.saveVersion; }
         }
+
+        public string UnitPrefabPath
+        {
+            get { return this.unitPrefabPath; }
+        }
     }
 
     // Register a SettingsProvider using IMGUI for the drawing framework:
@@ -244,6 +253,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorPrefabPath"), new GUIContent("Sector prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorNamesPath"), new GUIContent("Sector names path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("universeMapScaleFactor"), new GUIContent("Universe scale factor"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("unitPrefabPath"), new GUIContent("Unit prefab path"));
 
                     settings.ApplyModifiedPropertiesWithoutUndo();
                 },

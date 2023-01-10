@@ -7,6 +7,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 {
     public class ImportWindow : EditorWindow
     {
+        private bool exitOnFirstError = true;
+
         static void Init()
         {
             ShowNew();
@@ -23,6 +25,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         {
             GuiHelper.Subtitle("Import", "Import scenario data from an existing file");
 
+            EditorGUILayout.PrefixLabel(new GUIContent("Exit on error", "Whether to abort the import operation on the first error encountered"));
+            this.exitOnFirstError = EditorGUILayout.Toggle(this.exitOnFirstError, GUILayout.ExpandWidth(false));
+
             if (GUILayout.Button(
             new GUIContent(
                 "Import",
@@ -38,7 +43,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                         var savedGame = CreateNewScenarioTool.CreateNewEmpty();
                         if (savedGame != null)
                         {
-                            ImportTool.ImportFromFile(filePath, savedGame);
+                            ImportTool.ImportFromFile(filePath, savedGame, this.exitOnFirstError);
 
                             EditorUtility.DisplayDialog("Import", "Scenario was imported succcesfully", "OK");
                         }

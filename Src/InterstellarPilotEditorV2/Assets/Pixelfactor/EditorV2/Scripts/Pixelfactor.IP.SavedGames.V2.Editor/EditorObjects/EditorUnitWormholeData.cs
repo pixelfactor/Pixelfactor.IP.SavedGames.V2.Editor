@@ -51,7 +51,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
                 return this.TargetWormholeUnit.GetComponentInParent<EditorSector>();
             }
 
-            return this.UnstableTarget?.GetComponentInParent<EditorSector>();
+            if (this.UnstableTarget != null)
+            { 
+                return this.UnstableTarget.GetComponentInParent<EditorSector>();
+            }
+
+            return null;
         }
     }
 }

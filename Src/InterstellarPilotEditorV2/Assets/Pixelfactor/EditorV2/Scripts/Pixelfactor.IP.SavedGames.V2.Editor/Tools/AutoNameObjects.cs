@@ -201,7 +201,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         public static string GetWormholeObjectName(EditorUnitWormholeData wormholeData)
         {
             var targetSector = wormholeData.GetActualTargetSector();
-            var targetSectorName = targetSector?.Name ?? "Nowhere";
+
+            var targetSectorName = targetSector != null ? targetSector.Name : "Nowhere";
             if (wormholeData.IsUnstable)
             {
                 return $"UnstableWormhole_To_{targetSectorName}";
