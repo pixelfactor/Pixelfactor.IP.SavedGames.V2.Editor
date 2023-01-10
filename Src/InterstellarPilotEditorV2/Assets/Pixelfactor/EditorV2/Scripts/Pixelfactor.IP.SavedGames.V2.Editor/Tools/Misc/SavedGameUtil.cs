@@ -8,21 +8,21 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 {
     public static class SavedGameUtil
     {
-        public static EditorSavedGame FindSavedGameOrErrorOut()
+        public static EditorScenario FindSavedGameOrErrorOut()
         {
-            var editorSavedGame = FindSavedGame();
-            if (editorSavedGame == null)
+            var editorScenario = FindSavedGame();
+            if (editorScenario == null)
             {
-                EditorUtility.DisplayDialog("IP Editor", $"Cannot find a {nameof(EditorSavedGame)} type object in the current scene", "Ok");
+                EditorUtility.DisplayDialog("IP Editor", $"Cannot find a {nameof(EditorScenario)} type object in the current scene", "Ok");
                 return null;
             }
 
-            return editorSavedGame;
+            return editorScenario;
         }
 
-        public static EditorSavedGame FindSavedGame()
+        public static EditorScenario FindSavedGame()
         {
-            return GameObject.FindObjectOfType<EditorSavedGame>();
+            return GameObject.FindObjectOfType<EditorScenario>();
         }
 
         public static List<EditorSector> FindSectors()

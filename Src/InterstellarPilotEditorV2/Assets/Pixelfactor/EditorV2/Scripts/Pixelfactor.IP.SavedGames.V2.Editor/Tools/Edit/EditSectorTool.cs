@@ -7,17 +7,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Edit
 {
     public static class EditSectorTool
     {
-        public static void RandomizeAll(EditorSavedGame editorSavedGame)
+        public static void RandomizeAll(EditorScenario editorScenario)
         {
-            foreach (var sector in editorSavedGame.GetSectors())
+            foreach (var sector in editorScenario.GetSectors())
             {
                 Randomize(sector);
             }
         }
 
-        public static void RandomizeAllWithoutDirty(EditorSavedGame editorSavedGame)
+        public static void RandomizeAllWithoutDirty(EditorScenario editorScenario)
         {
-            foreach (var sector in editorSavedGame.GetSectors())
+            foreach (var sector in editorScenario.GetSectors())
             {
                 RandomizeWithoutDirty(sector);
             }
@@ -43,8 +43,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Edit
 
         public static void AutoNameSector(EditorSector editorSector)
         {
-            var editorSavedGame = editorSector.GetComponentInParent<EditorSavedGame>();
-            editorSector.Name = SectorNamingTool.GetUniqueSectorName(editorSector, editorSavedGame);
+            var editorScenario = editorSector.GetComponentInParent<EditorScenario>();
+            editorSector.Name = SectorNamingTool.GetUniqueSectorName(editorSector, editorScenario);
             EditorUtility.SetDirty(editorSector);
         }
     }

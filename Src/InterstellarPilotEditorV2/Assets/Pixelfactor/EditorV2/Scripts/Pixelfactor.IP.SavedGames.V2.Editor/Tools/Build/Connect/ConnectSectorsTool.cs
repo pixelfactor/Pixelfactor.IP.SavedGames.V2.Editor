@@ -134,9 +134,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Connect
         /// </summary>
         public static void ConnectSelectedSectorsWithWormholesMenuItem()
         {
-            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
+            var editorScenario = SavedGameUtil.FindSavedGameOrErrorOut();
 
-            ConnectSelectedSectorsWithWormholes(editorSavedGame.MaxWormholeDistance);
+            ConnectSelectedSectorsWithWormholes(editorScenario.MaxWormholeDistance);
         }
 
         public static bool CanConnectSelectedSectorsWithWormholes()

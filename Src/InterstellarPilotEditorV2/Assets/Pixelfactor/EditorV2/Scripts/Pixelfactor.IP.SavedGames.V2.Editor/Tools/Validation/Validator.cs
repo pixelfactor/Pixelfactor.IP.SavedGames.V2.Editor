@@ -9,34 +9,34 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 {
     public static class Validator
     {
-        public static void Validate(EditorSavedGame editorSavedGame, bool throwOnError)
+        public static void Validate(EditorScenario editorScenario, bool throwOnError)
         {
             var settings = CustomSettings.GetOrCreateSettings();
 
-            if (editorSavedGame.GetSectors().Length == 0)
+            if (editorScenario.GetSectors().Length == 0)
             {
-                OnError("A scenario must have at least one sector", editorSavedGame, throwOnError);
+                OnError("A scenario must have at least one sector", editorScenario, throwOnError);
 
             }
             // Only validate missing ids if they aren't set on export
             if (!settings.Export_AutosetIds)
             { 
-                ValidateMissingIds(editorSavedGame, throwOnError);
+                ValidateMissingIds(editorScenario, throwOnError);
             }
 
-            ValidateDuplicateIds(editorSavedGame, throwOnError);
+            ValidateDuplicateIds(editorScenario, throwOnError);
 
-            ValidateDuplicatePilotNames(editorSavedGame);
-            ValidateDuplicateShipNames(editorSavedGame);
+            ValidateDuplicatePilotNames(editorScenario);
+            ValidateDuplicateShipNames(editorScenario);
 
-            ValidateUnits(editorSavedGame, throwOnError);
+            ValidateUnits(editorScenario, throwOnError);
 
             Debug.Log("Validation complete");
         }
 
-        public static void ValidateDuplicateShipNames(EditorSavedGame editorSavedGame)
+        public static void ValidateDuplicateShipNames(EditorScenario editorScenario)
         {
-            var shipGroups = editorSavedGame.GetComponentsInChildren<EditorComponentUnitData>()
+            var shipGroups = editorScenario.GetComponentsInChildren<EditorComponentUnitData>()
                 .Where(e =>
                 {
                     var unit = e.GetComponentInParent<EditorUnit>();
@@ -51,9 +51,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        public static void ValidateDuplicatePilotNames(EditorSavedGame editorSavedGame)
+        public static void ValidateDuplicatePilotNames(EditorScenario editorScenario)
         {
-            var people = editorSavedGame.GetComponentsInChildren<EditorPerson>()
+            var people = editorScenario.GetComponentsInChildren<EditorPerson>()
                 .Where(e => !string.IsNullOrWhiteSpace(e.CustomName)).GroupBy(e => e.CustomName).Where(e => e.Count() > 1);
             foreach (var personGroup in people)
             {
@@ -64,34 +64,34 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateMissingIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateMissingIds(EditorScenario editorScenario, bool throwOnError)
         {
-            ValidateMessageIds(editorSavedGame, throwOnError);
-            ValidateUnitIds(editorSavedGame, throwOnError);
-            ValidateFactionIds(editorSavedGame, throwOnError);
-            ValidatePersonIds(editorSavedGame, throwOnError);
-            ValidateSectorIds(editorSavedGame, throwOnError);
-            ValidateFleetIds(editorSavedGame, throwOnError);
-            ValidateMissionIds(editorSavedGame, throwOnError);
-            ValidateTriggerGroupIds(editorSavedGame, throwOnError);
-            ValidateMissionObjectiveIds(editorSavedGame, throwOnError);
+            ValidateMessageIds(editorScenario, throwOnError);
+            ValidateUnitIds(editorScenario, throwOnError);
+            ValidateFactionIds(editorScenario, throwOnError);
+            ValidatePersonIds(editorScenario, throwOnError);
+            ValidateSectorIds(editorScenario, throwOnError);
+            ValidateFleetIds(editorScenario, throwOnError);
+            ValidateMissionIds(editorScenario, throwOnError);
+            ValidateTriggerGroupIds(editorScenario, throwOnError);
+            ValidateMissionObjectiveIds(editorScenario, throwOnError);
         }
 
-        private static void ValidateDuplicateIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateDuplicateIds(EditorScenario editorScenario, bool throwOnError)
         {
-            ValidateDuplicateSectors(editorSavedGame, throwOnError);
-            ValidateDuplicateFactions(editorSavedGame, throwOnError);
-            ValidateDuplicatePeople(editorSavedGame, throwOnError);
-            ValidateDuplicateUnits(editorSavedGame, throwOnError);
-            ValidateDuplicateMessageIds(editorSavedGame, throwOnError);
-            ValidateDuplicateMissionIds(editorSavedGame, throwOnError);
-            ValidateDuplicateTriggerGroupIds(editorSavedGame, throwOnError);
-            ValidateDuplicateMissionObjectiveIds(editorSavedGame, throwOnError);
+            ValidateDuplicateSectors(editorScenario, throwOnError);
+            ValidateDuplicateFactions(editorScenario, throwOnError);
+            ValidateDuplicatePeople(editorScenario, throwOnError);
+            ValidateDuplicateUnits(editorScenario, throwOnError);
+            ValidateDuplicateMessageIds(editorScenario, throwOnError);
+            ValidateDuplicateMissionIds(editorScenario, throwOnError);
+            ValidateDuplicateTriggerGroupIds(editorScenario, throwOnError);
+            ValidateDuplicateMissionObjectiveIds(editorScenario, throwOnError);
         }
 
-        private static void ValidateMessageIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateMessageIds(EditorScenario editorScenario, bool throwOnError)
         {
-            foreach (var message in editorSavedGame.GetComponentsInChildren<EditorPlayerMessage>())
+            foreach (var message in editorScenario.GetComponentsInChildren<EditorPlayerMessage>())
             {
                 if (message.Id < 0)
                 {
@@ -100,9 +100,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateTriggerGroupIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateTriggerGroupIds(EditorScenario editorScenario, bool throwOnError)
         {
-            foreach (var triggerGroup in editorSavedGame.GetComponentsInChildren<EditorTriggerGroup>())
+            foreach (var triggerGroup in editorScenario.GetComponentsInChildren<EditorTriggerGroup>())
             {
                 if (triggerGroup.Id < 0)
                 {
@@ -111,9 +111,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateMissionIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateMissionIds(EditorScenario editorScenario, bool throwOnError)
         {
-            foreach (var mission in editorSavedGame.GetComponentsInChildren<EditorMission>())
+            foreach (var mission in editorScenario.GetComponentsInChildren<EditorMission>())
             {
                 if (mission.Id < 0)
                 {
@@ -122,9 +122,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
 
         }
-        private static void ValidateMissionObjectiveIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateMissionObjectiveIds(EditorScenario editorScenario, bool throwOnError)
         {
-            foreach (var missionObjective in editorSavedGame.GetComponentsInChildren<EditorMissionObjective>())
+            foreach (var missionObjective in editorScenario.GetComponentsInChildren<EditorMissionObjective>())
             {
                 if (missionObjective.Id < 0)
                 {
@@ -133,9 +133,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateFleetIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateFleetIds(EditorScenario editorScenario, bool throwOnError)
         {
-            foreach (var fleet in editorSavedGame.GetComponentsInChildren<EditorFleet>())
+            foreach (var fleet in editorScenario.GetComponentsInChildren<EditorFleet>())
             {
                 if (fleet.Id < 0)
                 {
@@ -144,9 +144,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateUnits(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateUnits(EditorScenario editorScenario, bool throwOnError)
         {
-            foreach (var unit in editorSavedGame.GetComponentsInChildren<EditorUnit>())
+            foreach (var unit in editorScenario.GetComponentsInChildren<EditorUnit>())
             {
                 if ((int)unit.ModelUnitClass < 0)
                 {
@@ -155,9 +155,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateUnitIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateUnitIds(EditorScenario editorScenario, bool throwOnError)
         {
-            foreach (var unit in editorSavedGame.GetComponentsInChildren<EditorUnit>())
+            foreach (var unit in editorScenario.GetComponentsInChildren<EditorUnit>())
             {
                 if (unit.Id < 0)
                 {
@@ -166,9 +166,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateFactionIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateFactionIds(EditorScenario editorScenario, bool throwOnError)
         {
-            foreach (var faction in editorSavedGame.GetComponentsInChildren<EditorFaction>())
+            foreach (var faction in editorScenario.GetComponentsInChildren<EditorFaction>())
             {
                 if (faction.Id < 0)
                 {
@@ -177,9 +177,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateSectorIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateSectorIds(EditorScenario editorScenario, bool throwOnError)
         {
-            foreach (var sector in editorSavedGame.GetComponentsInChildren<EditorSector>())
+            foreach (var sector in editorScenario.GetComponentsInChildren<EditorSector>())
             {
                 if (sector.Id < 0)
                 {
@@ -188,9 +188,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidatePersonIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidatePersonIds(EditorScenario editorScenario, bool throwOnError)
         {
-            foreach (var person in editorSavedGame.GetComponentsInChildren<EditorPerson>())
+            foreach (var person in editorScenario.GetComponentsInChildren<EditorPerson>())
             {
                 if (person.Id < 0)
                 {
@@ -199,9 +199,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateDuplicateSectors(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateDuplicateSectors(EditorScenario editorScenario, bool throwOnError)
         {
-            var sectors = editorSavedGame.GetComponentsInChildren<EditorSector>();
+            var sectors = editorScenario.GetComponentsInChildren<EditorSector>();
             var duplicates = sectors.GroupBy(e => e.Id).Where(e => e.Count() > 1);
             if (duplicates.Any())
             {
@@ -209,9 +209,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateDuplicatePeople(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateDuplicatePeople(EditorScenario editorScenario, bool throwOnError)
         {
-            var people = editorSavedGame.GetComponentsInChildren<EditorPerson>();
+            var people = editorScenario.GetComponentsInChildren<EditorPerson>();
             var duplicates = people.GroupBy(e => e.Id).Where(e => e.Count() > 1);
             if (duplicates.Any())
             {
@@ -219,9 +219,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateDuplicateUnits(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateDuplicateUnits(EditorScenario editorScenario, bool throwOnError)
         {
-            var units = editorSavedGame.GetComponentsInChildren<EditorUnit>();
+            var units = editorScenario.GetComponentsInChildren<EditorUnit>();
             var duplicates = units.Where(e => e.Id > -1).GroupBy(e => e.Id).Where(e => e.Count() > 1);
             if (duplicates.Any())
             {
@@ -229,9 +229,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateDuplicateMessageIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateDuplicateMessageIds(EditorScenario editorScenario, bool throwOnError)
         {
-            var units = editorSavedGame.GetComponentsInChildren<EditorPlayerMessage>();
+            var units = editorScenario.GetComponentsInChildren<EditorPlayerMessage>();
             var duplicates = units.Where(e => e.Id > -1).GroupBy(e => e.Id).Where(e => e.Count() > 1);
             if (duplicates.Any())
             {
@@ -239,9 +239,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateDuplicateMissionIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateDuplicateMissionIds(EditorScenario editorScenario, bool throwOnError)
         {
-            var missions = editorSavedGame.GetComponentsInChildren<EditorMission>();
+            var missions = editorScenario.GetComponentsInChildren<EditorMission>();
             var duplicates = missions.Where(e => e.Id > -1).GroupBy(e => e.Id).Where(e => e.Count() > 1);
             if (duplicates.Any())
             {
@@ -249,9 +249,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateDuplicateTriggerGroupIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateDuplicateTriggerGroupIds(EditorScenario editorScenario, bool throwOnError)
         {
-            var triggerGroups = editorSavedGame.GetComponentsInChildren<EditorTriggerGroup>();
+            var triggerGroups = editorScenario.GetComponentsInChildren<EditorTriggerGroup>();
             var duplicates = triggerGroups.Where(e => e.Id > -1).GroupBy(e => e.Id).Where(e => e.Count() > 1);
             if (duplicates.Any())
             {
@@ -259,9 +259,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateDuplicateMissionObjectiveIds(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateDuplicateMissionObjectiveIds(EditorScenario editorScenario, bool throwOnError)
         {
-            var missionObjectives = editorSavedGame.GetComponentsInChildren<EditorMissionObjective>();
+            var missionObjectives = editorScenario.GetComponentsInChildren<EditorMissionObjective>();
             var duplicates = missionObjectives.Where(e => e.Id > -1).GroupBy(e => e.Id).Where(e => e.Count() > 1);
             if (duplicates.Any())
             {
@@ -269,9 +269,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        private static void ValidateDuplicateFactions(EditorSavedGame editorSavedGame, bool throwOnError)
+        private static void ValidateDuplicateFactions(EditorScenario editorScenario, bool throwOnError)
         {
-            var factions = editorSavedGame.GetComponentsInChildren<EditorFaction>();
+            var factions = editorScenario.GetComponentsInChildren<EditorFaction>();
             var duplicates = factions.GroupBy(e => e.Id).Where(e => e.Count() > 1);
             if (duplicates.Any())
             {

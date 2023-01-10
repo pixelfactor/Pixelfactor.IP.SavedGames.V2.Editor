@@ -20,9 +20,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         //[MenuItem("Window/IP Editor V2/Tools/Ids/Auto-assign object Ids")]
         public static void AutoAssignIdsMenuItem()
         {
-            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
+            var editorScenario = SavedGameUtil.FindSavedGameOrErrorOut();
 
-            AutoAssignIds(editorSavedGame);
+            AutoAssignIds(editorScenario);
 
             Debug.Log("Finished auto-assigning ids");
         }
@@ -30,9 +30,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         //[MenuItem("Window/IP Editor V2/Tools/Ids/Clear all Ids")]
         public static void ClearIdsMenuItem()
         {
-            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
+            var editorScenario = SavedGameUtil.FindSavedGameOrErrorOut();
 
-            ClearAllIds(editorSavedGame);
+            ClearAllIds(editorScenario);
 
             Debug.Log("Finished clearing ids");
         }
@@ -40,17 +40,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         //[MenuItem("Window/IP Editor V2/Tools/Ids/Reassign all Ids")]
         public static void ReassignIdsMenuItem()
         {
-            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
+            var editorScenario = SavedGameUtil.FindSavedGameOrErrorOut();
 
-            ClearAllIds(editorSavedGame);
-            AutoAssignIds(editorSavedGame);
+            ClearAllIds(editorScenario);
+            AutoAssignIds(editorScenario);
 
             Debug.Log("Finished reassigning ids");
         }
 
-        public static void AutoAssignIds(EditorSavedGame editorSavedGame)
+        public static void AutoAssignIds(EditorScenario editorScenario)
         {
-            var missions = editorSavedGame.GetComponentsInChildren<EditorMission>();
+            var missions = editorScenario.GetComponentsInChildren<EditorMission>();
             foreach (var mission in missions)
             {
                 if (mission.Id < 0)
@@ -60,7 +60,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                 }
             }
 
-            var missionObjectives = editorSavedGame.GetComponentsInChildren<EditorMissionObjective>();
+            var missionObjectives = editorScenario.GetComponentsInChildren<EditorMissionObjective>();
             foreach (var missionObjective in missionObjectives)
             {
                 if (missionObjective.Id < 0)
@@ -70,7 +70,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                 }
             }
 
-            var triggerGroups = editorSavedGame.GetComponentsInChildren<EditorTriggerGroup>();
+            var triggerGroups = editorScenario.GetComponentsInChildren<EditorTriggerGroup>();
             foreach (var triggerGroup in triggerGroups)
             {
                 if (triggerGroup.Id < 0)
@@ -80,7 +80,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                 }
             }
 
-            var units = editorSavedGame.GetComponentsInChildren<EditorUnit>();
+            var units = editorScenario.GetComponentsInChildren<EditorUnit>();
             foreach (var unit in units)
             {
                 if (unit.Id < 0)
@@ -90,7 +90,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                 }
             }
 
-            var factions = editorSavedGame.GetComponentsInChildren<EditorFaction>();
+            var factions = editorScenario.GetComponentsInChildren<EditorFaction>();
             foreach (var faction in factions)
             {
                 if (faction.Id < 0)
@@ -100,7 +100,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                 }
             }
 
-            var sectors = editorSavedGame.GetComponentsInChildren<EditorSector>();
+            var sectors = editorScenario.GetComponentsInChildren<EditorSector>();
             foreach (var sector in sectors)
             {
                 if (sector.Id < 0)
@@ -110,7 +110,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                 }
             }
 
-            var people = editorSavedGame.GetComponentsInChildren<EditorPerson>();
+            var people = editorScenario.GetComponentsInChildren<EditorPerson>();
             foreach (var person in people)
             {
                 if (person.Id < 0)
@@ -120,7 +120,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                 }
             }
 
-            var fleets = editorSavedGame.GetComponentsInChildren<EditorFleet>();
+            var fleets = editorScenario.GetComponentsInChildren<EditorFleet>();
             foreach (var fleet in fleets)
             {
                 if (fleet.Id < 0)
@@ -130,7 +130,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                 }
             }
 
-            var orders = editorSavedGame.GetComponentsInChildren<EditorFleetOrderCommon>();
+            var orders = editorScenario.GetComponentsInChildren<EditorFleetOrderCommon>();
             foreach (var order in orders)
             {
                 if (order.Id < 0)
@@ -140,7 +140,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                 }
             }
 
-            var messages = editorSavedGame.GetComponentsInChildren<EditorPlayerMessage>();
+            var messages = editorScenario.GetComponentsInChildren<EditorPlayerMessage>();
             foreach (var message in messages)
             {
                 if (message.Id < 0)
@@ -151,51 +151,51 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        public static void ClearAllIds(EditorSavedGame editorSavedGame)
+        public static void ClearAllIds(EditorScenario editorScenario)
         {
-            var units = editorSavedGame.GetComponentsInChildren<EditorUnit>();
+            var units = editorScenario.GetComponentsInChildren<EditorUnit>();
             foreach (var unit in units)
             {
                 unit.Id = -1;
                 EditorUtility.SetDirty(unit);
             }
 
-            var factions = editorSavedGame.GetComponentsInChildren<EditorFaction>();
+            var factions = editorScenario.GetComponentsInChildren<EditorFaction>();
             foreach (var faction in factions)
             {
                 faction.Id = -1;
                 EditorUtility.SetDirty(faction);
             }
 
-            var sectors = editorSavedGame.GetComponentsInChildren<EditorSector>();
+            var sectors = editorScenario.GetComponentsInChildren<EditorSector>();
             foreach (var sector in sectors)
             {
                 sector.Id = -1;
                 EditorUtility.SetDirty(sector);
             }
 
-            var people = editorSavedGame.GetComponentsInChildren<EditorPerson>();
+            var people = editorScenario.GetComponentsInChildren<EditorPerson>();
             foreach (var person in people)
             {
                 person.Id = -1;
                 EditorUtility.SetDirty(person);
             }
 
-            var fleets = editorSavedGame.GetComponentsInChildren<EditorFleet>();
+            var fleets = editorScenario.GetComponentsInChildren<EditorFleet>();
             foreach (var fleet in fleets)
             {
                 fleet.Id = -1;
                 EditorUtility.SetDirty(fleet);
             }
 
-            var orders = editorSavedGame.GetComponentsInChildren<EditorFleetOrderCommon>();
+            var orders = editorScenario.GetComponentsInChildren<EditorFleetOrderCommon>();
             foreach (var order in orders)
             {
                 order.Id = -1;
                 EditorUtility.SetDirty(order);
             }
 
-            var messages = editorSavedGame.GetComponentsInChildren<EditorPlayerMessage>();
+            var messages = editorScenario.GetComponentsInChildren<EditorPlayerMessage>();
             foreach (var message in messages)
             {
                 message.Id = -1;

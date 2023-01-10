@@ -214,7 +214,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUILayout.EndHorizontal();
         }
 
-        private EditorSavedGame TrashAndRecreateScene(CustomSettings settings)
+        private EditorScenario TrashAndRecreateScene(CustomSettings settings)
         {
             var savedGame = SavedGameUtil.FindSavedGame();
             GameObject.DestroyImmediate(savedGame.gameObject);
@@ -308,7 +308,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         private void ApplyAutoConnectToSector(
             EditorSector newSector, 
             CustomSettings customSettings, 
-            EditorSavedGame savedGame)
+            EditorScenario savedGame)
         {
             ConnectSectorsTool.ConnectSectorToOthers(
                 newSector,

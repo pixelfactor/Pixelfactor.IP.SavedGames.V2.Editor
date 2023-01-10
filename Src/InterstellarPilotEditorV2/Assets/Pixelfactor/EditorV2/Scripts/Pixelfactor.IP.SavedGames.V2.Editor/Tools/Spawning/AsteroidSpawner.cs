@@ -23,10 +23,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning
         /// <summary>
         /// Create asteroids in all sectors
         /// </summary>
-        public int Spawn(EditorSavedGame editorSavedGame)
+        public int Spawn(EditorScenario editorScenario)
         {
             var count = 0;
-            foreach (var asteroidCluster in editorSavedGame.GetComponentsInChildren<EditorAsteroidCluster>())
+            foreach (var asteroidCluster in editorScenario.GetComponentsInChildren<EditorAsteroidCluster>())
             {
                 count += SpawnAsteroidsAroundCluster(asteroidCluster);
             }

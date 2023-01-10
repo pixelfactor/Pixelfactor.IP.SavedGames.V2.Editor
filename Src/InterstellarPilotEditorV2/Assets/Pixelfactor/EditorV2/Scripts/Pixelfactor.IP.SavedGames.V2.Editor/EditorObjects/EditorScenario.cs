@@ -2,7 +2,7 @@
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor
 {
-    public class EditorSavedGame : MonoBehaviour
+    public class EditorScenario : MonoBehaviour
     {
         /// <summary>
         /// The distance from sector origin<br />

@@ -4,15 +4,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 {
     public static class ImportTool
     {
-        public static void ImportFromFile(string filePath, EditorSavedGame editorSavedGame)
+        public static void ImportFromFile(string filePath, EditorScenario editorScenario)
         {
             var saveModel = BinaryReadTool.ReadFromFile(filePath, out _);
-            ImportFromModel((SavedGame)saveModel, editorSavedGame);
+            ImportFromModel((SavedGame)saveModel, editorScenario);
         }
 
-        public static void ImportFromModel(SavedGame savedGameModel, EditorSavedGame editorSavedGame)
+        public static void ImportFromModel(SavedGame savedGameModel, EditorScenario editorScenario)
         {
-            new ImportOperation(savedGameModel, editorSavedGame).Import();
+            new ImportOperation(savedGameModel, editorScenario).Import();
         }
     }
 }

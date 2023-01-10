@@ -17,7 +17,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 {
     public class ExportOperation
     {
-        private EditorSavedGame editorSavedGame = null;
+        private EditorScenario editorScenario = null;
         private SavedGame savedGame = null;
         private SavedGameExportOptions options = null;
 
@@ -26,9 +26,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
         private EditorPlayer player = null;
         private ModelPlayer modelPlayer = null;
 
-        public SavedGame Export(EditorSavedGame editorSavedGame, SavedGameExportOptions options)
+        public SavedGame Export(EditorScenario editorScenario, SavedGameExportOptions options)
         {
-            this.editorSavedGame = editorSavedGame;
+            this.editorScenario = editorScenario;
             this.savedGame = new SavedGame();
             this.options = options;
 
@@ -62,7 +62,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
         private void ExportTriggers()
         {
-            foreach (var triggerGroup in this.editorSavedGame.GetComponentsInChildren<EditorTriggerGroup>())
+            foreach (var triggerGroup in this.editorScenario.GetComponentsInChildren<EditorTriggerGroup>())
             {
                 var modelTriggerGroup = new ModelTriggerGroup
                 {
@@ -197,7 +197,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
         private void ExportMissions()
         {
-            foreach (var editorMission in editorSavedGame.GetComponentsInChildren<EditorMission>())
+            foreach (var editorMission in editorScenario.GetComponentsInChildren<EditorMission>())
             {
                 var modelMission = new Model.Jobs.ModelMission
                 {
@@ -294,7 +294,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
         private void ExportFleets()
         {
-            foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
+            foreach (var editorSector in editorScenario.GetComponentsInChildren<EditorSector>())
             {
                 var sector = savedGame.Sectors.Single(e => e.Id == editorSector.Id);
                 if (sector == null)
@@ -343,7 +343,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                     var editorFleetOrders = editorFleet.GetComponentsInChildren<EditorFleetOrderBase>();
                     foreach (var editorFleetOrder in editorFleetOrders)
                     {
-                        var fleetOrder = CreateFleetOrderFromEditorFleetOrder.CreateFleetOrder(editorFleetOrder, editorSavedGame, savedGame);
+                        var fleetOrder = CreateFleetOrderFromEditorFleetOrder.CreateFleetOrder(editorFleetOrder, editorScenario, savedGame);
                         fleet.OrdersCollection.Orders.Add(fleetOrder);
                         fleet.OrdersCollection.QueuedOrders.Add(fleetOrder);
                     }
@@ -355,7 +355,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
         private void ExportFleetSpawners()
         {
-            foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
+            foreach (var editorSector in editorScenario.GetComponentsInChildren<EditorSector>())
             {
                 var modelSector = savedGame.Sectors.Single(e => e.Id == editorSector.Id);
 
@@ -404,7 +404,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
         /// Npc factions rely on the faction intel database. Without it they will have a hard time navigating<br />
         /// This could be built up in the editor. But because I am lazy, just have all factions discover eachother.
         /// </summary>
-        /// <param name="editorSavedGame"></param>
+        /// <param name="editorScenario"></param>
         /// <param name="savedGame"></param>
         private void SeedFactionIntel()
         {
@@ -429,7 +429,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
         private void ExportWormholes()
         {
-            foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
+            foreach (var editorSector in editorScenario.GetComponentsInChildren<EditorSector>())
             {
                 foreach (var editorWormholeData in editorSector.GetComponentsInChildren<EditorUnitWormholeData>())
                 {
@@ -498,14 +498,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
         /// <summary>
         /// Used to set up the universe map
         /// </summary>
-        /// <param name="editorSavedGame"></param>
+        /// <param name="editorScenario"></param>
         /// <param name="savedGame"></param>
         private void SetSectorMapPositions()
         {
-            // TODO: 
             var scaleFactor = CustomSettings.GetOrCreateSettings().UniverseMapScaleFactor;
 
-            foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
+            foreach (var editorSector in editorScenario.GetComponentsInChildren<EditorSector>())
             {
                 var sector = savedGame.Sectors.Single(e => e.Id == editorSector.Id);
                 sector.MapPosition = new Vec3
@@ -523,7 +522,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 NextRandomEventTime = 240d
             };
 
-            var customScenarioOptions = this.editorSavedGame.GetComponentInChildren<EditorScenarioOptions>();
+            var customScenarioOptions = this.editorScenario.GetComponentInChildren<EditorScenarioOptions>();
             if (customScenarioOptions != null)
             {
                 savedGame.ScenarioData.HasRandomEvents = customScenarioOptions.RandomEventsEnabled;
@@ -564,17 +563,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 TimeStamp = System.DateTime.Now,
                 Version = saveVersion, // This is the save file version (different from game)
                 CreatedVersion = saveVersion, // This is the game version
-                ScenarioTitle = editorSavedGame.Title,
-                ScenarioAuthor = editorSavedGame.Author,
+                ScenarioTitle = editorScenario.Title,
+                ScenarioAuthor = editorScenario.Author,
                 ScenarioAuthoringTool = $"IP2 Unity Editor {Versioning.Version}",
-                ScenarioDescription = editorSavedGame.Description,
-                GameStartDate = new System.DateTime(editorSavedGame.DateYear, editorSavedGame.DateMonth, editorSavedGame.DateDay, editorSavedGame.DateHour, editorSavedGame.DateMinute, 0),
+                ScenarioDescription = editorScenario.Description,
+                GameStartDate = new System.DateTime(editorScenario.DateYear, editorScenario.DateMonth, editorScenario.DateDay, editorScenario.DateHour, editorScenario.DateMinute, 0),
             };
         }
 
         private void ExportPlayer()
         {
-            var editorPlayers = editorSavedGame.GetComponentsInChildren<EditorPlayer>();
+            var editorPlayers = editorScenario.GetComponentsInChildren<EditorPlayer>();
             if (editorPlayers.Count() > 1)
             {
                 throw new System.Exception("More than one player object found");
@@ -659,7 +658,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
         }
         private void ExportPeople()
         {
-            foreach (var editorPerson in editorSavedGame.GetComponentsInChildren<EditorPerson>())
+            foreach (var editorPerson in editorScenario.GetComponentsInChildren<EditorPerson>())
             {
                 var modelPerson = new ModelPerson
                 {
@@ -761,7 +760,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
         /// There's a bug in the engine where, if the npc pilot doesn't have a fleet, the faction won't create one for it. So the npc will be left idle
         /// So create one automatically here
         /// </summary>
-        /// <param name="editorSavedGame"></param>
+        /// <param name="editorScenario"></param>
         /// <param name="savedGame"></param>
         private void AutoCreateFleetsWhereNeeded()
         {
@@ -789,7 +788,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
         private void ExportUnits()
         {
-            foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
+            foreach (var editorSector in editorScenario.GetComponentsInChildren<EditorSector>())
             {
                 foreach (var editorUnit in editorSector.GetComponentsInChildren<EditorUnit>())
                 {
@@ -857,7 +856,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
         private void ExportDockedUnits()
         {
-            foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
+            foreach (var editorSector in editorScenario.GetComponentsInChildren<EditorSector>())
             {
                 foreach (var editorUnit in editorSector.GetComponentsInChildren<EditorUnit>())
                 {
@@ -1018,7 +1017,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
         private void ExportSectors()
         {
-            var sectors = editorSavedGame.GetSectors();
+            var sectors = editorScenario.GetSectors();
 
             if (sectors.Count() == 0)
             {
@@ -1060,7 +1059,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
         private void ExportFactions()
         {
-            var factions = editorSavedGame.GetComponentsInChildren<EditorFaction>();
+            var factions = editorScenario.GetComponentsInChildren<EditorFaction>();
             foreach (var editorFaction in factions)
             {
                 var modelFaction = new ModelFaction
@@ -1116,7 +1115,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
         private void ExportFactionRelations()
         {
-            var editorFactions = editorSavedGame.GetComponentsInChildren<EditorFaction>();
+            var editorFactions = editorScenario.GetComponentsInChildren<EditorFaction>();
             foreach (var editorFaction in editorFactions)
             {
                 var editorFactionRelations = editorFaction.GetComponentsInChildren<EditorFactionRelation>();

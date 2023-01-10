@@ -9,13 +9,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         public static void Validate()
         {
             // Find the saved game
-            var editorSavedGame = GameObject.FindObjectOfType<EditorSavedGame>();
-            if (editorSavedGame == null)
+            var editorScenario = GameObject.FindObjectOfType<EditorScenario>();
+            if (editorScenario == null)
             {
                 Debug.LogError("No editor saved game found"); return;
             }
 
-            Validator.Validate(editorSavedGame, false);
+            Validator.Validate(editorScenario, false);
         }
     }
 }

@@ -7,14 +7,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning
 {
     public static class Spawn
     {
-        public static EditorSector NewSector(EditorSavedGame editorSavedGame)
+        public static EditorSector NewSector(EditorScenario editorScenario)
         {
-            return NewSector(editorSavedGame, CustomSettings.GetOrCreateSettings().SectorPrefabPath);
+            return NewSector(editorScenario, CustomSettings.GetOrCreateSettings().SectorPrefabPath);
         }
 
-        public static EditorSector NewSector(EditorSavedGame editorSavedGame, string prefabPath)
+        public static EditorSector NewSector(EditorScenario editorScenario, string prefabPath)
         {
-            var sector = PrefabHelper.Instantiate<EditorSector>(prefabPath, editorSavedGame.GetSectorsRoot());
+            var sector = PrefabHelper.Instantiate<EditorSector>(prefabPath, editorScenario.GetSectorsRoot());
             EditSectorTool.Randomize(sector);
             return sector;
         }

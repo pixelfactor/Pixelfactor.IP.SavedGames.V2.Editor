@@ -12,46 +12,46 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
     {
         public static void FixUpValidateAndExport()
         {
-            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
+            var editorScenario = SavedGameUtil.FindSavedGameOrErrorOut();
 
-            QuickFixSavedGame(editorSavedGame);
+            QuickFixSavedGame(editorScenario);
 
-            var path = GetExportPath(editorSavedGame.Title);
-            ValidateAndExport(editorSavedGame, path);
+            var path = GetExportPath(editorScenario.Title);
+            ValidateAndExport(editorScenario, path);
         }
 
         public static void FixUpAndExportTo()
         {
-            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
+            var editorScenario = SavedGameUtil.FindSavedGameOrErrorOut();
 
-            QuickFixSavedGame(editorSavedGame);
+            QuickFixSavedGame(editorScenario);
 
             var path = EditorUtility.SaveFilePanel(
                      "Save scenario to..",
                      "",
-                     $"{editorSavedGame.Title}.dat",
+                     $"{editorScenario.Title}.dat",
                      "dat");
 
-            ValidateAndExport(editorSavedGame, path);
+            ValidateAndExport(editorScenario, path);
         }
 
-        public static void QuickFixSavedGame(EditorSavedGame editorSavedGame)
+        public static void QuickFixSavedGame(EditorScenario editorScenario)
         {
             var settings = CustomSettings.GetOrCreateSettings();
 
-            FixUpUnitOwnership.SetFleetChildrenToSameFaction(editorSavedGame);
-            FixUpUnitOwnership.SetUnitFactionsToPilotFactions(editorSavedGame);
+            FixUpUnitOwnership.SetFleetChildrenToSameFaction(editorScenario);
+            FixUpUnitOwnership.SetUnitFactionsToPilotFactions(editorScenario);
 
             if (settings.Export_RemoveUntargettedWormholes)
             { 
-                RemoveUntargettedWormholesTool.Remove(editorSavedGame);
+                RemoveUntargettedWormholesTool.Remove(editorScenario);
             }
 
-            SeedTool.AutosetSeedsIfPreferred(editorSavedGame);
+            SeedTool.AutosetSeedsIfPreferred(editorScenario);
 
             // Blitz all ids to ensure uniqueness
-            AutoAssignIdsTool.ClearAllIds(editorSavedGame);
-            AutoAssignIdsTool.AutoAssignIds(editorSavedGame);
+            AutoAssignIdsTool.ClearAllIds(editorScenario);
+            AutoAssignIdsTool.AutoAssignIds(editorScenario);
         }
 
         public static string GetExportPath(string scenarioTitle = "")
@@ -71,11 +71,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             return path;
         }
 
-        private static void ValidateAndExport(EditorSavedGame editorSavedGame, string path)
+        private static void ValidateAndExport(EditorScenario editorScenario, string path)
         {
             try
             {
-                Validator.Validate(editorSavedGame, true);
+                Validator.Validate(editorScenario, true);
             }
             catch (System.Exception ex)
             {
@@ -87,7 +87,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             Model.SavedGame savedGame = null;
             try
             {
-                savedGame = SavedGameExporter.Export(editorSavedGame);
+                savedGame = SavedGameExporter.Export(editorScenario);
             }
             catch (System.Exception ex)
             {

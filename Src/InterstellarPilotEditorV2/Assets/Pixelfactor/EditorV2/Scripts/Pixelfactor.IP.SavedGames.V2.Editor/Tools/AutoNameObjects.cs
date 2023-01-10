@@ -12,36 +12,36 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         /// </summary>
         public static void AutoNameAllObjects()
         {
-            var editorSavedGame = GameObject.FindObjectOfType<EditorSavedGame>();
-            if (editorSavedGame == null)
+            var editorScenario = GameObject.FindObjectOfType<EditorScenario>();
+            if (editorScenario == null)
             {
-                EditorUtility.DisplayDialog("Auto-assign object ids", $"Cannot find a {nameof(EditorSavedGame)} type object in the current scene", "Ok");
+                EditorUtility.DisplayDialog("Auto-assign object ids", $"Cannot find a {nameof(EditorScenario)} type object in the current scene", "Ok");
                 return;
             }
 
-            AutoNameAllObjects(editorSavedGame);
+            AutoNameAllObjects(editorScenario);
 
             Debug.Log("Finished auto-naming objects");
         }
 
-        public static void AutoNameAllObjects(EditorSavedGame editorSavedGame)
+        public static void AutoNameAllObjects(EditorScenario editorScenario)
         {
-            AutoNameSectors(editorSavedGame);
-            AutoNameUnits(editorSavedGame);
-            AutoNameFactions(editorSavedGame);
-            AutoNameFleets(editorSavedGame);
+            AutoNameSectors(editorScenario);
+            AutoNameUnits(editorScenario);
+            AutoNameFactions(editorScenario);
+            AutoNameFleets(editorScenario);
         }
 
-        private static void AutoNameFleets(EditorSavedGame editorSavedGame)
+        private static void AutoNameFleets(EditorScenario editorScenario)
         {
-            foreach (var editorFleet in editorSavedGame.GetComponentsInChildren<EditorFleet>())
+            foreach (var editorFleet in editorScenario.GetComponentsInChildren<EditorFleet>())
             {
-                editorFleet.gameObject.name = GetEditorFleetName(editorFleet, editorSavedGame);
+                editorFleet.gameObject.name = GetEditorFleetName(editorFleet, editorScenario);
                 EditorUtility.SetDirty(editorFleet);
             }
         }
 
-        private static string GetEditorFleetName(EditorFleet editorFleet, EditorSavedGame editorSavedGame)
+        private static string GetEditorFleetName(EditorFleet editorFleet, EditorScenario editorScenario)
         {
             var factionPostfix = "_NoFaction";
             if (editorFleet.Faction != null)
@@ -79,9 +79,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             return name;
         }
 
-        private static void AutoNameSectors(EditorSavedGame editorSavedGame)
+        private static void AutoNameSectors(EditorScenario editorScenario)
         {
-            foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
+            foreach (var editorSector in editorScenario.GetComponentsInChildren<EditorSector>())
             {
                 AutoNameSector(editorSector);
             }
@@ -93,9 +93,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             EditorUtility.SetDirty(editorSector);
         }
 
-        private static void AutoNameUnits(EditorSavedGame editorSavedGame)
+        private static void AutoNameUnits(EditorScenario editorScenario)
         {
-            foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
+            foreach (var editorSector in editorScenario.GetComponentsInChildren<EditorSector>())
             {
                 foreach (var editorUnit in editorSector.GetComponentsInChildren<EditorUnit>())
                 {
@@ -110,9 +110,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             editorUnit.gameObject.name = GetEditorUnitName(editorUnit);
         }
 
-        private static void AutoNameFactions(EditorSavedGame editorSavedGame)
+        private static void AutoNameFactions(EditorScenario editorScenario)
         {
-            foreach (var editorFaction in editorSavedGame.GetComponentsInChildren<EditorFaction>())
+            foreach (var editorFaction in editorScenario.GetComponentsInChildren<EditorFaction>())
             {
                 editorFaction.gameObject.name = GetEditorFactionName(editorFaction);
                 EditorUtility.SetDirty(editorFaction);

@@ -11,25 +11,25 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         {
             EditorGUILayout.Space();
 
-            var editorSavedGame = SavedGameUtil.FindSavedGame();
-            var hasScenario = editorSavedGame != null;
+            var editorScenario = SavedGameUtil.FindSavedGame();
+            var hasScenario = editorScenario != null;
             var canPlay = hasScenario && !string.IsNullOrWhiteSpace(CustomSettings.GetOrCreateSettings().GameExecutablePath);
 
             EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.TextField("Current scenario", editorSavedGame != null ? editorSavedGame.Title : "[None]");
+            EditorGUILayout.TextField("Current scenario", editorScenario != null ? editorScenario.Title : "[None]");
             EditorGUI.EndDisabledGroup();
 
             EditorGUILayout.Space(30);
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
             EditorGUILayout.BeginVertical();
-            DrawButtons(editorSavedGame, hasScenario, canPlay);
+            DrawButtons(editorScenario, hasScenario, canPlay);
             EditorGUILayout.EndVertical();
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
         }
 
-        private static void DrawButtons(EditorSavedGame editorSavedGame, bool hasScenario, bool canPlay)
+        private static void DrawButtons(EditorScenario editorScenario, bool hasScenario, bool canPlay)
         {
             EditorGUI.BeginDisabledGroup(!canPlay);
 
@@ -70,7 +70,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 "Ensures that the scenario is valid for import into the game engine"),
                 GuiHelper.ButtonLayout))
             {
-                Validator.Validate(editorSavedGame, false);
+                Validator.Validate(editorScenario, false);
             }
 
             EditorGUI.EndDisabledGroup();

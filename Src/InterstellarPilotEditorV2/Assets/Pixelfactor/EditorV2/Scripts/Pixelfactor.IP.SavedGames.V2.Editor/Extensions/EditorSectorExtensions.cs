@@ -7,9 +7,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
 {
     public static class EditorSectorExtensions
     {
-        public static EditorSavedGame GetSavedGame(this EditorSector editorSector)
+        public static EditorScenario GetSavedGame(this EditorSector editorSector)
         {
-            return editorSector.GetComponentInParent<EditorSavedGame>();
+            return editorSector.GetComponentInParent<EditorScenario>();
         }
 
         public static List<EditorUnitWormholeData> GetValidStableWormholes(this EditorSector editorSector)

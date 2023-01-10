@@ -5,18 +5,18 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 {
     public static class SavedGameExporter
     {
-        public static SavedGame Export(EditorSavedGame editorSavedGame)
+        public static SavedGame Export(EditorScenario editorScenario)
         {
-            Debug.Log($"Exporting scenario [{(!string.IsNullOrEmpty(editorSavedGame.Title) ? editorSavedGame.Title : "Unnamed")}]");
+            Debug.Log($"Exporting scenario [{(!string.IsNullOrEmpty(editorScenario.Title) ? editorScenario.Title : "Unnamed")}]");
 
-            var options = editorSavedGame.GetComponentInChildren<SavedGameExportOptions>();
+            var options = editorScenario.GetComponentInChildren<SavedGameExportOptions>();
             if (options == null)
             {
-                options = editorSavedGame.gameObject.AddComponent<SavedGameExportOptions>();
+                options = editorScenario.gameObject.AddComponent<SavedGameExportOptions>();
             }
 
             var exportOperation = new ExportOperation();
-            var savedGame = exportOperation.Export(editorSavedGame, options);
+            var savedGame = exportOperation.Export(editorScenario, options);
 
 
             Debug.Log($"Export completed successfully");

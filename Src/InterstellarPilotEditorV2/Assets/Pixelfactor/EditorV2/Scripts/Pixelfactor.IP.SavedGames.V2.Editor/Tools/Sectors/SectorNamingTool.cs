@@ -17,22 +17,22 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Sectors
             return ReadAndSplitTextLines(namesAsset);
         }
 
-        public static IEnumerable<string> GetUsedNames(EditorSavedGame editorSavedGame)
+        public static IEnumerable<string> GetUsedNames(EditorScenario editorScenario)
         {
-            return editorSavedGame.GetComponentsInChildren<EditorSector>().Select(e => e.Name).Distinct();
+            return editorScenario.GetComponentsInChildren<EditorSector>().Select(e => e.Name).Distinct();
         }
 
-        public static IEnumerable<string> GetAvailableSectorNames(EditorSavedGame editorSavedGame)
+        public static IEnumerable<string> GetAvailableSectorNames(EditorScenario editorScenario)
         {
             var allNames = GetAllSectorNames();
-            var usedNames = GetUsedNames(editorSavedGame);
+            var usedNames = GetUsedNames(editorScenario);
 
             return allNames.Where(e => !usedNames.Contains(e));
         }
 
-        public static string GetUniqueSectorName(EditorSector sector, EditorSavedGame editorSavedGame)
+        public static string GetUniqueSectorName(EditorSector sector, EditorScenario editorScenario)
         {
-            var name = GetAvailableSectorNames(editorSavedGame).GetRandom();
+            var name = GetAvailableSectorNames(editorScenario).GetRandom();
             if (!string.IsNullOrWhiteSpace(name))
             {
                 return name;

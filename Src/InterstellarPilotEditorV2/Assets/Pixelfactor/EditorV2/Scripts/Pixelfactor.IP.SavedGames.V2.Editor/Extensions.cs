@@ -83,5 +83,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
                 Z = color.b
             };
         }
+
+        public static Color ToColor(this Vec3 vec3)
+        {
+            return new Color(vec3.X, vec3.Y, vec3.Z);
+        }
     }
 }

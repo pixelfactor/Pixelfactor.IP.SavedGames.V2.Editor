@@ -10,16 +10,16 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
     {
         public static void Play()
         {
-            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
-            if (editorSavedGame == null)
+            var editorScenario = SavedGameUtil.FindSavedGameOrErrorOut();
+            if (editorScenario == null)
                 return;
 
-            ImportExportTool.QuickFixSavedGame(editorSavedGame);
+            ImportExportTool.QuickFixSavedGame(editorScenario);
 
             // Validate first
             try
             {
-                Validator.Validate(editorSavedGame, true);
+                Validator.Validate(editorScenario, true);
             }
             catch (System.Exception ex)
             {
@@ -34,8 +34,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                 {
                     Debug.Log("Attempting to export and run scenario");
 
-                    var savedGame = SavedGameExporter.Export(editorSavedGame);
-                    var exportPath = ImportExportTool.GetExportPath(editorSavedGame.Title);
+                    var savedGame = SavedGameExporter.Export(editorScenario);
+                    var exportPath = ImportExportTool.GetExportPath(editorScenario.Title);
 
                     BinarySerialization.Writers.SaveGameWriter.WriteToPath(savedGame, exportPath);
 

@@ -6,10 +6,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Wormholes
 {
     public static class RemoveUntargettedWormholesTool
     {
-        public static int Remove(EditorSavedGame editorSavedGame)
+        public static int Remove(EditorScenario editorScenario)
         {
             var count = 0;
-            foreach (var sector in editorSavedGame.GetComponentsInChildren<EditorSector>())
+            foreach (var sector in editorScenario.GetComponentsInChildren<EditorSector>())
             {
                 foreach (var wormhole in sector.GetComponentsInChildren<EditorUnitWormholeData>())
                 {

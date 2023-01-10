@@ -12,7 +12,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         /// <summary>
         /// Creates a new unity scene with a heirachy that creates the basics
         /// </summary>
-        public static EditorSavedGame CreateNewSingleSector()
+        public static EditorScenario CreateNewSingleSector()
         {
             var savedGame = CreateNewEmpty();
             if (savedGame != null)
@@ -28,14 +28,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         /// <summary>
         /// Creates a new unity scene with a heirachy that creates the basics
         /// </summary>
-        public static EditorSavedGame CreateNewEmpty()
+        public static EditorScenario CreateNewEmpty()
         {
             var settings = CustomSettings.GetOrCreateSettings();
 
             return CreateNew(settings.EmptyScenePrefabPath);
         }
 
-        public static EditorSavedGame CreateNew(string prefabPath)
+        public static EditorScenario CreateNew(string prefabPath)
         {
             if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
             {
@@ -47,7 +47,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             return null;
         }
 
-        public static EditorSavedGame InstantiateSavedGame(string defaultPrefabPath)
+        public static EditorScenario InstantiateSavedGame(string defaultPrefabPath)
         {
             var templatePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(defaultPrefabPath);
 
@@ -57,7 +57,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
 
             var go = (GameObject)PrefabUtility.InstantiatePrefab(templatePrefab.gameObject);
-            var savedGame = go.GetComponentInChildren<EditorSavedGame>();
+            var savedGame = go.GetComponentInChildren<EditorScenario>();
 
             EditSectorTool.RandomizeAllWithoutDirty(savedGame);
 

@@ -46,7 +46,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
             SelectFirstSector(savedGame);
         }
 
-        public static void SelectFirstSector(EditorSavedGame savedGame)
+        public static void SelectFirstSector(EditorScenario savedGame)
         {
             if (savedGame != null)
             {

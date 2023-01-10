@@ -10,25 +10,25 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
     {
         public static void SetUnitFactionsToPilotFactionsMenuItem()
         {
-            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
+            var editorScenario = SavedGameUtil.FindSavedGameOrErrorOut();
 
-            SetUnitFactionsToPilotFactions(editorSavedGame);
+            SetUnitFactionsToPilotFactions(editorScenario);
 
             Debug.Log("Finished set unit factions to pilot factions");
         }
 
         public static void SetFleetChildrenToSameFactionMenuItem()
         {
-            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
+            var editorScenario = SavedGameUtil.FindSavedGameOrErrorOut();
 
-            SetFleetChildrenToSameFaction(editorSavedGame);
+            SetFleetChildrenToSameFaction(editorScenario);
 
             Debug.Log("Finished set fleet children to same faction");
         }
 
-        public static void SetFleetChildrenToSameFaction(EditorSavedGame editorSavedGame)
+        public static void SetFleetChildrenToSameFaction(EditorScenario editorScenario)
         {
-            foreach (var editorFleet in editorSavedGame.GetComponentsInChildren<EditorFleet>())
+            foreach (var editorFleet in editorScenario.GetComponentsInChildren<EditorFleet>())
             {
                 if (editorFleet.Faction != null)
                 {
@@ -53,9 +53,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             }
         }
 
-        public static void SetUnitFactionsToPilotFactions(EditorSavedGame editorSavedGame)
+        public static void SetUnitFactionsToPilotFactions(EditorScenario editorScenario)
         {
-            foreach (var editorSector in editorSavedGame.GetComponentsInChildren<EditorSector>())
+            foreach (var editorSector in editorScenario.GetComponentsInChildren<EditorSector>())
             {
                 foreach (var editorUnit in editorSector.GetComponentsInChildren<EditorUnit>())
                 {

@@ -13,9 +13,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Expand
     {
         public static void Expand(float distanceMultiplier = 2.0f)
         {
-            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
+            var editorScenario = SavedGameUtil.FindSavedGameOrErrorOut();
 
-            var sectors = editorSavedGame.GetComponentsInChildren<EditorSector>();
+            var sectors = editorScenario.GetComponentsInChildren<EditorSector>();
 
             var center = GetSectorsCenter(sectors);
 

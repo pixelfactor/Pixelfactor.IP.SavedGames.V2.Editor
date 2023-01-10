@@ -39,6 +39,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                         if (savedGame != null)
                         {
                             ImportTool.ImportFromFile(filePath, savedGame);
+
+                            EditorUtility.DisplayDialog("Import", "Scenario was imported succcesfully", "OK");
                         }
                     }
                     catch (System.Exception ex)

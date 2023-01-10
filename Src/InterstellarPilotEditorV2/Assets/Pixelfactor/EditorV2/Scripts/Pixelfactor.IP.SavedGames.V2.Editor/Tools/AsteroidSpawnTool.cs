@@ -11,9 +11,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
     {
         public static int SpawnAsteroids()
         {
-            var editorSavedGame = SavedGameUtil.FindSavedGameOrErrorOut();
+            var editorScenario = SavedGameUtil.FindSavedGameOrErrorOut();
 
-            var createdCount = new AsteroidSpawner().Spawn(editorSavedGame);
+            var createdCount = new AsteroidSpawner().Spawn(editorScenario);
 
             Debug.Log($"Finished creating {createdCount} asteroids");
 

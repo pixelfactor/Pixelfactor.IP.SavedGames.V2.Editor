@@ -17,10 +17,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         /// Creates the fleet order type used in the save model, from the editor version
         /// </summary>
         /// <param name="editorFleetOrder"></param>
-        /// <param name="editorSavedGame"></param>
+        /// <param name="editorScenario"></param>
         /// <param name="savedGame"></param>
         /// <returns></returns>
-        public static ModelFleetOrder CreateFleetOrder(EditorFleetOrderBase editorFleetOrder, EditorSavedGame editorSavedGame, SavedGame savedGame)
+        public static ModelFleetOrder CreateFleetOrder(EditorFleetOrderBase editorFleetOrder, EditorScenario editorScenario, SavedGame savedGame)
         {
             // Set common stuff
             var editorCommonOrderStuff = editorFleetOrder.GetComponent<EditorFleetOrderCommon>();
