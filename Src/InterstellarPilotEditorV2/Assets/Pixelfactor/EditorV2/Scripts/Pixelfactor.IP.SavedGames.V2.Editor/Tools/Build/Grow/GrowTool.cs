@@ -1,4 +1,5 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
+using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Connect;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Edit;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,22 +31,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow
             float minAngleBetweenWormholes)
         {
             var allSectors = existingSector.GetSavedGame().GetSectors().ToList();
-
-            List<Line> sectorLines = new List<Line>(allSectors.Count * 2);
-            foreach (var sector in allSectors)
-            {
-                var wormholes = sector.GetValidStableWormholes();
-                foreach (var wormhole in wormholes)
-                {
-                    var targetPosition = wormhole.GetActualTargetSector().transform.position;
-
-                    var line = new Line(
-                        new Vector2(sector.transform.position.x, sector.transform.position.z),
-                        new Vector2(targetPosition.x, targetPosition.z));
-
-                    sectorLines.Add(line);
-                }
-            }
+            var sectorLines = GrowHelper.GetSectorConnectionLines(allSectors);
 
             for (int i = 0; i < MaxIterations; i++)
             {

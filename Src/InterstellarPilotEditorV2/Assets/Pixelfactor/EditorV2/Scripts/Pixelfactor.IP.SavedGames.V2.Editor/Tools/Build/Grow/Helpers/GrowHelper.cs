@@ -73,5 +73,26 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow
             result1 = p1 - (vn * lengthAddition);
             result2 = p2 + (vn * lengthAddition);
         }
+
+        public static List<Line> GetSectorConnectionLines(List<EditorSector> allSectors)
+        {
+            List<Line> sectorLines = new List<Line>(allSectors.Count * 2);
+            foreach (var sector in allSectors)
+            {
+                var wormholes = sector.GetValidStableWormholes();
+                foreach (var wormhole in wormholes)
+                {
+                    var targetPosition = wormhole.GetActualTargetSector().transform.position;
+
+                    var line = new Line(
+                        new Vector2(sector.transform.position.x, sector.transform.position.z),
+                        new Vector2(targetPosition.x, targetPosition.z));
+
+                    sectorLines.Add(line);
+                }
+            }
+
+            return sectorLines;
+        }
     }
 }

@@ -27,12 +27,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
         /// </summary>
         /// <param name="editorSector"></param>
         /// <param name="targetSector"></param>
-        /// <param name="tolerance"></param>
+        /// <param name="minAngleBetweenWormholes"></param>
         /// <returns></returns>
-        public static bool ConnectionExistsAtPosition(this EditorSector editorSector, Vector3 targetPosition, float tolerance)
+        public static bool ConnectionExistsAtPosition(this EditorSector editorSector, Vector3 targetPosition, float minAngleBetweenWormholes)
         {
             var direction = Vector3.Normalize(targetPosition - editorSector.transform.position);
-            return ConnectionExistsAtDirection(editorSector, direction, tolerance);
+            return ConnectionExistsAtDirection(editorSector, direction, minAngleBetweenWormholes);
         }
 
         /// <summary>

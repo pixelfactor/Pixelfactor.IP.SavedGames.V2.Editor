@@ -1,6 +1,7 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
 using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools;
+using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Connect;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Expand;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         private GrowSectorSelectionMode growSectorSelectionMode = GrowSectorSelectionMode.Keep;
         private int growMaxWormholeConnections = 8;
         private float sectorDistanceFuzziness = 0.5f;
+        private bool autoConnect = true;
+        private float autoConnectLikelihood = 0.5f;
 
         public void Draw()
         {
@@ -83,6 +86,16 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUILayout.PrefixLabel(new GUIContent("Sector distance fuzziness", "How much to tweak the distance between sectors"));
             this.sectorDistanceFuzziness = EditorGUILayout.Slider(this.sectorDistanceFuzziness, 0.0f, 1.0f, GUILayout.ExpandWidth(false));
 
+            EditorGUILayout.PrefixLabel(new GUIContent("Auto-connect", "Whether to automatically connect new sectors to others"));
+            this.autoConnect = EditorGUILayout.Toggle(this.autoConnect, GUILayout.ExpandWidth(false));
+
+            if (this.autoConnect)
+            {
+                EditorGUILayout.PrefixLabel(new GUIContent("Auto-connect likelihood", "How likely new sectors will be connected to others"));
+
+                this.autoConnectLikelihood = EditorGUILayout.Slider(this.autoConnectLikelihood, 0.0f, 1.0f, GUILayout.ExpandWidth(false));
+            }
+
             EditorGUI.BeginDisabledGroup(!hasSectors && newSectorPrefab != null);
 
             EditorGUILayout.Space();
@@ -141,12 +154,16 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                             settings.MinAngleBetweenWormholes);
 
                         if (newSector != null)
+                        { 
                             break;
+                        }
                     }
                 }
 
                 if (newSector != null)
                 {
+                    ApplyAutoConnect(newSector, settings);
+
                     ApplyGrowSelectionMode(selectedSectors, newSector);
                 }
                 else
@@ -158,6 +175,26 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             {
                 EditorUtility.DisplayDialog("Grow sectors", "None of the selected sectors could be grown", "OK");
             }
+        }
+
+        private void ApplyAutoConnect(
+            EditorSector newSector,
+            CustomSettings customSettings)
+        {
+            if (!this.autoConnect)
+                return;
+
+            var savedGame = newSector.GetSavedGame();
+
+            ConnectSectorsTool.ConnectSectorToOthers(
+                newSector,
+                savedGame.GetSectors(),
+                this.growMaxWormholeConnections,
+                Mathf.Lerp(0.1f, 1.0f, this.autoConnectLikelihood),
+                customSettings.MinDistanceBetweenSectors,
+                customSettings.MaxDistanceBetweenSectors,
+                customSettings.MinAngleBetweenWormholes,
+                savedGame.PreferredWormholeDistance);
         }
 
         private void GrowEachOnce(List<EditorSector> selectedSectors, CustomSettings settings)
@@ -177,6 +214,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
                     if (newSector != null)
                     {
+                        ApplyAutoConnect(newSector, settings);
+
                         newSectors.Add(newSector);
                     }
                 }

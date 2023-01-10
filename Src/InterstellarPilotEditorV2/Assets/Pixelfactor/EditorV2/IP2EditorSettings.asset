@@ -26,5 +26,8 @@ MonoBehaviour:
   export_AutosetSectorSeed: 1
   export_AutosetUnitSeed: 1
   export_AutosetIds: 1
+  export_RemoveUntargettedWormholes: 1
   universeMapScaleFactor: 0.005
-  minDistanceBetweenSectors: 45000
+  minDistanceBetweenSectors: 40000
+  maxDistanceBetweenSectors: 125000
+  minAngleBetweenWormholes: 60

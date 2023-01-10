@@ -76,11 +76,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
 
         [Tooltip("Determines the min distance between new sectors")]
         [SerializeField]
-        private float minDistanceBetweenSectors = 45000.0f;
+        private float minDistanceBetweenSectors = 40000.0f;
 
         [Tooltip("Determines the max distance between new sectors")]
         [SerializeField]
-        private float maxDistanceBetweenSectors = 100000.0f;
+        private float maxDistanceBetweenSectors = 125000.0f;
 
         [Tooltip("Determines the min angle between wormholes. Determines how far apart wormholes are. In degrees.")]
         [SerializeField]
