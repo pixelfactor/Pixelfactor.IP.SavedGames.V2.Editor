@@ -71,6 +71,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 GuiHelper.ButtonLayout))
             {
                 Validator.Validate(editorScenario, false);
+                EditorUtility.DisplayDialog("Validation", "Validation completed. See the console for any warnings/errors", "OK");
             }
 
             EditorGUI.EndDisabledGroup();
@@ -96,7 +97,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             }
 
             if (GUILayout.Button(new GUIContent(
-                "Import...",
+                "Import... (Experimental)",
                 "Imports a scenario"),
                 GuiHelper.ButtonLayout))
             {

@@ -23,7 +23,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
         void OnGUI()
         {
-            GuiHelper.Subtitle("Import", "Import scenario data from an existing file");
+            GuiHelper.Subtitle("Import (Experimental)", "Import scenario data from an existing file");
+
+            GuiHelper.HelpPrompt("Importing scenarios is currently experimental. It works well for importing station universe objects e.g. sectors, wormholes, gas clouds, asteroids. All other objects are likely to have data missing.");
 
             EditorGUILayout.PrefixLabel(new GUIContent("Exit on error", "Whether to abort the import operation on the first error encountered"));
             this.exitOnFirstError = EditorGUILayout.Toggle(this.exitOnFirstError, GUILayout.ExpandWidth(false));

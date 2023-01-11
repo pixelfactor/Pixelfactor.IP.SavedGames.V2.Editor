@@ -37,7 +37,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             var drawArea = new Rect(this.position.width - 256, this.position.height - 256, 256, 256);
             GUI.DrawTexture(drawArea, icon, ScaleMode.ScaleAndCrop, true, 0.0f, new Color(1.0f, 1.0f, 1.0f, 0.25f), 0.0f, 0.0f);
 
-            currentTab = GUILayout.Toolbar(currentTab, new string[] { "Main", "Build", "Spawn", "Edit", "Refine", "Misc" });
+            var guiContents = new GUIContent[]
+            {
+                new GUIContent("Main", "File operations like import/export"),
+                new GUIContent("Build", "Tools to construct or amend universe sectors"),
+                new GUIContent("Spawn", "Tools to spawn objects inside sectors"),
+                new GUIContent("Edit", "Tools to edit existing universe objects"),
+                new GUIContent("Refine", "Tools to cleanup the current scenario"),
+                new GUIContent("Misc", "Tools that don't fit in the other categories"),
+            };
+
+            currentTab = GUILayout.Toolbar(currentTab, guiContents);
 
             EditorGUILayout.Space();
 

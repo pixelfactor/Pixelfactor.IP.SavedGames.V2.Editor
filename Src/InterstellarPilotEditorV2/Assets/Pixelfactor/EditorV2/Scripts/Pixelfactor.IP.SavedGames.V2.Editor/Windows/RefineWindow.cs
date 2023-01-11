@@ -10,7 +10,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         {
             if (GUILayout.Button(
                 new GUIContent(
-                    "Auto-name all objects",
+                    "Auto-name editor objects",
                     "Gives a name to all units based on their type and faction"),
                 GuiHelper.ButtonLayout))
             {

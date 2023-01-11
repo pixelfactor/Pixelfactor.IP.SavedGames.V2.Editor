@@ -9,6 +9,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
         {
             var labelStyle = new GUIStyle(GUI.skin.label);
             labelStyle.fontStyle = FontStyle.Italic;
+            labelStyle.wordWrap = true;
 
             EditorGUILayout.LabelField(text, labelStyle);
         }
