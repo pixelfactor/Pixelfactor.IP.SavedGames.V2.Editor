@@ -158,7 +158,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                     }
 
                     Selection.objects = new GameObject[] { unit.gameObject };
-                    SceneView.lastActiveSceneView.Frame(new Bounds(unit.transform.position, new Vector3(10.0f, 10.0f, 10.0f)), true);
+
+                    // Auto-frame on spawned object
+                    var viewSize = 100.0f;;
+                    SceneView.lastActiveSceneView.Frame(new Bounds(unit.transform.position, new Vector3(viewSize, viewSize, viewSize)), false);
                 }
             }
         }

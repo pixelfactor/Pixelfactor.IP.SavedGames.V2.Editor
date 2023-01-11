@@ -63,6 +63,7 @@ GameObject:
   - component: {fileID: 1499588013825266274}
   - component: {fileID: 3585806800839264951}
   - component: {fileID: 4580918040961066309}
+  - component: {fileID: -4693357751543189057}
   m_Layer: 0
   m_Name: Unit_Ship_MagnusEQ
   m_TagString: Untagged
@@ -128,6 +129,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea96f54fd9175e4d88a49ae6de5d0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &-4693357751543189057
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760377284931665905}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 29.95
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &52887154775190920
 PrefabInstance:
   m_ObjectHideFlags: 0
