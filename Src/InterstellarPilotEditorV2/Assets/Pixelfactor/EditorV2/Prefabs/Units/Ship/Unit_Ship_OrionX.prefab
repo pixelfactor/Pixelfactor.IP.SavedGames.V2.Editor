@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: 3585806800839264951}
   - component: {fileID: 2357831692022392022}
   - component: {fileID: -8274099977853110179}
+  - component: {fileID: 5403851103907206243}
   m_Layer: 0
   m_Name: Unit_Ship_OrionX
   m_TagString: Untagged
@@ -141,6 +142,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 8.82
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5403851103907206243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760377284931665905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!1001 &771538412298775887
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -200,6 +214,24 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: af2da71bba3e0554090f43f89e550acd, type: 3}
+--- !u!1 &7267840517054318823 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7956031403787150760, guid: af2da71bba3e0554090f43f89e550acd, type: 3}
+  m_PrefabInstance: {fileID: 771538412298775887}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-7255608431878571809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7267840517054318823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!4 &8238448202822137688 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8710479432911428119, guid: af2da71bba3e0554090f43f89e550acd, type: 3}

@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: 3585806800839264951}
   - component: {fileID: -1911627883773556351}
   - component: {fileID: 8625005264034550932}
+  - component: {fileID: -656243716649842255}
   m_Layer: 0
   m_Name: Unit_Ship_RangerX
   m_TagString: Untagged
@@ -141,6 +142,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.9
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-656243716649842255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760377284931665905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!1001 &1102585236236895655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -273,3 +287,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8710479432911428119, guid: 8994e241436ef2f45a4cfeb7825edb78, type: 3}
   m_PrefabInstance: {fileID: 8943393781912934047}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2628695916507635491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6369866960996305340, guid: 8994e241436ef2f45a4cfeb7825edb78, type: 3}
+  m_PrefabInstance: {fileID: 8943393781912934047}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-8060118786967406785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2628695916507635491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}

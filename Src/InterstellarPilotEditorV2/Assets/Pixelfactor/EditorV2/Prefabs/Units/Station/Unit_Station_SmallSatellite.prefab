@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 1499588013825266274}
   - component: {fileID: 3585806800839264951}
   - component: {fileID: -4888577951085927102}
+  - component: {fileID: 4489144736303727514}
   m_Layer: 0
   m_Name: Unit_Station_SmallSatellite
   m_TagString: Untagged
@@ -127,6 +128,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 36.25
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4489144736303727514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760377284931665905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!1001 &1851310914008368621
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -186,6 +200,42 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cd93781b0ff87b40967d20157afb902, type: 3}
+--- !u!1 &2602412207568152522 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4444082422496666151, guid: 4cd93781b0ff87b40967d20157afb902, type: 3}
+  m_PrefabInstance: {fileID: 1851310914008368621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1535725950889882281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2602412207568152522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
+--- !u!1 &5303789119565256609 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5776980796422296140, guid: 4cd93781b0ff87b40967d20157afb902, type: 3}
+  m_PrefabInstance: {fileID: 1851310914008368621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4054196009054909488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5303789119565256609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!4 &6533828620144181518 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4836303000731141347, guid: 4cd93781b0ff87b40967d20157afb902, type: 3}

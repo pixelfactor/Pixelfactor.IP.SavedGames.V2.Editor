@@ -47,12 +47,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
+  Seed: -1
   LegacyUnitClass: 7000
   UnitClass: {fileID: 5324093783107529889, guid: 82a9bddc9f478db48919afed1aa9c892, type: 3}
   Faction: {fileID: 0}
-  RpProvision: 0
   Name: 
+  ShortName: 
   Radius: -1
+  VariantName: 
+  Mass: -1
+  AllowDestruction: 1
+  IsInvulnerable: 0
+  RpProvision: 0
+  Health: -1
+  IsDestroyed: 0
+  EditorName: 
 --- !u!114 &7856581251997153304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,3 +143,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6387692198329388535, guid: 9ad1f8a7b99f16542a07c06004021b9a, type: 3}
   m_PrefabInstance: {fileID: 1017279684866837475}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6526645016876360007 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6092621991738124964, guid: 9ad1f8a7b99f16542a07c06004021b9a, type: 3}
+  m_PrefabInstance: {fileID: 1017279684866837475}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &631541446444960167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6526645016876360007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}

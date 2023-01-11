@@ -33,6 +33,18 @@ PrefabInstance:
       value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 1653622243463373397, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
+      propertyPath: EditorColor.b
+      value: 0.0141509175
+      objectReference: {fileID: 0}
+    - target: {fileID: 1653622243463373397, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
+      propertyPath: EditorColor.g
+      value: 0.15145604
+      objectReference: {fileID: 0}
+    - target: {fileID: 1653622243463373397, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
+      propertyPath: EditorColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1653622243463373397, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
       propertyPath: CustomShortName
       value: Bandits
       objectReference: {fileID: 0}

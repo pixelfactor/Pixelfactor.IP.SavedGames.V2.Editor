@@ -129,5 +129,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// </summary>
         [Tooltip("Determines whether the faction is a civilian faction. This is only relevant for 'Generic' type of faction. The AI interact with civilian factions slightly differently and there are harsher punishments for attacking them.")]
         public bool IsCivilian = false;
+        public Color EditorColor = Color.grey;
     }
 }

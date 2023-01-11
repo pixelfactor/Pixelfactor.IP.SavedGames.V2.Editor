@@ -46,32 +46,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
-  GeneratedNameId: -1
-  GeneratedSuffixId: -1
   CustomName: New Faction
   CustomShortName: New Faction
+  HomeSectorTransform: {fileID: 0}
+  PilotRankingSystemId: -1
   Credits: 500000
   Description: 
-  IsCivilian: 0
   FactionType: 32
   Aggression: 0.5
   Virtue: 0.5
   Greed: 0.5
   TradeEfficiency: 1
+  Cooperation: 0.5
   DynamicRelations: 1
   ShowJobBoards: 1
   CreateJobs: 1
-  RequisitionPointMultiplier: 1
-  DestroyWhenNoUnits: 0
   MinNpcCombatEfficiency: 0.5
   MaxNpcCombatEfficiency: 1
   AdditionalRpProvision: 0
   TradeIllegalGoods: 0
+  GeneratedNameId: -1
+  GeneratedSuffixId: -1
+  SpawnTime: 0
+  HighestEverNetWorth: 0
+  PreferredFormationId: -1
+  DestroyWhenNoUnits: 0
+  RequisitionPointMultiplier: 1
+  IsCivilian: 0
+  EditorColor: {r: 0.70823926, g: 0.7264151, b: 0.5448113, a: 1}
 --- !u!1001 &3250691762558348351
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 3530997568560213704}
     m_Modifications:
     - target: {fileID: 1714054122376800140, guid: 79fb98a68c1a0e24286c28b78714ed94, type: 3}
@@ -123,6 +131,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 79fb98a68c1a0e24286c28b78714ed94, type: 3}
 --- !u!4 &7067894941309927945 stripped
 Transform:

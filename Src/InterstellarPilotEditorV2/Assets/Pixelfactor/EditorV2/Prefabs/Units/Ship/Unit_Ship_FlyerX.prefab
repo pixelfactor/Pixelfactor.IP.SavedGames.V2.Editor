@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: 3585806800839264951}
   - component: {fileID: -5412470202436614116}
   - component: {fileID: 111132241029867378}
+  - component: {fileID: 2829266314959774361}
   m_Layer: 0
   m_Name: Unit_Ship_FlyerX
   m_TagString: Untagged
@@ -141,6 +142,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 4.32
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2829266314959774361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760377284931665905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!1001 &5516598960385774346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -264,6 +278,24 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: dd29f1870fe695145a4ccfc4eb3b7348, type: 3}
+--- !u!1 &444277201124680033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6369866960996305340, guid: dd29f1870fe695145a4ccfc4eb3b7348, type: 3}
+  m_PrefabInstance: {fileID: 6794862572147960029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7537993786493595678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444277201124680033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!4 &2787135974158758602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8710479432911428119, guid: dd29f1870fe695145a4ccfc4eb3b7348, type: 3}

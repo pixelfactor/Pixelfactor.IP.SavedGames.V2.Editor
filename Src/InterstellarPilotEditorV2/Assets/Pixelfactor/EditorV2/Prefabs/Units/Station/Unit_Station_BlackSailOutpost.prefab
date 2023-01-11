@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 1499588013825266274}
   - component: {fileID: 3585806800839264951}
   - component: {fileID: -379849542011812380}
+  - component: {fileID: 4028084117300470503}
   m_Layer: 0
   m_Name: Unit_Station_BlackSailOutpost
   m_TagString: Untagged
@@ -128,6 +129,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 36.25
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4028084117300470503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760377284931665905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!1001 &5588197094224038378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -192,6 +206,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5553878836564184304, guid: 6d8e804b3d77e4046af2a479a661be37, type: 3}
   m_PrefabInstance: {fileID: 5588197094224038378}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8044700988523736261 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2461717798303884591, guid: 6d8e804b3d77e4046af2a479a661be37, type: 3}
+  m_PrefabInstance: {fileID: 5588197094224038378}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-7075521119527062474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044700988523736261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!1001 &8941823224229507846
 PrefabInstance:
   m_ObjectHideFlags: 0

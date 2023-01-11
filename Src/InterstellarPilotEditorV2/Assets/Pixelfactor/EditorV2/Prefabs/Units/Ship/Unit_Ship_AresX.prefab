@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: 3585806800839264951}
   - component: {fileID: 1895159347204197290}
   - component: {fileID: 8945051924158302294}
+  - component: {fileID: 1005599522344414930}
   m_Layer: 0
   m_Name: Unit_Ship_AresX
   m_TagString: Untagged
@@ -141,6 +142,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 16
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1005599522344414930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760377284931665905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!1001 &207114029718981210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -200,6 +214,24 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a06c51fb3b9e8247b67f974a1bbe0b6, type: 3}
+--- !u!1 &5702773066531570804 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5619226794526887470, guid: 8a06c51fb3b9e8247b67f974a1bbe0b6, type: 3}
+  m_PrefabInstance: {fileID: 207114029718981210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2281620238489713435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5702773066531570804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!4 &8808486683980746829 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8710479432911428119, guid: 8a06c51fb3b9e8247b67f974a1bbe0b6, type: 3}

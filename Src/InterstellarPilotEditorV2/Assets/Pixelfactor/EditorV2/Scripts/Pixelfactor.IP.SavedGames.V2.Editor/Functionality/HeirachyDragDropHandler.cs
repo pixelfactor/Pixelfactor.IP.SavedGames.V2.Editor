@@ -54,7 +54,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Functionality
                 if (targetUnit.Faction != draggedFaction)
                 {
                     targetUnit.Faction = draggedFaction;
-                    EditorUtility.SetDirty(target);
+                    EditorUtility.SetDirty(targetUnit);
                 }
             }
 

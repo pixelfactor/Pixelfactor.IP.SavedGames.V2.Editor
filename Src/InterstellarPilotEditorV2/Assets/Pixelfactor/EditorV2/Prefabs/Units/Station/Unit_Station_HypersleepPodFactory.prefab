@@ -63,6 +63,7 @@ GameObject:
   - component: {fileID: 1499588013825266274}
   - component: {fileID: 3585806800839264951}
   - component: {fileID: -7610571288400206162}
+  - component: {fileID: -5973115213020073761}
   m_Layer: 0
   m_Name: Unit_Station_HypersleepPodFactory
   m_TagString: Untagged
@@ -129,6 +130,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 36.25
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5973115213020073761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760377284931665905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!1001 &404383096167955091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -321,3 +335,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6134081581200172643, guid: 39425a00afc168441be795f8e6c56348, type: 3}
   m_PrefabInstance: {fileID: 7452271886083278754}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7968997688116182031 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 719547789290060717, guid: 39425a00afc168441be795f8e6c56348, type: 3}
+  m_PrefabInstance: {fileID: 7452271886083278754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4600831420930499291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7968997688116182031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1499588013825266274}
   - component: {fileID: 3585806800839264951}
   - component: {fileID: 7856581251997153304}
+  - component: {fileID: -8312169303608377893}
   m_Layer: 0
   m_Name: Unit_Cargo_Ice
   m_TagString: Untagged
@@ -47,12 +48,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
+  Seed: -1
   LegacyUnitClass: 6000
   UnitClass: {fileID: 2669058712696016960, guid: e92c1a2e332d7374d82d5e1bae326687, type: 3}
   Faction: {fileID: 0}
-  RpProvision: 0
   Name: 
+  ShortName: 
   Radius: -1
+  VariantName: 
+  Mass: -1
+  AllowDestruction: 1
+  IsInvulnerable: 0
+  RpProvision: 0
+  Health: -1
+  IsDestroyed: 0
+  EditorName: 
 --- !u!114 &7856581251997153304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,6 +80,19 @@ MonoBehaviour:
   Quantity: 1
   Expires: 0
   SpawnTime: 0
+--- !u!114 &-8312169303608377893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760377284931665905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!1001 &3239252835847115194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,3 +157,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6387692198329388535, guid: 1348a60466bfdec4f87dd728bb009aac, type: 3}
   m_PrefabInstance: {fileID: 3239252835847115194}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8681097443327130398 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6092621991738124964, guid: 1348a60466bfdec4f87dd728bb009aac, type: 3}
+  m_PrefabInstance: {fileID: 3239252835847115194}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4688831832367486521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8681097443327130398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}

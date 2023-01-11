@@ -47,20 +47,29 @@ MonoBehaviour:
   Id: 0
   CustomName: Player
   CustomShortName: Player
+  HomeSectorTransform: {fileID: 0}
+  PilotRankingSystemId: -1
   Credits: 0
   Description: 
-  IsCivilian: 0
   FactionType: 16384
   Aggression: 0.5
   Virtue: 0.5
   Greed: 0.5
   TradeEfficiency: 0.5
+  Cooperation: 0.5
   DynamicRelations: 1
   ShowJobBoards: 0
   CreateJobs: 0
-  RequisitionPointMultiplier: 1
-  DestroyWhenNoUnits: 1
   MinNpcCombatEfficiency: 0
   MaxNpcCombatEfficiency: 1
   AdditionalRpProvision: 0
   TradeIllegalGoods: 0
+  GeneratedNameId: -1
+  GeneratedSuffixId: -1
+  SpawnTime: 0
+  HighestEverNetWorth: 0
+  PreferredFormationId: -1
+  DestroyWhenNoUnits: 1
+  RequisitionPointMultiplier: 1
+  IsCivilian: 0
+  EditorColor: {r: 0, g: 1, b: 0.9023998, a: 1}

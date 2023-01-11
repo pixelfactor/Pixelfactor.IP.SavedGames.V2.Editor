@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: 3585806800839264951}
   - component: {fileID: -5220208277633399547}
   - component: {fileID: -395392579756057408}
+  - component: {fileID: 1340050925471096897}
   m_Layer: 0
   m_Name: Unit_Ship_MagnusA
   m_TagString: Untagged
@@ -142,6 +143,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 29.95
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1340050925471096897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760377284931665905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!1001 &3813773311349399962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -201,6 +215,24 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ff8615f766f2422479bc4a0f2ff64ba0, type: 3}
+--- !u!1 &3362193548152234653 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1893156340090651399, guid: ff8615f766f2422479bc4a0f2ff64ba0, type: 3}
+  m_PrefabInstance: {fileID: 3813773311349399962}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2952062280050023352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3362193548152234653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a51ae3e6955ee41b09ca3216eb0b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 3585806800839264951}
 --- !u!4 &5480010458139245453 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8710479432911428119, guid: ff8615f766f2422479bc4a0f2ff64ba0, type: 3}
