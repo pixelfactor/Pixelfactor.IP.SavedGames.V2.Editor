@@ -1,5 +1,6 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
 using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
+using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Edit;
 using Pixelfactor.IP.SavedGames.V2.Model;
 using System;
 using System.Collections.Generic;
@@ -184,6 +185,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
                 editorFaction.HighestEverNetWorth = modelFaction.HighestEverNetWorth;
                 editorFaction.PilotRankingSystemId = modelFaction.RankingSystemId;
                 editorFaction.PreferredFormationId = modelFaction.PreferredFormationId;
+
+                EditFactionTool.RandomizeEditorColor(editorFaction);
+                EditorUtility.SetDirty(editorFaction);
             }
         }
 
@@ -215,6 +219,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 
         private void ImportUnit(ModelUnit modelUnit)
         {
+            // Projectiles not currently supported
+            if (modelUnit.Class.ToString().StartsWith("Projectile"))
+                return;
+
             var prefab = this.cachedUnitPrefabs.GetValueOrDefault(modelUnit.Class);
             if (prefab == null)
             {
