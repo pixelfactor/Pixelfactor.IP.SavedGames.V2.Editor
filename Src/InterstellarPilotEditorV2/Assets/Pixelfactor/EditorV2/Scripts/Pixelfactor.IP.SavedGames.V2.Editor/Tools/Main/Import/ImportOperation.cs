@@ -390,7 +390,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 
         private void CacheUnitPrefabs(string path)
         {
-            var units = TryGetUnityObjectsOfTypeFromPath<EditorUnit>(path);
+            var units = GameObjectHelper.TryGetUnityObjectsOfTypeFromPath<EditorUnit>(path);
             foreach (var unit in units)
             {
                 if (this.cachedUnitPrefabs.TryGetValue(unit.ModelUnitClass, out EditorUnit existingUnit))
@@ -404,7 +404,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 
         private void CacheCargoClassPrefabs(string path)
         {
-            var cargos = TryGetUnityObjectsOfTypeFromPath<EditorCargoClassRef>(path);
+            var cargos = GameObjectHelper.TryGetUnityObjectsOfTypeFromPath<EditorCargoClassRef>(path);
             foreach (var cargoClass in cargos)
             {
                 if (this.cachedCargoClassPrefabs.TryGetValue(cargoClass.CargoClass, out EditorCargoClassRef existingCargoClass))
@@ -414,31 +414,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
                     continue;
                 }
                 this.cachedCargoClassPrefabs.Add(cargoClass.CargoClass, cargoClass);
-            }
-        }
-
-        /// <summary>
-        /// Adds newly (if not already in the list) found assets.
-        /// Returns how many found (not how many added)
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="path"></param>
-        /// <param name="assetsFound">Adds to this list if it is not already there</param>
-        /// <returns></returns>
-        public static IEnumerable<T> TryGetUnityObjectsOfTypeFromPath<T>(string path) where T : UnityEngine.Object
-        {
-            string[] filePaths = System.IO.Directory.GetFiles(path);
-
-            if (filePaths != null && filePaths.Length > 0)
-            {
-                for (int i = 0; i < filePaths.Length; i++)
-                {
-                    UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(filePaths[i], typeof(T));
-                    if (obj is T asset)
-                    {
-                        yield return asset;
-                    }
-                }
             }
         }
     }

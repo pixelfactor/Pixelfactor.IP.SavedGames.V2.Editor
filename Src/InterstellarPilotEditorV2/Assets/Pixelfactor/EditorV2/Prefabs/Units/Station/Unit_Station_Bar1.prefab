@@ -50,6 +50,7 @@ MonoBehaviour:
   IsCloaked: 0
   EngineThrottle: -1
   Pilot: {fileID: 0}
+  CargoCapacity: -1
 --- !u!1 &3760377284931665905
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,12 +99,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
+  Seed: -1
   LegacyUnitClass: -1
   UnitClass: {fileID: 6407228828360461018, guid: 9358aae5e81af1a4f86994829dd0037b, type: 3}
   Faction: {fileID: 0}
-  RpProvision: 0
   Name: 
+  ShortName: 
   Radius: -1
+  VariantName: 
+  Mass: -1
+  AllowDestruction: 1
+  IsInvulnerable: 0
+  RpProvision: 0
+  Health: -1
+  IsDestroyed: 0
+  EditorName: Bar1
 --- !u!1001 &2833441112299858880
 PrefabInstance:
   m_ObjectHideFlags: 0

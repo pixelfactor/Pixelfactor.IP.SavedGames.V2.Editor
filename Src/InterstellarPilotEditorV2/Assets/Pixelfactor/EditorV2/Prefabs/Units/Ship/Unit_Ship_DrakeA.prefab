@@ -51,6 +51,7 @@ MonoBehaviour:
   IsCloaked: 0
   EngineThrottle: -1
   Pilot: {fileID: 0}
+  CargoCapacity: -1
 --- !u!1 &3760377284931665905
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,12 +100,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
+  Seed: -1
   LegacyUnitClass: -1
   UnitClass: {fileID: 2544603334889176812, guid: fdaff1fd371d34d4fb96efc44818eaec, type: 3}
   Faction: {fileID: 0}
-  RpProvision: 0
   Name: 
+  ShortName: 
   Radius: -1
+  VariantName: 
+  Mass: -1
+  AllowDestruction: 1
+  IsInvulnerable: 0
+  RpProvision: 0
+  Health: -1
+  IsDestroyed: 0
+  EditorName: Drake A
 --- !u!114 &4380311728204271963
 MonoBehaviour:
   m_ObjectHideFlags: 0

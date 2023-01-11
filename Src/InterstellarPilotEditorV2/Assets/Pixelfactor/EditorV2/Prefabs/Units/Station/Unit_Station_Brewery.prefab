@@ -50,6 +50,7 @@ MonoBehaviour:
   IsCloaked: 0
   EngineThrottle: -1
   Pilot: {fileID: 0}
+  CargoCapacity: -1
 --- !u!1 &3760377284931665905
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,12 +99,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
+  Seed: -1
   LegacyUnitClass: -1
   UnitClass: {fileID: 2879273741231102554, guid: 2dc51a1f832398145bc0c26cce3f66e7, type: 3}
   Faction: {fileID: 0}
-  RpProvision: 0
   Name: 
+  ShortName: 
   Radius: -1
+  VariantName: 
+  Mass: -1
+  AllowDestruction: 1
+  IsInvulnerable: 0
+  RpProvision: 0
+  Health: -1
+  IsDestroyed: 0
+  EditorName: Brewery
 --- !u!1001 &1989471814196574034
 PrefabInstance:
   m_ObjectHideFlags: 0

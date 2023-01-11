@@ -73,6 +73,20 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         [Tooltip("Whether the unit has already been destroyed. Generally this will not be the case.")]
         public bool IsDestroyed = false;
 
+        /// <summary>
+        /// A name that is displayed in the editor
+        /// </summary>
+        [Tooltip("A name for the unit displayed in the editor and not exported")]
+        public string EditorName;
+
+        public string GetEditorName()
+        {
+            if (!string.IsNullOrWhiteSpace(this.EditorName))
+                return this.EditorName;
+
+            return null;
+        }
+
         void OnDrawGizmos()
         {
             if (SelectionHelper.IsSelected(this) || SceneView.lastActiveSceneView.size < GetDrawLabelSceneViewSize())

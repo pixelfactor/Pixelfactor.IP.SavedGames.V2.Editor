@@ -51,6 +51,7 @@ MonoBehaviour:
   IsCloaked: 0
   EngineThrottle: -1
   Pilot: {fileID: 0}
+  CargoCapacity: -1
 --- !u!1 &3760377284931665905
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,12 +100,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
+  Seed: -1
   LegacyUnitClass: -1
   UnitClass: {fileID: 8630468139292183664, guid: be2776eab73e34c4891f388c72577c5e, type: 3}
   Faction: {fileID: 0}
-  RpProvision: 0
   Name: 
+  ShortName: 
   Radius: -1
+  VariantName: 
+  Mass: -1
+  AllowDestruction: 1
+  IsInvulnerable: 0
+  RpProvision: 0
+  Health: -1
+  IsDestroyed: 0
+  EditorName: Light Arms Factory
 --- !u!1001 &1870276584477340068
 PrefabInstance:
   m_ObjectHideFlags: 0

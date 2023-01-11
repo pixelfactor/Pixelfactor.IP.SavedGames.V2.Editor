@@ -45,6 +45,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning
             if (unitAsset == null)
                 throw new System.Exception($"Could not find unit prefab at path: \"{path}\"");
 
+            return Unit(editorSector, unitAsset);
+        }
+
+        public static EditorUnit Unit(EditorSector editorSector, EditorUnit unitAsset)
+        {
             var unit = PrefabHelper.Instantiate(unitAsset, editorSector.transform);
 
             return unit;

@@ -6,8 +6,23 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
 {
     public class WindowHelper
     {
+        public static string DescribeSectors(EditorSector sector)
+        {
+            if (sector == null)
+            {
+                return "[None]";
+            }
+
+            return DescribeSectors(new EditorSector[] { sector });  
+        }
+
         public static string DescribeSectors(IEnumerable<EditorSector> sectors)
         {
+            if (sectors == null)
+            {
+                return "[None]";
+            }
+
             if (sectors.Count() == 0)
             {
                 return "[None]";

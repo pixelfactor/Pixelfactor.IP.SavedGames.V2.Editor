@@ -11,14 +11,46 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 {
     public class SpawnWindow
     {
+        public const int SpawnShipId = 0;
+        public const int SpawnStationId = 1;
+        public const int SpawnAsteroidsId = 2;
+        private int currentTab = SpawnShipId;
+
         public void Draw()
+        {
+
+            currentTab = GUILayout.Toolbar(currentTab, new string[] { "Ship", "Station", "Asteroids" });
+
+            switch (currentTab)
+            {
+                case SpawnShipId:
+                    {
+                        ShowSpawnOptions("Ship");
+                    }
+                    break;
+                case SpawnStationId:
+                    {
+                        ShowSpawnOptions("Station");
+                    }
+                    break;
+                case SpawnAsteroidsId:
+                    {
+                        DrawSpawnAsteroidOptions();
+                    }
+                    break;
+            }
+
+            EditorGUI.EndDisabledGroup();
+        }
+
+        private static void DrawSpawnAsteroidOptions()
         {
             var sectors = Selector.GetInParents<EditorSector>();
 
             var hasSectors = sectors.Any();
 
             EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.TextField("Sectors", WindowHelper.DescribeSectors(sectors));
+            EditorGUILayout.TextField("Sector", WindowHelper.DescribeSectors(sectors));
             EditorGUI.EndDisabledGroup();
 
             EditorGUI.BeginDisabledGroup(!hasSectors);
@@ -32,28 +64,84 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 var count = AsteroidSpawnTool.SpawnAsteroidsInSectors(sectors);
 
                 var message = count > 0 ?
-                    $"Finished creating {count} asteroids" : 
+                    $"Finished creating {count} asteroids" :
                     "No asteroids were created. Ensure the selected sectors have asteroid clusters or aren't already filled with asteroids";
 
                 EditorUtility.DisplayDialog("Spawn asteroids", message, "OK");
             }
+        }
 
+        private static void ShowSpawnOptions(string subDirectory)
+        {
+            var sector = Selector.GetSingleSelectedSectorOrNull();
+
+            EditorGUI.BeginDisabledGroup(true);
+            EditorGUILayout.TextField("Spawn Sector", WindowHelper.DescribeSectors(sector));
+            EditorGUI.EndDisabledGroup();
+
+            var canSpawn = sector != null;
+
+            EditorGUI.BeginDisabledGroup(!canSpawn);
+
+            var settings = CustomSettings.GetOrCreateSettings();
+            var prefabs = GameObjectHelper.TryGetUnityObjectsOfTypeFromPath<EditorUnit>(settings.UnitPrefabsPath.Trim('/') + "/" + subDirectory).ToList();
+
+            if (prefabs.Count > 0)
+            {
+
+                var viewWidth = EditorGUIUtility.currentViewWidth;
+                var columnCount = Mathf.Max(1, Mathf.FloorToInt(viewWidth / 200));
+
+                var i = 0;
+                while (i < prefabs.Count)
+                {
+                    var unitPrefab = prefabs[i];
+                    if (columnCount > 1)
+                    {
+                        if (i == 0)
+                        {
+                            EditorGUILayout.BeginHorizontal();
+                        }
+                        else
+                        {
+                            var currentColumnIndex = i % columnCount;
+                            if (currentColumnIndex == 0)
+                            {
+                                EditorGUILayout.EndHorizontal();
+                                EditorGUILayout.BeginHorizontal();
+                            }
+                        }
+                    }
+
+                    DrawSpawnPrefabButton(sector, unitPrefab);
+
+                    i++;
+                }
+
+                if (columnCount > 1)
+                {
+                    EditorGUILayout.EndHorizontal();
+                }
+            }
+
+            EditorGUI.EndDisabledGroup();
+        }
+
+        private static void DrawSpawnPrefabButton(EditorSector sector, EditorUnit unitPrefab)
+        {
             if (GUILayout.Button(
                 new GUIContent(
-                    "Spawn Shuttle A",
-                    "Creates a Shuttle A ship"),
+                    $"Spawn {unitPrefab.GetEditorName()}",
+                    $"Creates a {unitPrefab.GetEditorName()}"),
                 GuiHelper.ButtonLayout))
             {
-                var count = AsteroidSpawnTool.SpawnAsteroidsInSectors(sectors);
-                var sector = Selector.GetSingleSelectedSectorOrNull();
-
                 if (sector == null)
                 {
                     EditorUtility.DisplayDialog("Spawn", "Select a sector first", "OK");
                 }
                 else
                 {
-                    var unit = Spawn.Unit(sector, Model.ModelUnitClass.Ship_ShuttleA, CustomSettings.GetOrCreateSettings().UnitPrefabsPath);
+                    var unit = Spawn.Unit(sector, unitPrefab);
                     var radius = 1.0f;
                     var sphereCollider = unit.GetComponentInChildren<SphereCollider>();
                     if (sphereCollider != null)
@@ -73,8 +161,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                     SceneView.lastActiveSceneView.Frame(new Bounds(unit.transform.position, new Vector3(10.0f, 10.0f, 10.0f)), true);
                 }
             }
-
-            EditorGUI.EndDisabledGroup();
         }
     }
 }

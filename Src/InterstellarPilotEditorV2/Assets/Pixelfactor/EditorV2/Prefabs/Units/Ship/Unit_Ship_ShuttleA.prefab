@@ -115,6 +115,7 @@ MonoBehaviour:
   RpProvision: 0
   Health: -1
   IsDestroyed: 0
+  EditorName: Shuttle A
 --- !u!114 &-9034277574335423159
 MonoBehaviour:
   m_ObjectHideFlags: 0

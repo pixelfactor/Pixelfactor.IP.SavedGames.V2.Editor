@@ -50,6 +50,7 @@ MonoBehaviour:
   IsCloaked: 0
   EngineThrottle: -1
   Pilot: {fileID: 0}
+  CargoCapacity: -1
 --- !u!1 &3760377284931665905
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,10 +98,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
-  EditorUnitClassRef: {fileID: 8924611216500675922, guid: e202f0b5d1a168a4484723f9b2d89f8b, type: 3}
+  Seed: -1
+  LegacyUnitClass: -1
+  UnitClass: {fileID: 8924611216500675922, guid: e202f0b5d1a168a4484723f9b2d89f8b, type: 3}
   Faction: {fileID: 0}
-  RpProvision: 0
   Name: 
+  ShortName: 
+  Radius: -1
+  VariantName: 
+  Mass: -1
+  AllowDestruction: 1
+  IsInvulnerable: 0
+  RpProvision: 0
+  Health: -1
+  IsDestroyed: 0
+  EditorName: Light Weapons Platform
 --- !u!1001 &5656861052813350005
 PrefabInstance:
   m_ObjectHideFlags: 0

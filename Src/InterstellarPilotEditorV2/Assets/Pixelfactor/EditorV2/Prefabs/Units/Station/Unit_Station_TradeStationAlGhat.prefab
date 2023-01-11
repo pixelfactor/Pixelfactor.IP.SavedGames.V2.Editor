@@ -110,6 +110,10 @@ MonoBehaviour:
   Mass: -1
   AllowDestruction: 1
   IsInvulnerable: 0
+  RpProvision: 0
+  Health: -1
+  IsDestroyed: 0
+  EditorName: Trade Station Al Ghat
 --- !u!1001 &4808167310423758927
 PrefabInstance:
   m_ObjectHideFlags: 0
