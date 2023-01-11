@@ -15,6 +15,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         public const int SpawnStationId = 1;
         public const int SpawnAsteroidsId = 2;
         private int currentTab = SpawnShipId;
+        private EditorFaction spawnFaction = null;
 
         public void Draw()
         {
@@ -36,6 +37,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 case SpawnAsteroidsId:
                     {
                         DrawSpawnAsteroidOptions();
+
+                        EditorGUILayout.Space(30);
+
+                        ShowSpawnOptions("Asteroid", allowFaction: false);
                     }
                     break;
             }
@@ -71,7 +76,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             }
         }
 
-        private static void ShowSpawnOptions(string subDirectory)
+        private void ShowSpawnOptions(string subDirectory, bool allowFaction = true)
         {
             var sector = Selector.GetSingleSelectedSectorOrNull();
 
@@ -79,9 +84,20 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUILayout.TextField("Spawn Sector", WindowHelper.DescribeSectors(sector));
             EditorGUI.EndDisabledGroup();
 
+            EditorGUI.BeginDisabledGroup(true);
+
+
+            EditorGUI.EndDisabledGroup();
+
             var canSpawn = sector != null;
 
             EditorGUI.BeginDisabledGroup(!canSpawn);
+
+            if (allowFaction)
+            {
+                var factionContent = new GUIContent("Spawn faction", "The faction that the spawned unit will be assigned to");
+                this.spawnFaction = (EditorFaction)EditorGUILayout.ObjectField(factionContent, this.spawnFaction, typeof(EditorFaction), allowSceneObjects: true);
+            }
 
             var settings = CustomSettings.GetOrCreateSettings();
             var prefabs = GameObjectHelper.TryGetUnityObjectsOfTypeFromPath<EditorUnit>(settings.UnitPrefabsPath.Trim('/') + "/" + subDirectory).ToList();
@@ -113,7 +129,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                         }
                     }
 
-                    DrawSpawnPrefabButton(sector, unitPrefab);
+                    DrawSpawnPrefabButton(sector, unitPrefab, this.spawnFaction);
 
                     i++;
                 }
@@ -127,7 +143,26 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUI.EndDisabledGroup();
         }
 
-        private static void DrawSpawnPrefabButton(EditorSector sector, EditorUnit unitPrefab)
+        Vector3 GetSceneViewCenter()
+        {
+            return GetCurrentScenePositionInScene(SceneView.lastActiveSceneView.position.center);
+        }
+
+        Vector3 GetCurrentScenePositionInScene()
+        {
+            return GetCurrentScenePositionInScene(Event.current.mousePosition);
+        }
+
+        Vector3 GetCurrentScenePositionInScene(Vector2 screenSpace)
+        {
+            Vector3 mousePosition = Event.current.mousePosition;
+            var placeObject = HandleUtility.PlaceObject(mousePosition, out var newPosition, out var normal);
+            var p = placeObject ? newPosition : HandleUtility.GUIPointToWorldRay(mousePosition).GetPoint(10);
+            p.y = 0.0f;
+            return p;
+        }
+
+        private void DrawSpawnPrefabButton(EditorSector sector, EditorUnit unitPrefab, EditorFaction editorFaction)
         {
             if (GUILayout.Button(
                 new GUIContent(
@@ -147,7 +182,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                     if (sphereCollider != null)
                         radius = sphereCollider.radius;
 
-                    var newPosition = SpawnPositionFinder.FindPositionOrNull(sector, sector.transform.position, radius);
+                    if (unit.CanHaveFaction())
+                    {
+                        unit.Faction = editorFaction;
+                    }
+
+                    var initialPosition = GetCurrentScenePositionInScene();
+                    var newPosition = SpawnPositionFinder.FindPositionOrNull(sector, initialPosition, radius);
                     if (newPosition.HasValue)
                     {
                         unit.transform.position = newPosition.Value;
@@ -160,8 +201,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                     Selection.objects = new GameObject[] { unit.gameObject };
 
                     // Auto-frame on spawned object
-                    var viewSize = 100.0f;;
-                    SceneView.lastActiveSceneView.Frame(new Bounds(unit.transform.position, new Vector3(viewSize, viewSize, viewSize)), false);
+                    //var viewSize = 100.0f;;
+                    //SceneView.lastActiveSceneView.Frame(new Bounds(unit.transform.position, new Vector3(viewSize, viewSize, viewSize)), false);
                 }
             }
         }

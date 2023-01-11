@@ -58,6 +58,10 @@ MonoBehaviour:
   Mass: -1
   AllowDestruction: 1
   IsInvulnerable: 0
+  RpProvision: 0
+  Health: -1
+  IsDestroyed: 0
+  EditorName: Asteroid Type H
 --- !u!135 &3144903898020836357
 SphereCollider:
   m_ObjectHideFlags: 0
