@@ -12,7 +12,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         public const int SpawnWindowId = 2;
         public const int EditWindowId = 3;
         public const int RefineWindowId = 4;
-        public const int MiscWindowId = 5;
+        public const int MiscWindowId = 6;
+        public const int StatsWindowId = 5;
 
         private BuildWindow buildWindow = new BuildWindow();
         private SpawnWindow spawnWindow = new SpawnWindow();
@@ -20,6 +21,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         private RefineWindow refineWindow = new RefineWindow();
         private MainWindow mainWindow = new MainWindow();
         private MiscWindow miscWindow = new MiscWindow();
+        private StatsWindow statsWindow = new StatsWindow();
+
         private Vector2 scrollPosition = Vector2.zero;   
 
         [MenuItem("Window/IP Editor V2")]
@@ -44,6 +47,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 new GUIContent("Spawn", "Tools to spawn objects inside sectors"),
                 new GUIContent("Edit", "Tools to edit existing universe objects"),
                 new GUIContent("Refine", "Tools to cleanup the current scenario"),
+                new GUIContent("Stats", "Info about the current scenario"),
                 new GUIContent("Misc", "Tools that don't fit in the other categories"),
             };
 
@@ -78,6 +82,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 case RefineWindowId:
                     {
                         this.refineWindow.Draw();
+                    }
+                    break;
+                case StatsWindowId:
+                    {
+                        this.statsWindow.Draw();
                     }
                     break;
                 case MiscWindowId:

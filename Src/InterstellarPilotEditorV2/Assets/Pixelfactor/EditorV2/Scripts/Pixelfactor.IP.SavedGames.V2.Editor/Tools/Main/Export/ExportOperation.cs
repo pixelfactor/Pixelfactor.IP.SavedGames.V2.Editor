@@ -568,6 +568,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 ScenarioAuthoringTool = $"IP2 Unity Editor {Versioning.Version}",
                 ScenarioDescription = editorScenario.Description,
                 GameStartDate = new System.DateTime(editorScenario.DateYear, editorScenario.DateMonth, editorScenario.DateDay, editorScenario.DateHour, editorScenario.DateMinute, 0),
+                SecondsElapsed = this.editorScenario.ScenarioTime
             };
         }
 

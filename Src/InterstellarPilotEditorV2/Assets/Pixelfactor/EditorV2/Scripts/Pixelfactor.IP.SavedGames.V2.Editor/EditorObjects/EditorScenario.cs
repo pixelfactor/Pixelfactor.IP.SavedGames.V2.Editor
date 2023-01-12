@@ -44,6 +44,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
         /// </summary>
         public Transform FactionsRoot = null;
 
+        [Tooltip("The current elapsed game time in seconds")]
+        public double ScenarioTime = 0.0;
+
         public Transform GetSectorsRoot()
         {
             if (this.SectorsRoot != null) 

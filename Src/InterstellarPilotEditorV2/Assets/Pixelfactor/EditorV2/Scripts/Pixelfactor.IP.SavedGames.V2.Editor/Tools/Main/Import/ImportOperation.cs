@@ -60,6 +60,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 
         public void Import()
         {
+            editorScenario.ScenarioTime = this.model.Header.SecondsElapsed;
+
             this.ImportSectors();
             this.ImportFactions();
             this.ImportUnits();
