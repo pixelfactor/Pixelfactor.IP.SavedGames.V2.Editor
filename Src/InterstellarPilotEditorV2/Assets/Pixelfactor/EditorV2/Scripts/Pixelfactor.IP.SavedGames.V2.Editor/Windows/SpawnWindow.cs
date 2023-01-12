@@ -84,28 +84,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
         private void DrawSpawnFleetOptions()
         {
-            var canSpawnFleetFromSelected = CanSpawnFleetForSelectedUnits(out List<EditorUnit> selectedUnits);
+            DrawSpawnNewFleetOptions();
+            DrawSpwnFleetFromExisting();
+        }
 
-            EditorGUI.BeginDisabledGroup(!canSpawnFleetFromSelected);
-
-            if (GUILayout.Button(
-                new GUIContent(
-                    "Fleet for selected units",
-                    "Creates a fleet for the selected units"),
-                GuiHelper.ButtonLayout))
-            {
-                var newFleet = Spawn.FleetForUnits(selectedUnits);
-                Selection.activeObject = newFleet.gameObject;
-            }
-
-            EditorGUI.EndDisabledGroup();
-
-            if (!canSpawnFleetFromSelected)
-            {
-                GuiHelper.HelpPrompt("Ensure that all selected objects are ships and that they have a faction, and aren't already part of a fleet");
-            }
-
+        private void DrawSpawnNewFleetOptions()
+        {
             GuiHelper.Subtitle("Spawn fleet", "Spawns a fleet of ships");
+            this.spawnFleetName = EditorGUILayout.TextField(new GUIContent("Fleet name", "Optional name to give to the fleet"), this.spawnFleetName, GUILayout.ExpandWidth(true));
+
             var factionContent = new GUIContent("Spawn faction", "The faction that the spawned unit will be assigned to");
             this.spawnFaction = (EditorFaction)EditorGUILayout.ObjectField(factionContent, this.spawnFaction, typeof(EditorFaction), allowSceneObjects: true);
 
@@ -119,8 +106,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 new GUIContent("Ship types", "The type of ships to include in the fleet"),
                 this.spawnFleetShipTypes,
                 GUILayout.ExpandWidth(false));
-
-            this.spawnFleetName = EditorGUILayout.TextField(new GUIContent("Fleet name", "Optional name to give to the fleet"), this.spawnFleetName, GUILayout.ExpandWidth(true));
 
             EditorGUI.BeginDisabledGroup(!canSpawnFleet);
             if (GUILayout.Button(
@@ -145,6 +130,37 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 Selection.activeObject = newFleet.gameObject;
             }
             EditorGUI.EndDisabledGroup();
+        }
+
+        private void DrawSpwnFleetFromExisting()
+        {
+            GuiHelper.Subtitle("Spawn fleet from selected", "Spawns a fleet from existing units");
+
+            var canSpawnFleetFromSelected = CanSpawnFleetForSelectedUnits(out List<EditorUnit> selectedUnits);
+            this.spawnFleetName = EditorGUILayout.TextField(new GUIContent("Fleet name", "Optional name to give to the fleet"), this.spawnFleetName, GUILayout.ExpandWidth(true));
+
+            EditorGUI.BeginDisabledGroup(!canSpawnFleetFromSelected);
+
+            if (GUILayout.Button(
+                new GUIContent(
+                    "Fleet for selected units",
+                    "Creates a fleet for the selected units"),
+                GuiHelper.ButtonLayout))
+            {
+                var newFleet = Spawn.FleetForUnits(selectedUnits);
+                newFleet.Designation = this.spawnFleetName;
+                EditorUtility.SetDirty(newFleet);
+                AutoNameObjects.AutoNameFleet(newFleet);
+
+                Selection.activeObject = newFleet.gameObject;
+            }
+
+            EditorGUI.EndDisabledGroup();
+
+            if (!canSpawnFleetFromSelected)
+            {
+                GuiHelper.HelpPrompt("Ensure that all selected objects are ships and that they have a faction, and aren't already part of a fleet");
+            }
         }
 
         private EditorUnit SpawnFleetUnit(EditorSector sector, IEnumerable<EditorUnit> prefabs)
