@@ -20,6 +20,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         private int currentTab = SpawnShipId;
         private EditorFaction spawnFaction = null;
         private int spawnFleetShipCount = 8;
+        private string spawnFleetName = null;
+        private EditorFactionStrategy spawnFleetShipTypes = EditorFactionStrategy.War;
 
         public void Draw()
         {
@@ -113,6 +115,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             var sector = Selector.GetSingleSelectedSectorOrNull();
             var canSpawnFleet = this.spawnFaction != null && sector != null;
 
+            this.spawnFleetShipTypes = (EditorFactionStrategy)EditorGUILayout.EnumFlagsField(
+                new GUIContent("Ship types", "The type of ships to include in the fleet"),
+                this.spawnFleetShipTypes,
+                GUILayout.ExpandWidth(false));
+
+            this.spawnFleetName = EditorGUILayout.TextField(new GUIContent("Fleet name", "Optional name to give to the fleet"), this.spawnFleetName, GUILayout.ExpandWidth(true));
+
             EditorGUI.BeginDisabledGroup(!canSpawnFleet);
             if (GUILayout.Button(
                 new GUIContent(
@@ -120,21 +129,27 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                     $"Creates a new fleet"),
                 GuiHelper.ButtonLayout))
             {
+                var shipPrefabs = GameObjectHelper.TryGetUnityObjectsOfTypeFromPath<EditorUnit>(
+                    CustomSettings.GetOrCreateSettings().UnitPrefabsPath.Trim('/') + "/Ship").ToList();
+
                 var newFleetUnits = new List<EditorUnit>();
                 for (int i = 0; i < this.spawnFleetShipCount; i++)
                 {
-                    newFleetUnits.Add(SpawnFleetUnit(sector));
+                    newFleetUnits.Add(SpawnFleetUnit(sector, shipPrefabs));
                 }
 
                 var newFleet = Spawn.FleetForUnits(newFleetUnits);
+                newFleet.Designation = this.spawnFleetName;
+                EditorUtility.SetDirty(newFleet);
+                AutoNameObjects.AutoNameFleet(newFleet);
                 Selection.activeObject = newFleet.gameObject;
             }
             EditorGUI.EndDisabledGroup();
         }
 
-        private EditorUnit SpawnFleetUnit(EditorSector sector)
+        private EditorUnit SpawnFleetUnit(EditorSector sector, IEnumerable<EditorUnit> prefabs)
         {
-            var randomFleetShipClass = GetRandomSpawnFleetShipClass();
+            var randomFleetShipClass = GetRandomSpawnFleetShipClass(prefabs);
             var unit = Spawn.Unit(sector, randomFleetShipClass, CustomSettings.GetOrCreateSettings().UnitPrefabsPath);
             unit.Faction = this.spawnFaction;
             unit.transform.position = GetNewUnitSpawnPosition(sector, unit.GetCollisionRadius());
@@ -145,9 +160,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             return unit;
         }
 
-        private ModelUnitClass GetRandomSpawnFleetShipClass()
+        private ModelUnitClass GetRandomSpawnFleetShipClass(IEnumerable<EditorUnit> prefabs)
         {
-            // TODO:
+            var ships = prefabs.Where(e => (e.EditorShipPurpose & this.spawnFleetShipTypes) != EditorFactionStrategy.None);
+            if (ships.Any())
+            { 
+                return ships.GetRandom().ModelUnitClass;
+            }
+
             return ModelUnitClass.Ship_ShuttleA;
         }
 

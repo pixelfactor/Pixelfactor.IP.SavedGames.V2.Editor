@@ -37,12 +37,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         {
             foreach (var editorFleet in editorScenario.GetComponentsInChildren<EditorFleet>())
             {
-                editorFleet.gameObject.name = GetEditorFleetName(editorFleet, editorScenario);
-                EditorUtility.SetDirty(editorFleet);
+                AutoNameFleet(editorFleet);
             }
         }
 
-        private static string GetEditorFleetName(EditorFleet editorFleet, EditorScenario editorScenario)
+        public static void AutoNameFleet(EditorFleet editorFleet)
+        {
+            editorFleet.gameObject.name = GetEditorFleetName(editorFleet);
+            EditorUtility.SetDirty(editorFleet);
+        }
+
+        private static string GetEditorFleetName(EditorFleet editorFleet)
         {
             var factionPostfix = "_NoFaction";
             if (editorFleet.Faction != null)

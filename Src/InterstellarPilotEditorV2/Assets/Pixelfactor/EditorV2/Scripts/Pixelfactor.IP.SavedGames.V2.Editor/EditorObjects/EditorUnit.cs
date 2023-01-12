@@ -1,6 +1,4 @@
-﻿using Pixelfactor.IP.Common.Factions;
-using Pixelfactor.IP.SavedGames.V2.Model;
-using System;
+﻿using Pixelfactor.IP.SavedGames.V2.Model;
 using UnityEditor;
 using UnityEngine;
 
@@ -82,7 +80,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         public string EditorName;
 
         [Tooltip("Helps determine what type of ship this is so that only certain ships can be spawned when needed")]
-        public FactionStrategy EditorShipPurpose = FactionStrategy.Unspecified;
+        public EditorFactionStrategy EditorShipPurpose = EditorFactionStrategy.None;
 
         public string GetEditorName()
         {
