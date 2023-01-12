@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1499588013825266274}
   - component: {fileID: 3585806800839264951}
   - component: {fileID: 7856581251997153304}
+  - component: {fileID: 734920693899224434}
   m_Layer: 0
   m_Name: Unit_Cargo_Rock
   m_TagString: Untagged
@@ -79,6 +80,19 @@ MonoBehaviour:
   Quantity: 1
   Expires: 0
   SpawnTime: 0
+--- !u!135 &734920693899224434
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760377284931665905}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1017279684866837475
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1499588013825266274}
   - component: {fileID: 3585806800839264951}
+  - component: {fileID: 867871448191494274}
   m_Layer: 0
   m_Name: Unit_Misc_NavBuoy
   m_TagString: Untagged
@@ -58,6 +59,22 @@ MonoBehaviour:
   AllowDestruction: 1
   IsInvulnerable: 0
   RpProvision: 1
+  Health: -1
+  IsDestroyed: 0
+  EditorName: 
+--- !u!135 &867871448191494274
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760377284931665905}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8234934650978750726
 GameObject:
   m_ObjectHideFlags: 0

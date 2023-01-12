@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1499588013825266274}
   - component: {fileID: 3585806800839264951}
   - component: {fileID: 9043795926212612615}
+  - component: {fileID: 4929998313269323685}
   m_Layer: 0
   m_Name: Unit_Wormhole_Default
   m_TagString: Untagged
@@ -47,12 +48,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
+  Seed: -1
   LegacyUnitClass: 20000
   UnitClass: {fileID: 2544603334889176812, guid: a62570a359836b74cb5248eb260d059f, type: 3}
   Faction: {fileID: 0}
-  RpProvision: 0
   Name: 
+  ShortName: 
   Radius: -1
+  VariantName: 
+  Mass: -1
+  AllowDestruction: 1
+  IsInvulnerable: 0
+  RpProvision: 0
+  Health: -1
+  IsDestroyed: 0
+  EditorName: 
 --- !u!114 &9043795926212612615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,6 +79,19 @@ MonoBehaviour:
   IsUnstable: 0
   UnstableNextChangeTargetTime: 0
   UnstableTarget: {fileID: 0}
+--- !u!135 &4929998313269323685
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760377284931665905}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 50
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3286997516906052616
 PrefabInstance:
   m_ObjectHideFlags: 0
