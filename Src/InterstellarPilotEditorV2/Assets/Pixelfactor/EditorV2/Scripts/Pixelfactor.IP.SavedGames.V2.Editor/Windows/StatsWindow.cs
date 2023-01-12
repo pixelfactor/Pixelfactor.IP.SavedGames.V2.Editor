@@ -1,6 +1,4 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.Tools;
-using System;
-using System.Text;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,7 +6,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 {
     public class StatsWindow
     {
-        private StringBuilder stringBuilder = new StringBuilder();
         private Stats stats = null;
         public void Draw()
         {
