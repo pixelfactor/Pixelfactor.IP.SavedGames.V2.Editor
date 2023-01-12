@@ -13,7 +13,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         {
             var editorScenario = SavedGameUtil.FindSavedGameOrErrorOut();
 
-            var createdCount = new AsteroidSpawner().Spawn(editorScenario);
+            var createdCount = new AsteroidSpawner().SpawnInAllClusters(editorScenario);
 
             Debug.Log($"Finished creating {createdCount} asteroids");
 
@@ -27,7 +27,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             var spawner = new AsteroidSpawner();
             foreach (var sector in sectors)
             {
-                createdCount += spawner.Spawn(sector);
+                createdCount += spawner.SpawnInSector(sector);
             }
 
             Debug.Log($"Finished creating {createdCount} asteroids");

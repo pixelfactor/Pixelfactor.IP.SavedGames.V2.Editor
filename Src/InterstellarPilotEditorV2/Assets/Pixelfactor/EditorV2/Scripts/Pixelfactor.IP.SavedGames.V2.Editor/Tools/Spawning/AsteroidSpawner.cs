@@ -1,4 +1,5 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
+using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,13 +18,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning
         /// </summary>
         public float AsteroidCountReferenceRadius = 1000.0f;
 
-        public string AsteroidTypeBPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Units/Asteroids/Unit_AsteroidTypeB_Rock.prefab";
-        public string AsteroidTypeHPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Units/Asteroids/Unit_AsteroidTypeH_Ice.prefab";
-
         /// <summary>
         /// Create asteroids in all sectors
         /// </summary>
-        public int Spawn(EditorScenario editorScenario)
+        public int SpawnInAllClusters(EditorScenario editorScenario)
         {
             var count = 0;
             foreach (var asteroidCluster in editorScenario.GetComponentsInChildren<EditorAsteroidCluster>())
@@ -37,7 +35,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning
         /// <summary>
         /// Create asteroids in all sectors
         /// </summary>
-        public int Spawn(EditorSector editorSector)
+        public int SpawnInSector(EditorSector editorSector)
         {
             var count = 0;
             foreach (var asteroidCluster in editorSector.GetComponentsInChildren<EditorAsteroidCluster>())
@@ -50,24 +48,26 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning
 
         private EditorUnit GetAsteroidPrefab(EditorAsteroidCluster asteroidCluster)
         {
+            var settings = CustomSettings.GetOrCreateSettings();
+
             switch (asteroidCluster.GetComponent<EditorUnit>().ModelUnitClass)
             {
                 case Model.ModelUnitClass.AsteroidCluster_TypeB:
                     {
-                        var unit = AssetDatabase.LoadAssetAtPath<EditorUnit>(this.AsteroidTypeBPrefabPath);
+                        var unit = AssetDatabase.LoadAssetAtPath<EditorUnit>(Spawn.GetUnitPrefabPath(settings.UnitPrefabsPath, Model.ModelUnitClass.Asteroid_TypeB));
                         if (unit == null)
                         {
-
+                            throw new System.Exception($"Cannot create asteroids in asteroid cluster {asteroidCluster}. No asteroid prefab for asteroid cluster found in path \"{settings.UnitPrefabsPath}\"");
                         }
 
                         return unit;
                     }
                 case Model.ModelUnitClass.AsteroidCluster_TypeH:
                     {
-                        var unit = AssetDatabase.LoadAssetAtPath<EditorUnit>(this.AsteroidTypeHPrefabPath);
+                        var unit = AssetDatabase.LoadAssetAtPath<EditorUnit>(Spawn.GetUnitPrefabPath(settings.UnitPrefabsPath, Model.ModelUnitClass.Asteroid_TypeH));
                         if (unit == null)
                         {
-                            throw new System.Exception($"Cannot create asteroids in asteroid cluster {asteroidCluster}. No asteroid prefab for asteroid cluster found at path \"{AsteroidTypeHPrefabPath}\"");
+                            throw new System.Exception($"Cannot create asteroids in asteroid cluster {asteroidCluster}. No asteroid prefab for asteroid cluster found in path \"{settings.UnitPrefabsPath}\"");
                         }
 
                         return unit;
@@ -105,7 +105,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning
 
             for (int i = 0; i < count; i++)
             {
-                var asteroid = TrySpawn(asteroidCluster, sector, asteroidPrefab);
+                var asteroid = TrySpawnAsteroid(asteroidCluster, sector, asteroidPrefab);
                 if (asteroid != null)
                 {
                     actualCreatedCount++;
@@ -127,19 +127,19 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning
                 MaxAsteroidCount * (asteroidCluster.GetComponent<EditorUnit>().Radius / AsteroidCountReferenceRadius));
         }
 
-        public EditorUnit TrySpawn(EditorAsteroidCluster asteroidCluster, EditorSector sector, EditorUnit asteroidPrefab)
+        public EditorUnit TrySpawnAsteroid(EditorAsteroidCluster asteroidCluster, EditorSector sector, EditorUnit asteroidPrefab)
         {
             var position = TryGenerateAsteroidSectorPosition(asteroidCluster, sector);
             if (position.HasValue)
             {
-                var asteroid = Spawn(asteroidPrefab, sector, position.Value);
+                var asteroid = SpawnAsteroid(asteroidPrefab, sector, position.Value);
                 return asteroid;
             }
 
             return null;
         }
 
-        public EditorUnit Spawn(EditorUnit prefab, EditorSector sector, Vector3 position)
+        public EditorUnit SpawnAsteroid(EditorUnit prefab, EditorSector sector, Vector3 position)
         {
             var asteroid = PrefabUtility.InstantiatePrefab(prefab.gameObject, sector.transform) as GameObject;
             asteroid.transform.position = position;
