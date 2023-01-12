@@ -23,6 +23,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         private string spawnFleetName = null;
         private EditorFactionStrategy spawnFleetShipTypes = EditorFactionStrategy.War;
 
+        private float spawnFleetMinShipSize = 0.0f;
+        private float spawnFleetMaxShipSize = 1.0f;
+
         public void Draw()
         {
 
@@ -107,6 +110,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 this.spawnFleetShipTypes,
                 GUILayout.ExpandWidth(false));
 
+            EditorGUILayout.MinMaxSlider(
+                new GUIContent("Ship size", "The min and max size of the ships to spawn"),
+                ref this.spawnFleetMinShipSize,
+                ref this.spawnFleetMaxShipSize,
+                0.0f,
+                1.0f);
+
             EditorGUI.BeginDisabledGroup(!canSpawnFleet);
             if (GUILayout.Button(
                 new GUIContent(
@@ -114,22 +124,36 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                     $"Creates a new fleet"),
                 GuiHelper.ButtonLayout))
             {
-                var shipPrefabs = GameObjectHelper.TryGetUnityObjectsOfTypeFromPath<EditorUnit>(
-                    CustomSettings.GetOrCreateSettings().UnitPrefabsPath.Trim('/') + "/Ship").ToList();
+                SpawnNewFleet(sector);
+            }
+            EditorGUI.EndDisabledGroup();
+        }
 
-                var newFleetUnits = new List<EditorUnit>();
+        private void SpawnNewFleet(EditorSector sector)
+        {
+            var shipPrefabs = GameObjectHelper.TryGetUnityObjectsOfTypeFromPath<EditorUnit>(
+                CustomSettings.GetOrCreateSettings().UnitPrefabsPath.Trim('/') + "/Ship").ToList();
+
+            var newFleetUnits = new List<EditorUnit>();
+            if (shipPrefabs.Count > 0)
+            {
                 for (int i = 0; i < this.spawnFleetShipCount; i++)
                 {
                     newFleetUnits.Add(SpawnFleetUnit(sector, shipPrefabs));
                 }
-
-                var newFleet = Spawn.FleetForUnits(newFleetUnits);
-                newFleet.Designation = this.spawnFleetName;
-                EditorUtility.SetDirty(newFleet);
-                AutoNameObjects.AutoNameFleet(newFleet);
-                Selection.activeObject = newFleet.gameObject;
             }
-            EditorGUI.EndDisabledGroup();
+
+            if (newFleetUnits.Count == 0)
+            {
+                EditorUtility.DisplayDialog("Spawn fleet", "No ships were found that match the parameters", "OK");
+                return;
+            }
+
+            var newFleet = Spawn.FleetForUnits(newFleetUnits);
+            newFleet.Designation = this.spawnFleetName;
+            EditorUtility.SetDirty(newFleet);
+            AutoNameObjects.AutoNameFleet(newFleet);
+            Selection.activeObject = newFleet.gameObject;
         }
 
         private void DrawSpwnFleetFromExisting()
@@ -178,9 +202,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
         private ModelUnitClass GetRandomSpawnFleetShipClass(IEnumerable<EditorUnit> prefabs)
         {
-            var ships = prefabs.Where(e => (e.EditorShipPurpose & this.spawnFleetShipTypes) != EditorFactionStrategy.None);
+            var ships = prefabs
+                .Where(e => (e.EditorShipPurpose & this.spawnFleetShipTypes) != EditorFactionStrategy.None)
+                .Where(e => e.GetRelativeSize() >= this.spawnFleetMinShipSize && e.GetRelativeSize() <= this.spawnFleetMaxShipSize).ToList();
             if (ships.Any())
-            { 
+            {
                 return ships.GetRandom().ModelUnitClass;
             }
 

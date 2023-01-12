@@ -1,4 +1,5 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Model;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -145,6 +146,16 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
                 return sphereCollider.radius;
 
             return 1.0f;
+        }
+
+        /// <summary>
+        /// Gets a massive estimate of the ships size compared to other ships
+        /// </summary>
+        /// <returns></returns>
+        public float GetRelativeSize()
+        {
+            // HACK: Hard-coded max radius is equivalent to the magnus
+            return Mathf.Lerp(0.0f, 1.0f, (this.GetCollisionRadius() - 3.0f) / 25f);
         }
     }
 }
