@@ -32,7 +32,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         {
             IPEditorWindow window = EditorWindow.GetWindow<IPEditorWindow>();
             var icon = AssetDatabase.LoadAssetAtPath<Texture>("Assets/Pixelfactor/EditorV2/Textures/DevLogoCentered256.png");
-            window.titleContent = new GUIContent("IP Editor V2", icon);
+            window.titleContent = new GUIContent("IP2 Editor", icon);
         }
 
         void OnGUI()
@@ -44,7 +44,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             var guiContents = new GUIContent[]
             {
-                new GUIContent("Main", "File operations like import/export"),
+                new GUIContent("File", "File operations like import/export"),
                 new GUIContent("Build", "Tools to construct or amend universe sectors"),
                 new GUIContent("Spawn", "Tools to spawn objects inside sectors"),
                 //new GUIContent("Edit", "Tools to edit existing universe objects"),

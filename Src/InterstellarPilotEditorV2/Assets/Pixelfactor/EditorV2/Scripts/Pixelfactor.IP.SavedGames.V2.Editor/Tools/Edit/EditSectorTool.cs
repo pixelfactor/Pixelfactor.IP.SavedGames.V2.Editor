@@ -29,7 +29,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Edit
 
             // TODO: Assign name
             editorSector.Name = SectorNamingTool.GetUniqueSectorName(editorSector, editorSector.GetSavedGame());
-            editorSector.WormholeDistanceMultiplier = Random.Range(0.6f, 1.0f);
+            editorSector.WormholeDistance = Random.Range(0.6f, 1.0f);
 
             AutoNameObjects.AutoNameSector(editorSector);
         }

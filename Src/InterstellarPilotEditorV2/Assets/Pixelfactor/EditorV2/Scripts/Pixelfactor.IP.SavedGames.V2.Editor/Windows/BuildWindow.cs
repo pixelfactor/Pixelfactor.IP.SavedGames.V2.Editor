@@ -318,7 +318,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 customSettings.MinDistanceBetweenSectors * 0.4f, // Increase tolerance slightly
                 customSettings.MaxDistanceBetweenSectors * 1.1f,
                 customSettings.MinAngleBetweenWormholes,
-                newSector.WormholeDistanceMultiplier * savedGame.MaxWormholeDistance);
+                newSector.WormholeDistance * savedGame.MaxWormholeDistance);
         }
 
         private void GrowEachOnce(List<EditorSector> selectedSectors, CustomSettings settings)
@@ -388,7 +388,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             if (GUILayout.Button(
                 new GUIContent(
-                    "Expand",
+                    this.expandMultiplier >= 1.0f ? "Expand" : "Shrink",
                     "Grows or shrinks the distance between existing sectors"),
                 GuiHelper.ButtonLayout))
             {

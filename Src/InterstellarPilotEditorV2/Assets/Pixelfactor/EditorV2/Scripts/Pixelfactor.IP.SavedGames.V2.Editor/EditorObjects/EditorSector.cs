@@ -1,6 +1,7 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Model;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 {
@@ -27,7 +28,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// </summary>
         [Tooltip("Determines the size of the playing area of the sector. This value is used extensively by the engine when determining where to place units. Use 0 to make the smallest sector possible. This value is respected when using the 'connect tool' to create wormholes.")]
         [Range(0.4f, 1f)]
-        public float WormholeDistanceMultiplier = 1.0f;
+        [FormerlySerializedAs("WormholeDistanceMultiplier")]
+        public float WormholeDistance = 1.0f;
 
         /// <summary>
         /// Something to do with the appearance of asteroid clusters

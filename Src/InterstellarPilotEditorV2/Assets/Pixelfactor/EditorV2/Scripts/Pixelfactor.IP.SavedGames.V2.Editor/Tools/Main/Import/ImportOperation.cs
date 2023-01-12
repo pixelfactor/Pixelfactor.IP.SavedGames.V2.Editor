@@ -118,7 +118,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
                 var editorSector = PrefabHelper.Instantiate(sectorPrefab, this.sectorsTransform);
                 editorSector.Id = modelSector.Id;
                 editorSector.Name = modelSector.Name;
-                editorSector.WormholeDistanceMultiplier = modelSector.GateDistanceMultiplier;
+                editorSector.WormholeDistance = modelSector.GateDistanceMultiplier;
                 editorSector.BackgroundRotation = modelSector.BackgroundRotation.ToVector3();
                 editorSector.Seed = modelSector.RandomSeed;
                 editorSector.AmbientLightColor = modelSector.AmbientLightColor.ToColor();
