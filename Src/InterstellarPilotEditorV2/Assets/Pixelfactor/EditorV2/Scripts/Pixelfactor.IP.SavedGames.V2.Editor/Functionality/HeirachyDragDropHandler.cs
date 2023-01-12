@@ -30,20 +30,20 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Functionality
         {
             var draggedFaction = GetDraggedFaction();
             if (draggedFaction == null)
-                return DragAndDropVisualMode.Generic;
+                return DragAndDropVisualMode.None;
 
             if ((dropMode & HierarchyDropFlags.DropUpon) == HierarchyDropFlags.None)
-                return DragAndDropVisualMode.Generic;
+                return DragAndDropVisualMode.None;
 
             var target = EditorUtility.InstanceIDToObject(dropTargetInstanceID) as GameObject;
             if (target == null)
-                return DragAndDropVisualMode.Rejected;
-
-            if (PrefabUtility.IsPartOfPrefabAsset(draggedFaction))
-                return DragAndDropVisualMode.Rejected;
+                return DragAndDropVisualMode.None;
 
             var targetUnit = target.GetComponent<EditorUnit>();
             if (targetUnit == null)
+                return DragAndDropVisualMode.None;
+
+            if (PrefabUtility.IsPartOfPrefabAsset(draggedFaction))
                 return DragAndDropVisualMode.Rejected;
 
             if (!targetUnit.CanHaveFaction())

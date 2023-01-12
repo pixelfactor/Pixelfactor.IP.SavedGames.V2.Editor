@@ -7,5 +7,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.FleetOrders.OrderTyp
     {
         public EditorUnit TargetUnit;
         public float AttackPriority = 8.0f;
+
+        public override Vector3? GetTargetPosition()
+        {
+            if (this.TargetUnit != null)
+                return this.TargetUnit.transform.position;
+
+            return base.GetTargetPosition();
+        }
     }
 }
