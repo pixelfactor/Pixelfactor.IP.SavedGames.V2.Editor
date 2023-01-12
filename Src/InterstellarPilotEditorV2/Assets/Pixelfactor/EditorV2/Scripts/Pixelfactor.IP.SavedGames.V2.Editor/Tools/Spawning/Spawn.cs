@@ -2,6 +2,8 @@
 using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Edit;
 using Pixelfactor.IP.SavedGames.V2.Model;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning
@@ -63,6 +65,46 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning
             var split = modelUnitClass.ToString().Split("_", 2, System.StringSplitOptions.RemoveEmptyEntries);
 
             return $"{basePath.TrimEnd('/')}/{split[0]}/Unit_{modelUnitClass}.prefab";
+        }
+
+        public static EditorFleet FleetForUnits(IEnumerable<EditorUnit> editorUnits)
+        {
+            var settings = CustomSettings.GetOrCreateSettings();
+            var fleetPath = settings.FleetPrefabPath;
+            var fleet = PrefabHelper.Instantiate<EditorFleet>(fleetPath);
+            var firstUnit = editorUnits.First();
+            fleet.transform.position = firstUnit.transform.position;
+            fleet.transform.SetParent(firstUnit.GetSector().transform);
+            fleet.Faction = firstUnit.Faction;
+            EditorUtility.SetDirty(fleet);
+
+            foreach (var unit in editorUnits)
+            {
+                var npc = PilotForUnitIfNone(unit);
+
+                // TODO: If any of the units are docked, we shouldn't nest the unit underneath the fleet
+                unit.transform.SetParent(fleet.transform);
+            }
+
+            return fleet;
+        }
+
+        public static EditorNpcPilot PilotForUnitIfNone(EditorUnit editorUnit)
+        {
+            var npc = editorUnit.GetComponentInChildren<EditorNpcPilot>();
+            if (npc == null)
+            {
+                return PilotForUnit(editorUnit);
+            }
+
+            return null;
+        }
+
+        public static EditorNpcPilot PilotForUnit(EditorUnit editorUnit)
+        {
+            var settings = CustomSettings.GetOrCreateSettings();
+            var npc = PrefabHelper.Instantiate<EditorNpcPilot>(settings.NpcPrefabPath, editorUnit.transform);
+            return npc;
         }
     }
 }

@@ -33,6 +33,28 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
             return list;
         }
 
+        public static bool TryGetSelectedRootUnits(out List<EditorUnit> units)
+        {
+            units = new List<EditorUnit>();
+            foreach (var obj in Selection.objects)
+            {
+                if (obj is GameObject gameObject)
+                {
+                    var p = gameObject.GetComponent<EditorUnit>();
+                    if (p != null && p.IsShip())
+                    {
+                        units.Add(p);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return units.Count > 0;
+        }
+
         public static void Add(Object gameObject)
         {
             var selection = Selection.objects.ToList();

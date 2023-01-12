@@ -85,7 +85,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
             if (!string.IsNullOrWhiteSpace(this.EditorName))
                 return this.EditorName;
 
-            return null;
+            return this.name;
         }
 
         void OnDrawGizmos()

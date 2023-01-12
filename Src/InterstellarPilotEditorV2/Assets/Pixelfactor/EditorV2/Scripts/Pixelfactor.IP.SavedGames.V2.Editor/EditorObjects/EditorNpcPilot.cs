@@ -7,5 +7,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
     /// </summary>
     public class EditorNpcPilot : MonoBehaviour
     {
+        [Tooltip("The fleet that the pilot belongs to. This can be left null and by convention the fleet will be found if the pilot is nested underneath it")]
+        public EditorFleet Fleet = null;
     }
 }

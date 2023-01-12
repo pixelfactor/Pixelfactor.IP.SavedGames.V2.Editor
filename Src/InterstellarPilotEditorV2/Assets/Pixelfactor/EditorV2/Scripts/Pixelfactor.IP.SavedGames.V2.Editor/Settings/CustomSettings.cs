@@ -18,7 +18,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
 
         [Tooltip("Whether clicking the Unity play button will run the scenario")]
         [SerializeField]
-        private bool runScenarioOnPlayMode = true;
+        private bool runScenarioOnPlayMode = false;
 
         /// <summary>
         /// The width and height of each scene
@@ -103,15 +103,20 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private string playerFactionPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Factions/FactionPlayer.prefab";
 
+        [Tooltip("The path to the prefab used for NPCs")]
+        [SerializeField]
+        private string npcPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/NpcPilots/NpcPilot.prefab";
+
+        [Tooltip("The path to the prefab used for fleets")]
+        [SerializeField]
+        private string fleetPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Fleets/Fleet.prefab";
+
         internal static CustomSettings GetOrCreateSettings()
         {
             var settings = AssetDatabase.LoadAssetAtPath<CustomSettings>(k_MyCustomSettingsPath);
             if (settings == null)
             {
                 settings = ScriptableObject.CreateInstance<CustomSettings>();
-                settings.gameExecutablePath = "";
-                settings.defaultExportPath = "";
-                settings.runScenarioOnPlayMode = true;
                 AssetDatabase.CreateAsset(settings, k_MyCustomSettingsPath);
                 AssetDatabase.SaveAssets();
             }
@@ -232,6 +237,16 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         {
             get { return this.cargoClassPrefabsPath; }
         }
+
+        public string FleetPrefabPath
+        {
+            get { return this.fleetPrefabPath; }
+        }
+
+        public string NpcPrefabPath
+        {
+            get { return this.npcPrefabPath; }
+        }
     }
 
     // Register a SettingsProvider using IMGUI for the drawing framework:
@@ -280,6 +295,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("universeMapScaleFactor"), new GUIContent("Universe scale factor"));
                     EditorGUILayout.PropertyField(settings.FindProperty("unitPrefabsPath"), new GUIContent("Unit prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("factionPrefabPath"), new GUIContent("Faction prefab path"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("fleetPrefabPath"), new GUIContent("Fleet prefab path"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("npcPrefabPath"), new GUIContent("NPC prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("playerFactionPrefabPath"), new GUIContent("Player faction prefab path"));
 
                     settings.ApplyModifiedPropertiesWithoutUndo();

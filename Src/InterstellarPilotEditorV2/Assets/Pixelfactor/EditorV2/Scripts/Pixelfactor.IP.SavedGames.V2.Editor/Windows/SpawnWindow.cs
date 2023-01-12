@@ -14,24 +14,26 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         public const int SpawnShipId = 0;
         public const int SpawnStationId = 1;
         public const int SpawnAsteroidsId = 2;
+        public const int SpawnFleetsId = 3;
+
         private int currentTab = SpawnShipId;
         private EditorFaction spawnFaction = null;
 
         public void Draw()
         {
 
-            currentTab = GUILayout.Toolbar(currentTab, new string[] { "Ship", "Station", "Asteroids" });
+            currentTab = GUILayout.Toolbar(currentTab, new string[] { "Ship", "Station", "Asteroid", "Fleet" });
 
             switch (currentTab)
             {
                 case SpawnShipId:
                     {
-                        ShowSpawnOptions("Ship");
+                        ShowSpawnOptionsAndSector("Ship");
                     }
                     break;
                 case SpawnStationId:
                     {
-                        ShowSpawnOptions("Station");
+                        ShowSpawnOptionsAndSector("Station");
                     }
                     break;
                 case SpawnAsteroidsId:
@@ -40,12 +42,64 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
                         EditorGUILayout.Space(30);
 
-                        ShowSpawnOptions("Asteroid", allowFaction: false);
+                        ShowSpawnOptionsAndSector("Asteroid", allowFaction: false);
+                        ShowSpawnOptions("AsteroidCluster", allowFaction: false);
+                    }
+                    break;
+                case SpawnFleetsId:
+                    {
+                        DrawSpawnFleetOptions();
                     }
                     break;
             }
 
             EditorGUI.EndDisabledGroup();
+        }
+
+        private static bool CanSpawnFleetForSelectedUnits(out List<EditorUnit> units)
+        {
+            if (Selector.TryGetSelectedRootUnits(out units))
+            {
+                if (units.Count > 0)
+                {
+                    var firstFaction = units[0].Faction;
+
+                    if (firstFaction != null)
+                    {
+                        if (units.All(e => e.Faction == firstFaction && e.GetFleet() == null))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            units = null;
+            return false;
+        }
+
+        private static void DrawSpawnFleetOptions()
+        {
+            var canSpawnFleetFromSelected = CanSpawnFleetForSelectedUnits(out List<EditorUnit> units);
+
+            EditorGUI.BeginDisabledGroup(!canSpawnFleetFromSelected);
+
+            if (GUILayout.Button(
+                new GUIContent(
+                    "Fleet for selected units",
+                    "Creates a fleet for the selected units"),
+                GuiHelper.ButtonLayout))
+            {
+                var newFleet = Spawn.FleetForUnits(units);
+                Selection.activeObject = newFleet.gameObject;
+            }
+
+            EditorGUI.EndDisabledGroup();
+
+            if (!canSpawnFleetFromSelected)
+            {
+                GuiHelper.HelpPrompt("Ensure that all selected objects are ships and that they have a faction, and aren't already part of a fleet");
+            }
         }
 
         private static void DrawSpawnAsteroidOptions()
@@ -76,7 +130,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             }
         }
 
-        private void ShowSpawnOptions(string subDirectory, bool allowFaction = true)
+        private void ShowSpawnOptionsAndSector(string subDirectory, bool allowFaction = true)
         {
             var sector = Selector.GetSingleSelectedSectorOrNull();
 
@@ -84,10 +138,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUILayout.TextField("Spawn Sector", WindowHelper.DescribeSectors(sector));
             EditorGUI.EndDisabledGroup();
 
-            EditorGUI.BeginDisabledGroup(true);
+            ShowSpawnOptions(subDirectory, allowFaction);
+        }
 
-
-            EditorGUI.EndDisabledGroup();
+        private void ShowSpawnOptions(string subDirectory, bool allowFaction)
+        {
+            var sector = Selector.GetSingleSelectedSectorOrNull();
 
             var canSpawn = sector != null;
 

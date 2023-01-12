@@ -4,6 +4,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
 {
     public static class EditorUnitExtensions
     {
+        public static EditorFleet GetFleet(this EditorUnit unit)
+        {
+            var npcPilot = unit.GetComponentInChildren<EditorNpcPilot>();
+            if (npcPilot != null && npcPilot.Fleet != null)
+            {
+                return npcPilot.Fleet;
+            }
+
+            return unit.GetComponentInParent<EditorFleet>();
+        }
+
         public static bool IsStableWormhole(this EditorUnit unit)
         {
             var wormholeData = unit.GetComponent<EditorUnitWormholeData>();
@@ -74,6 +85,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
         public static bool IsGasCloud(this EditorUnit unit)
         {
             return unit.ModelUnitClass.IsGasCloud();
+        }
+
+        public static EditorSector GetSector(this EditorUnit unit)
+        {
+            return unit.GetComponentInParent<EditorSector>();
         }
     }
 }

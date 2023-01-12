@@ -10,10 +10,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         public const int MainWindowId = 0;
         public const int BuildWindowId = 1;
         public const int SpawnWindowId = 2;
-        public const int EditWindowId = 3;
-        public const int RefineWindowId = 4;
-        public const int MiscWindowId = 6;
-        public const int StatsWindowId = 5;
+        public const int RefineWindowId = 3;
+        public const int StatsWindowId = 4;
+
+        public const int EditWindowId = -1;
+        public const int MiscWindowId = -1;
+        
 
         private BuildWindow buildWindow = new BuildWindow();
         private SpawnWindow spawnWindow = new SpawnWindow();
@@ -45,10 +47,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 new GUIContent("Main", "File operations like import/export"),
                 new GUIContent("Build", "Tools to construct or amend universe sectors"),
                 new GUIContent("Spawn", "Tools to spawn objects inside sectors"),
-                new GUIContent("Edit", "Tools to edit existing universe objects"),
+                //new GUIContent("Edit", "Tools to edit existing universe objects"),
                 new GUIContent("Refine", "Tools to cleanup the current scenario"),
                 new GUIContent("Stats", "Info about the current scenario"),
-                new GUIContent("Misc", "Tools that don't fit in the other categories"),
+                //new GUIContent("Misc", "Tools that don't fit in the other categories"),
             };
 
             currentTab = GUILayout.Toolbar(currentTab, guiContents);
@@ -89,11 +91,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                         this.statsWindow.Draw();
                     }
                     break;
-                case MiscWindowId:
-                    {
-                        this.miscWindow.Draw();
-                    }
-                    break;
+                //case MiscWindowId:
+                //    {
+                //        this.miscWindow.Draw();
+                //    }
+                //    break;
             }
 
             GUILayout.FlexibleSpace();

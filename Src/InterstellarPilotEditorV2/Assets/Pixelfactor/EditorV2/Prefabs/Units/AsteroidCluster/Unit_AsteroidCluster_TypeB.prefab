@@ -58,6 +58,10 @@ MonoBehaviour:
   Mass: -1
   AllowDestruction: 1
   IsInvulnerable: 0
+  RpProvision: 0
+  Health: -1
+  IsDestroyed: 0
+  EditorName: Cluster Type B
 --- !u!114 &-8275921844653596646
 MonoBehaviour:
   m_ObjectHideFlags: 0
