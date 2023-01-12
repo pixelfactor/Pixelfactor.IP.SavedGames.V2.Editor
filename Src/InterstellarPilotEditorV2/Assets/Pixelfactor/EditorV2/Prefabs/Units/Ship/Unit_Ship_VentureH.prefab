@@ -117,6 +117,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Venture H
+  EditorShipPurpose: 4
 --- !u!114 &615031964210006029
 MonoBehaviour:
   m_ObjectHideFlags: 0

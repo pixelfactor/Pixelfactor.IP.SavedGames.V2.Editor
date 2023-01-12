@@ -117,6 +117,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Shuttle X
+  EditorShipPurpose: 1
 --- !u!114 &-4683734814103346887
 MonoBehaviour:
   m_ObjectHideFlags: 0

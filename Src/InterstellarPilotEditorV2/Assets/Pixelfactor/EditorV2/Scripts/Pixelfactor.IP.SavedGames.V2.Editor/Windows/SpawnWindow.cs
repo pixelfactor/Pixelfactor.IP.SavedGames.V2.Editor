@@ -2,6 +2,7 @@
 using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning;
+using Pixelfactor.IP.SavedGames.V2.Model;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -18,6 +19,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
         private int currentTab = SpawnShipId;
         private EditorFaction spawnFaction = null;
+        private int spawnFleetShipCount = 8;
 
         public void Draw()
         {
@@ -78,9 +80,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             return false;
         }
 
-        private static void DrawSpawnFleetOptions()
+        private void DrawSpawnFleetOptions()
         {
-            var canSpawnFleetFromSelected = CanSpawnFleetForSelectedUnits(out List<EditorUnit> units);
+            var canSpawnFleetFromSelected = CanSpawnFleetForSelectedUnits(out List<EditorUnit> selectedUnits);
 
             EditorGUI.BeginDisabledGroup(!canSpawnFleetFromSelected);
 
@@ -90,7 +92,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                     "Creates a fleet for the selected units"),
                 GuiHelper.ButtonLayout))
             {
-                var newFleet = Spawn.FleetForUnits(units);
+                var newFleet = Spawn.FleetForUnits(selectedUnits);
                 Selection.activeObject = newFleet.gameObject;
             }
 
@@ -100,6 +102,53 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             {
                 GuiHelper.HelpPrompt("Ensure that all selected objects are ships and that they have a faction, and aren't already part of a fleet");
             }
+
+            GuiHelper.Subtitle("Spawn fleet", "Spawns a fleet of ships");
+            var factionContent = new GUIContent("Spawn faction", "The faction that the spawned unit will be assigned to");
+            this.spawnFaction = (EditorFaction)EditorGUILayout.ObjectField(factionContent, this.spawnFaction, typeof(EditorFaction), allowSceneObjects: true);
+
+            EditorGUILayout.PrefixLabel(new GUIContent("Ship count", "The number of ships in the fleet"));
+            this.spawnFleetShipCount = EditorGUILayout.IntSlider(this.spawnFleetShipCount, 1, 8, GUILayout.ExpandWidth(false));
+
+            var sector = Selector.GetSingleSelectedSectorOrNull();
+            var canSpawnFleet = this.spawnFaction != null && sector != null;
+
+            EditorGUI.BeginDisabledGroup(!canSpawnFleet);
+            if (GUILayout.Button(
+                new GUIContent(
+                    $"Spawn",
+                    $"Creates a new fleet"),
+                GuiHelper.ButtonLayout))
+            {
+                var newFleetUnits = new List<EditorUnit>();
+                for (int i = 0; i < this.spawnFleetShipCount; i++)
+                {
+                    newFleetUnits.Add(SpawnFleetUnit(sector));
+                }
+
+                var newFleet = Spawn.FleetForUnits(newFleetUnits);
+                Selection.activeObject = newFleet.gameObject;
+            }
+            EditorGUI.EndDisabledGroup();
+        }
+
+        private EditorUnit SpawnFleetUnit(EditorSector sector)
+        {
+            var randomFleetShipClass = GetRandomSpawnFleetShipClass();
+            var unit = Spawn.Unit(sector, randomFleetShipClass, CustomSettings.GetOrCreateSettings().UnitPrefabsPath);
+            unit.Faction = this.spawnFaction;
+            unit.transform.position = GetNewUnitSpawnPosition(sector, unit.GetCollisionRadius());
+
+            Physics.autoSimulation = false;
+            Physics.Simulate(0.1f);
+            EditorUtility.SetDirty(unit);
+            return unit;
+        }
+
+        private ModelUnitClass GetRandomSpawnFleetShipClass()
+        {
+            // TODO:
+            return ModelUnitClass.Ship_ShuttleA;
         }
 
         private static void DrawSpawnAsteroidOptions()
@@ -218,6 +267,19 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             return p;
         }
 
+        private Vector3 GetNewUnitSpawnPosition(EditorSector sector, float radius)
+        {
+            var initialPosition = GetCurrentScenePositionInScene();
+
+            var newPosition = SpawnPositionFinder.FindPositionOrNull(sector, initialPosition, radius);
+            if (newPosition.HasValue)
+            {
+                return newPosition.Value;
+            }
+
+            return sector.transform.position;
+        }
+
         private void DrawSpawnPrefabButton(EditorSector sector, EditorUnit unitPrefab, EditorFaction editorFaction)
         {
             if (GUILayout.Button(
@@ -233,26 +295,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 else
                 {
                     var unit = Spawn.Unit(sector, unitPrefab);
-                    var radius = 1.0f;
-                    var sphereCollider = unit.GetComponentInChildren<SphereCollider>();
-                    if (sphereCollider != null)
-                        radius = sphereCollider.radius;
-
                     if (unit.CanHaveFaction())
                     {
                         unit.Faction = editorFaction;
                     }
 
-                    var initialPosition = GetCurrentScenePositionInScene();
-                    var newPosition = SpawnPositionFinder.FindPositionOrNull(sector, initialPosition, radius);
-                    if (newPosition.HasValue)
-                    {
-                        unit.transform.position = newPosition.Value;
-                    }
-                    else
-                    {
-                        unit.transform.localPosition = Vector3.zero;
-                    }
+                    unit.transform.position = GetNewUnitSpawnPosition(sector, unit.GetCollisionRadius());
 
                     Selection.objects = new GameObject[] { unit.gameObject };
 

@@ -117,6 +117,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Orion X
+  EditorShipPurpose: 1
 --- !u!114 &2357831692022392022
 MonoBehaviour:
   m_ObjectHideFlags: 0

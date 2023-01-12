@@ -117,6 +117,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Magnus X
+  EditorShipPurpose: 1
 --- !u!114 &7930017523331774987
 MonoBehaviour:
   m_ObjectHideFlags: 0

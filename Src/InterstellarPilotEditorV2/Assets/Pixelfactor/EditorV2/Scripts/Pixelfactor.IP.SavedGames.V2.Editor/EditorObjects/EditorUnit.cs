@@ -1,4 +1,5 @@
-﻿using Pixelfactor.IP.SavedGames.V2.Model;
+﻿using Pixelfactor.IP.Common.Factions;
+using Pixelfactor.IP.SavedGames.V2.Model;
 using System;
 using UnityEditor;
 using UnityEngine;
@@ -80,6 +81,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         [Tooltip("A name for the unit displayed in the editor and not exported")]
         public string EditorName;
 
+        [Tooltip("Helps determine what type of ship this is so that only certain ships can be spawned when needed")]
+        public FactionStrategy EditorShipPurpose = FactionStrategy.Unspecified;
+
         public string GetEditorName()
         {
             if (!string.IsNullOrWhiteSpace(this.EditorName))
@@ -134,6 +138,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 
                 return ModelUnitClass.None;
             }
+        }
+
+        public float GetCollisionRadius()
+        {
+            var sphereCollider = this.GetComponentInChildren<SphereCollider>();
+            if (sphereCollider != null)
+                return sphereCollider.radius;
+
+            return 1.0f;
         }
     }
 }

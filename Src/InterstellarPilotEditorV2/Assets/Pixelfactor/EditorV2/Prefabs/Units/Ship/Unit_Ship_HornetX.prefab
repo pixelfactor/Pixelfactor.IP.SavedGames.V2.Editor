@@ -117,6 +117,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Hornet X
+  EditorShipPurpose: 1
 --- !u!114 &-1334482301781361748
 MonoBehaviour:
   m_ObjectHideFlags: 0

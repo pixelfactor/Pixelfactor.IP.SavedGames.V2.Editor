@@ -117,6 +117,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Hauler P
+  EditorShipPurpose: 128
 --- !u!114 &612890097101922229
 MonoBehaviour:
   m_ObjectHideFlags: 0

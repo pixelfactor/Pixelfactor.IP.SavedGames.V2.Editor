@@ -117,6 +117,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Ranger M
+  EditorShipPurpose: 16
 --- !u!114 &5476440316202007330
 MonoBehaviour:
   m_ObjectHideFlags: 0

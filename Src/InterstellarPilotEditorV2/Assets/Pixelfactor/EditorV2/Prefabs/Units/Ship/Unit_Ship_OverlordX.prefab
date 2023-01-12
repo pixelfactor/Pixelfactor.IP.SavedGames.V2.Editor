@@ -118,6 +118,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Overlord X
+  EditorShipPurpose: 1
 --- !u!114 &-7288787220880989701
 MonoBehaviour:
   m_ObjectHideFlags: 0

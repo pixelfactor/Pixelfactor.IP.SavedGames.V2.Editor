@@ -117,6 +117,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Creon M L
+  EditorShipPurpose: 1
 --- !u!114 &-2779205037002035363
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -117,6 +117,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Thunder A
+  EditorShipPurpose: 1
 --- !u!114 &-5912212689402796935
 MonoBehaviour:
   m_ObjectHideFlags: 0

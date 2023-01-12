@@ -117,6 +117,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Pioneer A
+  EditorShipPurpose: 1
 --- !u!114 &2266049344688612366
 MonoBehaviour:
   m_ObjectHideFlags: 0

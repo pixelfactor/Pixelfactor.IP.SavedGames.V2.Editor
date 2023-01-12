@@ -117,6 +117,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Flyer X
+  EditorShipPurpose: 1
 --- !u!114 &-5412470202436614116
 MonoBehaviour:
   m_ObjectHideFlags: 0

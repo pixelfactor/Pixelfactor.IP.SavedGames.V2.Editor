@@ -117,6 +117,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Drake A
+  EditorShipPurpose: 1
 --- !u!114 &4380311728204271963
 MonoBehaviour:
   m_ObjectHideFlags: 0

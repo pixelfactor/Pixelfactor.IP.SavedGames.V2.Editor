@@ -117,6 +117,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Raptor A
+  EditorShipPurpose: 1
 --- !u!114 &-758816600307856527
 MonoBehaviour:
   m_ObjectHideFlags: 0
