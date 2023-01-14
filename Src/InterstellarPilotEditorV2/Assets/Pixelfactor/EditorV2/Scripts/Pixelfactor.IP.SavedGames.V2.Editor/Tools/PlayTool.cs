@@ -30,6 +30,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 
             if (TryGetExePath(out string exePath))
             {
+                if (!System.IO.File.Exists(exePath))
+                {
+                    EditorUtility.DisplayDialog("Run scenario", "The path to the game's executable does not exist. Open settings to configure the executable path", "OK");
+                    return;
+                }
                 try
                 {
                     Debug.Log("Attempting to export and run scenario");
