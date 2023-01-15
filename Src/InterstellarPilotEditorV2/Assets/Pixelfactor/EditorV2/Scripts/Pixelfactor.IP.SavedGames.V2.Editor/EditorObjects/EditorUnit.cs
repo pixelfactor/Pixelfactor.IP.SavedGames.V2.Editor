@@ -141,7 +141,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 
         public float GetCollisionRadius()
         {
-            var sphereCollider = this.GetComponentInChildren<SphereCollider>();
+            var sphereCollider = this.GetComponent<SphereCollider>();
             if (sphereCollider != null)
                 return sphereCollider.radius;
 

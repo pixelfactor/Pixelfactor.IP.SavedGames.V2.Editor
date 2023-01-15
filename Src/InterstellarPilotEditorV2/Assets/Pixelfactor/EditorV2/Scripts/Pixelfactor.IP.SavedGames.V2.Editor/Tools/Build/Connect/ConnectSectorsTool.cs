@@ -167,7 +167,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Connect
             AutoNameObjects.AutoNameWormhole(wormhole2);
         }
 
-        private static EditorUnitWormholeData ConnectSectorTo(
+        private static EditorWormholeUnit ConnectSectorTo(
             EditorSector editorSector1,
             EditorSector editorSector2,
             float wormholeDistance)
@@ -178,7 +178,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Connect
             newWormhole.transform.position = editorSector1.transform.position + (direction * wormholeDistance);
             newWormhole.transform.rotation = Quaternion.LookRotation(-direction, Vector3.up);
 
-            var newWormholeData = newWormhole.GetComponent<EditorUnitWormholeData>();
+            var newWormholeData = newWormhole.GetComponent<EditorWormholeUnit>();
             return newWormholeData;
         }
 

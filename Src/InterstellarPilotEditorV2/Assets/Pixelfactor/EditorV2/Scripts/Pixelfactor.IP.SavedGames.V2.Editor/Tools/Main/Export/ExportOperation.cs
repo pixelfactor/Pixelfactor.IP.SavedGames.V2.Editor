@@ -10,6 +10,7 @@ using Pixelfactor.IP.SavedGames.V2.Model.Actions;
 using Pixelfactor.IP.SavedGames.V2.Model.Jobs;
 using Pixelfactor.IP.SavedGames.V2.Model.Triggers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -321,7 +322,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                         Name = editorFleet.Designation
                     };
 
-                    var editorFleetSettings = editorFleet.GetComponentInChildren<EditorFleetSettings>();
+                    var editorFleetSettings = editorFleet.transform.GetComponentInSelfOrImmediateChildren<EditorFleetSettings>();
                     if (editorFleetSettings != null)
                     {
                         fleet.FleetSettings = new ModelFleetSettings
@@ -340,7 +341,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                     }
 
                     // Orders
-                    var editorFleetOrders = editorFleet.GetComponentsInChildren<EditorFleetOrderBase>();
+                    var editorFleetOrders = editorFleet.GetOrdersRoot().GetComponentsInImmediateChildren<EditorFleetOrderBase>();
                     foreach (var editorFleetOrder in editorFleetOrders)
                     {
                         var fleetOrder = CreateFleetOrderFromEditorFleetOrder.CreateFleetOrder(editorFleetOrder, editorScenario, savedGame);
@@ -429,67 +430,64 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
         private void ExportWormholes()
         {
-            foreach (var editorSector in editorScenario.GetComponentsInChildren<EditorSector>())
+            foreach (var editorWormholeData in editorScenario.GetComponentsInChildren<EditorWormholeUnit>())
             {
-                foreach (var editorWormholeData in editorSector.GetComponentsInChildren<EditorUnitWormholeData>())
+                var editorUnit = editorWormholeData.transform.GetComponentInSelfOrImmediateChildren<EditorUnit>();
+                if (editorUnit == null)
                 {
-                    var editorUnit = editorWormholeData.GetComponentInParent<EditorUnit>();
-                    if (editorUnit == null)
-                    {
-                        LogAndThrow("Wormhole must be child of a unit", editorWormholeData);
-                    }
+                    LogAndThrow("Wormhole must be child of a unit", editorWormholeData);
+                }
 
-                    var unit = savedGame.Units.FirstOrDefault(e => e.Id == editorUnit.Id);
-                    if (unit == null)
-                    {
-                        LogAndThrow("Unit already exist in the saved game", editorWormholeData);
-                    }
+                var unit = savedGame.Units.FirstOrDefault(e => e.Id == editorUnit.Id);
+                if (unit == null)
+                {
+                    LogAndThrow("Unit already exist in the saved game", editorWormholeData);
+                }
 
-                    unit.WormholeData = new ModelUnitWormholeData
-                    {
-                        IsUnstable = editorWormholeData.IsUnstable,
-                        UnstableNextChangeTargetTime = editorWormholeData.UnstableNextChangeTargetTime,
-                    };
+                unit.WormholeData = new ModelUnitWormholeData
+                {
+                    IsUnstable = editorWormholeData.IsUnstable,
+                    UnstableNextChangeTargetTime = editorWormholeData.UnstableNextChangeTargetTime,
+                };
 
-                    if (editorWormholeData.IsUnstable)
+                if (editorWormholeData.IsUnstable)
+                {
+                    if (editorWormholeData.UnstableTarget != null)
                     {
-                        if (editorWormholeData.UnstableTarget != null)
+                        var targetSector = editorWormholeData.UnstableTarget.GetComponentInParent<EditorSector>();
+                        if (targetSector == null)
                         {
-                            var targetSector = editorWormholeData.UnstableTarget.GetComponentInParent<EditorSector>();
-                            if (targetSector == null)
-                            {
-                                LogAndThrow("Wormhole has a target transform that isn't a child of a sector", editorWormholeData);
-                            }
-
-                            unit.WormholeData.UnstableTargetSector = GetModelSector(targetSector);
-                            unit.WormholeData.UnstableTargetRotation = editorWormholeData.UnstableTarget.rotation.ToVec3();
-
-                            var targetSectorPosition = (editorWormholeData.UnstableTarget.position - targetSector.transform.position).ToVec3();
-                            targetSectorPosition.Y = 0.0f;
-                            unit.WormholeData.UnstableTargetPosition = targetSectorPosition;
+                            LogAndThrow("Wormhole has a target transform that isn't a child of a sector", editorWormholeData);
                         }
-                        else
-                        {
-                            Debug.LogWarning("Unstable wormhole should have a target", editorWormholeData);
-                        }
+
+                        unit.WormholeData.UnstableTargetSector = GetModelSector(targetSector);
+                        unit.WormholeData.UnstableTargetRotation = editorWormholeData.UnstableTarget.rotation.ToVec3();
+
+                        var targetSectorPosition = (editorWormholeData.UnstableTarget.position - targetSector.transform.position).ToVec3();
+                        targetSectorPosition.Y = 0.0f;
+                        unit.WormholeData.UnstableTargetPosition = targetSectorPosition;
                     }
                     else
                     {
-                        if (editorWormholeData.TargetWormholeUnit == null)
+                        Debug.LogWarning("Unstable wormhole should have a target", editorWormholeData);
+                    }
+                }
+                else
+                {
+                    if (editorWormholeData.TargetWormholeUnit == null)
+                    {
+                        Debug.LogWarning("Wormhole should have a target", editorWormholeData);
+                    }
+                    else
+                    {
+                        ModelUnit targetUnit = null;
+                        if (editorWormholeData.TargetWormholeUnit != null)
                         {
-                            Debug.LogWarning("Wormhole should have a target", editorWormholeData);
+                            targetUnit = savedGame.Units.FirstOrDefault(e =>
+                                e.Id == editorWormholeData.TargetWormholeUnit.Id);
                         }
-                        else
-                        {
-                            ModelUnit targetUnit = null;
-                            if (editorWormholeData.TargetWormholeUnit != null)
-                            {
-                                targetUnit = savedGame.Units.FirstOrDefault(e =>
-                                    e.Id == editorWormholeData.TargetWormholeUnit.Id);
-                            }
 
-                            unit.WormholeData.TargetWormholeUnit = targetUnit;
-                        }
+                        unit.WormholeData.TargetWormholeUnit = targetUnit;
                     }
                 }
             }
@@ -677,12 +675,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 }
 
                 // Link any pilot
-                var editorUnit = editorPerson.GetComponentInParent<EditorUnit>();
+                var editorUnit = editorPerson.transform.FindFirstParentOfType<EditorUnit>();
+
                 if (editorUnit != null)
                 {
                     modelPerson.CurrentUnit = savedGame.Units.FirstOrDefault(e => e.Id == editorUnit.Id);
 
-                    var editorComponentUnit = editorUnit.GetComponentInChildren<EditorComponentUnitData>();
+                    var editorComponentUnit = editorUnit.transform.GetComponentInSelfOrImmediateChildren<EditorComponentUnitData>();
                     if (editorComponentUnit != null)
                     {
                         modelPerson.CurrentUnit.ComponentUnitData.People.Add(modelPerson);
@@ -706,7 +705,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                             modelPerson.CurrentUnit.Faction = modelPerson.Faction;
                         }
                     }
-
                 }
 
                 // Init any Npc pilot
@@ -721,7 +719,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                     };
 
                     // Find fleet
-                    var editorFleet = editorNpcPilot.GetComponentInParent<EditorFleet>();
+                    var editorFleet = editorNpcPilot.Fleet;
+                    if (editorFleet == null)
+                    {
+                        editorFleet = editorUnit.FindFleetInParent();
+                    }
+
                     if (editorFleet != null)
                     {
                         var fleet = savedGame.Fleets.FirstOrDefault(e => e.Id == editorFleet.Id);
@@ -740,7 +743,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                     }
 
                     // Custom settings 
-                    var editorNpcPilotSettings = editorNpcPilot.GetComponentInChildren<EditorNpcPilotSettings>();
+                    var editorNpcPilotSettings = editorNpcPilot.transform.GetComponentInSelfOrImmediateChildren<EditorNpcPilotSettings>();
                     if (editorNpcPilotSettings != null)
                     {
                         modelPerson.NpcPilotSettings = new ModelNpcPilotSettings
@@ -866,36 +869,79 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
         private void ExportDockedUnits()
         {
-            foreach (var editorSector in editorScenario.GetComponentsInChildren<EditorSector>())
+            var units = editorScenario.GetComponentsInChildren<EditorUnit>();
+            var dockedUnitsWithoutBay = new List<(EditorUnit, EditorUnit)>();
+
+            foreach (var editorUnit in units)
             {
-                foreach (var editorUnit in editorSector.GetComponentsInChildren<EditorUnit>())
+                var hangarBay = editorUnit.transform.GetComponentInImmediateParent<EditorHangarBay>();
+                if (hangarBay != null)
                 {
-                    var hangarBay = editorUnit.GetComponentInParent<EditorHangarBay>();
-                    if (hangarBay != null)
+                    var editorDockUnit = hangarBay.transform.FindFirstParentOfType<EditorUnit>();
+                    if (editorDockUnit != null)
                     {
-                        var editorDockUnit = hangarBay.GetComponentInParent<EditorUnit>();
-                        if (editorDockUnit != null)
+                        var modelUnit = GetModelUnit(editorUnit);
+                        var modelDockUnit = GetModelUnit(editorDockUnit);
+
+                        if (modelDockUnit.ComponentUnitData == null)
                         {
-                            var modelUnit = GetModelUnit(editorUnit);
-                            var modelDockUnit = GetModelUnit(editorDockUnit);
-
-                            if (modelDockUnit.ComponentUnitData == null)
-                            {
-                                LogAndThrow($"A unit {editorUnit} is docked at another unit {editorDockUnit} that doesn't support a hangar", editorUnit);
-                            }
-
-                            if (modelDockUnit.ComponentUnitData.DockData == null)
-                            {
-                                modelDockUnit.ComponentUnitData.DockData = new ModelComponentUnitDockData();
-                            }
-
-                            modelDockUnit.ComponentUnitData.DockData.Items.Add(new ModelComponentUnitDockDataItem
-                            {
-                                BayId = hangarBay.BayId,
-                                DockedUnit   = modelUnit
-                            });
+                            LogAndThrow($"A unit {editorUnit} is docked at another unit {editorDockUnit} that doesn't support a hangar", editorUnit);
                         }
+
+                        if (modelDockUnit.ComponentUnitData.DockData == null)
+                        {
+                            modelDockUnit.ComponentUnitData.DockData = new ModelComponentUnitDockData();
+                        }
+
+                        modelDockUnit.ComponentUnitData.DockData.Items.Add(new ModelComponentUnitDockDataItem
+                        {
+                            BayId = hangarBay.BayId,
+                            DockedUnit = modelUnit
+                        });
                     }
+                }
+                else
+                {
+                    var parentUnit = editorUnit.transform.FindFirstParentOfType<EditorUnit>();
+                    if (parentUnit != null)
+                    {
+                        dockedUnitsWithoutBay.Add((editorUnit, parentUnit));
+                    }
+                }
+            }
+
+            // Handle units that aren't parented by a bay
+            foreach (var (unit, parentUnit) in dockedUnitsWithoutBay)
+            {
+                var modelUnit = GetModelUnit(unit);
+                var modelDockUnit = GetModelUnit(parentUnit);
+
+                if (modelDockUnit.ComponentUnitData == null)
+                {
+                    LogAndThrow($"A unit {unit} is docked at another unit {parentUnit} that doesn't support a hangar", unit);
+                }
+
+                if (modelDockUnit.ComponentUnitData.DockData == null)
+                {
+                    modelDockUnit.ComponentUnitData.DockData = new ModelComponentUnitDockData();
+                }
+
+                // Automatically find a bay
+                var possibleBays = parentUnit.FindChildrenExcludingUnits<EditorHangarBay>().Select(e => e.BayId).ToList();
+                var usedBayIds = modelDockUnit.ComponentUnitData.DockData.Items.Select(e => e.BayId);
+                var freeBays = possibleBays.Where(e => !usedBayIds.Contains(e));
+
+                if (freeBays.Any())
+                {
+                    modelDockUnit.ComponentUnitData.DockData.Items.Add(new ModelComponentUnitDockDataItem
+                    {
+                        BayId = freeBays.First(),
+                        DockedUnit = modelUnit
+                    });
+                }
+                else
+                {
+                    LogAndThrow($"A unit {unit} is docked at another unit {parentUnit} that doesn't have any more free hangar bays", unit);
                 }
             }
         }
@@ -908,7 +954,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
         /// <exception cref="NotImplementedException"></exception>
         private void ExportCargoContainerData(EditorUnit editorUnit, ModelUnit unit)
         {
-            var editorCargoContainerData = editorUnit.GetComponentInChildren<EditorUnitCargoData>();
+            var editorCargoContainerData = editorUnit.GetComponent<EditorCargoUnit>();
             if (editorCargoContainerData != null)
             {
                 if (unit.Class != ModelUnitClass.Cargo_Container &&
@@ -945,7 +991,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
         /// <param name="unit"></param>
         private void ExportComponentData(EditorUnit editorUnit, ModelUnit unit)
         {
-            var editorComponentData = editorUnit.GetComponentInChildren<EditorComponentUnitData>();
+            var editorComponentData = editorUnit.transform.GetComponentInSelfOrImmediateChildren<EditorComponentUnitData>();
             if (editorComponentData != null)
             {
                 unit.ComponentUnitData = new ModelComponentUnitData
@@ -959,8 +1005,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                     EngineThrottle = editorComponentData.EngineThrottle > 0.0f ? editorComponentData.EngineThrottle : null,
                 };
 
-                ExportComponentUnitCargo(unit, editorComponentData);
-                ExportComponentUnitMods(unit, editorComponentData);
+                ExportComponentUnitCargo(unit, editorUnit, editorComponentData);
+                ExportComponentUnitMods(unit, editorUnit, editorComponentData);
 
                 if (unit.IsShip())
                 {
@@ -973,10 +1019,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
             }
         }
 
-        private void ExportComponentUnitMods(ModelUnit unit, EditorComponentUnitData editorComponentData)
+        private void ExportComponentUnitMods(ModelUnit unit, EditorUnit editorUnit, EditorComponentUnitData editorComponentData)
         {
-            var editorComponentBayMods = editorComponentData.GetComponentsInChildren<EditorComponentBayMod>();
-            if (editorComponentBayMods.Length > 0)
+            var editorComponentBayMods = editorUnit.FindChildrenExcludingUnits<EditorComponentBayMod>();
+            if (editorComponentBayMods.Count > 0)
             {
                 unit.ComponentUnitData.ModData = new ModelComponentUnitModData();
                 foreach (var editorComponentBayMod in editorComponentBayMods)
@@ -995,10 +1041,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
             }
         }
 
-        private void ExportComponentUnitCargo(ModelUnit unit, EditorComponentUnitData editorComponentData)
+        private void ExportComponentUnitCargo(ModelUnit unit, EditorUnit editorUnit, EditorComponentUnitData editorComponentData)
         {
-            var editorCargoDataItmes = editorComponentData.GetComponentsInChildren<EditorComponentUnitCargoDataItem>();
-            if (editorCargoDataItmes.Length > 0)
+            var editorCargoDataItmes = editorUnit.FindChildrenExcludingUnits<EditorCargo>();
+            if (editorCargoDataItmes.Count > 0)
             {
                 unit.ComponentUnitData.CargoData = new ModelComponentUnitCargoData();
                 foreach (var item in editorCargoDataItmes)
@@ -1050,7 +1096,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                     LightDirectionFudge = editorSector.LightDirectionFudge,
                 };
 
-                var editorSectorSky = editorSector.GetComponentInChildren<EditorSectorSky>();
+                var editorSectorSky = editorSector.transform.GetComponentInSelfOrImmediateChildren<EditorSectorSky>();
                 if (editorSectorSky != null)
                 {
                     modelSector.CustomAppearance = new ModelSectorAppearance

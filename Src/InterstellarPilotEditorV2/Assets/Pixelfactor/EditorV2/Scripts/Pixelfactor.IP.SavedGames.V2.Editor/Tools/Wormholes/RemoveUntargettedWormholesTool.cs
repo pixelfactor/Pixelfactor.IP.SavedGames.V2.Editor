@@ -11,7 +11,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Wormholes
             var count = 0;
             foreach (var sector in editorScenario.GetComponentsInChildren<EditorSector>())
             {
-                foreach (var wormhole in sector.GetComponentsInChildren<EditorUnitWormholeData>())
+                foreach (var wormhole in sector.GetComponentsInChildren<EditorWormholeUnit>())
                 {
                     if ((wormhole.IsUnstable && wormhole.UnstableTarget == null) ||
                         (!wormhole.IsUnstable && wormhole.TargetWormholeUnit == null))

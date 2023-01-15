@@ -177,7 +177,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         {
             if (editorUnit.ModelUnitClass.IsWormhole())
             {
-                var wormholeData = editorUnit.GetComponent<EditorUnitWormholeData>();
+                var wormholeData = editorUnit.GetComponent<EditorWormholeUnit>();
                 if (wormholeData != null)
                 {
                     return GetWormholeObjectName(wormholeData);
@@ -194,7 +194,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 
             if (editorUnit.ModelUnitClass.IsCargo())
             {
-                var cargo = editorUnit.GetComponent<EditorUnitCargoData>();
+                var cargo = editorUnit.GetComponent<EditorCargoUnit>();
                 if (cargo != null)
                 {
                     return $"Cargo_{cargo.ModelCargoClass}_{cargo.Quantity}{factionPostfix}";
@@ -209,7 +209,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             {
                 var name = editorUnit.ModelUnitClass.ToString();
 
-                if (editorUnit.GetComponentInParent<EditorHangarBay>() != null)
+                if (editorUnit.transform.GetComponentInImmediateParent<EditorHangarBay>() != null)
                 {
                     name += " (Docked)";
                 }
@@ -225,12 +225,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             return $"{editorUnit.ModelUnitClass.ToString()}";
         }
 
-        public static void AutoNameWormhole(EditorUnitWormholeData wormholeData)
+        public static void AutoNameWormhole(EditorWormholeUnit wormholeData)
         {
             wormholeData.gameObject.name = GetWormholeObjectName(wormholeData);
         }
 
-        public static string GetWormholeObjectName(EditorUnitWormholeData wormholeData)
+        public static string GetWormholeObjectName(EditorWormholeUnit wormholeData)
         {
             var targetSector = wormholeData.GetActualTargetSector();
 

@@ -5,7 +5,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
     /// <summary>
     /// Defines a wormhole where a ship can get from one sector to another
     /// </summary>
-    public class EditorUnitWormholeData : MonoBehaviour
+    public class EditorWormholeUnit : MonoBehaviour
     {
         /// <summary>
         /// For stable wormholes, points to the other wormhole that this connects to.
