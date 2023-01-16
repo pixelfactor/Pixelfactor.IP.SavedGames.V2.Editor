@@ -4,7 +4,8 @@ using UnityEngine;
 namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 {
     /// <summary>
-    /// Defines the ID of a component bay, unique to a specific ship/station
+    /// Defines the ID of a component bay and meta, unique to a specific ship/station<br />
+    /// Data in this class should not be changed and won't be exported
     /// </summary>
     public class EditorComponentBayRef : MonoBehaviour
     {

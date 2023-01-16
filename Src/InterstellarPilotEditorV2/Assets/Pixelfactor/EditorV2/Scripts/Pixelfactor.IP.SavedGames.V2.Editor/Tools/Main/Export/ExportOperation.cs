@@ -981,7 +981,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 unit.ComponentUnitData.ModData = new ModelComponentUnitModData();
                 foreach (var editorComponentBayMod in editorComponentBayMods)
                 {
-                    if (!System.Enum.IsDefined(typeof(ModelComponentClass), editorComponentBayMod.LegacyComponentClass))
+                    if (!System.Enum.IsDefined(typeof(ModelComponentClass), editorComponentBayMod.ComponentClass))
                     {
                         LogAndThrow("Unknown component type", editorComponentBayMod);
                     }
@@ -989,7 +989,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                     unit.ComponentUnitData.ModData.Items.Add(new ModelComponentUnitModDataItem
                     {
                         BayId = editorComponentBayMod.ComponentBayId,
-                        ComponentClass = editorComponentBayMod.LegacyComponentClass
+                        ComponentClass = editorComponentBayMod.ComponentClass
                     });
                 }
             }
@@ -1003,9 +1003,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 unit.ComponentUnitData.CargoData = new ModelComponentUnitCargoData();
                 foreach (var item in editorCargoDataItmes)
                 {
-                    if (!System.Enum.IsDefined(typeof(ModelCargoClass), item.CargoClass))
+                    if (!System.Enum.IsDefined(typeof(ModelCargoClass), item.ModelCargoClass))
                     {
-                        LogAndThrow($"Unknown cargo type found on {editorComponentData.name}: {item.CargoClass}", item);
+                        LogAndThrow($"Unknown cargo type found on {editorComponentData.name}: {item.ModelCargoClass}", item);
                     }
 
                     if (item.Quantity < 0)
@@ -1017,7 +1017,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                     {
                         unit.ComponentUnitData.CargoData.Items.Add(new ModelComponentUnitCargoDataItem
                         {
-                            CargoClass = item.CargoClass,
+                            CargoClass = item.ModelCargoClass,
                             Quantity = item.Quantity
                         });
                     }

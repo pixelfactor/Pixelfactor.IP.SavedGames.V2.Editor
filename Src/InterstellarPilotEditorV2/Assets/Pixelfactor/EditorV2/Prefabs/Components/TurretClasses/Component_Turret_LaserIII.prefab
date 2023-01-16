@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400000}
+  - component: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: Component_Turret_LaserIII
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.15278625, y: -2.2562943, z: 11.142189}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d2e7dace4d9621439a2c9e472f1ae8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RechargePriority: 0
+  ShortIconName: III
+  IconSpriteNameOverride: laser_3
+  AllowBuy: 1
+  BaseCost: 23000
+  ComponentBayType: {fileID: 11400000, guid: 3ea73503f68caed4fad8de3ce5308a62, type: 3}
+  ComponentPrefab: {fileID: 0}
+  ComponentType: {fileID: 11400000, guid: 0a2ce34636575604b8cf53f8fffa1973, type: 3}
+  Description: A medium laser which increases range and damage significantly. Despite
+    a longer reload time this weapon is deadly to small craft
+  EnergyChargeRate: 25.3125
+  IgnoreFiringArc: 0
+  Manufacturer: {fileID: 0}
+  MaxHealthPoints: 50
+  MaxHullType: 64
+  MinHullType: 8
+  Name: Laser III
+  RepairCostFactor: 1
+  UniqueId: 70300
+  IsPointDefence: 0
+  ManualCombatRating: -1
+  ManualDamagePerSecond: -1
+  CalculatedDamagePerSecond: 25.3125
+  CalculatedCombatRating: 25.3125
+  UsesAmmo: 0
+  AIConventionalWeapon: 1
+  AiFireProbabilityPower: 0.5
+  AIMaxTimeBeforeFire: 240
+  AIMinTimeBeforeFire: 5
+  AIPointDefenseEffectiveness: 0.5
+  AIUseAsPointDefense: 0
+  DefaultTurretGroup: 0
+  EnergyCost: 202.5
+  EnergyCostPerSecond: 0
+  EnergyToDamageConversion: 1
+  FireAudioPrefab: {fileID: 100000, guid: b8dcfdd3778c1154ebc96c75ebf6d7ab, type: 3}
+  FireChargeAudioPrefab: {fileID: 0}
+  FireLoopAudioSource: {fileID: 0}
+  FirePrewarmTime: 1
+  InaccuracyPower: 1
+  MaxFiringRange: 360
+  InaccuracyMultiplier: 1
+  MinAppliedDamage: 0.8
+  MinFiringRange: 0
+  RequiresTarget: 1
+  RestrictAIUsage: 0
+  AutoTurretFireCooldown: 0
+  ShieldDamageType: 0
+  TurretPrefab: {fileID: 0}
+  duration: 2
+  fadeOutTime: 0.4
+  FiringTimeout: 2
+  ImpactPrefabs:
+  - {fileID: 19800000, guid: 29a3d3022e427f14188d5374fee6914d, type: 3}
+  - {fileID: 19800000, guid: 05541335db30e1a468d22cf2bb10b2f2, type: 3}
+  LaserLineRendererPrefab: {fileID: 100000, guid: f4aa5630bf5d71542b53a4bc2fd84abd,
+    type: 3}
+  LaserMaterialScaleRate: {x: -1, y: 0}
+  LaserMoveSpd: 600
+  LaserTextureRealWorldSize: 20
+  MaxRangeMaxDamageMultiplier: 0.25
+  MaxRangeMinDamageMultiplier: 0.2
+  MiningDamageMultiplier: 0.0025

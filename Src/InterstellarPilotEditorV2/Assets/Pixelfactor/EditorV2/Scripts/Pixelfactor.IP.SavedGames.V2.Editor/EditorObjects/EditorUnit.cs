@@ -83,6 +83,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         [Tooltip("Helps determine what type of ship this is so that only certain ships can be spawned when needed")]
         public EditorFactionStrategy EditorShipPurpose = EditorFactionStrategy.None;
 
+        [Tooltip("Whether the editor should automatically add ammo to this ship when exporting")]
+        public bool EditorAutoExportAmmo = true;
+
         public string GetEditorName()
         {
             if (!string.IsNullOrWhiteSpace(this.EditorName))

@@ -28,8 +28,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5981123991870315533}
+  m_Children: []
   m_Father: {fileID: 1499588013825266274}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -117,6 +116,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Hypersleep Pod Factory
+  EditorShipPurpose: 0
 --- !u!135 &-7610571288400206162
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -206,70 +206,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 682785801832469051, guid: 683e581a781d726459ffdbcfe7bdf148, type: 3}
   m_PrefabInstance: {fileID: 404383096167955091}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &415203008478041554
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 2
-    m_TransformParent: {fileID: 2818396943555392176}
-    m_Modifications:
-    - target: {fileID: 6251594947460254175, guid: aad5b6cac532e5a4bb4a4c4f63e04f13, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: aad5b6cac532e5a4bb4a4c4f63e04f13, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: aad5b6cac532e5a4bb4a4c4f63e04f13, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: aad5b6cac532e5a4bb4a4c4f63e04f13, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: aad5b6cac532e5a4bb4a4c4f63e04f13, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: aad5b6cac532e5a4bb4a4c4f63e04f13, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: aad5b6cac532e5a4bb4a4c4f63e04f13, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: aad5b6cac532e5a4bb4a4c4f63e04f13, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: aad5b6cac532e5a4bb4a4c4f63e04f13, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: aad5b6cac532e5a4bb4a4c4f63e04f13, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: aad5b6cac532e5a4bb4a4c4f63e04f13, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680723256370153899, guid: aad5b6cac532e5a4bb4a4c4f63e04f13, type: 3}
-      propertyPath: m_Name
-      value: PodFactoryStandardCargo
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_AddedGameObjects: []
-  m_SourcePrefab: {fileID: 100100000, guid: aad5b6cac532e5a4bb4a4c4f63e04f13, type: 3}
---- !u!4 &5981123991870315533 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6251594947460254175, guid: aad5b6cac532e5a4bb4a4c4f63e04f13, type: 3}
-  m_PrefabInstance: {fileID: 415203008478041554}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7452271886083278754
 PrefabInstance:

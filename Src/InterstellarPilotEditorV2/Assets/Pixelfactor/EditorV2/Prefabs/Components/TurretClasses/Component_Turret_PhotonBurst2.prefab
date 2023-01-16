@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400000}
+  - component: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: Component_Turret_PhotonBurst2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.5027914, y: 95.43573, z: -82.20643}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9445a93c4c13524d85eba15cbda6830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RechargePriority: 0
+  ShortIconName: II
+  IconSpriteNameOverride: photon_2
+  AllowBuy: 1
+  BaseCost: 7200
+  ComponentBayType: {fileID: 11400000, guid: 3ea73503f68caed4fad8de3ce5308a62, type: 3}
+  ComponentPrefab: {fileID: 0}
+  ComponentType: {fileID: 11400000, guid: 0a2ce34636575604b8cf53f8fffa1973, type: 3}
+  Description: This turret has a slightly increased range and damage output while
+    maintaining the same energy-damage ratio.
+  EnergyChargeRate: 26.257502
+  IgnoreFiringArc: 0
+  Manufacturer: {fileID: 0}
+  MaxHealthPoints: 50
+  MaxHullType: 64
+  MinHullType: 4
+  Name: Photon Burst II
+  RepairCostFactor: 1
+  UniqueId: 70900
+  IsPointDefence: 0
+  ManualCombatRating: -1
+  ManualDamagePerSecond: -1
+  CalculatedDamagePerSecond: 32.821877
+  CalculatedCombatRating: 32.821877
+  UsesAmmo: 0
+  AIConventionalWeapon: 1
+  AiFireProbabilityPower: 0.5
+  AIMaxTimeBeforeFire: 240
+  AIMinTimeBeforeFire: 5
+  AIPointDefenseEffectiveness: 1
+  AIUseAsPointDefense: 0
+  DefaultTurretGroup: 0
+  EnergyCost: 236.25
+  EnergyCostPerSecond: 0
+  EnergyToDamageConversion: 1.25
+  FireAudioPrefab: {fileID: 100000, guid: e7750a07ce26a4f4d9171ed6008fa88d, type: 3}
+  FireChargeAudioPrefab: {fileID: 0}
+  FireLoopAudioSource: {fileID: 0}
+  FirePrewarmTime: 1
+  InaccuracyPower: 4.5
+  MaxFiringRange: 425
+  InaccuracyMultiplier: 1
+  MinAppliedDamage: 0.8
+  MinFiringRange: 0
+  RequiresTarget: 1
+  RestrictAIUsage: 0
+  AutoTurretFireCooldown: 0
+  ShieldDamageType: 0
+  TurretPrefab: {fileID: 0}
+  CompatibleProjectiles:
+  - {fileID: 11400000, guid: 707b6f7cbd8efa140b4d616bb9130010, type: 3}
+  ProjectileTurretType: 0
+  UseSubTargetPositions: 0

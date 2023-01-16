@@ -28,8 +28,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2096531083091683161}
+  m_Children: []
   m_Father: {fileID: 1499588013825266274}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -117,6 +116,7 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Scrapyard
+  EditorShipPurpose: 0
 --- !u!135 &4421769882920984272
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -224,70 +224,6 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6134081581200172643, guid: 39425a00afc168441be795f8e6c56348, type: 3}
   m_PrefabInstance: {fileID: 4072905665377234243}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &5465821367083495046
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 2
-    m_TransformParent: {fileID: 2818396943555392176}
-    m_Modifications:
-    - target: {fileID: 6251594947460254175, guid: ead84bdfb4779f1498fc91c01d48a5be, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: ead84bdfb4779f1498fc91c01d48a5be, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: ead84bdfb4779f1498fc91c01d48a5be, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: ead84bdfb4779f1498fc91c01d48a5be, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: ead84bdfb4779f1498fc91c01d48a5be, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: ead84bdfb4779f1498fc91c01d48a5be, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: ead84bdfb4779f1498fc91c01d48a5be, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: ead84bdfb4779f1498fc91c01d48a5be, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: ead84bdfb4779f1498fc91c01d48a5be, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: ead84bdfb4779f1498fc91c01d48a5be, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251594947460254175, guid: ead84bdfb4779f1498fc91c01d48a5be, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680723256370153899, guid: ead84bdfb4779f1498fc91c01d48a5be, type: 3}
-      propertyPath: m_Name
-      value: RepairShopStandardCargo
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_AddedGameObjects: []
-  m_SourcePrefab: {fileID: 100100000, guid: ead84bdfb4779f1498fc91c01d48a5be, type: 3}
---- !u!4 &2096531083091683161 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6251594947460254175, guid: ead84bdfb4779f1498fc91c01d48a5be, type: 3}
-  m_PrefabInstance: {fileID: 5465821367083495046}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5942137299733863719
 PrefabInstance:
