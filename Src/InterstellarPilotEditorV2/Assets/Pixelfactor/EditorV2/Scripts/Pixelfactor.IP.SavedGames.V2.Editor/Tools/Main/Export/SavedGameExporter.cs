@@ -1,4 +1,6 @@
-﻿using Pixelfactor.IP.SavedGames.V2.Model;
+﻿using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
+using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Export;
+using Pixelfactor.IP.SavedGames.V2.Model;
 using UnityEngine;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
@@ -18,6 +20,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
             var exportOperation = new ExportOperation();
             var savedGame = exportOperation.Export(editorScenario, options);
 
+            var settings = CustomSettings.GetOrCreateSettings();
+
+            Debug.Log($"Adding unit ammo...");
+            new AddAmmoTool(settings).AddAmmo(editorScenario, savedGame, settings.Export_AutoAddAmmo);
 
             Debug.Log($"Export completed successfully");
 

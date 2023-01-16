@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 7
   Name: RightTurret
   BayType: 1300
+  DefaultComponent: {fileID: 11400000, guid: cc49e3c4dd261fb4e8f43c318c2df7e5, type: 3}

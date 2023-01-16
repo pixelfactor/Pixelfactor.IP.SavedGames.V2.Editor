@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 7
   Name: MediumTurretII
   BayType: 1300
+  DefaultComponent: {fileID: 11400000, guid: 84cecb357321e2740bb49b0eac9db8c6, type: 3}

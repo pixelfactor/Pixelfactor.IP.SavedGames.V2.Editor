@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 6
   Name: PowerGenerator
   BayType: 1000
+  DefaultComponent: {fileID: 11400000, guid: 039a8d7ea7f310d42a89e64106335818, type: 3}

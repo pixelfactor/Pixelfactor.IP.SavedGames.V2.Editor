@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 3
   Name: EngineBay
   BayType: 500
+  DefaultComponent: {fileID: 11400000, guid: 6162b6e5401a9414db94658d6dae60cb, type: 3}

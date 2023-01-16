@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 4
   Name: FrontLeftTurret
   BayType: 1300
+  DefaultComponent: {fileID: 11400000, guid: bb6c17889afa0a5469c0743eda2aebf2, type: 3}

@@ -15,5 +15,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         public string Name;
         [Tooltip("The component type of the bay - for info only")]
         public ModelComponentBayType BayType;
+        /// <summary>
+        /// The component that is installed in this bay before any mods
+        /// </summary>
+        [Tooltip("The component that is installed in this bay before any mods")]
+        public EditorComponentClass DefaultComponent;
     }
 }

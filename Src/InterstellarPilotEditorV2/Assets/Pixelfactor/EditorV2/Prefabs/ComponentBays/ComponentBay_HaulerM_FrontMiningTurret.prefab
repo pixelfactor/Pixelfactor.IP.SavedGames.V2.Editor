@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 4
   Name: FrontMiningTurret
   BayType: 1400
+  DefaultComponent: {fileID: 11400000, guid: 2bddd4dccdeb232458154ddf9ad58a16, type: 3}

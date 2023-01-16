@@ -6,7 +6,7 @@
     /// <summary>
     /// Defines a collection of cargo items
     /// </summary>
-    public class CargoBayItems : MonoBehaviour
+    public class EditorCargoBayItems : MonoBehaviour
     {
         public List<EditorCargoBayItem> Items = null;
     }

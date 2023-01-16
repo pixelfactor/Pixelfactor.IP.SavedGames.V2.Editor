@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 11
   Name: RearRightTurret
   BayType: 1300
+  DefaultComponent: {fileID: 11400000, guid: 1a595da76fc886e48bb3d6ceb7e8f096, type: 3}

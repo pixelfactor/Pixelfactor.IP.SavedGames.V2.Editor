@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 12
   Name: Electronics
   BayType: 400
+  DefaultComponent: {fileID: 11400000, guid: 675824b6676cfae4c91817cebf8b6739, type: 3}

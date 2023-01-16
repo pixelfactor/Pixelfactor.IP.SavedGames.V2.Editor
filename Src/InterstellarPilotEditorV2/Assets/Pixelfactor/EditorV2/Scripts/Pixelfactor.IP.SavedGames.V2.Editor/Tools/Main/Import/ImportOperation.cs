@@ -285,6 +285,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
                 editorUnit.Health = modelUnit.HealthData.Health;
             }
 
+            // As we've imported all the units ammo, we should not automatically add any
+            editorUnit.EditorAutoExportAmmo = EditorUnit.AutoExportAmmoOption.DontExport;
+
             // TODO: Asteroid data
 
             // TODO: Ship trader data
@@ -400,7 +403,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 
         private void CacheUnitPrefabs(string path)
         {
-            var units = GameObjectHelper.TryGetUnityObjectsOfTypeFromPath<EditorUnit>(path);
+            var units = GameObjectHelper.GetPrefabsOfTypeFromPath<EditorUnit>(path);
             foreach (var unit in units)
             {
                 if (this.cachedUnitPrefabs.TryGetValue(unit.ModelUnitClass, out EditorUnit existingUnit))
@@ -414,7 +417,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 
         private void CacheCargoClassPrefabs(string path)
         {
-            var cargos = GameObjectHelper.TryGetUnityObjectsOfTypeFromPath<EditorCargoClassRef>(path);
+            var cargos = GameObjectHelper.GetPrefabsOfTypeFromPath<EditorCargoClassRef>(path);
             foreach (var cargoClass in cargos)
             {
                 if (this.cachedCargoClassPrefabs.TryGetValue(cargoClass.CargoClass, out EditorCargoClassRef existingCargoClass))

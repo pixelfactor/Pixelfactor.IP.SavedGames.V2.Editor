@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 4
   Name: TurretI
   BayType: 1300
+  DefaultComponent: {fileID: 11400000, guid: 884031c1d4e233f4ab160b924f293c83, type: 3}

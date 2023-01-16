@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 5
   Name: Mine
   BayType: 700
+  DefaultComponent: {fileID: 11400000, guid: 06df5a28dcf63734e927adfde8f65587, type: 3}

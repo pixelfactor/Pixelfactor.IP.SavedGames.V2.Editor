@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 5
   Name: AuxUpperTurret
   BayType: 1300
+  DefaultComponent: {fileID: 11400000, guid: 1c44146ddfb644a41a9ed6ea0b2ef489, type: 3}

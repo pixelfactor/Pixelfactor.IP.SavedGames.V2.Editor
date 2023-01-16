@@ -84,7 +84,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         public EditorFactionStrategy EditorShipPurpose = EditorFactionStrategy.None;
 
         [Tooltip("Whether the editor should automatically add ammo to this ship when exporting")]
-        public bool EditorAutoExportAmmo = true;
+        public AutoExportAmmoOption EditorAutoExportAmmo = AutoExportAmmoOption.DontCare;
+
+        public enum AutoExportAmmoOption
+        {
+            DontCare = 0,
+            DontExport = 1,
+            Export = 2
+        }
 
         public string GetEditorName()
         {

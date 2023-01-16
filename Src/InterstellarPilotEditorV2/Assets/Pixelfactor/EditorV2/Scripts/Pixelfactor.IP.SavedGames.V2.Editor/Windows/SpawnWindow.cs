@@ -131,7 +131,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
         private void SpawnNewFleet(EditorSector sector)
         {
-            var shipPrefabs = GameObjectHelper.TryGetUnityObjectsOfTypeFromPath<EditorUnit>(
+            var shipPrefabs = GameObjectHelper.GetPrefabsOfTypeFromPath<EditorUnit>(
                 CustomSettings.GetOrCreateSettings().UnitPrefabsPath.Trim('/') + "/Ship").ToList();
 
             var newFleetUnits = new List<EditorUnit>();
@@ -267,7 +267,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             }
 
             var settings = CustomSettings.GetOrCreateSettings();
-            var prefabs = GameObjectHelper.TryGetUnityObjectsOfTypeFromPath<EditorUnit>(settings.UnitPrefabsPath.Trim('/') + "/" + subDirectory).ToList();
+            var prefabs = GameObjectHelper.GetPrefabsOfTypeFromPath<EditorUnit>(settings.UnitPrefabsPath.Trim('/') + "/" + subDirectory).ToList();
 
             if (prefabs.Count > 0)
             {

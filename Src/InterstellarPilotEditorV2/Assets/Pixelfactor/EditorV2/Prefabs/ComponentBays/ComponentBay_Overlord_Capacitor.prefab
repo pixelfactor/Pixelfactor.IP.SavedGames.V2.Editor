@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 1
   Name: Capacitor
   BayType: 100
+  DefaultComponent: {fileID: 11400000, guid: a7ae398291d1a134ab22eb628dab0f76, type: 3}

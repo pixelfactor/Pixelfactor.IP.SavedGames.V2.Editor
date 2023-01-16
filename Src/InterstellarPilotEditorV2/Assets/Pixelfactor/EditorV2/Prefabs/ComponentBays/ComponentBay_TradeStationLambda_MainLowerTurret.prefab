@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 6
   Name: MainLowerTurret
   BayType: 1300
+  DefaultComponent: {fileID: 11400000, guid: ea94d9f90eda2a843a07e199bf97adbe, type: 3}

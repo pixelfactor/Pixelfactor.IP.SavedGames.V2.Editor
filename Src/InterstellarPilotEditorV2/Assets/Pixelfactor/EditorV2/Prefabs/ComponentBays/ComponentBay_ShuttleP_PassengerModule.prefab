@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 100
   Name: PassengerModule
   BayType: 900
+  DefaultComponent: {fileID: 11497564, guid: ce6ce8082fc6adb40be3d16a1d5b49c8, type: 3}

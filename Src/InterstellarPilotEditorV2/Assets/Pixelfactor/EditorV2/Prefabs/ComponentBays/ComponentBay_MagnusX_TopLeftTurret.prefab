@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 8
   Name: TopLeftTurret
   BayType: 1300
+  DefaultComponent: {fileID: 11400000, guid: 797970d3dfcef1e46a549bf37bbab51a, type: 3}

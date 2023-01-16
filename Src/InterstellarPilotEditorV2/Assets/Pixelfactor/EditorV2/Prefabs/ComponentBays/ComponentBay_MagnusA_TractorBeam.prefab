@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 13
   Name: TractorBeam
   BayType: 1200
+  DefaultComponent: {fileID: 11400002, guid: a1410d3a97c238f4185c329aaac6b255, type: 3}

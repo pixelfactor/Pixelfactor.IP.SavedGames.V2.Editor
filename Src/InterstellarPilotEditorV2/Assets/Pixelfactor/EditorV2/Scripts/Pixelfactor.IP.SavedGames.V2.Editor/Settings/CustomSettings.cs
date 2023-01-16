@@ -6,6 +6,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
 {
     public class CustomSettings : ScriptableObject
     {
+#if UNITY_EDITOR_WIN
+        private const string defaultSteamInstallationPath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Interstellar Pilot 2\\Interstellar Pilot 2.exe";
+#else
+        private const string defaultSteamInstallationPath = "";
+#endif
+
         public const string k_MyCustomSettingsPath = "Assets/Pixelfactor/EditorV2/IP2EditorSettings.asset";
 
         [Tooltip("The full path including file name of the Interstellar Pilot 2 executable file")]
@@ -66,6 +72,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private bool export_AutosetIds = true;
 
+        [Tooltip("Whether to add ammo to ships/stations based on the weapons that they have")]
+        [SerializeField]
+        private bool export_AutoAddAmmo = true;
+
         [Tooltip("Whether to remove wormholes without a target on export")]
         [SerializeField]
         private bool export_RemoveUntargettedWormholes = true;
@@ -93,6 +103,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private string unitPrefabsPath = "Assets/Pixelfactor/EditorV2/Prefabs/Units";
 
+        [Tooltip("The root folder of where cargo classes are found")]
+        [SerializeField]
         private string cargoClassPrefabsPath = "Assets/Pixelfactor/EditorV2/Prefabs/CargoClasses";
 
         [Tooltip("The path to the prefab used to create new factions")]
@@ -111,12 +123,26 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private string fleetPrefabPath = "Assets/Pixelfactor/EditorV2/Prefabs/Fleets/Fleet.prefab";
 
-        internal static CustomSettings GetOrCreateSettings()
+        [Tooltip("The path to ship component prefabs")]
+        [SerializeField]
+        private string componentPrefabsPath = "Assets/Pixelfactor/EditorV2/Prefabs/Components";
+
+        [Tooltip("The path to component bays")]
+        [SerializeField]
+        private string componentBayPrefabsPath = "Assets/Pixelfactor/EditorV2/Prefabs/ComponentBays";
+
+        public static CustomSettings GetOrCreateSettings()
         {
             var settings = AssetDatabase.LoadAssetAtPath<CustomSettings>(k_MyCustomSettingsPath);
             if (settings == null)
             {
                 settings = ScriptableObject.CreateInstance<CustomSettings>();
+
+                if (!string.IsNullOrWhiteSpace(defaultSteamInstallationPath) && System.IO.File.Exists(defaultSteamInstallationPath))
+                {
+                    settings.gameExecutablePath = defaultSteamInstallationPath;
+                }
+
                 AssetDatabase.CreateAsset(settings, k_MyCustomSettingsPath);
                 AssetDatabase.SaveAssets();
             }
@@ -213,6 +239,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
             get { return this.export_RemoveUntargettedWormholes; }
         }
 
+        public bool Export_AutoAddAmmo
+        {
+            get { return this.export_AutoAddAmmo; }
+        }
+
         public System.Version SaveVersion
         {
             get { return this.saveVersion; }
@@ -221,6 +252,16 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         public string UnitPrefabsPath
         {
             get { return this.unitPrefabsPath; }
+        }
+
+        public string ComponentPrefabsPath
+        {
+            get { return this.componentPrefabsPath; }
+        }
+
+        public string ComponentBayPrefabsPath
+        {
+            get { return this.componentBayPrefabsPath; }
         }
 
         public string FactionPrefabPath
@@ -277,6 +318,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("export_AutosetUnitSeed"), new GUIContent("Autoset unit seeds"));
                     EditorGUILayout.PropertyField(settings.FindProperty("export_AutosetIds"), new GUIContent("Autoset unique ids"));
                     EditorGUILayout.PropertyField(settings.FindProperty("export_RemoveUntargettedWormholes"), new GUIContent("Remove untargetted wormholes"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("export_AutoAddAmmo"), new GUIContent("Auto-add ammo"));
                     EditorGUILayout.Space();
 
                     EditorGUILayout.LabelField("Universe Build", EditorStyles.boldLabel);
@@ -294,6 +336,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("sectorNamesPath"), new GUIContent("Sector names path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("universeMapScaleFactor"), new GUIContent("Universe scale factor"));
                     EditorGUILayout.PropertyField(settings.FindProperty("unitPrefabsPath"), new GUIContent("Unit prefab path"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("componentPrefabsPath"), new GUIContent("Component prefab path"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("componentBayPrefabsPath"), new GUIContent("Component bay prefabs path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("factionPrefabPath"), new GUIContent("Faction prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("fleetPrefabPath"), new GUIContent("Fleet prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty("npcPrefabPath"), new GUIContent("NPC prefab path"));

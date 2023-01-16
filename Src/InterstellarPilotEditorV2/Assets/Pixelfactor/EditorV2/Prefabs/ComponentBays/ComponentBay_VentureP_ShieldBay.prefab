@@ -47,3 +47,4 @@ MonoBehaviour:
   BayId: 9
   Name: ShieldBay
   BayType: 1100
+  DefaultComponent: {fileID: 11400000, guid: abeab3096d3c1a44fa3211b282e54b53, type: 3}
