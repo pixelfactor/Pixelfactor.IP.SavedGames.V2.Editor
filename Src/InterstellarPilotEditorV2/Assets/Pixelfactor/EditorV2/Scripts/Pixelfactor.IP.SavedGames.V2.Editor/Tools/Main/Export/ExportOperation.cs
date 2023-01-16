@@ -655,6 +655,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
             Debug.LogError(error, context);
             throw new System.Exception("A critical error occured while exporting and the operation cannot continue.");
         }
+
         private void ExportPeople()
         {
             foreach (var editorPerson in editorScenario.GetComponentsInChildren<EditorPerson>())
@@ -663,9 +664,19 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 {
                     IsMale = editorPerson.IsMale,
                     Id = editorPerson.Id,
+                    CustomTitle = editorPerson.CustomTitle,
                     CustomName = editorPerson.CustomName,
+                    CustomShortName = editorPerson.CustomShortName,
                     Faction = savedGame.Factions.FirstOrDefault(e => e.Id == editorPerson.Faction?.Id),
                     Kills = editorPerson.Kills,
+                    Deaths = editorPerson.Deaths,
+                    GeneratedFirstNameId = editorPerson.FirstNameId,
+                    GeneratedLastNameId = editorPerson.LastNameId,
+                    IsAutoPilot = editorPerson.IsAutoPilot,
+                    Seed = editorPerson.Seed,
+                    DialogId = editorPerson.DialogId,
+                    DialogProfileId = (sbyte)editorPerson.DialogProfileId,
+                    DestroyGameObjectOnKill = editorPerson.DestroyOnKill,
                 };
 
                 if (string.IsNullOrEmpty(modelPerson.CustomName))

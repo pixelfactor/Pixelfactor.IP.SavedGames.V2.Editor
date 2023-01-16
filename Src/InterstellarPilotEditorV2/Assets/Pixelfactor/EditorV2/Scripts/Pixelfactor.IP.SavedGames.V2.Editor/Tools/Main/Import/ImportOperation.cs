@@ -23,6 +23,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
         private Dictionary<int, EditorSector> editorSectorsById = new Dictionary<int, EditorSector>(64);
         private Dictionary<int, EditorFaction> editorFactionsById = new Dictionary<int, EditorFaction>(64);
         private Dictionary<int, EditorUnit> editorUnitsById = new Dictionary<int, EditorUnit>(64);
+        private Dictionary<int, EditorPerson> editorPeopleById = new Dictionary<int, EditorPerson>(100);
+
         private EditorFaction factionPrefab = null;
 
         public ImportOperation(
@@ -66,6 +68,56 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
             this.ImportFactions();
             this.ImportUnits();
             this.ImportWormholes();
+            this.ImportPeople();
+            this.ImportPlayer();
+        }
+
+        private void ImportPeople()
+        {
+            foreach (var person in this.model.People)
+            {
+                var parent = this.editorScenario.transform;
+
+                var editorUnit = GetEditorUnit(person.CurrentUnit);
+                if (editorUnit != null)
+                {
+                    parent = editorUnit.transform;
+                }
+
+                var editorPerson = GameObjectHelper.Instantiate<EditorPerson>(parent);
+                editorPerson.IsMale = person.IsMale;
+                editorPerson.Id = person.Id;
+                editorPerson.CustomTitle = person.CustomTitle;
+                editorPerson.CustomName = person.CustomName;
+                editorPerson.CustomShortName = person.CustomShortName;
+                editorPerson.FirstNameId = person.GeneratedFirstNameId;
+                editorPerson.LastNameId = person.GeneratedFirstNameId;
+                editorPerson.IsAutoPilot = person.IsAutoPilot;
+                editorPerson.Seed = person.Seed;
+                editorPerson.Faction = GetEditorFaction(person.Faction);
+                editorPerson.DialogId = person.DialogId;
+                editorPerson.DialogProfileId = person.DialogProfileId;
+                editorPerson.DestroyOnKill = person.DestroyGameObjectOnKill;
+                editorPerson.Kills = person.Kills;
+                editorPerson.Deaths = person.Deaths;
+
+                this.editorPeopleById.Add(person.Id, editorPerson);
+
+                AutoNameObjects.AutoNamePerson(editorPerson);
+            }
+        }
+
+        private void ImportPlayer()
+        {
+            if (this.model.Player != null)
+            {
+                var player = GameObjectHelper.Instantiate<EditorPlayer>(this.editorScenario, "Editor_Player");
+
+                if (this.model.Player.Person != null)
+                {
+                    player.Person = this.GetEditorPerson(this.model.Player.Person.Id);
+                }
+            }
         }
 
         private void ImportWormholes()
@@ -393,6 +445,30 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
             }
 
             return faction;
+        }
+
+        private EditorPerson GetEditorPerson(ModelPerson modelPerson)
+        {
+            if (modelPerson == null)
+                return null;
+
+            return GetEditorPerson(modelPerson.Id);
+        }
+
+        private EditorPerson GetEditorPerson(int id)
+        {
+            if (id < 0)
+                return null;
+
+            var person = this.editorPeopleById.GetValueOrDefault(id);
+            if (person == null)
+            {
+                var message = $"Missing person with id: {id}";
+                Debug.LogError(message);
+                OnError(message);
+            }
+
+            return person;
         }
 
         private void OnError(string message)
