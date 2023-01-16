@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Component_Engine_Fighter_14
+  m_Name: Component_Engine_Battleship_120
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,8 +47,8 @@ MonoBehaviour:
   RechargePriority: 0
   ShortIconName: 
   IconSpriteNameOverride: 
-  AllowBuy: 0
-  BaseCost: 5000
+  AllowBuy: 1
+  BaseCost: 250000
   ComponentBayType: {fileID: 11400000, guid: c7a8c7a7e6aacd440aa87d9fd4035343, type: 3}
   ComponentPrefab: {fileID: 0}
   ComponentType: {fileID: 11400000, guid: 710c22a7af9045a4d999731cb4ffa281, type: 3}
@@ -57,9 +57,9 @@ MonoBehaviour:
   IgnoreFiringArc: 0
   Manufacturer: {fileID: 0}
   MaxHealthPoints: 50
-  MaxHullType: 2
-  MinHullType: 2
-  Name: Sunspire 6K
+  MaxHullType: 32
+  MinHullType: 32
+  Name: Sunspire 25K
   RepairCostFactor: 1
-  UniqueId: 40013
-  EnginePower: 28
+  UniqueId: 40002
+  EnginePower: 120

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Component_Engine_Cruiser_35
+  m_Name: Component_Engine_Scout_16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   ShortIconName: 
   IconSpriteNameOverride: 
   AllowBuy: 1
-  BaseCost: 48000
+  BaseCost: 1750
   ComponentBayType: {fileID: 11400000, guid: c7a8c7a7e6aacd440aa87d9fd4035343, type: 3}
   ComponentPrefab: {fileID: 0}
   ComponentType: {fileID: 11400000, guid: 710c22a7af9045a4d999731cb4ffa281, type: 3}
@@ -57,9 +57,9 @@ MonoBehaviour:
   IgnoreFiringArc: 0
   Manufacturer: {fileID: 0}
   MaxHealthPoints: 50
-  MaxHullType: 16
-  MinHullType: 16
-  Name: Sunspire 30K
+  MaxHullType: 1
+  MinHullType: 1
+  Name: 
   RepairCostFactor: 1
-  UniqueId: 40005
-  EnginePower: 70
+  UniqueId: 41090
+  EnginePower: 16

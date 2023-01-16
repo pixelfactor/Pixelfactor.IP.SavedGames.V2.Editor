@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Component_Engine_Destroyer_40
+  m_Name: Component_Engine_Destroyer_56
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   ShortIconName: 
   IconSpriteNameOverride: 
   AllowBuy: 1
-  BaseCost: 30000
+  BaseCost: 7500
   ComponentBayType: {fileID: 11400000, guid: c7a8c7a7e6aacd440aa87d9fd4035343, type: 3}
   ComponentPrefab: {fileID: 0}
   ComponentType: {fileID: 11400000, guid: 710c22a7af9045a4d999731cb4ffa281, type: 3}
@@ -59,7 +59,7 @@ MonoBehaviour:
   MaxHealthPoints: 50
   MaxHullType: 8
   MinHullType: 8
-  Name: Sunspire 20K
+  Name: Sunspire 14K
   RepairCostFactor: 1
-  UniqueId: 40010
-  EnginePower: 80
+  UniqueId: 40007
+  EnginePower: 56

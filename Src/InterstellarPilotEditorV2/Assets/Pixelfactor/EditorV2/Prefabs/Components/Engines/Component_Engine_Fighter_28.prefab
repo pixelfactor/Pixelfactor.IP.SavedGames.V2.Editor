@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Component_Engine_Frigate_12
+  m_Name: Component_Engine_Fighter_28
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   RechargePriority: 0
   ShortIconName: 
   IconSpriteNameOverride: 
-  AllowBuy: 1
+  AllowBuy: 0
   BaseCost: 5000
   ComponentBayType: {fileID: 11400000, guid: c7a8c7a7e6aacd440aa87d9fd4035343, type: 3}
   ComponentPrefab: {fileID: 0}
@@ -57,9 +57,9 @@ MonoBehaviour:
   IgnoreFiringArc: 0
   Manufacturer: {fileID: 0}
   MaxHealthPoints: 50
-  MaxHullType: 4
-  MinHullType: 4
+  MaxHullType: 2
+  MinHullType: 2
   Name: Sunspire 6K
   RepairCostFactor: 1
-  UniqueId: 40018
-  EnginePower: 24
+  UniqueId: 40013
+  EnginePower: 28
