@@ -32,6 +32,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                      $"{editorScenario.Title}.dat",
                      "dat");
 
+            if (string.IsNullOrWhiteSpace(path))
+                return;
+
             ValidateAndExport(editorScenario, path);
         }
 
