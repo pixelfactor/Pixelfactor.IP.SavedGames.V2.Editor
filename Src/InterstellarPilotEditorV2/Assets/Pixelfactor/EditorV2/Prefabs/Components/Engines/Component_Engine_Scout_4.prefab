@@ -48,7 +48,7 @@ MonoBehaviour:
   ShortIconName: 
   IconSpriteNameOverride: 
   AllowBuy: 1
-  BaseCost: 750
+  BaseCost: 300
   ComponentBayType: {fileID: 11400000, guid: c7a8c7a7e6aacd440aa87d9fd4035343, type: 3}
   ComponentPrefab: {fileID: 0}
   ComponentType: {fileID: 11400000, guid: 710c22a7af9045a4d999731cb4ffa281, type: 3}
@@ -61,5 +61,5 @@ MonoBehaviour:
   MinHullType: 1
   Name: 
   RepairCostFactor: 1
-  UniqueId: 41050
-  EnginePower: 8
+  UniqueId: 41000
+  EnginePower: 4
