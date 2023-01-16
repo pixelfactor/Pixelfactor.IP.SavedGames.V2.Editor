@@ -1,4 +1,6 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor
 {
@@ -6,24 +8,42 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
     {
         public static EditorFleet GetFleet(this EditorUnit unit)
         {
-            var npcPilot = unit.GetComponentInChildren<EditorNpcPilot>();
+            var npcPilot = unit.transform.GetComponentInImmediateChildren<EditorNpcPilot>();
             if (npcPilot != null && npcPilot.Fleet != null)
             {
                 return npcPilot.Fleet;
             }
 
-            return unit.GetComponentInParent<EditorFleet>();
+            return unit.FindFleetInParent();
+        }
+
+        public static EditorFleet FindFleetInParent(this EditorUnit unit)
+        {
+            var transform = unit.transform.parent;
+            while (transform != null)
+            {
+                if (transform.GetComponent<EditorUnit>() != null)
+                    return null;
+
+                var fleet = transform.GetComponent<EditorFleet>();
+                if (fleet != null)
+                    return fleet;
+
+                transform = transform.parent;
+            }
+
+            return null;
         }
 
         public static bool IsStableWormhole(this EditorUnit unit)
         {
-            var wormholeData = unit.GetComponent<EditorUnitWormholeData>();
+            var wormholeData = unit.GetComponent<EditorWormholeUnit>();
             return wormholeData != null && !wormholeData.IsUnstable;
         }
 
         public static bool IsUnstableWormhole(this EditorUnit unit)
         {
-            var wormholeData = unit.GetComponent<EditorUnitWormholeData>();
+            var wormholeData = unit.GetComponent<EditorWormholeUnit>();
             return wormholeData != null && wormholeData.IsUnstable;
         }
 
@@ -90,6 +110,34 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
         public static EditorSector GetSector(this EditorUnit unit)
         {
             return unit.GetComponentInParent<EditorSector>();
+        }
+
+        public static List<T> FindChildrenExcludingUnits<T>(this EditorUnit unit) where T : Component
+        {
+            var list = new List<T>();
+
+            FindChildrenExcludingUnitsInternal<T>(unit.transform, list);
+
+            return list;
+        }
+
+        public static void FindChildrenExcludingUnitsInternal<T>(Transform transform, List<T> list) where T : Component
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                var child = transform.GetChild(i);
+
+                var unit = child.GetComponent<EditorUnit>();
+                if (unit == null)
+                {
+                    var t = child.GetComponent<T>();
+                    if (t != null)
+                        list.Add(t);
+
+                    FindChildrenExcludingUnitsInternal<T>(child.transform, list);
+                }
+
+            }
         }
     }
 }

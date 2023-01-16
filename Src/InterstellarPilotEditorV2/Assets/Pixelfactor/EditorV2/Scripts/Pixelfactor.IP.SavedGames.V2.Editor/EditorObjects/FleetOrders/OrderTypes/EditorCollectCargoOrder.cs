@@ -6,6 +6,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.FleetOrders.OrderTyp
     [RequireComponent(typeof(EditorFleetOrderCommon))]
     public class EditorCollectCargoOrder : EditorFleetOrderBase
     {
-        public EditorUnitCargoData CargoUnit = null;
+        public EditorCargoUnit CargoUnit = null;
     }
 }

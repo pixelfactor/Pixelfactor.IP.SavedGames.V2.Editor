@@ -6,7 +6,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
     /// <summary>
     /// Defines a cargo container that can be tractored by a ship
     /// </summary>
-    public class EditorUnitCargoData : MonoBehaviour
+    public class EditorCargoUnit : MonoBehaviour
     {
         /// <summary>
         /// Obsolete - avoid use and switch over to <see cref="CargoClass"/>

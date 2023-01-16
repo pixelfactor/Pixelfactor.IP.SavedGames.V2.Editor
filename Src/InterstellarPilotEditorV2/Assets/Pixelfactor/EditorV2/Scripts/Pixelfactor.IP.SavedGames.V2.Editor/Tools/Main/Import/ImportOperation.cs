@@ -83,7 +83,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 
         private void ImportWormhole(EditorUnit editorUnit, ModelUnitWormholeData modelUnitWormholeData)
         {
-            var editorWormhole = editorUnit.gameObject.GetOrAddComponent<EditorUnitWormholeData>();
+            var editorWormhole = editorUnit.gameObject.GetOrAddComponent<EditorWormholeUnit>();
 
             editorWormhole.IsUnstable = modelUnitWormholeData.IsUnstable;
             editorWormhole.UnstableNextChangeTargetTime = modelUnitWormholeData.UnstableNextChangeTargetTime;
@@ -296,7 +296,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 
         private void ImportUnitCargoData(EditorUnit editorUnit, ModelUnitCargoData cargoData)
         {
-            var editorData = editorUnit.gameObject.GetOrAddComponent<EditorUnitCargoData>();
+            var editorData = editorUnit.gameObject.GetOrAddComponent<EditorCargoUnit>();
 
             editorData.CargoClass = GetCargoClass(cargoData.CargoClass);
             editorData.Quantity = cargoData.Quantity;

@@ -24,6 +24,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                 ValidateMissingIds(editorScenario, throwOnError);
             }
 
+            ValidateDockedUnits(editorScenario, throwOnError);
+
             ValidateDuplicateIds(editorScenario, throwOnError);
 
             ValidateDuplicatePilotNames(editorScenario);
@@ -32,6 +34,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             ValidateUnits(editorScenario, throwOnError);
 
             Debug.Log("Validation complete");
+        }
+
+        public static void ValidateDockedUnits(EditorScenario editorScenario, bool throwOnError)
+        {
         }
 
         public static void ValidateDuplicateShipNames(EditorScenario editorScenario)
@@ -202,7 +208,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         private static void ValidateDuplicateSectors(EditorScenario editorScenario, bool throwOnError)
         {
             var sectors = editorScenario.GetComponentsInChildren<EditorSector>();
-            var duplicates = sectors.GroupBy(e => e.Id).Where(e => e.Count() > 1);
+            var duplicates = sectors.Where(e => e.Id > -1).GroupBy(e => e.Id).Where(e => e.Count() > 1);
             if (duplicates.Any())
             {
                 OnError("Duplicate sector ids found", duplicates.First().First(), throwOnError);
@@ -212,7 +218,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         private static void ValidateDuplicatePeople(EditorScenario editorScenario, bool throwOnError)
         {
             var people = editorScenario.GetComponentsInChildren<EditorPerson>();
-            var duplicates = people.GroupBy(e => e.Id).Where(e => e.Count() > 1);
+            var duplicates = people.Where(e => e.Id > -1).GroupBy(e => e.Id).Where(e => e.Count() > 1);
             if (duplicates.Any())
             {
                 OnError("Duplicate person ids found", duplicates.First().First(), throwOnError);
@@ -231,8 +237,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 
         private static void ValidateDuplicateMessageIds(EditorScenario editorScenario, bool throwOnError)
         {
-            var units = editorScenario.GetComponentsInChildren<EditorPlayerMessage>();
-            var duplicates = units.Where(e => e.Id > -1).GroupBy(e => e.Id).Where(e => e.Count() > 1);
+            var messages = editorScenario.GetComponentsInChildren<EditorPlayerMessage>();
+            var duplicates = messages.Where(e => e.Id > -1).GroupBy(e => e.Id).Where(e => e.Count() > 1);
             if (duplicates.Any())
             {
                 OnError("Duplicate message ids found", duplicates.First().First(), throwOnError);
@@ -272,7 +278,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         private static void ValidateDuplicateFactions(EditorScenario editorScenario, bool throwOnError)
         {
             var factions = editorScenario.GetComponentsInChildren<EditorFaction>();
-            var duplicates = factions.GroupBy(e => e.Id).Where(e => e.Count() > 1);
+            var duplicates = factions.Where(e => e.Id > -1).GroupBy(e => e.Id).Where(e => e.Count() > 1);
             if (duplicates.Any())
             {
                 OnError("Duplicate faction ids found", duplicates.First().First(), throwOnError);

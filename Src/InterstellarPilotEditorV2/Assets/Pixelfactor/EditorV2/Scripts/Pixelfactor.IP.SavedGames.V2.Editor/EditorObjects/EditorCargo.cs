@@ -6,7 +6,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
     /// <summary>
     /// Defines an item of cargo on a ship/station
     /// </summary>
-    public class EditorComponentUnitCargoDataItem : MonoBehaviour
+    public class EditorCargo : MonoBehaviour
     {
         [UnityEngine.Serialization.FormerlySerializedAs("CargoClass")]
         [Tooltip("The type of the cargo. Obsolete - assign CargoClass instead")]

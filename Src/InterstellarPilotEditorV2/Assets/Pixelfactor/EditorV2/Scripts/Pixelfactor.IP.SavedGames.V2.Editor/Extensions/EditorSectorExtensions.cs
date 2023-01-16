@@ -12,9 +12,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
             return editorSector.GetComponentInParent<EditorScenario>();
         }
 
-        public static List<EditorUnitWormholeData> GetValidStableWormholes(this EditorSector editorSector)
+        public static List<EditorWormholeUnit> GetValidStableWormholes(this EditorSector editorSector)
         {
-            return editorSector.GetComponentsInChildren<EditorUnitWormholeData>().Where(e => !e.IsUnstable && e.TargetWormholeUnit != null).ToList();
+            return editorSector.GetComponentsInChildren<EditorWormholeUnit>().Where(e => !e.IsUnstable && e.TargetWormholeUnit != null).ToList();
         }
 
         public static int GetStableWormholeCount(this EditorSector editorSector)
