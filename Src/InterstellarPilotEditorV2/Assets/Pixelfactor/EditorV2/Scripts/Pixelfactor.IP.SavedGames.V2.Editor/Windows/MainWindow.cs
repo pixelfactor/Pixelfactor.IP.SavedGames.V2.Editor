@@ -79,7 +79,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUILayout.Space();
 
             if (GUILayout.Button(new GUIContent(
-                "Create new...",
+                "Create custom..",
+                "Creates a custom new scenario"),
+                GuiHelper.ButtonLayout))
+            {
+                CreateWindow.ShowNew();
+            }
+
+            if (GUILayout.Button(new GUIContent(
+                "Create new",
                 "Creates a new scenario with a single sector and player"),
                 GuiHelper.ButtonLayout))
             {
@@ -88,7 +96,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             }
 
             if (GUILayout.Button(new GUIContent(
-                "Create new empty...",
+                "Create new empty",
                 "Creates a new empty scenario"),
                 GuiHelper.ButtonLayout))
             {
@@ -96,8 +104,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 GUIUtility.ExitGUI();
             }
 
+            EditorGUILayout.Space();
+
             if (GUILayout.Button(new GUIContent(
-                "Import... (Experimental)",
+                "Import...",
                 "Imports a scenario"),
                 GuiHelper.ButtonLayout))
             {

@@ -321,7 +321,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
         private static void DrawAsteroidAutoSpawnOptions()
         {
-            GuiHelper.Subtitle("Spawn asteroids", "Spawn asteroids in selected sectors based on existing asteroid clusters");
+            GuiHelper.Subtitle("Auto-spawn asteroids", "Spawn asteroids in selected sectors based on existing asteroid clusters");
             var sectors = SpawnWindowHelper.GetSelectedOrAllSectors();
             var hasSectors = sectors.Any();
 
@@ -333,7 +333,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             if (GUILayout.Button(
                 new GUIContent(
-                    "Spawn",
+                    "Auto spawn",
                     "Creates asteroids inside asteroid clusters of every sector"),
                 GuiHelper.ButtonLayout))
             {

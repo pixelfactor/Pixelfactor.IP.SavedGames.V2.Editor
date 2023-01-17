@@ -30,6 +30,16 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow
             float minDistanceBetweenSectors,
             float minAngleBetweenWormholes)
         {
+            if (sectorPrefab == null)
+            {
+                throw new System.Exception("Sector prefab is required");
+            }
+
+            if (existingSector == null)
+            {
+                throw new System.Exception("Existing sector is required");
+            }
+
             var allSectors = existingSector.GetSavedGame().GetSectors().ToList();
             var sectorLines = GrowHelper.GetSectorConnectionLines(allSectors);
 
@@ -59,6 +69,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Grow
 
                 EditSectorTool.Randomize(sector);
 
+                Debug.Log($"Spawned new sector: {sector.Name}", sector);
                 return sector;
             }
 

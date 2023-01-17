@@ -97,12 +97,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUILayout.TextField("Selected sectors", WindowHelper.DescribeSectors(selectedSectors));
             EditorGUI.EndDisabledGroup();
 
-            if (newSectorPrefab == null)
-            {
-                newSectorPrefab = AssetDatabase.LoadAssetAtPath<EditorSector>(settings.SectorPrefabPath);
-            }
+            SetDefaultSectorPrefabIfNull(settings);
 
-            newSectorPrefab = (EditorSector)EditorGUILayout.ObjectField("Sector prefab", newSectorPrefab, typeof(EditorSector), allowSceneObjects: false);
+            this.newSectorPrefab = (EditorSector)EditorGUILayout.ObjectField("Sector prefab", newSectorPrefab, typeof(EditorSector), allowSceneObjects: false);
 
             EditorGUILayout.PrefixLabel(new GUIContent("Selection mode", "Determines what to select after creating new sectors"));
 
@@ -160,6 +157,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUI.EndDisabledGroup();
 
             DrawAutoGrow(settings, allSectors, selectedSectors);
+        }
+
+        private void SetDefaultSectorPrefabIfNull(CustomSettings settings)
+        {
+            if (this.newSectorPrefab == null)
+            {
+                this.newSectorPrefab = AssetDatabase.LoadAssetAtPath<EditorSector>(settings.SectorPrefabPath);
+            }
         }
 
         private void DrawAutoGrow(CustomSettings settings, List<EditorSector> allSectors, List<EditorSector> selectedSectors)
@@ -236,7 +241,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 Mathf.Pow(Random.value, Mathf.Lerp(32.0f, 1.0f, this.sectorDistanceFuzziness)));
         }
 
-        private void AutoGrow(List<EditorSector> selectedSectors, List<EditorSector> allSectors, CustomSettings settings, int autoGrowCount)
+        public void AutoGrow(List<EditorSector> selectedSectors, List<EditorSector> allSectors, CustomSettings settings, int autoGrowCount)
         {
             var sectorCount = allSectors.Count;
             var createdCount = 0;
@@ -266,6 +271,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         {
             EditorSector newSector = null;
 
+            SetDefaultSectorPrefabIfNull(settings);
+
             var availableSectors = selectedSectors.Where(e => CanGrowSector(e));
             if (availableSectors.Count() > 0)
             {
@@ -277,7 +284,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                     {
                         newSector = GrowTool.GrowOnceAndConnect(
                             randomSector,
-                            newSectorPrefab,
+                            this.newSectorPrefab,
                             GetNewSectorDistance(settings),
                             settings.MinDistanceBetweenSectors,
                             settings.MinAngleBetweenWormholes);
