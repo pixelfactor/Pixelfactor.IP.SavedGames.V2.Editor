@@ -9,7 +9,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 {
     public class AsteroidSpawnTool
     {
-        public static int SpawnAsteroids()
+        public static int SpawnInClusters()
         {
             var editorScenario = SavedGameUtil.FindSavedGameOrErrorOut();
 
@@ -20,14 +20,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             return createdCount;
         }
 
-        public static int SpawnAsteroidsInSectors(IEnumerable<EditorSector> sectors)
+        public static int SpawnInClustersInSectors(IEnumerable<EditorSector> sectors)
         {
             var createdCount = 0;
 
             var spawner = new AsteroidSpawner();
             foreach (var sector in sectors)
             {
-                createdCount += spawner.SpawnInSector(sector);
+                createdCount += spawner.SpawnInClustersInSector(sector);
             }
 
             Debug.Log($"Finished creating {createdCount} asteroids");

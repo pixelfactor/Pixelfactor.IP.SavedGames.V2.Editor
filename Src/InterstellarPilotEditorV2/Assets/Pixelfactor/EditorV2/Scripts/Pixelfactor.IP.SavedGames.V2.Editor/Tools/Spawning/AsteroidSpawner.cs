@@ -35,7 +35,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning
         /// <summary>
         /// Create asteroids in all sectors
         /// </summary>
-        public int SpawnInSector(EditorSector editorSector)
+        public int SpawnInClustersInSector(EditorSector editorSector)
         {
             var count = 0;
             foreach (var asteroidCluster in editorSector.GetComponentsInChildren<EditorAsteroidCluster>())
@@ -144,6 +144,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning
             var asteroid = PrefabUtility.InstantiatePrefab(prefab.gameObject, sector.transform) as GameObject;
             asteroid.transform.position = position;
             asteroid.transform.localRotation = Random.rotationUniform;
+
+            Physics.Simulate(0.01f);
+
             return asteroid.GetComponent<EditorUnit>();
         }
 

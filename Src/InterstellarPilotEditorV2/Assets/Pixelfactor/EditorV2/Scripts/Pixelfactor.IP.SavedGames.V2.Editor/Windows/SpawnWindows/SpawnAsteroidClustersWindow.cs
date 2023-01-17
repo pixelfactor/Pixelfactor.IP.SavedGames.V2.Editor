@@ -43,35 +43,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
                 GuiHelper.ButtonLayout))
             {
                 var settings = CustomSettings.GetOrCreateSettings();
-                var sectorsToSpawnAsteroidClusters = AsteroidClusterSpawnTool.GetNewAsteroidClusterSectors(sectors, settings);
 
-                var asteroidClusterPrefabPath = settings.UnitPrefabsPath.TrimEnd('/') + "/" + "AsteroidCluster";
-                var asteroidClusterPrefabs = GameObjectHelper.GetPrefabsOfTypeFromPath<EditorUnit>(asteroidClusterPrefabPath).ToList();
-
-                // Find all existing asteroid clusters - use this to try and spawn unique ones
-                var allAsteroidClusters = SavedGameUtil.FindSavedGameOrErrorOut().GetComponentsInChildren<EditorAsteroidCluster>().Select(e => e.GetComponent<EditorUnit>()).ToList();
-                var count = 0;
-
-                var allSectors = SpawnWindowHelper.GetAllSectors();
-                var asteroidTypes = PrefabHelper.GetAsteroidTypes(settings);
-
-                var spawnedAsteroidClusters = new List<EditorUnit>();
-                foreach (var sector in sectorsToSpawnAsteroidClusters)
-                {
-                    Debug.Log($"Spawning asteroid cluster(s) in {sector.Name}");
-
-                    foreach (var spawnedAsteroidCluster in AsteroidClusterSpawnTool.CreateSectorAsteroidClusters(sector, allSectors, asteroidTypes, settings))
-                    {
-                        Debug.Log($"Spawned asteroid cluster in {sector.Name}");
-
-                        spawnedAsteroidClusters.Add(spawnedAsteroidCluster);
-                        allAsteroidClusters.Add(spawnedAsteroidCluster);
-                        count++;
-                    }
-                }
 
                 var message = "No asteroid clusters were created. Ensure that asteroid cluster prefabs can be found"; 
                 
+                var spawnedAsteroidClusters = AutoSpawnAsteroidClustersInSectors(sectors, settings);
+                var count = spawnedAsteroidClusters.Count;
+
                 if (count > 0)
                 { 
                     var spawnedAsteroidClustersByType = spawnedAsteroidClusters.Select(e => e.GetComponent<EditorAsteroidCluster>())
@@ -87,6 +65,40 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
             }
 
             EditorGUI.EndDisabledGroup();
+        }
+
+        public List<EditorUnit> AutoSpawnAsteroidClustersInSectors(IEnumerable<EditorSector> sectors, CustomSettings settings)
+        {
+            var selectedSectors = sectors.ToList();
+
+            var sectorsToSpawnAsteroidClusters = AsteroidClusterSpawnTool.GetNewAsteroidClusterSectors(selectedSectors, settings);
+
+            var asteroidClusterPrefabPath = settings.UnitPrefabsPath.TrimEnd('/') + "/" + "AsteroidCluster";
+            var asteroidClusterPrefabs = GameObjectHelper.GetPrefabsOfTypeFromPath<EditorUnit>(asteroidClusterPrefabPath).ToList();
+
+            // Find all existing asteroid clusters - use this to try and spawn unique ones
+            var allAsteroidClusters = SavedGameUtil.FindSavedGameOrErrorOut().GetComponentsInChildren<EditorAsteroidCluster>().Select(e => e.GetComponent<EditorUnit>()).ToList();
+            var count = 0;
+
+            var allSectors = SpawnWindowHelper.GetAllSectors();
+            var asteroidTypes = PrefabHelper.GetAsteroidTypes(settings);
+
+            var spawnedAsteroidClusters = new List<EditorUnit>();
+            foreach (var sector in sectorsToSpawnAsteroidClusters)
+            {
+                Debug.Log($"Spawning asteroid cluster(s) in {sector.Name}");
+
+                foreach (var spawnedAsteroidCluster in AsteroidClusterSpawnTool.CreateSectorAsteroidClusters(sector, allSectors, asteroidTypes, settings))
+                {
+                    Debug.Log($"Spawned asteroid cluster in {sector.Name}");
+
+                    spawnedAsteroidClusters.Add(spawnedAsteroidCluster);
+                    allAsteroidClusters.Add(spawnedAsteroidCluster);
+                    count++;
+                }
+            }
+
+            return spawnedAsteroidClusters;
         }
 
         private void DrawDeleteOptions()
