@@ -67,5 +67,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
         {
             return editorSector.GetComponentInChildren<EditorPlanet>() != null;
         }
+
+        public static bool HasAsteroidClusters(this EditorSector editorSector)
+        {
+            return editorSector.GetComponentInChildren<EditorAsteroidCluster>() != null;
+        }
     }
 }

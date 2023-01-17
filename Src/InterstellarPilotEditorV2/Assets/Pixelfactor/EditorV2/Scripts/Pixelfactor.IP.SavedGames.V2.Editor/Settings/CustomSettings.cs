@@ -135,6 +135,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [Tooltip("Determines how many sectors are given asteroids")]
         public float AsteroidSectorWeighting = 2.6f;
 
+        public int MinNumberAsteroidSectors = 2;
+
         public static CustomSettings GetOrCreateSettings()
         {
             var settings = AssetDatabase.LoadAssetAtPath<CustomSettings>(k_MyCustomSettingsPath);
@@ -194,6 +196,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.MinAngleBetweenWormholes)), new GUIContent("Min wormhole angle"));
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.MinDistanceBetweenSectors)), new GUIContent("Min distance between sectors"));
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.MaxDistanceBetweenSectors)), new GUIContent("Max distance between sectors"));
+                    EditorGUILayout.Space();
+
+                    EditorGUILayout.LabelField("Sector types", EditorStyles.boldLabel);
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.AsteroidSectorWeighting)), new GUIContent("Asteroid sector weight"));
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.PlanetSectorWeighting)), new GUIContent("Planet sector weight"));
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.DeepSpaceSectorWeighting)), new GUIContent("Deep space sector weight"));
                     EditorGUILayout.Space();
 
                     EditorGUILayout.LabelField("Planets", EditorStyles.boldLabel);

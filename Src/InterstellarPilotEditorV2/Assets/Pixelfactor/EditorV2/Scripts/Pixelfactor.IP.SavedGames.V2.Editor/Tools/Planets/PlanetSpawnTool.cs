@@ -79,7 +79,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
             return score;
         }
 
-        private static int? GetSectorMinDistanceFromPlanetSector(
+        public static int? GetSectorMinDistanceFromPlanetSector(
             IEnumerable<EditorSector> sectors,
             IEnumerable<EditorSector> planetSectors,
             EditorSector sector)

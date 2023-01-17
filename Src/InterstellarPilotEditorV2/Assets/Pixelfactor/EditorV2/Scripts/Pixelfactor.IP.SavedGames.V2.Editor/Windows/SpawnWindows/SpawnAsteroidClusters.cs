@@ -13,7 +13,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
     {
         public void Draw()
         {
-            DrawAutoSpawnOptions(null);
+            DrawAutoSpawnOptions();
 
             GuiHelper.Subtitle("Spawn single asteroid clusters", "Create asteroid clusters in selected sectors");
 
@@ -23,7 +23,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
             DrawDeleteOptions();
         }
 
-        private void DrawAutoSpawnOptions(IEnumerable<EditorUnit> asteroidClusterPrefabs)
+        private void DrawAutoSpawnOptions()
         {
             GuiHelper.Subtitle("Auto-spawn clusters", "Spawn asteroid clusters in all sectors based on settings");
 
@@ -45,21 +45,31 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
                 var settings = CustomSettings.GetOrCreateSettings();
                 var sectorsToSpawnAsteroidClusters = AsteroidClusterSpawnTool.GetNewAsteroidClusterSectors(sectors, settings);
 
-                // Find all existing planets - use this to try and spawn unique ones
+                var asteroidClusterPrefabPath = settings.UnitPrefabsPath.TrimEnd('/') + "/" + "AsteroidCluster";
+                var asteroidClusterPrefabs = GameObjectHelper.GetPrefabsOfTypeFromPath<EditorUnit>(asteroidClusterPrefabPath).ToList();
+
+                // Find all existing asteroid clusters - use this to try and spawn unique ones
                 var allAsteroidClusters = SavedGameUtil.FindSavedGameOrErrorOut().GetComponentsInChildren<EditorAsteroidCluster>().Select(e => e.GetComponent<EditorUnit>()).ToList();
                 var count = 0;
                 foreach (var sector in sectorsToSpawnAsteroidClusters)
                 {
                     Debug.Log($"Spawning asteroid cluster in {sector.Name}");
-                    //var newPlanet = SpawnNewAsteroidCluster(sector, autoPositionPlanet: true, planetPrefabs, settings, allAsteroidClusters);
-                    //if (newPlanet != null)
-                    //{
-                    //    allAsteroidClusters.Add(newPlanet);
-                    //    count++;
-                    //}
-                }
 
-                //var count = PlanetSpawnTool.SpawnPlanetsInSectors(sectors, );
+                    // TODO: Choose asteroid cluster type based on weight
+                    var asteroidClusterPrefab = asteroidClusterPrefabs.GetRandom();
+
+                    var newAsteroidCluster = SpawnNewAsteroidCluster(
+                        asteroidClusterPrefab,
+                        sector,
+                        autoPosition: true,
+                        settings);
+
+                    if (newAsteroidCluster != null)
+                    {
+                        allAsteroidClusters.Add(newAsteroidCluster);
+                        count++;
+                    }
+                }
 
                 var message = count > 0 ?
                     $"Finished creating {count} asteroid clusters" :
@@ -73,7 +83,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
 
         private EditorUnit SpawnNewAsteroidCluster(EditorUnit prefab, EditorSector sector, bool autoPosition, CustomSettings settings)
         {
-            var planetUnit = PrefabHelper.Instantiate(prefab, sector.transform);
+            var asteroidClusterUnit = PrefabHelper.Instantiate(prefab, sector.transform);
 
             if (autoPosition)
             {
@@ -81,12 +91,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
             }
             else
             {
-                planetUnit.transform.position = SpawnWindowHelper.GetNewUnitSpawnPosition(sector, 1000.0f);
+                asteroidClusterUnit.transform.position = SpawnWindowHelper.GetNewUnitSpawnPosition(sector, 1000.0f);
             }
 
-            AutoNameObjects.AutoNameUnit(planetUnit);
+            // TODO: Set radius
 
-            return planetUnit;
+            AutoNameObjects.AutoNameUnit(asteroidClusterUnit);
+
+            return asteroidClusterUnit;
         }
 
         private void DrawDeleteOptions()
