@@ -29,6 +29,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         private bool autoPositionPlanets = true;
 
         private SpawnFleets spawnFleetsWindow = new SpawnFleets();
+        private SpawnAsteroidClusters spawnAsteroidClustersWindow = new SpawnAsteroidClusters();
 
         public void Draw()
         {
@@ -54,8 +55,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                     break;
                 case SpawnAsteroidClustersId:
                     {
-                        GuiHelper.Subtitle("Spawn asteroid clusters", "Create asteroid clusters in selected sectors");
-                        ShowSpawnOptions("AsteroidCluster", allowFaction: false);
+                        spawnAsteroidClustersWindow.Draw();
                     }
                     break;
                 case SpawnAsteroidsId:
@@ -200,7 +200,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         {
             GuiHelper.Subtitle("Auto-spawn planets", "Spawn planets in all sectors based on settings");
 
-            var sectors = GetAllSectors();
+            var sectors = SpawnWindowHelper.GetAllSectors();
             var hasSectors = sectors.Any();
 
             EditorGUI.BeginDisabledGroup(true);
@@ -318,32 +318,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             return planetUnit;
         }
 
-        private static List<EditorSector> GetSelectedOrAllSectors()
-        {
-            var sectors = Selector.GetInParents<EditorSector>();
-            if (sectors.Any())
-            {
-                return sectors.ToList();
-            }
-
-            return GetAllSectors();
-        }
-
-        public static List<EditorSector> GetAllSectors()
-        {
-            var savedGame = SavedGameUtil.FindSavedGame();
-            if (savedGame != null)
-            {
-                return savedGame.GetSectors().ToList();
-            }
-
-            return new EditorSector[0].ToList();
-        }
-
         private static void DrawAsteroidAutoSpawnOptions()
         {
             GuiHelper.Subtitle("Spawn asteroids", "Spawn asteroids in selected sectors based on existing asteroid clusters");
-            var sectors = GetSelectedOrAllSectors();
+            var sectors = SpawnWindowHelper.GetSelectedOrAllSectors();
             var hasSectors = sectors.Any();
 
             EditorGUI.BeginDisabledGroup(true);
@@ -378,96 +356,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUILayout.TextField("Spawn Sector", WindowHelper.DescribeSectors(sector));
             EditorGUI.EndDisabledGroup();
 
-            ShowSpawnOptions(subDirectory, allowFaction);
-        }
-
-        private void ShowSpawnOptions(string subDirectory, bool allowFaction)
-        {
-            var sector = Selector.GetSingleSelectedSectorOrNull();
-
-            var canSpawn = sector != null;
-
-            EditorGUI.BeginDisabledGroup(!canSpawn);
-
-            if (allowFaction)
-            {
-                var factionContent = new GUIContent("Spawn faction", "The faction that the spawned unit will be assigned to");
-                this.spawnFaction = (EditorFaction)EditorGUILayout.ObjectField(factionContent, this.spawnFaction, typeof(EditorFaction), allowSceneObjects: true);
-            }
-
-            var settings = CustomSettings.GetOrCreateSettings();
-            var prefabs = GameObjectHelper.GetPrefabsOfTypeFromPath<EditorUnit>(settings.UnitPrefabsPath.Trim('/') + "/" + subDirectory).ToList();
-
-            if (prefabs.Count > 0)
-            {
-
-                var viewWidth = EditorGUIUtility.currentViewWidth;
-                var columnCount = Mathf.Max(1, Mathf.FloorToInt(viewWidth / 200));
-
-                var i = 0;
-                while (i < prefabs.Count)
-                {
-                    var unitPrefab = prefabs[i];
-                    if (columnCount > 1)
-                    {
-                        if (i == 0)
-                        {
-                            EditorGUILayout.BeginHorizontal();
-                        }
-                        else
-                        {
-                            var currentColumnIndex = i % columnCount;
-                            if (currentColumnIndex == 0)
-                            {
-                                EditorGUILayout.EndHorizontal();
-                                EditorGUILayout.BeginHorizontal();
-                            }
-                        }
-                    }
-
-                    DrawSpawnPrefabButton(sector, unitPrefab, this.spawnFaction);
-
-                    i++;
-                }
-
-                if (columnCount > 1)
-                {
-                    EditorGUILayout.EndHorizontal();
-                }
-            }
-
-            EditorGUI.EndDisabledGroup();
-        }
-
-        private void DrawSpawnPrefabButton(EditorSector sector, EditorUnit unitPrefab, EditorFaction editorFaction)
-        {
-            if (GUILayout.Button(
-                new GUIContent(
-                    $"Spawn {unitPrefab.GetEditorName()}",
-                    $"Creates a {unitPrefab.GetEditorName()}"),
-                GuiHelper.ButtonLayout))
-            {
-                if (sector == null)
-                {
-                    EditorUtility.DisplayDialog("Spawn", "Select a sector first", "OK");
-                }
-                else
-                {
-                    var unit = Spawn.Unit(sector, unitPrefab);
-                    if (unit.CanHaveFaction())
-                    {
-                        unit.Faction = editorFaction;
-                    }
-
-                    unit.transform.position = SpawnWindowHelper.GetNewUnitSpawnPosition(sector, unit.GetCollisionRadius());
-
-                    Selection.objects = new GameObject[] { unit.gameObject };
-
-                    // Auto-frame on spawned object
-                    //var viewSize = 100.0f;;
-                    //SceneView.lastActiveSceneView.Frame(new Bounds(unit.transform.position, new Vector3(viewSize, viewSize, viewSize)), false);
-                }
-            }
+            SpawnWindowHelper.ShowSpawnUnitOptions(subDirectory, allowFaction, ref this.spawnFaction);
         }
     }
 }
