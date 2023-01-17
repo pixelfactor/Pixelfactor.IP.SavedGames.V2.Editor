@@ -62,5 +62,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
 
             return false;
         }
+
+        public static bool HasPlanets(this EditorSector editorSector)
+        {
+            return editorSector.GetComponentInChildren<EditorPlanet>() != null;
+        }
     }
 }

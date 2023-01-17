@@ -13,13 +13,16 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 {
     public class SpawnWindow
     {
-        public const int SpawnShipId = 0;
-        public const int SpawnStationId = 1;
-        public const int SpawnAsteroidsId = 2;
-        public const int SpawnFleetsId = 3;
-        public const int SpawnPlanetId = 4;
+        public const int SpawnShipId = 3;
+        public const int SpawnStationId = 4;
+        
+        public const int SpawnFleetsId = 5;
 
-        private int currentTab = SpawnShipId;
+        public const int SpawnPlanetId = 0;
+        public const int SpawnAsteroidClustersId = 1;
+        public const int SpawnAsteroidsId = 2;
+
+        private int currentTab = 0;
         private EditorFaction spawnFaction = null;
         private int spawnFleetShipCount = 8;
         private string spawnFleetName = null;
@@ -31,10 +34,43 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         public void Draw()
         {
 
-            currentTab = GUILayout.Toolbar(currentTab, new string[] { "Ship", "Station", "Asteroid", "Fleet", "Planet" });
+            currentTab = GUILayout.Toolbar(currentTab, new string[] { "Planet", "Cluster", "Asteroid", "Ship", "Station", "Fleet" });
 
             switch (currentTab)
             {
+                case SpawnPlanetId:
+                    {
+                        var settings = CustomSettings.GetOrCreateSettings();
+                        var planetPrefabPath = settings.UnitPrefabsPath.TrimEnd('/') + "/" + "Planet";
+                        var allPlanetPrefabs = GameObjectHelper.GetPrefabsOfTypeFromPath<EditorUnit>(planetPrefabPath).Where(e => e.ModelUnitClass != ModelUnitClass.Planet_Earth).ToList();
+                        var planetPrefabs = allPlanetPrefabs.Where(e => !e.name.Contains("moon", System.StringComparison.InvariantCultureIgnoreCase)).ToList();
+                        var moonPrefabs = allPlanetPrefabs.Where(e => e.name.Contains("moon", System.StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+                        DrawPlanetAutoSpawnOptions(allPlanetPrefabs, planetPrefabs, moonPrefabs);
+
+                        DrawSpawnPlanetOptions(allPlanetPrefabs, planetPrefabs, moonPrefabs);
+
+                        DrawDeletePlanetOptions();
+                    }
+                    break;
+                case SpawnAsteroidClustersId:
+                    {
+                        GuiHelper.Subtitle("Spawn asteroid clusters", "Create asteroid clusters in selected sectors");
+                        ShowSpawnOptions("AsteroidCluster", allowFaction: false);
+                    }
+                    break;
+                case SpawnAsteroidsId:
+                    {
+                        DrawAsteroidAutoSpawnOptions();
+
+                        EditorGUILayout.Space(30);
+
+                        GuiHelper.Subtitle("Spawn single asteroid", "Spawn an asteroid in a specific sector");
+                        ShowSpawnOptionsAndSector("Asteroid", allowFaction: false);
+
+
+                    }
+                    break;
                 case SpawnShipId:
                     {
                         ShowSpawnOptionsAndSector("Ship");
@@ -45,24 +81,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                         ShowSpawnOptionsAndSector("Station");
                     }
                     break;
-                case SpawnAsteroidsId:
-                    {
-                        DrawSpawnAsteroidOptions();
-
-                        EditorGUILayout.Space(30);
-
-                        ShowSpawnOptionsAndSector("Asteroid", allowFaction: false);
-                        ShowSpawnOptions("AsteroidCluster", allowFaction: false);
-                    }
-                    break;
                 case SpawnFleetsId:
                     {
                         DrawSpawnFleetOptions();
-                    }
-                    break;
-                case SpawnPlanetId:
-                    {
-                        DrawSpawnPlanetOptions();
                     }
                     break;
             }
@@ -92,7 +113,44 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             return false;
         }
 
-        private void DrawSpawnPlanetOptions()
+        private void DrawDeletePlanetOptions()
+        {
+            GuiHelper.Subtitle("Delete planets", "Deletes planets from the selected sectors");
+            var selectedSectors = Selector.GetInParents<EditorSector>();
+            if (selectedSectors.Count() == 0)
+            {
+                var savedGame = SavedGameUtil.FindSavedGame();
+                selectedSectors = savedGame.GetComponentsInChildren<EditorSector>();
+            }
+
+            EditorGUI.BeginDisabledGroup(true);
+            EditorGUILayout.TextField("Target sector", WindowHelper.DescribeSectors(selectedSectors));
+            EditorGUI.EndDisabledGroup();
+
+            var canDelete = selectedSectors.Count() > 0;
+
+            EditorGUI.BeginDisabledGroup(!canDelete);
+            if (GUILayout.Button(
+                new GUIContent(
+                    $"Delete planets",
+                    $"Deletes planets from the selected sectors"),
+                GuiHelper.ButtonLayout))
+            {
+                foreach (var sector in selectedSectors)
+                {
+                    foreach (var planet in sector.GetComponentsInChildren<EditorPlanet>())
+                    {
+                        GameObject.DestroyImmediate(planet.gameObject);
+                    }
+                }
+            }
+            EditorGUI.EndDisabledGroup();
+        }
+
+        private void DrawSpawnPlanetOptions(
+            IEnumerable<EditorUnit> allPlanetPrefabs, 
+            IEnumerable<EditorUnit> planetPrefabs,
+            IEnumerable<EditorUnit> moonPrefabs)
         {
             GuiHelper.Subtitle("Spawn planets", "Spawns planets in selected sectors");
 
@@ -106,10 +164,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             var canSpawnPlanet = selectedSectors.Count() > 0;
 
             var settings = CustomSettings.GetOrCreateSettings();
-            var planetPrefabPath = settings.UnitPrefabsPath.TrimEnd('/') + "/" + "Planet";
-            var allPlanetPrefabs = GameObjectHelper.GetPrefabsOfTypeFromPath<EditorUnit>(planetPrefabPath).Where(e => e.ModelUnitClass != ModelUnitClass.Planet_Earth).ToList();
-            var planetPrefabs = allPlanetPrefabs.Where(e => !e.name.Contains("moon", System.StringComparison.InvariantCultureIgnoreCase)).ToList();
-            var moonPrefabs = allPlanetPrefabs.Where(e => e.name.Contains("moon", System.StringComparison.InvariantCultureIgnoreCase)).ToList();
 
             EditorGUILayout.PrefixLabel(new GUIContent("Auto-position", "Whether to randomly position planets in a sector in the same way that the game-engine would"));
             this.autoPositionPlanets = EditorGUILayout.Toggle(this.autoPositionPlanets, GUILayout.ExpandWidth(false));
@@ -162,6 +216,57 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUI.EndDisabledGroup();
         }
 
+        private void DrawPlanetAutoSpawnOptions(
+    IEnumerable<EditorUnit> allPlanetPrefabs,
+    IEnumerable<EditorUnit> planetPrefabs,
+    IEnumerable<EditorUnit> moonPrefabs)
+        {
+            GuiHelper.Subtitle("Auto-spawn planets", "Spawn planets in all sectors based on settings");
+
+            var sectors = GetAllSectors();
+            var hasSectors = sectors.Any();
+
+            EditorGUI.BeginDisabledGroup(true);
+            EditorGUILayout.TextField("Sector", WindowHelper.DescribeSectors(sectors));
+            EditorGUI.EndDisabledGroup();
+
+            EditorGUI.BeginDisabledGroup(!hasSectors);
+
+            if (GUILayout.Button(
+                new GUIContent(
+                    "Auto spawn",
+                    "Creates planets automatically in all sectors"),
+                GuiHelper.ButtonLayout))
+            {
+                var settings = CustomSettings.GetOrCreateSettings();
+                var sectorsToSpawnPlanets = PlanetSpawnTool.GetNewPlanetSectors(sectors, settings);
+
+                // Find all existing planets - use this to try and spawn unique ones
+                var allPlanets = SavedGameUtil.FindSavedGameOrErrorOut().GetComponentsInChildren<EditorPlanet>().Select(e => e.GetComponent<EditorUnit>()).ToList();
+                var count = 0;
+                foreach (var sector in sectorsToSpawnPlanets)
+                {
+                    Debug.Log($"Spawning planet in {sector.Name}");
+                    var newPlanet = SpawnNewPlanet(sector, autoPositionPlanet: true, planetPrefabs, settings, allPlanets);
+                    if (newPlanet != null)
+                    {
+                        allPlanets.Add(newPlanet);
+                        count++;
+                    }
+                }
+
+                //var count = PlanetSpawnTool.SpawnPlanetsInSectors(sectors, );
+
+                var message = count > 0 ?
+                    $"Finished creating {count} planets" :
+                    "No planets were created. Ensure that planet prefabs can be found";
+
+                EditorUtility.DisplayDialog("Spawn planets", message, "OK");
+            }
+
+            EditorGUI.EndDisabledGroup();
+        }
+
         private void OnSpawnPlanetClick(
             IEnumerable<EditorSector> selectedSectors, 
             IEnumerable<EditorUnit> planetPrefabs, 
@@ -181,7 +286,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             {
                 var newPlanet = SpawnNewPlanet(sector, autoPositionPlanet, planetPrefabs, customSettings, allPlanets);
 
-                allPlanets.Add(newPlanet);
+                if (newPlanet != null)
+                { 
+                    allPlanets.Add(newPlanet);
+                }
             }
         }
 
@@ -236,7 +344,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         private void DrawSpawnFleetOptions()
         {
             DrawSpawnNewFleetOptions();
-            DrawSpwnFleetFromExisting();
+            DrawSpawnFleetFromExisting();
         }
 
         private void DrawSpawnNewFleetOptions()
@@ -304,7 +412,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             Selection.activeObject = newFleet.gameObject;
         }
 
-        private void DrawSpwnFleetFromExisting()
+        private void DrawSpawnFleetFromExisting()
         {
             GuiHelper.Subtitle("Spawn fleet from selected", "Spawns a fleet from existing units");
 
@@ -361,10 +469,32 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             return ModelUnitClass.Ship_ShuttleA;
         }
 
-        private static void DrawSpawnAsteroidOptions()
+        private static List<EditorSector> GetSelectedOrAllSectors()
         {
             var sectors = Selector.GetInParents<EditorSector>();
+            if (sectors.Any())
+            {
+                return sectors.ToList();
+            }
 
+            return GetAllSectors();
+        }
+
+        public static List<EditorSector> GetAllSectors()
+        {
+            var savedGame = SavedGameUtil.FindSavedGame();
+            if (savedGame != null)
+            {
+                return savedGame.GetSectors().ToList();
+            }
+
+            return new EditorSector[0].ToList();
+        }
+
+        private static void DrawAsteroidAutoSpawnOptions()
+        {
+            GuiHelper.Subtitle("Spawn asteroids", "Spawn asteroids in selected sectors based on existing asteroid clusters");
+            var sectors = GetSelectedOrAllSectors();
             var hasSectors = sectors.Any();
 
             EditorGUI.BeginDisabledGroup(true);
@@ -375,7 +505,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             if (GUILayout.Button(
                 new GUIContent(
-                    "Spawn asteroids in all sectors",
+                    "Spawn",
                     "Creates asteroids inside asteroid clusters of every sector"),
                 GuiHelper.ButtonLayout))
             {
@@ -387,6 +517,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
                 EditorUtility.DisplayDialog("Spawn asteroids", message, "OK");
             }
+
+            EditorGUI.EndDisabledGroup();
         }
 
         private void ShowSpawnOptionsAndSector(string subDirectory, bool allowFaction = true)
