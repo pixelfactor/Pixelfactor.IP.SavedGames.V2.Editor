@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4484576795801601491}
   - component: {fileID: 8914060074567719434}
+  - component: {fileID: -5083759368461667920}
   m_Layer: 0
   m_Name: Unit_Planet_WinterWorld
   m_TagString: Untagged
@@ -63,6 +64,18 @@ MonoBehaviour:
   EditorName: Winter World
   EditorShipPurpose: 0
   EditorAutoExportAmmo: 0
+--- !u!114 &-5083759368461667920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8813697111012170827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7609730c4a3fad64f97c15e7d248307d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4484449279476365956
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,7 +4,6 @@ using Pixelfactor.IP.SavedGames.V2.Editor.Tools;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Planets;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning;
 using Pixelfactor.IP.SavedGames.V2.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -108,7 +107,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             var settings = CustomSettings.GetOrCreateSettings();
             var planetPrefabPath = settings.UnitPrefabsPath.TrimEnd('/') + "/" + "Planet";
-            var planetPrefabs = GameObjectHelper.GetPrefabsOfTypeFromPath<EditorUnit>(planetPrefabPath);
+            var allPlanetPrefabs = GameObjectHelper.GetPrefabsOfTypeFromPath<EditorUnit>(planetPrefabPath).Where(e => e.ModelUnitClass != ModelUnitClass.Planet_Earth).ToList();
+            var planetPrefabs = allPlanetPrefabs.Where(e => !e.name.Contains("moon", System.StringComparison.InvariantCultureIgnoreCase)).ToList();
+            var moonPrefabs = allPlanetPrefabs.Where(e => e.name.Contains("moon", System.StringComparison.InvariantCultureIgnoreCase)).ToList();
 
             EditorGUILayout.PrefixLabel(new GUIContent("Auto-position", "Whether to randomly position planets in a sector in the same way that the game-engine would"));
             this.autoPositionPlanets = EditorGUILayout.Toggle(this.autoPositionPlanets, GUILayout.ExpandWidth(false));
@@ -120,7 +121,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUI.BeginDisabledGroup(!canSpawnPlanet);
             if (GUILayout.Button(
                 new GUIContent(
-                    $"Spawn Random",
+                    $"Spawn random planet",
                     $"Creates a random planet in selected sectors"),
                 GuiHelper.ButtonLayout))
             {
@@ -128,6 +129,23 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             }
 
             GuiHelper.FlowButtons(planetPrefabs.Select(planetPrefab => new GuiHelper.ButtonInfo
+            {
+                Text = $"Spawn {planetPrefab.GetEditorName()}",
+                Description = $"Spawns a planet in selected sectors",
+                OnClick = () =>
+                {
+                    foreach (var sector in selectedSectors)
+                    {
+                        SpawnNewPlanet(planetPrefab, sector, autoPositionPlanets, settings);
+                    }
+                }
+
+            }).ToList());
+
+            GuiHelper.Subtitle("Spawn moons", "Spawns moons in selected sectors");
+            GuiHelper.HelpPrompt("Experimental - moons are currently treated the same as planets");
+
+            GuiHelper.FlowButtons(moonPrefabs.Select(planetPrefab => new GuiHelper.ButtonInfo
             {
                 Text = $"Spawn {planetPrefab.GetEditorName()}",
                 Description = $"Spawns a planet in selected sectors",
@@ -156,29 +174,48 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 return;
             }
 
+            // Find all existing planets - use this to try and spawn unique ones
+            var allPlanets = SavedGameUtil.FindSavedGameOrErrorOut().GetComponentsInChildren<EditorPlanet>().Select(e => e.GetComponent<EditorUnit>()).ToList();
+
             foreach (var sector in selectedSectors)
             {
-                SpawnNewPlanet(sector, autoPositionPlanet, planetPrefabs, customSettings);
+                var newPlanet = SpawnNewPlanet(sector, autoPositionPlanet, planetPrefabs, customSettings, allPlanets);
+
+                allPlanets.Add(newPlanet);
             }
         }
 
-        private void SpawnNewPlanet(
+        private EditorUnit SpawnNewPlanet(
             EditorSector sector,
             bool autoPositionPlanet, 
             IEnumerable<EditorUnit> planetPrefabs, 
-            CustomSettings customSettings)
+            CustomSettings customSettings,
+            List<EditorUnit> allPlanets)
         {
-            var randomPlanetPrefab = GetRandomPlanetPrefab(planetPrefabs);
-            SpawnNewPlanet(randomPlanetPrefab, sector, autoPositionPlanet, customSettings);
+            var randomPlanetPrefab = GetRandomPlanetPrefab(planetPrefabs, allPlanets);
+            return SpawnNewPlanet(randomPlanetPrefab, sector, autoPositionPlanet, customSettings);
         }
 
-        private EditorUnit GetRandomPlanetPrefab(IEnumerable<EditorUnit> planetPrefabs)
+        private EditorUnit GetRandomPlanetPrefab(IEnumerable<EditorUnit> planetPrefabs, List<EditorUnit> allPlanets)
         {
-            // TODO: Should improve this to generate unique planets where possible
-            return planetPrefabs.GetRandom();
+            return planetPrefabs.OrderBy(e => GetCountOfPlanetClass(e, allPlanets) + (Random.value * 0.2f)).FirstOrDefault();
         }
 
-        private void SpawnNewPlanet(EditorUnit prefab, EditorSector sector, bool autoPositionPlanet, CustomSettings settings)
+        private int GetCountOfPlanetClass(EditorUnit editorUnit, List<EditorUnit> allPlanets)
+        {
+            var count = 0;
+            foreach (var planet in allPlanets)
+            {
+                if (planet.ModelUnitClass == editorUnit.ModelUnitClass)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        private EditorUnit SpawnNewPlanet(EditorUnit prefab, EditorSector sector, bool autoPositionPlanet, CustomSettings settings)
         {
             var planetUnit = PrefabHelper.Instantiate(prefab, sector.transform);
 
@@ -192,6 +229,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             }
 
             AutoNameObjects.AutoNameUnit(planetUnit);
+
+            return planetUnit;
         }
 
         private void DrawSpawnFleetOptions()
