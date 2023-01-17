@@ -48,33 +48,10 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning
 
         private EditorUnit GetAsteroidPrefab(EditorAsteroidCluster asteroidCluster)
         {
-            var settings = CustomSettings.GetOrCreateSettings();
+            if (asteroidCluster.AsteroidType.AsteroidPrefab == null)
+                throw new System.Exception($"Cannot create asteroids in asteroid cluster {asteroidCluster}. No asteroid prefab defined for this asteroid cluster");
 
-            switch (asteroidCluster.GetComponent<EditorUnit>().ModelUnitClass)
-            {
-                case Model.ModelUnitClass.AsteroidCluster_TypeB:
-                    {
-                        var unit = AssetDatabase.LoadAssetAtPath<EditorUnit>(Spawn.GetUnitPrefabPath(settings.UnitPrefabsPath, Model.ModelUnitClass.Asteroid_TypeB));
-                        if (unit == null)
-                        {
-                            throw new System.Exception($"Cannot create asteroids in asteroid cluster {asteroidCluster}. No asteroid prefab for asteroid cluster found in path \"{settings.UnitPrefabsPath}\"");
-                        }
-
-                        return unit;
-                    }
-                case Model.ModelUnitClass.AsteroidCluster_TypeH:
-                    {
-                        var unit = AssetDatabase.LoadAssetAtPath<EditorUnit>(Spawn.GetUnitPrefabPath(settings.UnitPrefabsPath, Model.ModelUnitClass.Asteroid_TypeH));
-                        if (unit == null)
-                        {
-                            throw new System.Exception($"Cannot create asteroids in asteroid cluster {asteroidCluster}. No asteroid prefab for asteroid cluster found in path \"{settings.UnitPrefabsPath}\"");
-                        }
-
-                        return unit;
-                    }
-            }
-
-            throw new System.Exception($"Cannot create asteroids in asteroid cluster {asteroidCluster}. No asteroid prefab defined for this asteroid cluster");
+            return asteroidCluster.AsteroidType.AsteroidPrefab;
         }
 
         public int SpawnAsteroidsAroundCluster(EditorAsteroidCluster asteroidCluster)

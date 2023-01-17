@@ -47,3 +47,4 @@ MonoBehaviour:
   Name: Type-H Ice
   PreferredWeighting: 1
   AsteroidClusterPrefab: {fileID: 5033624439146972838, guid: c7e5df85e9937d24f9fc4cb9b4deab53, type: 3}
+  AsteroidPrefab: {fileID: 6029716177475390603, guid: 1855bd841bdb4c24f99202155560dab2, type: 3}

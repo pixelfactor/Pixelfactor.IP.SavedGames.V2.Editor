@@ -47,3 +47,4 @@ MonoBehaviour:
   Name: Type-B Rock
   PreferredWeighting: 2
   AsteroidClusterPrefab: {fileID: 5033624439146972838, guid: 51e8450728973704d9c77e5206950a74, type: 3}
+  AsteroidPrefab: {fileID: 6029716177475390603, guid: 40ed77f865267bd44bb2fa95d6718851, type: 3}

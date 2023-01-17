@@ -43,7 +43,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.AsteroidClusters
 
             for (int i = 0; i < numAsteroidSectorsToCreate - numExistingAsteroidSectors; i++)
             {
-                var sectorForAsteroid = GetBestSectorForAsteroid(sectors, planetSectors, asteroidClusterSectors, settings, random);
+                var sectorForAsteroid = GetBestSectorForAsteroidCluster(sectors, planetSectors, asteroidClusterSectors, settings, random);
                 if (sectorForAsteroid != null)
                 {
                     newAsteroidSectors.Add(sectorForAsteroid);
@@ -53,7 +53,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.AsteroidClusters
             return newAsteroidSectors;
         }
 
-        public static EditorSector GetBestSectorForAsteroid(
+        public static EditorSector GetBestSectorForAsteroidCluster(
             IEnumerable<EditorSector> sectors,
             IEnumerable<EditorSector> planetSectors,
             IEnumerable<EditorSector> asteroidClusterSectors,

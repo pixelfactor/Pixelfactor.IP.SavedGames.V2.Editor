@@ -24,6 +24,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
                 ValidateMissingIds(editorScenario, throwOnError);
             }
 
+            ValidateAsteroidClusterTypes(editorScenario);
+
             ValidateDockedUnits(editorScenario, throwOnError);
 
             ValidateDuplicateIds(editorScenario, throwOnError);
@@ -34,6 +36,18 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             ValidateUnits(editorScenario, throwOnError);
 
             Debug.Log("Validation complete");
+        }
+
+        private static void ValidateAsteroidClusterTypes(EditorScenario editorScenario)
+        {
+            foreach (var sector in editorScenario.GetSectors())
+            {
+                var asteroidClusters = sector.GetComponentsInChildren<EditorAsteroidCluster>();
+                if (asteroidClusters.Length > 0 && asteroidClusters.GroupBy(e => e.AsteroidType).Count() > 1)
+                {
+                    Debug.LogWarning($"Sector {sector.Name} contains asteroid clusters of different types. Was this intended?", sector);
+                }
+            }
         }
 
         public static void ValidateDockedUnits(EditorScenario editorScenario, bool throwOnError)

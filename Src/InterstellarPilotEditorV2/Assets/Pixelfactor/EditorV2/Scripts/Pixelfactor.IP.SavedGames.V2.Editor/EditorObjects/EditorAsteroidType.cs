@@ -18,5 +18,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 
         [Tooltip("The asteroid cluster that is associated with this asteroid type")]
         public EditorUnit AsteroidClusterPrefab = null;
+
+        public EditorUnit AsteroidPrefab = null;
     }
 }
