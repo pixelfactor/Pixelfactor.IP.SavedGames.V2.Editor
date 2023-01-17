@@ -217,23 +217,24 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.AsteroidClusters
 
             var existingAsteroidClusters = sector.GetComponentsInChildren<EditorAsteroidCluster>().Select(e => e.GetComponent<EditorUnit>()).ToList();
 
-            var asteroidClusters = new List<EditorUnit>();
+            var spawnedAsteroidClusters = new List<EditorUnit>();
 
             for (int i = 0; i < count; i++)
             {
                 var asteroidClusterUnit = TryGenerateAsteroidCluster(sector, asteroidClusterPrefab, existingAsteroidClusters, settings);
                 if (asteroidClusterUnit != null)
                 {
+                    existingAsteroidClusters.Add(asteroidClusterUnit);
 
                     AutoNameObjects.AutoNameUnit(asteroidClusterUnit);
 
-                    asteroidClusters.Add(asteroidClusterUnit);
+                    spawnedAsteroidClusters.Add(asteroidClusterUnit);
 
                     var asteroidClusterData = asteroidClusterUnit.GetComponent<EditorAsteroidCluster>();
 
                     if (asteroidClusterData != null && asteroidClusterData.GasCloudPrefab != null && Random.value < settings.ProbabilityOfGeneratingGasCloud)
                     {
-                        var gasCloud = CreateGasCloud(sector, asteroidClusterUnit.Radius, asteroidClusterUnit.transform.localPosition, asteroidClusterData.GasCloudPrefab);
+                        var gasCloud = CreateGasCloud(sector, asteroidClusterUnit.Radius, asteroidClusterUnit.transform.position, asteroidClusterData.GasCloudPrefab);
                         if (gasCloud != null)
                         {
                             AutoNameObjects.AutoNameUnit(gasCloud);
@@ -242,7 +243,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.AsteroidClusters
                 }
             }
 
-            return asteroidClusters;
+            return spawnedAsteroidClusters;
         }
 
         public static EditorUnit CreateGasCloud(EditorSector sector, float radius, Vector3 position, EditorUnit randomGasCloudPrefab)

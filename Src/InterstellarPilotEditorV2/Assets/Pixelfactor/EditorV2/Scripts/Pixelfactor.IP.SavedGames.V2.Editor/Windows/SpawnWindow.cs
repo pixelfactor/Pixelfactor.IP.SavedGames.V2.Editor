@@ -2,7 +2,6 @@
 using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Planets;
-using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning;
 using Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows;
 using Pixelfactor.IP.SavedGames.V2.Model;
 using System.Collections.Generic;
@@ -14,27 +13,26 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 {
     public class SpawnWindow
     {
-        public const int SpawnShipId = 3;
-        public const int SpawnStationId = 4;
-        
-        public const int SpawnFleetsId = 5;
-
         public const int SpawnPlanetId = 0;
         public const int SpawnAsteroidClustersId = 1;
         public const int SpawnAsteroidsId = 2;
+        public const int SpawnGasCloudsId = 3;
+        public const int SpawnShipId = 4;
+        public const int SpawnStationId = 5;
+        public const int SpawnFleetsId = 6;
 
         private int currentTab = 0;
         private EditorFaction spawnFaction = null;
 
         private bool autoPositionPlanets = true;
 
-        private SpawnFleets spawnFleetsWindow = new SpawnFleets();
-        private SpawnAsteroidClusters spawnAsteroidClustersWindow = new SpawnAsteroidClusters();
+        private SpawnFleetsWindow spawnFleetsWindow = new SpawnFleetsWindow();
+        private SpawnAsteroidClustersWindow spawnAsteroidClustersWindow = new SpawnAsteroidClustersWindow();
+        private SpawnGasCloudsWindow spawnGasCloudsWindow = new SpawnGasCloudsWindow();
 
         public void Draw()
         {
-
-            currentTab = GUILayout.Toolbar(currentTab, new string[] { "Planet", "Cluster", "Asteroid", "Ship", "Station", "Fleet" });
+            currentTab = GUILayout.Toolbar(currentTab, new string[] { "Planet", "Cluster", "Asteroid", "Cloud", "Ship", "Station", "Fleet" });
 
             switch (currentTab)
             {
@@ -56,6 +54,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 case SpawnAsteroidClustersId:
                     {
                         spawnAsteroidClustersWindow.Draw();
+                    }
+                    break;
+                case SpawnGasCloudsId:
+                    {
+                        spawnGasCloudsWindow.Draw();
                     }
                     break;
                 case SpawnAsteroidsId:

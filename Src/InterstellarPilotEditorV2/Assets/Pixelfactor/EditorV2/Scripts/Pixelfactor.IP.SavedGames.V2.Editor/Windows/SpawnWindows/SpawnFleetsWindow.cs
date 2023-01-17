@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
 {
-    public class SpawnFleets
+    public class SpawnFleetsWindow
     {
         private int spawnFleetShipCount = 8;
         private string spawnFleetName = null;

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
 {
-    public class SpawnAsteroidClusters
+    public class SpawnAsteroidClustersWindow
     {
         public void Draw()
         {
@@ -55,20 +55,33 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
                 var allSectors = SpawnWindowHelper.GetAllSectors();
                 var asteroidTypes = PrefabHelper.GetAsteroidTypes(settings);
 
+                var spawnedAsteroidClusters = new List<EditorUnit>();
                 foreach (var sector in sectorsToSpawnAsteroidClusters)
                 {
-                    Debug.Log($"Spawning asteroid cluster in {sector.Name}");
+                    Debug.Log($"Spawning asteroid cluster(s) in {sector.Name}");
 
                     foreach (var spawnedAsteroidCluster in AsteroidClusterSpawnTool.CreateSectorAsteroidClusters(sector, allSectors, asteroidTypes, settings))
                     {
+                        Debug.Log($"Spawned asteroid cluster in {sector.Name}");
+
+                        spawnedAsteroidClusters.Add(spawnedAsteroidCluster);
                         allAsteroidClusters.Add(spawnedAsteroidCluster);
                         count++;
                     }
                 }
 
-                var message = count > 0 ?
-                    $"Finished creating {count} asteroid clusters" :
-                    "No asteroid clusters were created. Ensure that asteroid cluster prefabs can be found";
+                var message = "No asteroid clusters were created. Ensure that asteroid cluster prefabs can be found"; 
+                
+                if (count > 0)
+                { 
+                    var spawnedAsteroidClustersByType = spawnedAsteroidClusters.Select(e => e.GetComponent<EditorAsteroidCluster>())
+                        .GroupBy(e => e.AsteroidType)
+                        .Where(e => e.Count() > 0);
+
+                    var statusText = string.Join(", ", spawnedAsteroidClustersByType.Select(grouping => $"{grouping.Count()} x {grouping.First().AsteroidType.Name}"));
+                    message = $"Finished creating {statusText}";
+                }
+                    
 
                 EditorUtility.DisplayDialog("Spawn planets", message, "OK");
             }

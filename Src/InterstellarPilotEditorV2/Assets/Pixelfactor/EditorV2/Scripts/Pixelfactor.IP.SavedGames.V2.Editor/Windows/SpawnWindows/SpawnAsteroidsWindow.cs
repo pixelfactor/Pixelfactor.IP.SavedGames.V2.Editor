@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
 {
-    public class SpawnAsteroids
+    public class SpawnAsteroidsWindow
     {
 
     }
