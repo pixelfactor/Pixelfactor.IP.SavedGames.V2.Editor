@@ -46,11 +46,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
-  EditorUnitClassRef: {fileID: 2544603334889176812, guid: d4e546b7ae4231f44b1f64d8a11a7fd0, type: 3}
+  Seed: -1
+  LegacyUnitClass: -1
+  UnitClass: {fileID: 2544603334889176812, guid: d4e546b7ae4231f44b1f64d8a11a7fd0, type: 3}
   Faction: {fileID: 0}
-  RpProvision: 0
   Name: 
+  ShortName: 
   Radius: -1
+  VariantName: 
+  Mass: -1
+  AllowDestruction: 1
+  IsInvulnerable: 0
+  RpProvision: 0
+  Health: -1
+  IsDestroyed: 0
+  EditorName: Alien Ashy Green
+  EditorShipPurpose: 0
+  EditorAutoExportAmmo: 0
 --- !u!1001 &3444691344539959326
 PrefabInstance:
   m_ObjectHideFlags: 0

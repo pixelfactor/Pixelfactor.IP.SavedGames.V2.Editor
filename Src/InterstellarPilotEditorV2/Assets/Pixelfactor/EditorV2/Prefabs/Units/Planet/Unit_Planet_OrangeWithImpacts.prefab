@@ -46,11 +46,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
-  EditorUnitClassRef: {fileID: 2544603334889176812, guid: bb22b46dff99e1344b892bb2c4216525, type: 3}
+  Seed: -1
+  LegacyUnitClass: -1
+  UnitClass: {fileID: 2544603334889176812, guid: bb22b46dff99e1344b892bb2c4216525, type: 3}
   Faction: {fileID: 0}
-  RpProvision: 0
   Name: 
+  ShortName: 
   Radius: -1
+  VariantName: 
+  Mass: -1
+  AllowDestruction: 1
+  IsInvulnerable: 0
+  RpProvision: 0
+  Health: -1
+  IsDestroyed: 0
+  EditorName: Orange with Impacts
+  EditorShipPurpose: 0
+  EditorAutoExportAmmo: 0
 --- !u!1001 &8115359616551527146
 PrefabInstance:
   m_ObjectHideFlags: 0

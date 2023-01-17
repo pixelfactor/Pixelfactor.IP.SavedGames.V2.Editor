@@ -3,6 +3,7 @@ using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning;
 using Pixelfactor.IP.SavedGames.V2.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -16,20 +17,21 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         public const int SpawnStationId = 1;
         public const int SpawnAsteroidsId = 2;
         public const int SpawnFleetsId = 3;
+        public const int SpawnPlanetId = 4;
 
         private int currentTab = SpawnShipId;
         private EditorFaction spawnFaction = null;
         private int spawnFleetShipCount = 8;
         private string spawnFleetName = null;
         private EditorFactionStrategy spawnFleetShipTypes = EditorFactionStrategy.War;
-
+        private bool autoPositionPlanets = true;
         private float spawnFleetMinShipSize = 0.0f;
         private float spawnFleetMaxShipSize = 1.0f;
 
         public void Draw()
         {
 
-            currentTab = GUILayout.Toolbar(currentTab, new string[] { "Ship", "Station", "Asteroid", "Fleet" });
+            currentTab = GUILayout.Toolbar(currentTab, new string[] { "Ship", "Station", "Asteroid", "Fleet", "Planet" });
 
             switch (currentTab)
             {
@@ -58,6 +60,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                         DrawSpawnFleetOptions();
                     }
                     break;
+                case SpawnPlanetId:
+                    {
+                        DrawSpawnPlanetOptions();
+                    }
+                    break;
             }
 
             EditorGUI.EndDisabledGroup();
@@ -83,6 +90,104 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             units = null;
             return false;
+        }
+
+        private void DrawSpawnPlanetOptions()
+        {
+            GuiHelper.Subtitle("Spawn planets", "Spawns planets in selected sectors");
+
+            var selectedSectors = Selector.GetInParents<EditorSector>();
+            if (selectedSectors.Count() == 0)
+            {
+                var savedGame = SavedGameUtil.FindSavedGame();
+                selectedSectors = savedGame.GetComponentsInChildren<EditorSector>();
+            }
+
+            var canSpawnPlanet = selectedSectors.Count() > 0;
+
+            var settings = CustomSettings.GetOrCreateSettings();
+            var planetPrefabPath = settings.UnitPrefabsPath.TrimEnd('/') + "/" + "Planet";
+            var planetPrefabs = GameObjectHelper.GetPrefabsOfTypeFromPath<EditorUnit>(planetPrefabPath);
+
+            EditorGUILayout.PrefixLabel(new GUIContent("Auto-position", "Whether to randomly position planets in a sector in the same way that the game-engine would"));
+            this.autoPositionPlanets = EditorGUILayout.Toggle(this.autoPositionPlanets, GUILayout.ExpandWidth(false));
+
+            EditorGUI.BeginDisabledGroup(true);
+            EditorGUILayout.TextField("Spawn sector", WindowHelper.DescribeSectors(selectedSectors));
+            EditorGUI.EndDisabledGroup();
+
+            EditorGUI.BeginDisabledGroup(!canSpawnPlanet);
+            if (GUILayout.Button(
+                new GUIContent(
+                    $"Spawn Random",
+                    $"Creates a random planet in selected sectors"),
+                GuiHelper.ButtonLayout))
+            {
+                OnSpawnPlanetClick(selectedSectors, planetPrefabs, autoPositionPlanets);
+            }
+
+            GuiHelper.FlowButtons(planetPrefabs.Select(planetPrefab => new GuiHelper.ButtonInfo
+            {
+                Text = $"Spawn {planetPrefab.GetEditorName()}",
+                Description = $"Spawns a planet in selected sectors",
+                OnClick = () =>
+                {
+                    foreach (var sector in selectedSectors)
+                    {
+                        SpawnNewPlanet(planetPrefab, sector, autoPositionPlanets);
+                    }
+                }
+
+            }).ToList());
+
+            EditorGUI.EndDisabledGroup();
+        }
+
+        private void OnSpawnPlanetClick(IEnumerable<EditorSector> selectedSectors, IEnumerable<EditorUnit> planetPrefabs, bool autoPositionPlanet)
+        {
+            if (planetPrefabs.Count() == 0)
+            {
+                Debug.LogError("No planet prefabs were found");
+                return;
+            }
+
+            foreach (var sector in selectedSectors)
+            {
+                SpawnNewPlanet(sector, autoPositionPlanet, planetPrefabs);
+            }
+        }
+
+        private void SpawnNewPlanet(EditorSector sector, bool autoPositionPlanet, IEnumerable<EditorUnit> planetPrefabs)
+        {
+            var randomPlanetPrefab = GetRandomPlanetPrefab(planetPrefabs);
+            SpawnNewPlanet(randomPlanetPrefab, sector, autoPositionPlanet);
+        }
+
+        private EditorUnit GetRandomPlanetPrefab(IEnumerable<EditorUnit> planetPrefabs)
+        {
+            // TODO: Should improve this to generate unique planets where possible
+            return planetPrefabs.GetRandom();
+        }
+
+        private void SpawnNewPlanet(EditorUnit prefab, EditorSector sector, bool autoPositionPlanet)
+        {
+            var planetUnit = PrefabHelper.Instantiate(prefab, sector.transform);
+
+            if (autoPositionPlanet)
+            {
+                AutoPositionPlanet(planetUnit);
+            }
+            else
+            { 
+                planetUnit.transform.position = GetNewUnitSpawnPosition(sector, 1000.0f);
+            }
+
+            AutoNameObjects.AutoNameUnit(planetUnit);
+        }
+
+        private void AutoPositionPlanet(EditorUnit planetUnit)
+        {
+            throw new NotImplementedException();
         }
 
         private void DrawSpawnFleetOptions()
