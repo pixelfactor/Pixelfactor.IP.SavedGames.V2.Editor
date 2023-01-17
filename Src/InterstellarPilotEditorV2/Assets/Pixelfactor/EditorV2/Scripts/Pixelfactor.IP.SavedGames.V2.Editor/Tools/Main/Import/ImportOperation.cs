@@ -346,6 +346,21 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 
             // TODO: Projectile data
 
+            // Cargo data
+            if (modelUnit.ComponentUnitData != null)
+            {
+                if (modelUnit.ComponentUnitData.CargoData?.Items != null)
+                {
+                    foreach (var item in modelUnit.ComponentUnitData.CargoData.Items)
+                    {
+                        var cargoItem = GameObjectHelper.Instantiate<EditorCargo>(editorUnit.transform);
+                        cargoItem.Quantity = item.Quantity;
+                        cargoItem.Cargo = cachedCargoClassPrefabs.GetValueOrDefault(item.CargoClass);
+                        AutoNameObjects.AutoNameCargo(cargoItem);
+                    }
+                }
+            }
+
             this.editorUnitsById.Add(modelUnit.Id, editorUnit);
         }
 

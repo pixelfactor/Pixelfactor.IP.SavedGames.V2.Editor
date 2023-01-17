@@ -13,6 +13,7 @@ Units,Planets,Edit radius,Not possible,No engine support
 Units,Gas clouds,Edit radius,Yes,
 Units,Asteroid clusters,Edit radius,Yes,
 Units,General,Docked ships,Yes,
+Units,General,Nested docked ships,Yes,I.e. docked ships inside docked ships
 Units,General,Custom hangars,Not possible,Not supported in engine. Do not change the existing hangar prefabs
 Units,General,Create asteroids,Yes,
 Units,General,Abandoned ships/stations,Yes,

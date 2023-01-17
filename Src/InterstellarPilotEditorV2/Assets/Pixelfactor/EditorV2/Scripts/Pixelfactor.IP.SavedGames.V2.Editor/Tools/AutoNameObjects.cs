@@ -31,6 +31,27 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             AutoNameFactions(editorScenario);
             AutoNameFleets(editorScenario);
             AutoNamePeople(editorScenario);
+            AutoNameCargo(editorScenario);
+        }
+
+        public static void AutoNameCargo(EditorScenario editorScenario)
+        {
+            foreach (var editorCargo in editorScenario.GetComponentsInChildren<EditorCargo>())
+            {
+                AutoNameCargo(editorCargo);
+            }
+        }
+
+        public static void AutoNameCargo(EditorCargo editorCargo)
+        {
+            editorCargo.gameObject.name = GetCargoName(editorCargo);
+            EditorUtility.SetDirty(editorCargo);
+        }
+
+        public static string GetCargoName(EditorCargo editorCargo)
+        {
+            var cargoClass = editorCargo.ModelCargoClass.ToString().Replace("Cargo_", string.Empty);
+            return $"Cargo_{cargoClass}_{editorCargo.Quantity}";
         }
 
         private static void AutoNameFleets(EditorScenario editorScenario)
