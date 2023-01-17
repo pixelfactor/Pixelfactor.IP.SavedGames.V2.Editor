@@ -105,6 +105,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [Tooltip("The path to component bays")]
         public string ComponentBayPrefabsPath = "Assets/Pixelfactor/EditorV2/Prefabs/ComponentBays";
 
+        [Tooltip("The path to asteroid types")]
+        public string AsteroidTypesPath = "Assets/Pixelfactor/EditorV2/Prefabs/AsteroidTypes";
+
         [Tooltip("Lowest position to place a planet")]
         public float MinPlanetPositionY = -2500.0f;
 
@@ -135,7 +138,33 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [Tooltip("Determines how many sectors are given asteroids")]
         public float AsteroidSectorWeighting = 2.6f;
 
-        public int MinNumberAsteroidSectors = 2;
+        [Tooltip("Minimum number of sectors that should contain asteroids")]
+        public int MinNumberAsteroidSectors = 1;
+
+        [Tooltip("Minimum distance between asteroid clusters")]
+        public float MinDistanceBetweenAsteroidClusters = 400.0f;
+
+        [Tooltip("Minimum radius of asteroid clusters")]
+        public float MinAsteroidClusterRadius = 1500.0f;
+
+        [Tooltip("Maximum radius of asteroid clusters")]
+        public float MaxAsteroidClusterRadius = 8000.0f;
+
+        [Range(0.5f, 32.0f)]
+        [Tooltip("Determines the random radius given to asteroid clusters. Increase to favour lower values")]
+        public float AsteroidClusterRadiusPower = 1.5f;
+
+        [Tooltip("The inclusive minimum number of asteroid clusters to generate in a sector")]
+        public int MinAsteroidClusterCount = 1;
+
+        [Tooltip("The inclusive maximum number of asteroid clusters to generate in a sector")]
+        public int MaxAsteroidClusterCount = 3;
+
+        [Tooltip("Determines the probability that an asteroid cluster will have a gas cloud")]
+        public float ProbabilityOfGeneratingGasCloud = 0.75f;
+
+        [Tooltip("Determines the randomness of the asteroid type that is given to sectors")]
+        public float AsteroidTypeWeightRandomness = 0.0f;
 
         public static CustomSettings GetOrCreateSettings()
         {
@@ -202,6 +231,19 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.AsteroidSectorWeighting)), new GUIContent("Asteroid sector weight"));
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.PlanetSectorWeighting)), new GUIContent("Planet sector weight"));
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.DeepSpaceSectorWeighting)), new GUIContent("Deep space sector weight"));
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.MinNumberAsteroidSectors)), new GUIContent("Min asteroid sectors"));
+                    
+                    EditorGUILayout.Space();
+
+                    EditorGUILayout.LabelField("Asteroid clusters", EditorStyles.boldLabel);
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.MinDistanceBetweenAsteroidClusters)), new GUIContent("Spacing"));
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.MinAsteroidClusterRadius)), new GUIContent("Min radius"));
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.MaxAsteroidClusterRadius)), new GUIContent("Max radius"));
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.AsteroidClusterRadiusPower)), new GUIContent("Radius power"));
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.MinAsteroidClusterCount)), new GUIContent("Min cluster count"));
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.MaxAsteroidClusterCount)), new GUIContent("Max cluster count"));
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.ProbabilityOfGeneratingGasCloud)), new GUIContent("Gas cloud probability"));
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.AsteroidTypeWeightRandomness)), new GUIContent("Type randomness"));
                     EditorGUILayout.Space();
 
                     EditorGUILayout.LabelField("Planets", EditorStyles.boldLabel);
@@ -224,6 +266,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.UnitPrefabsPath)), new GUIContent("Unit prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.ComponentPrefabsPath)), new GUIContent("Component prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.ComponentBayPrefabsPath)), new GUIContent("Component bay prefabs path"));
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.AsteroidTypesPath)), new GUIContent("Asteroid types path"));
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.FactionPrefabPath)), new GUIContent("Faction prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.FleetPrefabPath)), new GUIContent("Fleet prefab path"));
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.NpcPrefabPath)), new GUIContent("NPC prefab path"));

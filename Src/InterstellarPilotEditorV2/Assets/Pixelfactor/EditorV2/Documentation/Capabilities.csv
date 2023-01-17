@@ -54,7 +54,7 @@ Manage,Import,Import asteroids,Yes*,Partial support
 Manage,Import,Import planets,Yes*,Partial support
 Manage,Import,Import factions,Yes*,Partial support (no faction settings)
 Manage,Import,Import moons,Yes*,Partial support
-Manage,Import,Import people,No,
+Manage,Import,Import people,Yes*,Some data is not imported
 Manage,Import,Import NPCs,No,
 Manage,Import,Import ships,Yes*,
 Manage,Import,Import extended unit properties,No,"Cargo capacity, mass etc"
@@ -69,8 +69,8 @@ Manage,Import,Import docked ships,No,
 Manage,Import,Import fleets,No,
 Manage,Import,Import fleet custom settings,No,
 Manage,Import,Import fleet orders,No,
-Manage,Import,Import cargo containers,No,
-Manage,Import,Import ship/station cargo,No,
+Manage,Import,Import cargo containers,Yes,
+Manage,Import,Import ship/station cargo,Yes,
 Manage,Import,Import faction relations,No,
 Manage,Import,Import ship traders,No,
 Manage,Import,Import player messages,No,

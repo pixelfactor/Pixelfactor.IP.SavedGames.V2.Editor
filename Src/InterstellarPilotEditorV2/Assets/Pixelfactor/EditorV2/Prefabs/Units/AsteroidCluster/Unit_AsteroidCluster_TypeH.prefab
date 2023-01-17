@@ -62,6 +62,8 @@ MonoBehaviour:
   Health: -1
   IsDestroyed: 0
   EditorName: Cluster Type H
+  EditorShipPurpose: 0
+  EditorAutoExportAmmo: 0
 --- !u!114 &-7740353057320373423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,6 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633aa355725dcde4b9cd16816bbbb02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GasCloudPrefab: {fileID: 5033624439146972838, guid: bd1e23702ea9485499d42321007e5fb9, type: 3}
+  AsteroidType: {fileID: 3056060032258412398, guid: 8512980cbb6817445977af07f36a13b1, type: 3}
 --- !u!1 &5507963291060157466
 GameObject:
   m_ObjectHideFlags: 0

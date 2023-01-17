@@ -1,4 +1,9 @@
-﻿using UnityEditor;
+﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
+using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor
@@ -31,6 +36,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
             var gameObject = (GameObject)PrefabUtility.InstantiatePrefab(asset.gameObject, transform);
 
             return gameObject.GetComponent<T>();
+        }
+
+        public static List<EditorAsteroidType> GetAsteroidTypes(CustomSettings settings)
+        {
+            return GameObjectHelper.GetPrefabsOfTypeFromPath<EditorAsteroidType>(settings.AsteroidTypesPath).ToList();
         }
     }
 }

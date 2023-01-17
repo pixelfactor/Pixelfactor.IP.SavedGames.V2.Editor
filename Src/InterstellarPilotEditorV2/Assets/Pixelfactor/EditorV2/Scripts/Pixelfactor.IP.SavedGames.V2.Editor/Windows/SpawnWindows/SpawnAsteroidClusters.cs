@@ -15,7 +15,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
         {
             DrawAutoSpawnOptions();
 
-            GuiHelper.Subtitle("Spawn single asteroid clusters", "Create asteroid clusters in selected sectors");
+            GuiHelper.Subtitle("Spawn single asteroid cluster", "Create an asteroid cluster in selected sectors");
 
             EditorFaction editorFaction = null;
             SpawnWindowHelper.ShowSpawnUnitOptions("AsteroidCluster", allowFaction: false, ref editorFaction);
@@ -25,7 +25,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
 
         private void DrawAutoSpawnOptions()
         {
-            GuiHelper.Subtitle("Auto-spawn clusters", "Spawn asteroid clusters in all sectors based on settings");
+            GuiHelper.Subtitle("Auto-spawn asteroid clusters", "Spawn asteroid clusters in all sectors based on settings");
 
             var sectors = SpawnWindowHelper.GetAllSectors();
             var hasSectors = sectors.Any();
@@ -51,22 +51,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
                 // Find all existing asteroid clusters - use this to try and spawn unique ones
                 var allAsteroidClusters = SavedGameUtil.FindSavedGameOrErrorOut().GetComponentsInChildren<EditorAsteroidCluster>().Select(e => e.GetComponent<EditorUnit>()).ToList();
                 var count = 0;
+
+                var allSectors = SpawnWindowHelper.GetAllSectors();
+                var asteroidTypes = PrefabHelper.GetAsteroidTypes(settings);
+
                 foreach (var sector in sectorsToSpawnAsteroidClusters)
                 {
                     Debug.Log($"Spawning asteroid cluster in {sector.Name}");
 
-                    // TODO: Choose asteroid cluster type based on weight
-                    var asteroidClusterPrefab = asteroidClusterPrefabs.GetRandom();
-
-                    var newAsteroidCluster = SpawnNewAsteroidCluster(
-                        asteroidClusterPrefab,
-                        sector,
-                        autoPosition: true,
-                        settings);
-
-                    if (newAsteroidCluster != null)
+                    foreach (var spawnedAsteroidCluster in AsteroidClusterSpawnTool.CreateSectorAsteroidClusters(sector, allSectors, asteroidTypes, settings))
                     {
-                        allAsteroidClusters.Add(newAsteroidCluster);
+                        allAsteroidClusters.Add(spawnedAsteroidCluster);
                         count++;
                     }
                 }
@@ -79,26 +74,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
             }
 
             EditorGUI.EndDisabledGroup();
-        }
-
-        private EditorUnit SpawnNewAsteroidCluster(EditorUnit prefab, EditorSector sector, bool autoPosition, CustomSettings settings)
-        {
-            var asteroidClusterUnit = PrefabHelper.Instantiate(prefab, sector.transform);
-
-            if (autoPosition)
-            {
-                //AutoPositionAsteroidClusterTool.AutoPositionPlanet(planetUnit, sector, settings);
-            }
-            else
-            {
-                asteroidClusterUnit.transform.position = SpawnWindowHelper.GetNewUnitSpawnPosition(sector, 1000.0f);
-            }
-
-            // TODO: Set radius
-
-            AutoNameObjects.AutoNameUnit(asteroidClusterUnit);
-
-            return asteroidClusterUnit;
         }
 
         private void DrawDeleteOptions()

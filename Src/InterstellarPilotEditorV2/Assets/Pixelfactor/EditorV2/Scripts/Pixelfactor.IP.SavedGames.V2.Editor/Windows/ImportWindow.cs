@@ -18,7 +18,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
         {
             ImportWindow window = EditorWindow.GetWindow<ImportWindow>();
             var icon = AssetDatabase.LoadAssetAtPath<Texture>("Assets/Pixelfactor/EditorV2/Textures/DevLogoCentered256.png");
-            window.titleContent = new GUIContent("IP2 Editor", icon);
+            window.titleContent = new GUIContent("Import", icon);
         }
 
         void OnGUI()

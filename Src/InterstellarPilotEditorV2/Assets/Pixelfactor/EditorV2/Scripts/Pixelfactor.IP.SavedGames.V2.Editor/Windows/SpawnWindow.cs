@@ -66,8 +66,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
                         GuiHelper.Subtitle("Spawn single asteroid", "Spawn an asteroid in a specific sector");
                         ShowSpawnOptionsAndSector("Asteroid", allowFaction: false);
-
-
                     }
                     break;
                 case SpawnShipId:
