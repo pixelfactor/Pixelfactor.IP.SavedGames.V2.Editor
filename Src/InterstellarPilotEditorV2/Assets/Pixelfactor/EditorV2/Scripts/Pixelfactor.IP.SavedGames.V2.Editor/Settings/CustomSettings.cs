@@ -131,6 +131,30 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [SerializeField]
         private string componentBayPrefabsPath = "Assets/Pixelfactor/EditorV2/Prefabs/ComponentBays";
 
+        [Tooltip("Lowest position to place a planet")]
+        [SerializeField]
+        private float minPlanetPositionY = -2500.0f;
+
+        [Tooltip("Highest position to place a planet")]
+        [SerializeField]
+        private float maxPlanetPositionY = 1000.0f;
+
+        [Tooltip("Minimum distance of a planet from the center of a sector")]
+        [SerializeField]
+        private float minPlanetDistance = 19800.0f;
+
+        [Tooltip("Maximum distance of a planet from the center of a sector")]
+        [SerializeField]
+        private float maxPlanetDistance = 20000.0f;
+
+        [Tooltip("Minimum x rotation of a planet")]
+        [SerializeField]
+        private float minPlanetRotationX = 5.0f;
+
+        [Tooltip("Maximum x rotation of a planet")]
+        [SerializeField]
+        private float maxPlanetRotationX = 20.0f;
+
         public static CustomSettings GetOrCreateSettings()
         {
             var settings = AssetDatabase.LoadAssetAtPath<CustomSettings>(k_MyCustomSettingsPath);
@@ -288,6 +312,36 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         {
             get { return this.npcPrefabPath; }
         }
+
+        public float MinPlanetPositionY
+        {
+            get { return this.minPlanetPositionY; }
+        }
+
+        public float MaxPlanetPositionY
+        {
+            get { return this.maxPlanetPositionY; }
+        }
+
+        public float MinPlanetDistance
+        {
+            get { return this.minPlanetDistance; }
+        }
+
+        public float MaxPlanetDistance
+        {
+            get { return this.maxPlanetDistance; }
+        }
+
+        public float MinPlanetRotationX
+        {
+            get { return this.minPlanetRotationX; }
+        }
+
+        public float MaxPlanetRotationX
+        {
+            get { return this.maxPlanetRotationX; }
+        }
     }
 
     // Register a SettingsProvider using IMGUI for the drawing framework:
@@ -325,6 +379,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty("minAngleBetweenWormholes"), new GUIContent("Min wormhole angle"));
                     EditorGUILayout.PropertyField(settings.FindProperty("minDistanceBetweenSectors"), new GUIContent("Min distance between sectors"));
                     EditorGUILayout.PropertyField(settings.FindProperty("maxDistanceBetweenSectors"), new GUIContent("Max distance between sectors"));
+                    EditorGUILayout.Space();
+
+                    EditorGUILayout.LabelField("Planets", EditorStyles.boldLabel);
+                    EditorGUILayout.PropertyField(settings.FindProperty("minPlanetPositionY"), new GUIContent("Min planet Y position"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("maxPlanetPositionY"), new GUIContent("Max planet Y position"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("minPlanetDistance"), new GUIContent("Min planet distance"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("maxPlanetDistance"), new GUIContent("Max planet distance"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("minPlanetRotationX"), new GUIContent("Min planet X rotation"));
+                    EditorGUILayout.PropertyField(settings.FindProperty("maxPlanetRotationX"), new GUIContent("Max planet X rotation"));
                     EditorGUILayout.Space();
 
                     EditorGUILayout.LabelField("Advanced", EditorStyles.boldLabel);

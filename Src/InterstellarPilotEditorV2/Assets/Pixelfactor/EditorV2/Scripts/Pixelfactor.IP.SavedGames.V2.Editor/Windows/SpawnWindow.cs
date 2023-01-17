@@ -1,6 +1,7 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
 using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools;
+using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Planets;
 using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning;
 using Pixelfactor.IP.SavedGames.V2.Model;
 using System;
@@ -123,7 +124,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                     $"Creates a random planet in selected sectors"),
                 GuiHelper.ButtonLayout))
             {
-                OnSpawnPlanetClick(selectedSectors, planetPrefabs, autoPositionPlanets);
+                OnSpawnPlanetClick(selectedSectors, planetPrefabs, autoPositionPlanets, settings);
             }
 
             GuiHelper.FlowButtons(planetPrefabs.Select(planetPrefab => new GuiHelper.ButtonInfo
@@ -134,7 +135,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
                 {
                     foreach (var sector in selectedSectors)
                     {
-                        SpawnNewPlanet(planetPrefab, sector, autoPositionPlanets);
+                        SpawnNewPlanet(planetPrefab, sector, autoPositionPlanets, settings);
                     }
                 }
 
@@ -143,7 +144,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             EditorGUI.EndDisabledGroup();
         }
 
-        private void OnSpawnPlanetClick(IEnumerable<EditorSector> selectedSectors, IEnumerable<EditorUnit> planetPrefabs, bool autoPositionPlanet)
+        private void OnSpawnPlanetClick(
+            IEnumerable<EditorSector> selectedSectors, 
+            IEnumerable<EditorUnit> planetPrefabs, 
+            bool autoPositionPlanet,
+            CustomSettings customSettings)
         {
             if (planetPrefabs.Count() == 0)
             {
@@ -153,14 +158,18 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
 
             foreach (var sector in selectedSectors)
             {
-                SpawnNewPlanet(sector, autoPositionPlanet, planetPrefabs);
+                SpawnNewPlanet(sector, autoPositionPlanet, planetPrefabs, customSettings);
             }
         }
 
-        private void SpawnNewPlanet(EditorSector sector, bool autoPositionPlanet, IEnumerable<EditorUnit> planetPrefabs)
+        private void SpawnNewPlanet(
+            EditorSector sector,
+            bool autoPositionPlanet, 
+            IEnumerable<EditorUnit> planetPrefabs, 
+            CustomSettings customSettings)
         {
             var randomPlanetPrefab = GetRandomPlanetPrefab(planetPrefabs);
-            SpawnNewPlanet(randomPlanetPrefab, sector, autoPositionPlanet);
+            SpawnNewPlanet(randomPlanetPrefab, sector, autoPositionPlanet, customSettings);
         }
 
         private EditorUnit GetRandomPlanetPrefab(IEnumerable<EditorUnit> planetPrefabs)
@@ -169,13 +178,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             return planetPrefabs.GetRandom();
         }
 
-        private void SpawnNewPlanet(EditorUnit prefab, EditorSector sector, bool autoPositionPlanet)
+        private void SpawnNewPlanet(EditorUnit prefab, EditorSector sector, bool autoPositionPlanet, CustomSettings settings)
         {
             var planetUnit = PrefabHelper.Instantiate(prefab, sector.transform);
 
             if (autoPositionPlanet)
             {
-                AutoPositionPlanet(planetUnit);
+                AutoPositionPlanetTool.AutoPositionPlanet(planetUnit, sector, settings);
             }
             else
             { 
@@ -183,11 +192,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows
             }
 
             AutoNameObjects.AutoNameUnit(planetUnit);
-        }
-
-        private void AutoPositionPlanet(EditorUnit planetUnit)
-        {
-            throw new NotImplementedException();
         }
 
         private void DrawSpawnFleetOptions()
