@@ -45,13 +45,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
                 var settings = CustomSettings.GetOrCreateSettings();
 
 
-                var message = "No asteroid clusters were created. Ensure that asteroid cluster prefabs can be found"; 
-                
+                var message = "No asteroid clusters were created. Ensure that there are any sectors selected where asteroids can be spawned";
+
                 var spawnedAsteroidClusters = AutoSpawnAsteroidClustersInSectors(sectors, settings);
                 var count = spawnedAsteroidClusters.Count;
 
                 if (count > 0)
-                { 
+                {
                     var spawnedAsteroidClustersByType = spawnedAsteroidClusters.Select(e => e.GetComponent<EditorAsteroidCluster>())
                         .GroupBy(e => e.AsteroidType)
                         .Where(e => e.Count() > 0);
@@ -59,7 +59,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
                     var statusText = string.Join(", ", spawnedAsteroidClustersByType.Select(grouping => $"{grouping.Count()} x {grouping.First().AsteroidType.Name}"));
                     message = $"Finished creating {statusText}";
                 }
-                    
+
 
                 EditorUtility.DisplayDialog("Spawn planets", message, "OK");
             }
@@ -69,19 +69,28 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
 
         public List<EditorUnit> AutoSpawnAsteroidClustersInSectors(IEnumerable<EditorSector> sectors, CustomSettings settings)
         {
+            var asteroidTypes = PrefabHelper.GetAsteroidTypes(settings);
+
+            if (asteroidTypes.Count == 0)
+            {
+                Debug.LogError("No asteroid types were found. Check that path to asteroid type prefabs is valid in settings");
+                return new List<EditorUnit>();
+            }
+
+            return AutoSpawnAsteroidClustersInSectors(sectors, asteroidTypes, settings);
+        }
+
+        public List<EditorUnit> AutoSpawnAsteroidClustersInSectors(IEnumerable<EditorSector> sectors, List<EditorAsteroidType> asteroidTypes, CustomSettings settings)
+        {
             var selectedSectors = sectors.ToList();
 
             var sectorsToSpawnAsteroidClusters = AsteroidClusterSpawnTool.GetNewAsteroidClusterSectors(selectedSectors, settings);
-
-            var asteroidClusterPrefabPath = settings.UnitPrefabsPath.TrimEnd('/') + "/" + "AsteroidCluster";
-            var asteroidClusterPrefabs = GameObjectHelper.GetPrefabsOfTypeFromPath<EditorUnit>(asteroidClusterPrefabPath).ToList();
 
             // Find all existing asteroid clusters - use this to try and spawn unique ones
             var allAsteroidClusters = SavedGameUtil.FindSavedGameOrErrorOut().GetComponentsInChildren<EditorAsteroidCluster>().Select(e => e.GetComponent<EditorUnit>()).ToList();
             var count = 0;
 
             var allSectors = SpawnWindowHelper.GetAllSectors();
-            var asteroidTypes = PrefabHelper.GetAsteroidTypes(settings);
 
             var spawnedAsteroidClusters = new List<EditorUnit>();
             foreach (var sector in sectorsToSpawnAsteroidClusters)
@@ -129,7 +138,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Windows.SpawnWindows
                     foreach (var unit in sector.GetComponentsInChildren<EditorUnit>())
                     {
                         if (unit.IsAsteroidCluster())
-                        { 
+                        {
                             GameObject.DestroyImmediate(unit.gameObject);
                         }
                     }
