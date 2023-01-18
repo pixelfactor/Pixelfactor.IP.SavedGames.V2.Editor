@@ -1,4 +1,4 @@
 Date,Version,Comment
-06/01/2023,0.01,Initial pre-alpha version with capability to create a simple scenario (e.g. a skirmish) with win trigger
-07/01/2023,0.02,Added support for unstable wormholes. Tidied up wormhole export. Added asteroid models. Added support for docked ships
-,,
+06/01/2023,0.0.1,Initial pre-alpha version with capability to create a simple scenario (e.g. a skirmish) with win trigger
+07/01/2023,0.0.2,Added support for unstable wormholes. Tidied up wormhole export. Added asteroid models. Added support for docked ships
+17/01/2023,0.0.3,Added create window. Added ability to spawn planets and asteroid clusters. Some work on the import function
