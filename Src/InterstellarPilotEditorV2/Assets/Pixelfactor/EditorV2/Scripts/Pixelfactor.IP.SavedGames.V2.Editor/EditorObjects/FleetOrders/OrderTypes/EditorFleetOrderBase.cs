@@ -20,7 +20,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.FleetOrders.OrderTyp
                 var fleet = this.GetComponentInParent<EditorFleet>();
                 if (fleet != null)
                 {
-                    if (!SelectionHelper.IsSelected(fleet))
+                    if (!SelectionHelper.IsSelected(fleet) && !SelectionHelper.IsSelected(this))
                     {
                         return;
                     }

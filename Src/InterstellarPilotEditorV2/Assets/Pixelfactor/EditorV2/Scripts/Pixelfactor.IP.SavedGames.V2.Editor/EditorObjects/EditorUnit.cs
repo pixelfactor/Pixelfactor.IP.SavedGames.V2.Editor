@@ -105,7 +105,22 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         {
             if (SelectionHelper.IsSelected(this) || SceneView.lastActiveSceneView.size < GetDrawLabelSceneViewSize())
             {
-                DrawString.Draw(this.gameObject.name, this.transform.position, Color.white);
+                if (this.transform.FindFirstParentOfType<EditorUnit>() != null)
+                    return;
+
+                var dockedShipCount = 0;
+                if (this.IsShip() || this.IsStation())
+                {
+                    dockedShipCount = this.transform.CountRootChildrenOfType<EditorUnit>();
+                }
+
+                var name = this.gameObject.name;
+                if (dockedShipCount > 0)
+                {
+                    name += $"\n{dockedShipCount} docked ships";
+                }
+
+                DrawString.Draw(name, this.transform.position, Color.white);
             }
         }
 
@@ -166,6 +181,18 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         {
             // HACK: Hard-coded max radius is equivalent to the magnus
             return Mathf.Lerp(0.0f, 1.0f, (this.GetCollisionRadius() - 3.0f) / 25f);
+        }
+
+        public void OnValidate()
+        {
+            // Ensure that docked ships are always positioned in the same place as the parent dock
+            if (this.IsShip() || this.IsStation())
+            {
+                if (this.transform.FindFirstParentOfType<EditorUnit>() != null)
+                {
+                    this.transform.localPosition = Vector3.zero;
+                }
+            }
         }
     }
 }

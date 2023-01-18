@@ -11,16 +11,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
         {
             Debug.Log($"Exporting scenario [{(!string.IsNullOrEmpty(editorScenario.Title) ? editorScenario.Title : "Unnamed")}]");
 
-            var options = editorScenario.GetComponentInChildren<SavedGameExportOptions>();
-            if (options == null)
-            {
-                options = editorScenario.gameObject.AddComponent<SavedGameExportOptions>();
-            }
-
             var exportOperation = new ExportOperation();
-            var savedGame = exportOperation.Export(editorScenario, options);
-
             var settings = CustomSettings.GetOrCreateSettings();
+            var savedGame = exportOperation.Export(editorScenario, settings);
 
             Debug.Log($"Adding unit ammo...");
             new AddAmmoTool(settings).AddAmmo(editorScenario, savedGame, settings.Export_AutoAddAmmo);

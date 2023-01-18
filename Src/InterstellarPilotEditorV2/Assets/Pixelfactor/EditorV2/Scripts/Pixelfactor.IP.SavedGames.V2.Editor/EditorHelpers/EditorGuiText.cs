@@ -4,6 +4,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorHelpers
 {
     public class EditorGuiText : MonoBehaviour
     {
+        [Multiline(5)]
         public string Text;
 
         public Vector2 CustomScreenOffset = Vector2.zero;

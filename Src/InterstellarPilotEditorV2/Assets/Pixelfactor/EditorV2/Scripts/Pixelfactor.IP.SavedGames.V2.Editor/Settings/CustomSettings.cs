@@ -66,6 +66,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         [Tooltip("Whether to remove wormholes without a target on export")]
         public bool Export_RemoveUntargettedWormholes = true;
 
+        [Tooltip("Whether to automatically create fleets for ships that need one")]
+        public bool Export_AutoCreateFleets = true;
+
+        [Tooltip("Whether to automatically add intel to factions. This is currently essential as otherwise a faction will have no intel at all")]
+        public bool Export_AutoAddIntel = true;
+
         [Tooltip("Determines how the spacing between sectors is converted to the spacing on the universe map")]
         public float UniverseMapScaleFactor = 0.005f;
 
@@ -219,6 +225,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.Export_AutosetIds)), new GUIContent("Autoset unique ids"));
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.Export_RemoveUntargettedWormholes)), new GUIContent("Remove untargetted wormholes"));
                     EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.Export_AutoAddAmmo)), new GUIContent("Auto-add ammo"));
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.Export_AutoAddIntel)), new GUIContent("Add faction intel"));
+                    EditorGUILayout.PropertyField(settings.FindProperty(nameof(CustomSettings.Export_AutoCreateFleets)), new GUIContent("Create fleets"));
                     EditorGUILayout.Space();
 
                     EditorGUILayout.LabelField("Universe Build", EditorStyles.boldLabel);

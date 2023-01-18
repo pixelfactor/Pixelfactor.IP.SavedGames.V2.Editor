@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -128,6 +128,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 758405480}
     m_Modifications:
     - target: {fileID: 1499588013825266274, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
@@ -191,15 +192,17 @@ PrefabInstance:
       value: Ship_ShuttleA_P1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1499588013825266274, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 355130521}
+    - targetCorrespondingSourceObject: {fileID: 1499588013825266274, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1246386235}
   m_SourcePrefab: {fileID: 100100000, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
 --- !u!4 &7901610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1499588013825266274, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
-  m_PrefabInstance: {fileID: 7901609}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7901611 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6453388977050438776, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
   m_PrefabInstance: {fileID: 7901609}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &126364434
@@ -207,6 +210,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 758405480}
     m_Modifications:
     - target: {fileID: 1499588013825266274, guid: e53c1946b795335479b9561394f4229c, type: 3}
@@ -266,7 +270,13 @@ PrefabInstance:
       value: Station_TradeStation_Faction 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: e53c1946b795335479b9561394f4229c, type: 3}
+--- !u!4 &126364435 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1499588013825266274, guid: e53c1946b795335479b9561394f4229c, type: 3}
+  m_PrefabInstance: {fileID: 126364434}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &215810542
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +340,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7901611}
+  m_Father: {fileID: 7901610}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &355130522
@@ -345,13 +355,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d72edc6df3f5758419a748d3868a69ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CargoClass: 3220
   Quantity: 6
+  Cargo: {fileID: 0}
+  LegacyCargoClass: 3220
 --- !u!1001 &418546895
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 758405480}
     m_Modifications:
     - target: {fileID: 1499588013825266274, guid: bab355f0c5892194eb26327324237aab, type: 3}
@@ -411,7 +423,13 @@ PrefabInstance:
       value: Ship_AresA_Faction 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: bab355f0c5892194eb26327324237aab, type: 3}
+--- !u!4 &418546896 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1499588013825266274, guid: bab355f0c5892194eb26327324237aab, type: 3}
+  m_PrefabInstance: {fileID: 418546895}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &503276849
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,11 +477,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Person: {fileID: 1246386234}
+  ActiveMission: {fileID: 0}
 --- !u!1001 &526968507
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 215810543}
     m_Modifications:
     - target: {fileID: 1653622243463373397, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
@@ -531,6 +551,10 @@ PrefabInstance:
       value: Faction_Faction 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3530997568560213704, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 996113252}
   m_SourcePrefab: {fileID: 100100000, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
 --- !u!114 &526968508 stripped
 MonoBehaviour:
@@ -553,6 +577,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 758405480}
     m_Modifications:
     - target: {fileID: 1499588013825266274, guid: e53c1946b795335479b9561394f4229c, type: 3}
@@ -612,12 +637,19 @@ PrefabInstance:
       value: Station_TradeStation_Faction 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: e53c1946b795335479b9561394f4229c, type: 3}
+--- !u!4 &728605578 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1499588013825266274, guid: e53c1946b795335479b9561394f4229c, type: 3}
+  m_PrefabInstance: {fileID: 728605577}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &758405479
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1226813276}
     m_Modifications:
     - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
@@ -677,6 +709,22 @@ PrefabInstance:
       value: Sector_Gatopea
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7901610}
+    - targetCorrespondingSourceObject: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 728605578}
+    - targetCorrespondingSourceObject: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 126364435}
+    - targetCorrespondingSourceObject: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1968651180}
+    - targetCorrespondingSourceObject: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 418546896}
   m_SourcePrefab: {fileID: 100100000, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
 --- !u!4 &758405480 stripped
 Transform:
@@ -818,6 +866,7 @@ MonoBehaviour:
   HostilityEndTime: -1
   RecentDamageReceived: 0
   Opinion: 0
+  ApplyTwoWay: 1
 --- !u!1 &1007941719
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,9 +961,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsMale: 1
   Id: 100001
+  CustomTitle: 
   CustomName: Pixelfactor
+  CustomShortName: 
   Faction: {fileID: 5733813827815111819}
   Kills: 0
+  Deaths: 0
+  FirstNameId: -1
+  LastNameId: -1
+  IsAutoPilot: 0
+  Seed: -1
+  DialogId: -1
+  DialogProfileId: -1
+  DestroyOnKill: 1
 --- !u!4 &1246386235
 Transform:
   m_ObjectHideFlags: 0
@@ -935,6 +994,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 215810543}
     m_Modifications:
     - target: {fileID: 1653622243463373397, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
@@ -1002,6 +1062,10 @@ PrefabInstance:
       value: Faction_Faction 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3530997568560213704, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1675239310}
   m_SourcePrefab: {fileID: 100100000, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
 --- !u!114 &1507409785 stripped
 MonoBehaviour:
@@ -1053,6 +1117,7 @@ MonoBehaviour:
     This object can then be tweaked to e.g. create allies / enemies that aren't at
     war. Set the Opinion value from 0 (worst) to 1 (best). Faction relations should
     always be created on both factions.
+  CustomScreenOffset: {x: 0, y: 0}
 --- !u!4 &1515143899
 Transform:
   m_ObjectHideFlags: 0
@@ -1066,7 +1131,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1675239309
 GameObject:
@@ -1119,6 +1184,7 @@ MonoBehaviour:
   HostilityEndTime: -1
   RecentDamageReceived: 0
   Opinion: 0
+  ApplyTwoWay: 1
 --- !u!1 &1884125941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,7 +1218,7 @@ Transform:
   - {fileID: 215810543}
   - {fileID: 503276850}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1884125943
 MonoBehaviour:
@@ -1166,8 +1232,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2e99e66bdc3b444aff8e3200f18b58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RandomEventsEnabled: 1
-  PreferredWormholeDistance: 2000
+  MaxWormholeDistance: 6000
+  Title: Custom scenario
+  Author: 
+  Description: 
+  DateYear: 2236
+  DateMonth: 1
+  DateDay: 1
+  DateHour: 0
+  DateMinute: 0
+  SectorsRoot: {fileID: 0}
+  FactionsRoot: {fileID: 0}
+  ScenarioTime: 0
 --- !u!1 &1941909369
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,6 +1280,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 758405480}
     m_Modifications:
     - target: {fileID: 1499588013825266274, guid: bab355f0c5892194eb26327324237aab, type: 3}
@@ -1263,7 +1340,107 @@ PrefabInstance:
       value: Ship_AresA_Faction 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: bab355f0c5892194eb26327324237aab, type: 3}
+--- !u!4 &1968651180 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1499588013825266274, guid: bab355f0c5892194eb26327324237aab, type: 3}
+  m_PrefabInstance: {fileID: 1968651179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2008643613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2008643615}
+  - component: {fileID: 2008643614}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &2008643614
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008643613}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 1
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &2008643615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008643613}
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 1.0086818, y: 2.4479713, z: 2.9081087}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &5733813827815111819 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1724664696237471513, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
@@ -1280,6 +1457,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 215810543}
     m_Modifications:
     - target: {fileID: 1724664696237471513, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
@@ -1335,6 +1513,7 @@ PrefabInstance:
       value: Faction_P1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
 --- !u!4 &7521255967266795542 stripped
 Transform:

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Pixelfactor.IP.SavedGames.V2.Editor.Tools.Spawning;
+using UnityEngine;
 
 namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 {
@@ -12,5 +13,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 
         [Tooltip("The asteroid unit that this cluster will generate")]
         public EditorAsteroidType AsteroidType;
+
+        [ContextMenu("Spawn asteroids")]
+        public void SpawnAsteroids()
+        {
+            var count = new AsteroidSpawner().SpawnAsteroidsAroundCluster(this);
+            Debug.Log($"Spawned {count} asteroids");
+        }
     }
 }

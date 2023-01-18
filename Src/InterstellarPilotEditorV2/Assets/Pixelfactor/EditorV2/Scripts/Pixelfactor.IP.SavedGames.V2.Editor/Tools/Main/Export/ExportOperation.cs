@@ -20,18 +20,18 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
     {
         private EditorScenario editorScenario = null;
         private SavedGame savedGame = null;
-        private SavedGameExportOptions options = null;
+        private CustomSettings settings = null;
 
         private EditorFaction playerFaction = null;
         private ModelFaction playerModelFaction = null;
         private EditorPlayer player = null;
         private ModelPlayer modelPlayer = null;
 
-        public SavedGame Export(EditorScenario editorScenario, SavedGameExportOptions options)
+        public SavedGame Export(EditorScenario editorScenario, CustomSettings settings)
         {
             this.editorScenario = editorScenario;
             this.savedGame = new SavedGame();
-            this.options = options;
+            this.settings = settings;
 
             this.ExportSectors();
             this.SetSectorMapPositions();
@@ -50,13 +50,17 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
             savedGame.EngineData = new ModelEngineData();
 
-            if (options.AutoCreateFleets)
+            if (settings.Export_AutoCreateFleets)
             {
                 this.AutoCreateFleetsWhereNeeded();
             }
 
             this.ExportHeader();
-            this.SeedFactionIntel();
+
+            if (settings.Export_AutoAddIntel)
+            { 
+                this.SeedFactionIntel();
+            }
 
             return savedGame;
         }
@@ -420,8 +424,13 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
                 foreach (var unit in savedGame.Units)
                 {
-                    if (unit.IsStation())
+                    if (unit.IsStation() || unit.IsWormhole())
                     {
+                        if (unit.IsWormhole())
+                        {
+                            faction.Intel.EnteredWormholes.Add(unit);
+                        }
+
                         faction.Intel.Units.Add(unit);
                     }
                 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -128,6 +128,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 758405480}
     m_Modifications:
     - target: {fileID: 1499588013825266274, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
@@ -183,6 +184,10 @@ PrefabInstance:
       value: Abacus
       objectReference: {fileID: 0}
     - target: {fileID: 3585806800839264951, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
+      propertyPath: Seed
+      value: 1031566618
+      objectReference: {fileID: 0}
+    - target: {fileID: 3585806800839264951, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
       propertyPath: Faction
       value: 
       objectReference: {fileID: 5733813827815111819}
@@ -191,15 +196,17 @@ PrefabInstance:
       value: Ship_ShuttleA_P1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1499588013825266274, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 355130521}
+    - targetCorrespondingSourceObject: {fileID: 1499588013825266274, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1246386235}
   m_SourcePrefab: {fileID: 100100000, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
 --- !u!4 &7901610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1499588013825266274, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
-  m_PrefabInstance: {fileID: 7901609}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7901611 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6453388977050438776, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
   m_PrefabInstance: {fileID: 7901609}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &139033125
@@ -207,6 +214,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 758405480}
     m_Modifications:
     - target: {fileID: 1499588013825266274, guid: 3d632c927b195004780775b3c31513cc, type: 3}
@@ -257,6 +265,10 @@ PrefabInstance:
       propertyPath: Id
       value: 100002
       objectReference: {fileID: 0}
+    - target: {fileID: 3585806800839264951, guid: 3d632c927b195004780775b3c31513cc, type: 3}
+      propertyPath: Seed
+      value: 302826020
+      objectReference: {fileID: 0}
     - target: {fileID: 3760377284931665905, guid: 3d632c927b195004780775b3c31513cc, type: 3}
       propertyPath: m_Name
       value: Wormhole_To_Terekos
@@ -266,6 +278,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1826235385}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d632c927b195004780775b3c31513cc, type: 3}
 --- !u!114 &139033126 stripped
 MonoBehaviour:
@@ -278,12 +291,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2337b80db35de994c8004a96c1bbeee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &139033127 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1499588013825266274, guid: 3d632c927b195004780775b3c31513cc, type: 3}
+  m_PrefabInstance: {fileID: 139033125}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &152070827
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1226813276}
+    serializedVersion: 2
+    m_TransformParent: {fileID: 226747770}
     m_Modifications:
     - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: Id
@@ -294,12 +313,16 @@ PrefabInstance:
       value: Terekos
       objectReference: {fileID: 0}
     - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      propertyPath: Seed
+      value: 1808244514
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: Resource
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -346,44 +369,106 @@ PrefabInstance:
       value: Sector_Terekos
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1826235386}
   m_SourcePrefab: {fileID: 100100000, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
 --- !u!4 &152070828 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
   m_PrefabInstance: {fileID: 152070827}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &215810542
-GameObject:
+--- !u!1001 &226747768
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 215810543}
-  m_Layer: 0
-  m_Name: Factions
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &215810543
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7529907460713107569, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_Name
+      value: ScenarioTemplate
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107571, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: Title
+      value: Wormholes sample
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 503276850}
+    - targetCorrespondingSourceObject: {fileID: 7529907459751445976, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 758405480}
+    - targetCorrespondingSourceObject: {fileID: 7529907459751445976, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 152070828}
+    - targetCorrespondingSourceObject: {fileID: 7529907460921764715, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7521255967266795542}
+  m_SourcePrefab: {fileID: 100100000, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+--- !u!4 &226747769 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7529907460921764715, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+  m_PrefabInstance: {fileID: 226747768}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 215810542}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7521255967266795542}
-  m_Father: {fileID: 1884125942}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &226747770 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7529907459751445976, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+  m_PrefabInstance: {fileID: 226747768}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &226747771 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+  m_PrefabInstance: {fileID: 226747768}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &355130520
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +498,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7901611}
+  m_Father: {fileID: 7901610}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &355130522
@@ -428,62 +513,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d72edc6df3f5758419a748d3868a69ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CargoClass: 3220
+  LegacyCargoClass: 3220
   Quantity: 6
---- !u!1 &376133293
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 376133295}
-  - component: {fileID: 376133294}
-  m_Layer: 0
-  m_Name: Notes (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &376133294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 376133293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba6990d2a4fd5924ca7cab248ef5863a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Text: The easiest way to create wormholes is to select two sectors and use IPEditor->Tools->Sectors->Connect.
-    This will always create two new wormholes. The distance of the wormholes from
-    the sector origin is determined by 'preferred wormhole distance' set on the save
-    game object. Each sector also has a distance multiplier if a sector should be
-    smaller/bigger. When wormholes are selected, a blue line is drawn in the editor
-    to show the connection.   Wormholes can also be positioned and linked manually.
-    The rotation of a wormhole is important and controls which way ships face when
-    exiting.  Do not create disconnected sectors (sectors not connected to the rest
-    of the universe), the engine will struggle with this.
-  CustomScreenOffset: {x: 0, y: 77.8}
---- !u!4 &376133295
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 376133293}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 295.02023, y: 614.40265, z: 1121.3092}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  Cargo: {fileID: 0}
 --- !u!1 &503276849
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,15 +540,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 503276849}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1007941720}
   - {fileID: 1941909370}
-  m_Father: {fileID: 1884125942}
-  m_RootOrder: 2
+  m_Father: {fileID: 226747771}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &503276851
 MonoBehaviour:
@@ -531,12 +563,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Person: {fileID: 1246386234}
+  ActiveMission: {fileID: 0}
 --- !u!1001 &758405479
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1226813276}
+    serializedVersion: 2
+    m_TransformParent: {fileID: 226747770}
     m_Modifications:
     - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: Id
@@ -546,9 +580,13 @@ PrefabInstance:
       propertyPath: Name
       value: Gatopea
       objectReference: {fileID: 0}
+    - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      propertyPath: Seed
+      value: 2088465641
+      objectReference: {fileID: 0}
     - target: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -595,59 +633,19 @@ PrefabInstance:
       value: Sector_Gatopea
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7901610}
+    - targetCorrespondingSourceObject: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 139033127}
   m_SourcePrefab: {fileID: 100100000, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
 --- !u!4 &758405480 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
   m_PrefabInstance: {fileID: 758405479}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &891289273
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 891289275}
-  - component: {fileID: 891289274}
-  m_Layer: 0
-  m_Name: Notes (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &891289274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891289273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba6990d2a4fd5924ca7cab248ef5863a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Text: If you have a sector selected in the hierachy, any wormhole connections are
-    show with a blue line to the other sector.
-  CustomScreenOffset: {x: 0, y: 37.52}
---- !u!4 &891289275
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891289273}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 295.02023, y: 614.40265, z: 1121.3092}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,7 +761,7 @@ Transform:
   m_Father: {fileID: 503276850}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1226813275
+--- !u!1 &1042300566
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -771,31 +769,92 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1226813276}
+  - component: {fileID: 1042300568}
+  - component: {fileID: 1042300567}
   m_Layer: 0
-  m_Name: Sectors
+  m_Name: Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1226813276
+--- !u!108 &1042300567
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042300566}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 1
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &1042300568
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1226813275}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1042300566}
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 1108.8705, y: 4737.2896, z: -1356.5061}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 758405480}
-  - {fileID: 152070828}
-  m_Father: {fileID: 1884125942}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1246386233
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,9 +886,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsMale: 1
   Id: 100001
+  CustomTitle: 
   CustomName: Pixelfactor
+  CustomShortName: 
   Faction: {fileID: 5733813827815111819}
   Kills: 0
+  Deaths: 0
+  FirstNameId: -1
+  LastNameId: -1
+  IsAutoPilot: 0
+  Seed: -1
+  DialogId: -1
+  DialogProfileId: -1
+  DestroyOnKill: 1
 --- !u!4 &1246386235
 Transform:
   m_ObjectHideFlags: 0
@@ -850,6 +919,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 152070828}
     m_Modifications:
     - target: {fileID: 1499588013825266274, guid: 3d632c927b195004780775b3c31513cc, type: 3}
@@ -900,6 +970,10 @@ PrefabInstance:
       propertyPath: Id
       value: 100003
       objectReference: {fileID: 0}
+    - target: {fileID: 3585806800839264951, guid: 3d632c927b195004780775b3c31513cc, type: 3}
+      propertyPath: Seed
+      value: 896999601
+      objectReference: {fileID: 0}
     - target: {fileID: 3760377284931665905, guid: 3d632c927b195004780775b3c31513cc, type: 3}
       propertyPath: m_Name
       value: Wormhole_To_Gatopea
@@ -909,6 +983,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 139033126}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d632c927b195004780775b3c31513cc, type: 3}
 --- !u!114 &1826235385 stripped
 MonoBehaviour:
@@ -921,55 +996,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2337b80db35de994c8004a96c1bbeee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1884125941
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1884125942}
-  - component: {fileID: 1884125943}
-  m_Layer: 0
-  m_Name: SavedGame
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1884125942
+--- !u!4 &1826235386 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1499588013825266274, guid: 3d632c927b195004780775b3c31513cc, type: 3}
+  m_PrefabInstance: {fileID: 1826235384}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1884125941}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1226813276}
-  - {fileID: 215810543}
-  - {fileID: 503276850}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1884125943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1884125941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f2e99e66bdc3b444aff8e3200f18b58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RandomEventsEnabled: 1
-  PreferredWormholeDistance: 2000
 --- !u!1 &1941909369
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1061,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6990d2a4fd5924ca7cab248ef5863a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: This sample contains two sectors connected by wormholes.
+  Text: 'This sample contains two sectors connected by wormholes.
+
+
+
+    If you have
+    a sector selected in the hierachy, any wormhole connections are shown with a
+    blue line to the other sector.
+
+
+
+    The easiest way to create wormholes is
+    to select two sectors and use the Connect tool under the Build tab. This will
+    always create two new wormholes. The distance of the wormholes from the sector
+    origin is determined by ''wormhole distance'' set on the scenario object. Each
+    sector also has a distance multiplier to make a sector smaller/bigger than the
+    default. Wormholes can also be positioned and linked manually. The rotation of
+    a wormhole is important and controls which way ships face when exiting.  Do not
+    create disconnected sectors (sectors not connected to the rest of the universe),
+    the engine will struggle with this.'
   CustomScreenOffset: {x: 0, y: 0}
 --- !u!4 &2128336781
 Transform:
@@ -1045,7 +1094,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5733813827815111819 stripped
 MonoBehaviour:
@@ -1063,7 +1112,8 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 215810543}
+    serializedVersion: 2
+    m_TransformParent: {fileID: 226747769}
     m_Modifications:
     - target: {fileID: 1724664696237471513, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
       propertyPath: Id
@@ -1071,7 +1121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3467061809229937540, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3467061809229937540, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1091,15 +1141,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3467061809229937540, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3467061809229937540, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3467061809229937540, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3467061809229937540, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1118,6 +1168,7 @@ PrefabInstance:
       value: Faction_P1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
 --- !u!4 &7521255967266795542 stripped
 Transform:

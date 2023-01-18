@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2484085525794927833}
   - component: {fileID: 2261098159386245339}
-  - component: {fileID: -5330435169451704685}
   m_Layer: 0
   m_Name: Fleet
   m_TagString: Untagged
@@ -52,27 +51,7 @@ MonoBehaviour:
   HomeBase: {fileID: 0}
   ExcludeFromFactionAI: 0
   Designation: 
---- !u!114 &-5330435169451704685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3345523284422466656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd1dfcbdd56a048489fbd022bb20b0a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AllowCombatInterception: 1
-  AllowAttack: 1
-  Aggression: 0.5
-  CargoCollectionPreference: 1
-  TargetInterceptionLowerDistance: 1300
-  TargetInterceptionUpperDistance: 1500
-  PreferCloak: 0
-  PreferToDock: 0
-  MaxJumpDistance: 99
+  EditorOrdersRoot: {fileID: 2557966264443392247}
 --- !u!1 &6108328036075798351
 GameObject:
   m_ObjectHideFlags: 0

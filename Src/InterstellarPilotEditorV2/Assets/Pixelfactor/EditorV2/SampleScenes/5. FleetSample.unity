@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -128,6 +128,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 758405480}
     m_Modifications:
     - target: {fileID: 1499588013825266274, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
@@ -183,6 +184,10 @@ PrefabInstance:
       value: Abacus
       objectReference: {fileID: 0}
     - target: {fileID: 3585806800839264951, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
+      propertyPath: Seed
+      value: 1016390213
+      objectReference: {fileID: 0}
+    - target: {fileID: 3585806800839264951, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
       propertyPath: Faction
       value: 
       objectReference: {fileID: 5733813827815111819}
@@ -191,102 +196,25 @@ PrefabInstance:
       value: Ship_ShuttleA_P1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1499588013825266274, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 355130521}
+    - targetCorrespondingSourceObject: {fileID: 1499588013825266274, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1246386235}
   m_SourcePrefab: {fileID: 100100000, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
 --- !u!4 &7901610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1499588013825266274, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
   m_PrefabInstance: {fileID: 7901609}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &7901611 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6453388977050438776, guid: 5ec907e2d1dcb5d429152a458b678b90, type: 3}
-  m_PrefabInstance: {fileID: 7901609}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &105447465
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 105447467}
-  - component: {fileID: 105447466}
-  m_Layer: 0
-  m_Name: Notes2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &105447466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 105447465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba6990d2a4fd5924ca7cab248ef5863a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Text: The position of the fleet is important and marks where the ships *should*
-    be. If the ships are far away from this point, they will start a regroup.
-  CustomScreenOffset: {x: 0, y: 127.7}
---- !u!4 &105447467
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 105447465}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 295.02023, y: 614.40265, z: 1121.3092}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &215810542
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 215810543}
-  m_Layer: 0
-  m_Name: Factions
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &215810543
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 215810542}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7521255967266795542}
-  - {fileID: 1815160270}
-  m_Father: {fileID: 1884125942}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &218146823
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 520567116}
     m_Modifications:
     - target: {fileID: 2184259999515811693, guid: e9e6fd58bebc1fa46b68928085f61544, type: 3}
@@ -346,7 +274,107 @@ PrefabInstance:
       value: NpcPilotNoCustomSettings
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: e9e6fd58bebc1fa46b68928085f61544, type: 3}
+--- !u!4 &218146824 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2184259999515811693, guid: e9e6fd58bebc1fa46b68928085f61544, type: 3}
+  m_PrefabInstance: {fileID: 218146823}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &308944243
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 308944245}
+  - component: {fileID: 308944244}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &308944244
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308944243}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 1
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &308944245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308944243}
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 167.03217, y: 5824.1724, z: -474.63916}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &355130520
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +404,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7901611}
+  m_Father: {fileID: 7901610}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &355130522
@@ -391,13 +419,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d72edc6df3f5758419a748d3868a69ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CargoClass: 3220
+  LegacyCargoClass: 3220
   Quantity: 6
+  Cargo: {fileID: 0}
 --- !u!1001 &418245923
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2128249545}
     m_Modifications:
     - target: {fileID: 2184259999515811693, guid: e9e6fd58bebc1fa46b68928085f61544, type: 3}
@@ -457,7 +487,13 @@ PrefabInstance:
       value: NpcPilotNoCustomSettings
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: e9e6fd58bebc1fa46b68928085f61544, type: 3}
+--- !u!4 &418245924 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2184259999515811693, guid: e9e6fd58bebc1fa46b68928085f61544, type: 3}
+  m_PrefabInstance: {fileID: 418245923}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &503276849
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,13 +518,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 503276849}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1884125942}
-  m_RootOrder: 2
+  m_Father: {fileID: 1488391971}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &503276851
 MonoBehaviour:
@@ -503,11 +539,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Person: {fileID: 1246386234}
+  ActiveMission: {fileID: 0}
 --- !u!1001 &520567115
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1247449261}
     m_Modifications:
     - target: {fileID: 1499588013825266274, guid: 873d690e24b3b814490c97a4933f80ef, type: 3}
@@ -559,6 +597,10 @@ PrefabInstance:
       value: 100003
       objectReference: {fileID: 0}
     - target: {fileID: 3585806800839264951, guid: 873d690e24b3b814490c97a4933f80ef, type: 3}
+      propertyPath: Seed
+      value: 1149485344
+      objectReference: {fileID: 0}
+    - target: {fileID: 3585806800839264951, guid: 873d690e24b3b814490c97a4933f80ef, type: 3}
       propertyPath: Faction
       value: 
       objectReference: {fileID: 1815160271}
@@ -567,6 +609,10 @@ PrefabInstance:
       value: Ship_HornetA_P1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1499588013825266274, guid: 873d690e24b3b814490c97a4933f80ef, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 218146824}
   m_SourcePrefab: {fileID: 100100000, guid: 873d690e24b3b814490c97a4933f80ef, type: 3}
 --- !u!4 &520567116 stripped
 Transform:
@@ -578,7 +624,8 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1226813276}
+    serializedVersion: 2
+    m_TransformParent: {fileID: 1488391970}
     m_Modifications:
     - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: Id
@@ -588,9 +635,13 @@ PrefabInstance:
       propertyPath: Name
       value: Gatopea
       objectReference: {fileID: 0}
+    - target: {fileID: 4599161615274450661, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      propertyPath: Seed
+      value: 1654562728
+      objectReference: {fileID: 0}
     - target: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -637,6 +688,13 @@ PrefabInstance:
       value: Sector_Gatopea
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7901610}
+    - targetCorrespondingSourceObject: {fileID: 5505798914149961743, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1247449261}
   m_SourcePrefab: {fileID: 100100000, guid: 18c904d7d145fc74da3690f62f5577d8, type: 3}
 --- !u!4 &758405480 stripped
 Transform:
@@ -672,14 +730,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6990d2a4fd5924ca7cab248ef5863a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: This sample contains an NPC fleet 'MySampleFleet'. The fleet consists of
+  Text: "This sample contains an NPC fleet 'MySampleFleet'. The fleet consists of
     three ships, which all exist under the heirachy of the fleet object. Each ship
-    also has an 'NpcPilot'. Finally, the fleet has set 'Exclude from faction AI'.
+    also has an 'NpcPilot'. \r\n\r\nThe position of the fleet is important and marks
+    where the ships *should* be. If the ships are far away from this point, they
+    will start a regroup.\r\n\r\nThe fleet has enabled 'Exclude from faction AI'.
     This means that when running the game, the NPC faction will not control this
-    fleet. This is useful to give it special orders. After creating a fleet and all
-    its ships, use IPEditor->Tools->Fleets->Set fleet children[...]. This will ensure
-    that the fleet owns all its units, which would otherwise create a lot of weirdness
-    in the engine.
+    fleet. This is useful to give it special orders.\r\n\r\nThe easiest way to create
+    new fleets is to use the Spawn->Fleet tool from the editor window. "
   CustomScreenOffset: {x: 0, y: 0}
 --- !u!4 &952198428
 Transform:
@@ -694,7 +752,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -785,6 +843,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1247449261}
     m_Modifications:
     - target: {fileID: 1499588013825266274, guid: ba76e83ec7677e644bc64e511a684394, type: 3}
@@ -836,6 +895,10 @@ PrefabInstance:
       value: 100002
       objectReference: {fileID: 0}
     - target: {fileID: 3585806800839264951, guid: ba76e83ec7677e644bc64e511a684394, type: 3}
+      propertyPath: Seed
+      value: 1224542737
+      objectReference: {fileID: 0}
+    - target: {fileID: 3585806800839264951, guid: ba76e83ec7677e644bc64e511a684394, type: 3}
       propertyPath: Faction
       value: 
       objectReference: {fileID: 1815160271}
@@ -844,44 +907,16 @@ PrefabInstance:
       value: Ship_FlyerA_P1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1499588013825266274, guid: ba76e83ec7677e644bc64e511a684394, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1760844670}
   m_SourcePrefab: {fileID: 100100000, guid: ba76e83ec7677e644bc64e511a684394, type: 3}
 --- !u!4 &1116883050 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1499588013825266274, guid: ba76e83ec7677e644bc64e511a684394, type: 3}
   m_PrefabInstance: {fileID: 1116883049}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1226813275
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1226813276}
-  m_Layer: 0
-  m_Name: Sectors
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1226813276
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1226813275}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 758405480}
-  m_Father: {fileID: 1884125942}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1246386233
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,9 +948,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsMale: 1
   Id: 100001
+  CustomTitle: 
   CustomName: Pixelfactor
+  CustomShortName: 
   Faction: {fileID: 5733813827815111819}
   Kills: 0
+  Deaths: 0
+  FirstNameId: -1
+  LastNameId: -1
+  IsAutoPilot: 0
+  Seed: -1
+  DialogId: -1
+  DialogProfileId: -1
+  DestroyOnKill: 1
 --- !u!4 &1246386235
 Transform:
   m_ObjectHideFlags: 0
@@ -936,6 +981,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 758405480}
     m_Modifications:
     - target: {fileID: 2261098159386245339, guid: 8b1b06e86924d664cbb508c578bf8bff, type: 3}
@@ -948,7 +994,7 @@ PrefabInstance:
       objectReference: {fileID: 1815160271}
     - target: {fileID: 2261098159386245339, guid: 8b1b06e86924d664cbb508c578bf8bff, type: 3}
       propertyPath: Designation
-      value: My new fleet
+      value: MySampleFleet
       objectReference: {fileID: 0}
     - target: {fileID: 2261098159386245339, guid: 8b1b06e86924d664cbb508c578bf8bff, type: 3}
       propertyPath: ExcludeFromFactionAI
@@ -1003,17 +1049,118 @@ PrefabInstance:
       value: Fleet_Ship_FlyerA_New Faction
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2484085525794927833, guid: 8b1b06e86924d664cbb508c578bf8bff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1116883050}
+    - targetCorrespondingSourceObject: {fileID: 2484085525794927833, guid: 8b1b06e86924d664cbb508c578bf8bff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 520567116}
+    - targetCorrespondingSourceObject: {fileID: 2484085525794927833, guid: 8b1b06e86924d664cbb508c578bf8bff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2128249545}
   m_SourcePrefab: {fileID: 100100000, guid: 8b1b06e86924d664cbb508c578bf8bff, type: 3}
 --- !u!4 &1247449261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2484085525794927833, guid: 8b1b06e86924d664cbb508c578bf8bff, type: 3}
   m_PrefabInstance: {fileID: 1247449260}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1488391968
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7529907460713107569, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_Name
+      value: ScenarioTemplate
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529907460713107571, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      propertyPath: Title
+      value: Fleets sample
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 503276850}
+    - targetCorrespondingSourceObject: {fileID: 7529907459751445976, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 758405480}
+    - targetCorrespondingSourceObject: {fileID: 7529907460921764715, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7521255967266795542}
+    - targetCorrespondingSourceObject: {fileID: 7529907460921764715, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1815160270}
+  m_SourcePrefab: {fileID: 100100000, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+--- !u!4 &1488391969 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7529907460921764715, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+  m_PrefabInstance: {fileID: 1488391968}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1488391970 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7529907459751445976, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+  m_PrefabInstance: {fileID: 1488391968}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1488391971 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7529907460713107570, guid: 66756b7286b1a54419d09a3c82372ac5, type: 3}
+  m_PrefabInstance: {fileID: 1488391968}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1760844669
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1116883050}
     m_Modifications:
     - target: {fileID: 2184259999515811693, guid: e9e6fd58bebc1fa46b68928085f61544, type: 3}
@@ -1073,13 +1220,20 @@ PrefabInstance:
       value: NpcPilotNoCustomSettings
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: e9e6fd58bebc1fa46b68928085f61544, type: 3}
+--- !u!4 &1760844670 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2184259999515811693, guid: e9e6fd58bebc1fa46b68928085f61544, type: 3}
+  m_PrefabInstance: {fileID: 1760844669}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1815160269
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 215810543}
+    serializedVersion: 2
+    m_TransformParent: {fileID: 1488391969}
     m_Modifications:
     - target: {fileID: 1653622243463373397, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
       propertyPath: Id
@@ -1087,7 +1241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3530997568560213704, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3530997568560213704, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1107,15 +1261,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3530997568560213704, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3530997568560213704, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3530997568560213704, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3530997568560213704, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1134,6 +1288,7 @@ PrefabInstance:
       value: Faction_New Faction
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: b1bac0a1fc998c84e9bcd5eb07dc1449, type: 3}
 --- !u!4 &1815160270 stripped
 Transform:
@@ -1151,60 +1306,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8bababd92ec1eb4ea29420010d60dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1884125941
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1884125942}
-  - component: {fileID: 1884125943}
-  m_Layer: 0
-  m_Name: SavedGame
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1884125942
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1884125941}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1226813276}
-  - {fileID: 215810543}
-  - {fileID: 503276850}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1884125943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1884125941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f2e99e66bdc3b444aff8e3200f18b58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RandomEventsEnabled: 1
-  PreferredWormholeDistance: 2000
 --- !u!1001 &2128249544
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1247449261}
     m_Modifications:
     - target: {fileID: 1499588013825266274, guid: cc3f97cade22fa4469c7c9575d3c8f76, type: 3}
@@ -1256,6 +1363,10 @@ PrefabInstance:
       value: 100004
       objectReference: {fileID: 0}
     - target: {fileID: 3585806800839264951, guid: cc3f97cade22fa4469c7c9575d3c8f76, type: 3}
+      propertyPath: Seed
+      value: 1383491064
+      objectReference: {fileID: 0}
+    - target: {fileID: 3585806800839264951, guid: cc3f97cade22fa4469c7c9575d3c8f76, type: 3}
       propertyPath: Faction
       value: 
       objectReference: {fileID: 1815160271}
@@ -1264,6 +1375,10 @@ PrefabInstance:
       value: Ship_VentureA_P1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1499588013825266274, guid: cc3f97cade22fa4469c7c9575d3c8f76, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 418245924}
   m_SourcePrefab: {fileID: 100100000, guid: cc3f97cade22fa4469c7c9575d3c8f76, type: 3}
 --- !u!4 &2128249545 stripped
 Transform:
@@ -1286,7 +1401,8 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 215810543}
+    serializedVersion: 2
+    m_TransformParent: {fileID: 1488391969}
     m_Modifications:
     - target: {fileID: 1724664696237471513, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
       propertyPath: Id
@@ -1294,7 +1410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3467061809229937540, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3467061809229937540, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1314,15 +1430,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3467061809229937540, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3467061809229937540, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3467061809229937540, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3467061809229937540, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1341,6 +1457,7 @@ PrefabInstance:
       value: Faction_P1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f94860ff386eb84297faa598c834cfb, type: 3}
 --- !u!4 &7521255967266795542 stripped
 Transform:

@@ -10,7 +10,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
 
         void Update()
         {
-            var isDockedNow = this.GetComponentInParent<EditorHangarBay>() != null;
+            var isDockedNow = this.transform.FindFirstParentOfType<EditorUnit>() != null;
             if (isDockedNow != isDocked)
             {
                 foreach (var meshRenderer in this.GetComponentsInChildren<MeshRenderer>())

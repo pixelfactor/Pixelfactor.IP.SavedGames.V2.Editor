@@ -79,13 +79,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: -1
   Faction: {fileID: 0}
-  HomeBaseUnit: {fileID: 0}
+  HomeBase: {fileID: 0}
   ExcludeFromFactionAI: 0
+  Designation: 
+  EditorOrdersRoot: {fileID: 1891053854183352209}
 --- !u!1001 &6851088957592431335
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2484085525794927833}
     m_Modifications:
     - target: {fileID: 3279563953272864656, guid: 2078b91da396bd14cb73e9b8704a7827, type: 3}
@@ -137,6 +140,7 @@ PrefabInstance:
       value: AggressiveFleetSettings
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 2078b91da396bd14cb73e9b8704a7827, type: 3}
 --- !u!4 &8255290607151666551 stripped
 Transform:

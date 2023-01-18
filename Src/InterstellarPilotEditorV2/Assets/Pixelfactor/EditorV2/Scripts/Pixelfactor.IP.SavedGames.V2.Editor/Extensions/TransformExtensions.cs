@@ -67,6 +67,26 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
             return null;
         }
 
+        public static int CountRootChildrenOfType<T>(this Transform transform) where T : Component
+        {
+            var count = 0;
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                var child = transform.GetChild(i);
+                var isMatch = child.GetComponent<T>() != null;
+                if (isMatch)
+                {
+                    count++;
+                }
+                else
+                {
+                    count += CountRootChildrenOfType<T>(child);
+                }
+            }
+
+            return count;
+        }
+
         public static T FindFirstParentOfType<T>(this Transform transform) where T : Component
         {
             var t = transform.parent;

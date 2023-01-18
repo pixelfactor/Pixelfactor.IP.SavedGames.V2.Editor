@@ -48,8 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: -1
   Faction: {fileID: 0}
-  HomeBaseUnit: {fileID: 0}
+  HomeBase: {fileID: 0}
   ExcludeFromFactionAI: 0
+  Designation: 
+  EditorOrdersRoot: {fileID: 8204244204682543851}
 --- !u!1 &8126983157223835989
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,6 +88,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2484085525794927833}
     m_Modifications:
     - target: {fileID: 3279563953272864656, guid: 2c715b0cb1954d64aae546d643a72f31, type: 3}
@@ -137,6 +140,7 @@ PrefabInstance:
       value: GenericNoInterceptFleetSettings
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c715b0cb1954d64aae546d643a72f31, type: 3}
 --- !u!4 &8838371199149330458 stripped
 Transform:
