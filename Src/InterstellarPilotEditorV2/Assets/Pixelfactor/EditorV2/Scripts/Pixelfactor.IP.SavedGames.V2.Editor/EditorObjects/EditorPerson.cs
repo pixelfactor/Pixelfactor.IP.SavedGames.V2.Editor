@@ -58,5 +58,26 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 
         [Tooltip("Whether to destroy this person when killed rather than keep them alive but increment the deaths counter (normally true)")]
         public bool DestroyOnKill = true;
+
+        public string GetEditorName()
+        {
+            if (!string.IsNullOrWhiteSpace(this.CustomName))
+                return this.CustomName;
+
+            if (!string.IsNullOrWhiteSpace(this.CustomShortName))
+                return this.CustomShortName;
+
+            return "Unnamed";
+        }
+
+        public void OnValidate()
+        {
+            // When a person is inside a unit, their local position should be zero
+            var parentUnit = this.GetComponentInParent<EditorUnit>();
+            if (parentUnit != null)
+            {
+                this.transform.localPosition = Vector3.zero;
+            }
+        }
     }
 }

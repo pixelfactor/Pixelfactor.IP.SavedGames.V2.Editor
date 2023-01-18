@@ -15,7 +15,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorHelpers
             var guiStyle = new GUIStyle();
             guiStyle.alignment = TextAnchor.UpperLeft;
             guiStyle.normal.textColor = Color.white;
-            guiStyle.fontSize = 17;
+            guiStyle.fontSize = 12;
             guiStyle.wordWrap = true;
 
             var insetX = 70;

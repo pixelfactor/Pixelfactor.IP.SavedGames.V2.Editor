@@ -1,4 +1,5 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.FleetOrders.OrderTypes;
+using Pixelfactor.IP.SavedGames.V2.Editor.Tools;
 using UnityEditor;
 using UnityEngine;
 
@@ -63,6 +64,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
             }
 
             return this.transform;
+        }
+
+        [ContextMenu("Make children same faction")]
+        public void MakeChildrenSameFaction()
+        {
+            FixUpUnitOwnership.MakeFleetOwnChildren(this);
         }
     }
 }

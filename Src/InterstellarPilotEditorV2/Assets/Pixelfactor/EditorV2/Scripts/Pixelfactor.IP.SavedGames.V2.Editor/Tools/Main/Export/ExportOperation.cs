@@ -1,4 +1,5 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
+using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Bounty;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.FleetOrders.OrderTypes;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Missions;
 using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Scripting;
@@ -7,6 +8,7 @@ using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Scripting.Triggers;
 using Pixelfactor.IP.SavedGames.V2.Editor.Settings;
 using Pixelfactor.IP.SavedGames.V2.Model;
 using Pixelfactor.IP.SavedGames.V2.Model.Actions;
+using Pixelfactor.IP.SavedGames.V2.Model.Factions.Bounty;
 using Pixelfactor.IP.SavedGames.V2.Model.Jobs;
 using Pixelfactor.IP.SavedGames.V2.Model.Triggers;
 using System;
@@ -43,6 +45,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
             this.ExportFleets();
             this.ExportPeople();
             this.ExportPlayer();
+            this.ExportBounty();
+
             this.ExportScenarioData();
             this.ExportFleetSpawners();
             this.ExportMissions();
@@ -295,6 +299,14 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 return null;
 
             return savedGame.Units.FirstOrDefault(e => e.Id == editorUnit.Id);
+        }
+
+        private ModelPerson GetModelPerson(EditorPerson editorPerson)
+        {
+            if (editorPerson == null)
+                return null;
+
+            return savedGame.People.FirstOrDefault(e => e.Id == editorPerson.Id);
         }
 
         private void ExportFleets()
@@ -1291,6 +1303,107 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 };
 
                 otherFaction.Relations.Items.Add(otherFactionRelationDataItem);
+            }
+        }
+
+        private void ExportBounty()
+        {
+            foreach (var bountyItem in this.editorScenario.GetComponentsInChildren<EditorBountyBoardItem>())
+            {
+                var parentFaction = bountyItem.GetComponentInParent<EditorFaction>();
+                if (parentFaction == null)
+                {
+                    Debug.LogWarning("Bounty item should be parented by a faction (the faction that owns the bounty board", bountyItem);
+                    continue;
+                }
+
+                if (bountyItem.TargetPerson == null)
+                {
+                    Debug.LogWarning("Bounty item does not have a target person and so will be ignored", bountyItem);
+                    continue;
+                }
+
+                var modelFaction = GetModelFaction(parentFaction);
+                if (modelFaction.BountyBoard == null)
+                {
+                    modelFaction.BountyBoard = new Model.Factions.Bounty.ModelFactionBountyBoard();
+                }
+
+                if (modelFaction.BountyBoard.Items == null)
+                {
+                    modelFaction.BountyBoard.Items = new List<ModelFactionBountyBoardItem>();
+                }
+
+                var modelPerson = GetModelPerson(bountyItem.TargetPerson);
+                if (modelFaction == null)
+                {
+                    Debug.LogWarning("Could not find the person that is targetted by this bounty board item", bountyItem);
+                    continue;
+                }
+
+                var sourceFaction = GetModelFaction(bountyItem.SourceFaction);
+
+                // Note: there must be a source faction. If not, pre 2.0.56 engine versions will error out. Newer ones will just ignore the bounty.
+                if (sourceFaction == null)
+                {
+                    sourceFaction = modelFaction;
+                }
+
+                var modelBountyItem = new ModelFactionBountyBoardItem
+                {
+                    TargetPerson = modelPerson,
+                    Reward = bountyItem.Reward,
+                    TimeOfLastSighting = bountyItem.TimeOfLastSighting >= 0d ? bountyItem.TimeOfLastSighting : null,
+                    SourceFaction = sourceFaction
+                };
+
+                if (bountyItem.LastKnownLocation != null)
+                {
+                    // Last known location has been given as somewhere in a sector
+                    var targetSector = bountyItem.LastKnownLocation.GetComponent<EditorSector>();
+                    if (targetSector != null)
+                    {
+                        modelBountyItem.LastKnownTargetSector = GetModelSector(targetSector);
+                    }
+                    else
+                    {
+                        var parentSector = bountyItem.LastKnownLocation.GetComponentInParent<EditorSector>();
+                        if (parentSector == null)
+                        {
+                            Debug.LogWarning("Bounty board item has been given a last known location that isn't a child of a sector. The location will be ignored", bountyItem);
+                        }
+                        else
+                        {
+                            // Last known location has been given as somewhere specific in a sector or to an actual unit
+                            modelBountyItem.LastKnownTargetSector = GetModelSector(parentSector);
+                            modelBountyItem.LastKnownTargetPosition = (bountyItem.LastKnownLocation.position - parentSector.transform.position).ToVec3_ZeroY();
+                            
+                            var unit = bountyItem.LastKnownLocation.GetComponent<EditorUnit>();
+                            if (unit != null)
+                            {
+                                modelBountyItem.LastKnownTargetUnit = GetModelUnit(unit);
+                            }
+                        }
+                    }
+                }
+
+                if (bountyItem.ExportLastKnownPosition && modelBountyItem.LastKnownTargetSector == null)
+                {
+                    var sector = bountyItem.TargetPerson.GetComponentInParent<EditorSector>();
+                    if (sector != null)
+                    {
+                        modelBountyItem.LastKnownTargetSector = GetModelSector(sector);
+                        modelBountyItem.LastKnownTargetPosition = (bountyItem.TargetPerson.transform.position - sector.transform.position).ToVec3_ZeroY();
+                    }
+                }
+
+                if (bountyItem.ExportLastPilottedUnit && modelBountyItem.LastKnownTargetUnit == null)
+                {
+                    var targetUnit = bountyItem.TargetPerson.GetComponentInParent<EditorUnit>();
+                    modelBountyItem.LastKnownTargetUnit = GetModelUnit(targetUnit);
+                }
+
+                modelFaction.BountyBoard.Items.Add(modelBountyItem);
             }
         }
     }

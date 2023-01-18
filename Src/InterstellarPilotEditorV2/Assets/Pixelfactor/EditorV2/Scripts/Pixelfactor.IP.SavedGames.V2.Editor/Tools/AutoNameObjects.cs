@@ -1,4 +1,5 @@
 ﻿using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects;
+using Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects.Bounty;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -32,6 +33,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             AutoNameFleets(editorScenario);
             AutoNamePeople(editorScenario);
             AutoNameCargo(editorScenario);
+            AutoNameBountyItems(editorScenario);
         }
 
         public static void AutoNameCargo(EditorScenario editorScenario)
@@ -165,6 +167,19 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             editorFactionRelation.gameObject.name = GetFactionRelationName(editorFactionRelation);
         }
 
+        public static void AutoNameBountyItems(EditorScenario editorScenario)
+        {
+            foreach (var bountyItem in editorScenario.GetComponentsInChildren<EditorBountyBoardItem>())
+            {
+                bountyItem.name = GetBountyItemName(bountyItem);
+            }
+        }
+
+        public static string GetBountyItemName(EditorBountyBoardItem bountyBoardItem)
+        {
+            return $"BountyBoardItem_{(bountyBoardItem.TargetPerson != null ? bountyBoardItem.TargetPerson.GetEditorName() : "NoTarget")}";
+        }
+
         public static string GetFactionRelationName(EditorFactionRelation editorFactionRelation)
         {
             if (editorFactionRelation.OtherFaction == null)
@@ -186,12 +201,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
         {
             var factionName = editorPerson.Faction != null ? editorPerson.Faction.CustomName : "NoFaction";
 
-            if (!string.IsNullOrEmpty(editorPerson.CustomName))
-            {
-                return $"Person_{editorPerson.CustomName}_{factionName}";
-            }
-
-            return $"Person_Unnamed_{factionName}";
+            return $"Person_{editorPerson.GetEditorName()}_{factionName}";
         }
 
         private static string GetEditorUnitName(EditorUnit editorUnit)

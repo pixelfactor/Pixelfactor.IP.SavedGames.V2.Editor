@@ -32,22 +32,30 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools
             {
                 if (editorFleet.Faction != null)
                 {
-                    foreach (var editorUnit in editorFleet.GetComponentsInChildren<EditorUnit>())
-                    {
-                        if (editorUnit.Faction != editorFleet.Faction)
-                        {
-                            editorUnit.Faction = editorFleet.Faction;
-                            EditorUtility.SetDirty(editorUnit);
-                        }
-                    }
+                    MakeFleetOwnChildren(editorFleet);
+                }
+            }
+        }
 
-                    foreach (var editorPerson in editorFleet.GetComponentsInChildren<EditorPerson>())
+        public static void MakeFleetOwnChildren(EditorFleet editorFleet)
+        {
+            if (editorFleet.Faction != null)
+            {
+                foreach (var editorUnit in editorFleet.GetComponentsInChildren<EditorUnit>())
+                {
+                    if (editorUnit.Faction != editorFleet.Faction)
                     {
-                        if (editorPerson.Faction != editorFleet.Faction)
-                        {
-                            editorPerson.Faction = editorFleet.Faction;
-                            EditorUtility.SetDirty(editorPerson);
-                        }
+                        editorUnit.Faction = editorFleet.Faction;
+                        EditorUtility.SetDirty(editorUnit);
+                    }
+                }
+
+                foreach (var editorPerson in editorFleet.GetComponentsInChildren<EditorPerson>())
+                {
+                    if (editorPerson.Faction != editorFleet.Faction)
+                    {
+                        editorPerson.Faction = editorFleet.Faction;
+                        EditorUtility.SetDirty(editorPerson);
                     }
                 }
             }
