@@ -1,5 +1,4 @@
 ﻿using Pixelfactor.IP.Common;
-using Pixelfactor.IP.Common;
 using Pixelfactor.IP.SavedGames.V2.Model.Jobs;
 using Pixelfactor.IP.SavedGames.V2.Model.Jobs.Missions;
 
