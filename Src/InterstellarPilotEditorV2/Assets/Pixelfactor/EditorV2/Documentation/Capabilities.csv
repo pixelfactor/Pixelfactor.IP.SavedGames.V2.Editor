@@ -106,3 +106,4 @@ Fleets,Orders,Create station order,No,
 Fleets,Orders,Claim ship/station order,No,
 Misc,Fleet Spawner,Create fleet spawners,?,Not tested - likely to be broken
 Misc,Legacy patrol paths,Create AI sector patrol paths,?,Not tested
+Factions,Bounty,Create faction bounty boards,Yes,
