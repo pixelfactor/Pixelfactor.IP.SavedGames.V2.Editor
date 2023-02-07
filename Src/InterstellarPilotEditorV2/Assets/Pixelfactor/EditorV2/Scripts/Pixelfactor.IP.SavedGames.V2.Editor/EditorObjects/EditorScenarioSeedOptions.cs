@@ -8,9 +8,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
     public class EditorScenarioSeedOptions : MonoBehaviour
     {
         public bool SeedUnstableWormholes = false;
-        public bool SeedPlanets = false;
-
-        public bool SeedAsteroidClusters = false;
 
         public bool SeedAsteroids = false;
 

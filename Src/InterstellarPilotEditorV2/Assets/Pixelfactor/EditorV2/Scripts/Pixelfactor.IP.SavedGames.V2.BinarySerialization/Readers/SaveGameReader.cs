@@ -957,8 +957,6 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
                 var seedOptions = new ModelSeedOptions();
 
                 seedOptions.SeedUnstableWormholes = reader.ReadBoolean();
-                seedOptions.SeedPlanets = reader.ReadBoolean();
-                seedOptions.SeedAsteroidClusters = reader.ReadBoolean();
                 seedOptions.SeedAsteroids = reader.ReadBoolean();
                 seedOptions.SeedSprinkledAsteroids = reader.ReadBoolean();
                 seedOptions.SeedGasClouds = reader.ReadBoolean();

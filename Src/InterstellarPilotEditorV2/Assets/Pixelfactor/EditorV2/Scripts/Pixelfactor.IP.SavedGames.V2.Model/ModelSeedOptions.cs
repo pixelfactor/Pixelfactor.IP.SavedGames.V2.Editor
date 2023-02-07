@@ -3,12 +3,6 @@
     public class ModelSeedOptions
     {
         public bool SeedUnstableWormholes { get; set; } = false;
-        public bool SeedPlanets { get; set; } = false;
-
-        /// <summary>
-        /// Gets or sets whether to seed new asteroid clusters
-        /// </summary>
-        public bool SeedAsteroidClusters { get; set; } = false;
 
         /// <summary>
         /// Gets or sets whether to seed asteroids inside asteroid clusters

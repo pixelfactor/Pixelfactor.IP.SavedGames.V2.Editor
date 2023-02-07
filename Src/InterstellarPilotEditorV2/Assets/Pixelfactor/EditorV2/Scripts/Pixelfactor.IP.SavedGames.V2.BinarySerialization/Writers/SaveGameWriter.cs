@@ -725,8 +725,6 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
             if (seedOptions != null)
             {
                 writer.Write(seedOptions.SeedUnstableWormholes);
-                writer.Write(seedOptions.SeedPlanets);
-                writer.Write(seedOptions.SeedAsteroidClusters);
                 writer.Write(seedOptions.SeedAsteroids);
                 writer.Write(seedOptions.SeedSprinkledAsteroids);
                 writer.Write(seedOptions.SeedGasClouds);

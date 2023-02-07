@@ -80,8 +80,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 this.savedGame.SeedOptions = new ModelSeedOptions
                 {
                     SeedUnstableWormholes = seedOptions.SeedUnstableWormholes,
-                    SeedPlanets = seedOptions.SeedPlanets,
-                    SeedAsteroidClusters = seedOptions.SeedAsteroidClusters,
                     SeedAsteroids = seedOptions.SeedAsteroids,
                     SeedSprinkledAsteroids = seedOptions.SeedSprinkledAsteroids,
                     SeedGasClouds = seedOptions.SeedGasClouds,
