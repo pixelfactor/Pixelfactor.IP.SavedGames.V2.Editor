@@ -4,18 +4,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Model
 {
     public class ModelFactionCustomSettings
     {
-        /// <summary>
-        /// Defines if faction is a "freelancer" or not
-        /// </summary>
-        public bool PreferSingleShip { get; set; }
+        public bool BuildStations { get; set; } = true;
 
         public bool BuildShips { get; set; } = true;
 
-        public bool RepairShips { get; set; }
+        public bool RepairShips { get; set; } = true;
 
-        public bool UpgradeShips { get; set; }
+        public bool UpgradeShips { get; set; } = true;
 
-        public float RepairMinHullDamage { get; set; }
+        public bool UpgradeStations { get; set; } = true;
 
         public int RepairMinCreditsBeforeRepair { get; set; }
 

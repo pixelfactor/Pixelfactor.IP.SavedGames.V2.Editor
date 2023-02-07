@@ -2541,7 +2541,7 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
             settings.BuildShips = reader.ReadBoolean();
             settings.RepairShips = reader.ReadBoolean();
             settings.UpgradeShips = reader.ReadBoolean();
-            settings.RepairMinHullDamage = reader.ReadSingle();
+            reader.ReadSingle(); // RepairMinHullDamage removed v2.0.58
             settings.RepairMinCreditsBeforeRepair = reader.ReadInt32();
             settings.PreferenceToPlaceBounty = reader.ReadSingle();
             settings.LargeShipPreference = reader.ReadSingle();

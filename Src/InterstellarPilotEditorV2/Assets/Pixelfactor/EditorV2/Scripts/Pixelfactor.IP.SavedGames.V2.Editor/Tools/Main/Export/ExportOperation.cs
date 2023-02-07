@@ -1193,13 +1193,19 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                         PreferenceToBuildStations = editorFactionSettings.PreferenceToBuildStations,
                         PreferenceToBuildTurrets = editorFactionSettings.PreferenceToBuildTurrets,
                         PreferenceToPlaceBounty = editorFactionSettings.PreferenceToPlaceBounty,
-                        PreferSingleShip = editorFactionSettings.PreferSingleShip,
                         RepairMinCreditsBeforeRepair = editorFactionSettings.RepairMinCreditsBeforeRepair,
-                        RepairMinHullDamage = editorFactionSettings.RepairMinHullDamage,
                         RepairShips = editorFactionSettings.RepairShips,
                         UpgradeShips = editorFactionSettings.UpgradeShips,
+                        UpgradeStations = editorFactionSettings.UpgradeStations,
                         FixedShipCount = editorFactionSettings.FixedShipCount,
+                        BuildShips = editorFactionSettings.BuildShips,
+                        BuildStations = editorFactionSettings.BuildStations,
                     };
+
+                    if (editorFactionSettings.LegacyPreferSingleShip && editorFactionSettings.FixedShipCount < 0)
+                    {
+                        modelFaction.CustomSettings.FixedShipCount = 1;
+                    }
                 }
 
                 savedGame.Factions.Add(modelFaction);

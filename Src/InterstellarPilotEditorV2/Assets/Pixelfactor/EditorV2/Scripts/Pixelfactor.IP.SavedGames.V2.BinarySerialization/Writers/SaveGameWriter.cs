@@ -1833,9 +1833,10 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
         private void WriteFactionCustomSettings(BinaryWriter writer, ModelFactionCustomSettings settings)
         {
             writer.Write(settings.BuildShips);
+            writer.Write(settings.BuildStations);
             writer.Write(settings.RepairShips);
             writer.Write(settings.UpgradeShips);
-            writer.Write(settings.RepairMinHullDamage);
+            writer.Write(settings.UpgradeStations);
             writer.Write(settings.RepairMinCreditsBeforeRepair);
             writer.Write(settings.PreferenceToPlaceBounty);
             writer.Write(settings.LargeShipPreference);

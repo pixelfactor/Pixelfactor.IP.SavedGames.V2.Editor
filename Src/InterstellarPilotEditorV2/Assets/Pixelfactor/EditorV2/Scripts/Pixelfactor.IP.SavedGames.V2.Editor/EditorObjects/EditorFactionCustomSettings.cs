@@ -4,17 +4,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 {
     public class EditorFactionCustomSettings : MonoBehaviour
     {
-        /// <summary>
-        /// Defines if faction is a "freelancer" or not
-        /// </summary>
-        public bool PreferSingleShip = false;
-
         public bool RepairShips = true;
 
         public bool UpgradeShips = true;
 
-        [Range(0f, 1f)]
-        public float RepairMinHullDamage = 0.2f;
+        public bool UpgradeStations = true;
+
+        public bool BuildShips = true;
+
+        public bool BuildStations = true;
 
         public int RepairMinCreditsBeforeRepair = 2000;
 
@@ -61,5 +59,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         /// Gets or sets a fixed number of ships that the faction should own. This is intended for freelancers (where value should be 1) and outlaws. All other factions should keep the default value of -1
         /// </summary>
         public int FixedShipCount { get; set; } = -1;
+
+        /// <summary>
+        /// Defines if faction is a "freelancer" or not. This is super-ceded by FixedShipCount. For freelancer faction set FixedShipCount = 1
+        /// </summary>
+        [UnityEngine.Serialization.FormerlySerializedAs("PreferSingleShip")]
+        public bool LegacyPreferSingleShip = false;
     }
 }
