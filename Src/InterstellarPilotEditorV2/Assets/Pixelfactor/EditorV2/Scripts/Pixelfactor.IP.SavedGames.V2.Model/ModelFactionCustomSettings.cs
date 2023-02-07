@@ -61,7 +61,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Model
         public GenderChoice PilotGender { get; set; }
         public int MaxJumpDistanceFromHomeSector { get; set; } = -1;
         public int MaxStationBuildDistanceFromHomeSector { get; set;} = -1;
-        public int FixedShipCount { get; set; }
+        public int FixedShipCount { get; set; } = -1;
         public float SectorControlLikelihood { get; set; } = 0.0f;
         public float PreferenceToHaveAmmo { get; set; } = 0.5f;
     }

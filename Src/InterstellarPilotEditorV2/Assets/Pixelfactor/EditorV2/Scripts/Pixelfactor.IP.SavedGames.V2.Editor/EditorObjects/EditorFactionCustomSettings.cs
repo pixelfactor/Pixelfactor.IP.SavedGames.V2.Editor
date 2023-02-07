@@ -57,5 +57,9 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 
         public bool IgnoreStationCreditsReserve = false;
 
+        /// <summary>
+        /// Gets or sets a fixed number of ships that the faction should own. This is intended for freelancers (where value should be 1) and outlaws. All other factions should keep the default value of -1
+        /// </summary>
+        public int FixedShipCount { get; set; } = -1;
     }
 }

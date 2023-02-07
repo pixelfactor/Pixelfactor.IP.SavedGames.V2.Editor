@@ -1217,6 +1217,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                         RepairMinHullDamage = editorFactionSettings.RepairMinHullDamage,
                         RepairShips = editorFactionSettings.RepairShips,
                         UpgradeShips = editorFactionSettings.UpgradeShips,
+                        FixedShipCount = editorFactionSettings.FixedShipCount,
                     };
                 }
 
