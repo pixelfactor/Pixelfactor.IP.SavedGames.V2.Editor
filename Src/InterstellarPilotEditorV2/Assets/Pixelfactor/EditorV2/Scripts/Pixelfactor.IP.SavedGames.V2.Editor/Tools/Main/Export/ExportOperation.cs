@@ -544,49 +544,51 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
             };
 
             var customScenarioOptions = this.editorScenario.GetComponentInChildren<EditorScenarioOptions>();
-            if (customScenarioOptions != null)
+
+            if (customScenarioOptions == null)
             {
-                savedGame.ScenarioData.HasRandomEvents = customScenarioOptions.RandomEventsEnabled;
+                customScenarioOptions = GameObjectHelper.Instantiate<EditorScenarioOptions>(this.editorScenario.transform, "ScenarioOptions");
+            }
 
-                if (customScenarioOptions.FactionSpawningEnabled)
+            savedGame.ScenarioData.HasRandomEvents = customScenarioOptions.RandomEventsEnabled;
+
+            if (customScenarioOptions.FactionSpawningEnabled)
+            {
+                savedGame.ScenarioData.FactionSpawner = new ModelFactionSpawner
                 {
-                    savedGame.ScenarioData.FactionSpawner = new ModelFactionSpawner
-                    {
-                        NextFactionSpawnTime = customScenarioOptions.NextFactionSpawnTime,
-                        NextFreelancerSpawnTime = customScenarioOptions.NextFreelancerSpawnTime
-                    };
+                    NextFactionSpawnTime = customScenarioOptions.NextFactionSpawnTime,
+                    NextFreelancerSpawnTime = customScenarioOptions.NextFreelancerSpawnTime
+                };
 
-                    var editorFactionSpawnSettings = this.editorScenario.GetComponentInChildren<EditorFactionSpawnSettings>();
-                    if (editorFactionSpawnSettings != null)
+                var editorFactionSpawnSettings = this.editorScenario.GetComponentInChildren<EditorFactionSpawnSettings>();
+                if (editorFactionSpawnSettings != null)
+                {
+                    if (savedGame.ScenarioData.FactionSpawner.FactionTypeSpawnSettings == null)
                     {
-                        if (savedGame.ScenarioData.FactionSpawner.FactionTypeSpawnSettings == null)
-                        {
-                            savedGame.ScenarioData.FactionSpawner.FactionTypeSpawnSettings = new List<ModelFactionTypeSpawnSetting>();
-                        }
+                        savedGame.ScenarioData.FactionSpawner.FactionTypeSpawnSettings = new List<ModelFactionTypeSpawnSetting>();
+                    }
 
-                        foreach (var editorFactionTypesSpawn in editorFactionSpawnSettings.FactionTypeSettings)
+                    foreach (var editorFactionTypesSpawn in editorFactionSpawnSettings.FactionTypeSettings)
+                    {
+                        savedGame.ScenarioData.FactionSpawner.FactionTypeSpawnSettings.Add(new ModelFactionTypeSpawnSetting
                         {
-                            savedGame.ScenarioData.FactionSpawner.FactionTypeSpawnSettings.Add(new ModelFactionTypeSpawnSetting
-                            {
-                                AllowSpawn = editorFactionTypesSpawn.AllowSpawn,
-                                FreelancerType = editorFactionTypesSpawn.FreelancerType,
-                                FactionType = editorFactionTypesSpawn.FactionType
-                            });
-                        }
+                            AllowSpawn = editorFactionTypesSpawn.AllowSpawn,
+                            FreelancerType = editorFactionTypesSpawn.FreelancerType,
+                            FactionType = editorFactionTypesSpawn.FactionType
+                        });
                     }
                 }
-
-                savedGame.ScenarioData.AllowGodMode = customScenarioOptions.AllowGodMode;
-                savedGame.ScenarioData.AllowAbandonShip = customScenarioOptions.AllowAbandonShip;
-                savedGame.ScenarioData.AllowStationCapture = customScenarioOptions.AllowStationCapture;
-                savedGame.ScenarioData.AllowTeleporting = customScenarioOptions.AllowTeleporting;
-                savedGame.ScenarioData.AsteroidRespawningEnabled = customScenarioOptions.AsteroidRespawningEnabled;
-                savedGame.ScenarioData.AsteroidRespawnTime = customScenarioOptions.AsteroidRespawnTime;
-                savedGame.ScenarioData.Permadeath = customScenarioOptions.Permadeath;
-                savedGame.ScenarioData.RespawnOnDeath = customScenarioOptions.RespawnOnDeath;
-                savedGame.ScenarioData.PlayerPropertyAttackNotifications = customScenarioOptions.PlayerPropertyAttackNotifications;
-
             }
+
+            savedGame.ScenarioData.AllowGodMode = customScenarioOptions.AllowGodMode;
+            savedGame.ScenarioData.AllowAbandonShip = customScenarioOptions.AllowAbandonShip;
+            savedGame.ScenarioData.AllowStationCapture = customScenarioOptions.AllowStationCapture;
+            savedGame.ScenarioData.AllowTeleporting = customScenarioOptions.AllowTeleporting;
+            savedGame.ScenarioData.AsteroidRespawningEnabled = customScenarioOptions.AsteroidRespawningEnabled;
+            savedGame.ScenarioData.AsteroidRespawnTime = customScenarioOptions.AsteroidRespawnTime;
+            savedGame.ScenarioData.Permadeath = customScenarioOptions.Permadeath;
+            savedGame.ScenarioData.RespawnOnDeath = customScenarioOptions.RespawnOnDeath;
+            savedGame.ScenarioData.PlayerPropertyAttackNotifications = customScenarioOptions.PlayerPropertyAttackNotifications;
         }
 
         private void ExportHeader()
