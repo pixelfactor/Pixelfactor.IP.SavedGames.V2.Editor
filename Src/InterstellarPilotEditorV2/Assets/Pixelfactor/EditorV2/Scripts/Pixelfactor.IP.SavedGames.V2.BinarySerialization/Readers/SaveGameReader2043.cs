@@ -21,9 +21,9 @@ using Pixelfactor.IP.SavedGames.V2.Model.FleetOrders.Models;
 
 namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
 {
-    public class SaveGameReader : ISaveGameReader
+    public class SaveGameReader2043 : ISaveGameReader
     {
-        private readonly HeaderReader headerReader = new HeaderReader();
+        private readonly HeaderReader2043 headerReader = new HeaderReader2043();
 
         private Dictionary<int, ModelUnit> unitsById = new Dictionary<int, ModelUnit>(512);
         private Dictionary<int, ModelSector> sectorsById = new Dictionary<int, ModelSector>(64);
@@ -2515,7 +2515,6 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
             sector.AmbientLightColor = reader.ReadVec3();
             sector.DirectionLightColor = reader.ReadVec3();
             sector.DirectionLightRotation = reader.ReadVec3();
-            sector.DirectionLightIntensity = reader.ReadSingle();
             sector.LastTimeChangedControl = reader.ReadDouble();
             sector.LightDirectionFudge = reader.ReadSingle();
 

@@ -8,7 +8,8 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
     {
         public void Write(BinaryWriter writer, ModelHeader header)
         {
-            writer.WriteVersion(header.Version ?? new Version(1, 0, 0));
+            writer.WriteVersion(header.SaveVersion ?? new Version(1, 0, 0));
+            writer.WriteVersion(header.GameVersion ?? new Version(1, 0, 0));
             writer.WriteVersion(header.CreatedVersion ?? new Version(1, 0, 0));
             writer.Write(header.IsAutoSave);
             writer.Write(DateTime.Now.ToString(Constants.HeaderDateFormat));

@@ -580,7 +580,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 PlayerSectorName = savedGame.Player?.Person?.CurrentUnit?.Sector?.Name ?? null,
                 ScenarioInfoId = 100000, // Don't change this
                 TimeStamp = System.DateTime.Now,
-                Version = saveVersion, // This is the save file version (different from game)
+                SaveVersion = saveVersion, // This is the save file version (different from game)
                 CreatedVersion = saveVersion, // This is the game version
                 ScenarioTitle = editorScenario.Title,
                 ScenarioAuthor = editorScenario.Author,

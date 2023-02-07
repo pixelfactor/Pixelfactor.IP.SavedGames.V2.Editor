@@ -8,7 +8,12 @@ namespace Pixelfactor.IP.SavedGames.V2.Model
         /// <summary>
         /// The "save" version. Not guaranteed to be the same as the game version but normally close.
         /// </summary>
-        public Version Version { get; set; }
+        public Version SaveVersion { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the version of the game engine that the save was created with
+        /// </summary>
+        public Version GameVersion { get; set; }
 
         /// <summary>
         /// The version of the game that the save file was created in

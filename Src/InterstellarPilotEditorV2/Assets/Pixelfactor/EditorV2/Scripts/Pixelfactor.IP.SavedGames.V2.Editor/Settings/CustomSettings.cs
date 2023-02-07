@@ -85,7 +85,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Settings
         public float MinAngleBetweenWormholes = 60.0f;
 
         [Tooltip("The save version that the editor works with")]
-        public System.Version SaveVersion = new System.Version(2, 0, 50);
+        public System.Version SaveVersion = new System.Version(2, 0, 51);
 
         [Tooltip("The root folder of where units are found")]
         public string UnitPrefabsPath = "Assets/Pixelfactor/EditorV2/Prefabs/Units";

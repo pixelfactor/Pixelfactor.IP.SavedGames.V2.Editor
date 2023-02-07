@@ -12,7 +12,8 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
         {
             var header = new ModelHeader();
 
-            header.Version = reader.ReadVersion();
+            header.SaveVersion = reader.ReadVersion();
+            header.GameVersion = reader.ReadVersion();
             header.CreatedVersion = reader.ReadVersion();
             header.IsAutoSave = reader.ReadBoolean();
             header.TimeStamp = DateTime.ParseExact(reader.ReadString(), Constants.HeaderDateFormat, new CultureInfo("en-GB"));

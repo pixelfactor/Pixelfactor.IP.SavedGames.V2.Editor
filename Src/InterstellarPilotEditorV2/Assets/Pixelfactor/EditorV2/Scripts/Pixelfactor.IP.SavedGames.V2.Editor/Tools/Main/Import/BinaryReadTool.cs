@@ -77,10 +77,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 
         private static ISaveGameReader GetBackwardsCompatibleReader(Version version)
         {
+            if (version > new Version(2, 0, 50))
+            {
+                return new SaveGameReader();
+            }
+
             // HACK: Reader hasn't changed structure since 2.0.43, but had to give new version ID just to Drake component bay carnage caused in v2.0.49
             if (version >= new Version(2, 0, 43))
             {
-                return new SaveGameReader();
+                return new SaveGameReader2043();
             }
 
             // NOTE: 2.0.18 and 2.0.19 use the same reader but import differently

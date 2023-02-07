@@ -36,6 +36,7 @@
         /// </summary>
         public Vec3 DirectionLightRotation { get; set; }
         public Vec3 DirectionLightColor { get; set; }
+        public float DirectionLightIntensity { get; set; } = 0.87f;
         public Vec3 AmbientLightColor { get; set; }
 
         /// <summary>
