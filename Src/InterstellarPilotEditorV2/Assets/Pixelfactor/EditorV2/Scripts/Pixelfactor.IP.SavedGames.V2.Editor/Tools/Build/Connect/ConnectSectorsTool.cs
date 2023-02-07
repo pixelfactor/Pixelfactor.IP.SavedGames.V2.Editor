@@ -107,7 +107,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Connect
 
                     if (GrowHelper.DoesNewConnectionIntersect(
                         sectorLines,
-                        sector.transform.position, 
+                        sector.transform.position,
                         otherSector.transform.position,
                         0.0f,
                         0.0f))
@@ -174,12 +174,37 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Build.Connect
         {
             var newWormhole = Spawn.Unit(editorSector1, Model.ModelUnitClass.Wormhole_Default, CustomSettings.GetOrCreateSettings().UnitPrefabsPath);
 
-            var direction = (editorSector2.transform.position - editorSector1.transform.position).normalized;
-            newWormhole.transform.position = editorSector1.transform.position + (direction * wormholeDistance);
-            newWormhole.transform.rotation = Quaternion.LookRotation(-direction, Vector3.up);
+            AutoPositionWormholeUnit(newWormhole, editorSector2, wormholeDistance);
 
             var newWormholeData = newWormhole.GetComponent<EditorWormholeUnit>();
             return newWormholeData;
+        }
+
+        public static void AutoPositionWormholeUnit(EditorUnit wormholeUnit, float maxWormholeDistance)
+        {
+            var editorSector1 = wormholeUnit.GetComponentInParent<EditorSector>();
+            var wormholeDistance = editorSector1.WormholeDistance * maxWormholeDistance;
+            var wormhole = wormholeUnit.GetComponent<EditorWormholeUnit>();
+            var targetSector = wormhole.GetActualTargetSector();
+            if (targetSector != null)
+            {
+                var direction = (targetSector.transform.position - editorSector1.transform.position).normalized;
+                wormhole.transform.position = editorSector1.transform.position + (direction * wormholeDistance);
+                wormhole.transform.rotation = Quaternion.LookRotation(-direction, Vector3.up);
+
+                EditorUtility.SetDirty(wormhole);
+            }
+        }
+
+        public static void AutoPositionWormholeUnit(EditorUnit wormhole, EditorSector editorSector2, float wormholeDistance)
+        {
+            var editorSector1 = wormhole.GetComponentInParent<EditorSector>();
+
+            var direction = (editorSector2.transform.position - editorSector1.transform.position).normalized;
+            wormhole.transform.position = editorSector1.transform.position + (direction * wormholeDistance);
+            wormhole.transform.rotation = Quaternion.LookRotation(-direction, Vector3.up);
+
+            EditorUtility.SetDirty(wormhole);
         }
 
         public static bool TryGetSelectedSectors(out List<EditorSector> sectors)
