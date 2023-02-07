@@ -955,8 +955,8 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
                 var seedOptions = new ModelSeedOptions();
                 seedOptions.SeedAbandonedCargo = reader.ReadBoolean();
                 seedOptions.SeedAbandonedShips = reader.ReadBoolean();
-                seedOptions.SeedCargoHolds = reader.ReadBoolean();
-                seedOptions.SeedFactionIntel = reader.ReadBoolean();
+                seedOptions.SeedTraderCargo = reader.ReadBoolean();
+                seedOptions.SeedFactionStaticIntel = reader.ReadBoolean();
                 seedOptions.SeedPassengerGroups = reader.ReadBoolean();
                 return seedOptions;
             }

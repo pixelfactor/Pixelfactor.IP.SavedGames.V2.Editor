@@ -955,11 +955,39 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
             if (hasSeedOptions)
             {
                 var seedOptions = new ModelSeedOptions();
+
+                seedOptions.SeedUnstableWormholes = reader.ReadBoolean();
+                seedOptions.SeedPlanets = reader.ReadBoolean();
+                seedOptions.SeedAsteroidClusters = reader.ReadBoolean();
+                seedOptions.SeedAsteroids = reader.ReadBoolean();
+                seedOptions.SeedSprinkledAsteroids = reader.ReadBoolean();
+                seedOptions.SeedGasClouds = reader.ReadBoolean();
+
+                seedOptions.SeedEmpireFactions = reader.ReadBoolean();
+                seedOptions.SeedBanditFactions = reader.ReadBoolean();
+                seedOptions.SeedBars = reader.ReadBoolean();
+                seedOptions.SeedOtherFactions = reader.ReadBoolean();
+
+                seedOptions.SeedFactionStaticIntel = reader.ReadBoolean();
+                seedOptions.SeedFactionUnitIntel = reader.ReadBoolean();
+                seedOptions.SeedFactionOnFactionIntel = reader.ReadBoolean();
+                seedOptions.SeedFactionRelations = reader.ReadBoolean();
+
+                seedOptions.SeedPassengerGroups = reader.ReadBoolean();
+                seedOptions.SeedModdedUnits = reader.ReadBoolean();
+                seedOptions.SeedDepletedAsteroids = reader.ReadBoolean();
+                seedOptions.SeedTraderCargo = reader.ReadBoolean();
+                seedOptions.SeedShipDamage = reader.ReadBoolean();
+
+                seedOptions.SeedRandomizedFleets = reader.ReadBoolean();
+                seedOptions.SeedBounty = reader.ReadBoolean();
+
+                seedOptions.SeedSmallAsteroids = reader.ReadBoolean();
                 seedOptions.SeedAbandonedCargo = reader.ReadBoolean();
                 seedOptions.SeedAbandonedShips = reader.ReadBoolean();
-                seedOptions.SeedCargoHolds = reader.ReadBoolean();
-                seedOptions.SeedFactionIntel = reader.ReadBoolean();
-                seedOptions.SeedPassengerGroups = reader.ReadBoolean();
+
+                seedOptions.SeedPilotPromotions = reader.ReadBoolean();
+
                 return seedOptions;
             }
 

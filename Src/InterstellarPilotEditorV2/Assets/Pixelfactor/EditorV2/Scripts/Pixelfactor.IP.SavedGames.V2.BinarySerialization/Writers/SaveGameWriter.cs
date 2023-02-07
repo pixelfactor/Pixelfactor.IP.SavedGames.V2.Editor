@@ -724,11 +724,37 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
             writer.Write(seedOptions != null);
             if (seedOptions != null)
             {
+                writer.Write(seedOptions.SeedUnstableWormholes);
+                writer.Write(seedOptions.SeedPlanets);
+                writer.Write(seedOptions.SeedAsteroidClusters);
+                writer.Write(seedOptions.SeedAsteroids);
+                writer.Write(seedOptions.SeedSprinkledAsteroids);
+                writer.Write(seedOptions.SeedGasClouds);
+
+                writer.Write(seedOptions.SeedEmpireFactions);
+                writer.Write(seedOptions.SeedBanditFactions);
+                writer.Write(seedOptions.SeedBars);
+                writer.Write(seedOptions.SeedOtherFactions);
+
+                writer.Write(seedOptions.SeedFactionStaticIntel);
+                writer.Write(seedOptions.SeedFactionUnitIntel);
+                writer.Write(seedOptions.SeedFactionOnFactionIntel);
+                writer.Write(seedOptions.SeedFactionRelations);
+
+                writer.Write(seedOptions.SeedPassengerGroups);
+                writer.Write(seedOptions.SeedModdedUnits);
+                writer.Write(seedOptions.SeedDepletedAsteroids);
+                writer.Write(seedOptions.SeedTraderCargo);
+                writer.Write(seedOptions.SeedShipDamage);
+
+                writer.Write(seedOptions.SeedRandomizedFleets);
+                writer.Write(seedOptions.SeedBounty);
+
+                writer.Write(seedOptions.SeedSmallAsteroids);
                 writer.Write(seedOptions.SeedAbandonedCargo);
                 writer.Write(seedOptions.SeedAbandonedShips);
-                writer.Write(seedOptions.SeedCargoHolds);
-                writer.Write(seedOptions.SeedFactionIntel);
-                writer.Write(seedOptions.SeedPassengerGroups);
+
+                writer.Write(seedOptions.SeedPilotPromotions);
             }
         }
 

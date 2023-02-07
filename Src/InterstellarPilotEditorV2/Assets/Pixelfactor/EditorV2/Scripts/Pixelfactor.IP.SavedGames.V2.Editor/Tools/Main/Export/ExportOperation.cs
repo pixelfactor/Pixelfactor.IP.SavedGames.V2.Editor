@@ -47,6 +47,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
             this.ExportPlayer();
             this.ExportBounty();
 
+            this.ExportSeedOptions();
             this.ExportScenarioData();
             this.ExportFleetSpawners();
             this.ExportMissions();
@@ -69,6 +70,48 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
             }
 
             return savedGame;
+        }
+
+        private void ExportSeedOptions()
+        {
+            var seedOptions = this.editorScenario.GetComponentInChildren<EditorScenarioSeedOptions>();
+            if (seedOptions != null)
+            {
+                this.savedGame.SeedOptions = new ModelSeedOptions
+                {
+                    SeedUnstableWormholes = seedOptions.SeedUnstableWormholes,
+                    SeedPlanets = seedOptions.SeedPlanets,
+                    SeedAsteroidClusters = seedOptions.SeedAsteroidClusters,
+                    SeedAsteroids = seedOptions.SeedAsteroids,
+                    SeedSprinkledAsteroids = seedOptions.SeedSprinkledAsteroids,
+                    SeedGasClouds = seedOptions.SeedGasClouds,
+
+                    SeedEmpireFactions = seedOptions.SeedEmpireFactions,
+                    SeedBanditFactions = seedOptions.SeedBanditFactions,
+                    SeedBars = seedOptions.SeedBars,
+                    SeedOtherFactions = seedOptions.SeedOtherFactions,
+
+                    SeedFactionStaticIntel = seedOptions.SeedFactionStaticIntel,
+                    SeedFactionUnitIntel = seedOptions.SeedFactionUnitIntel,
+                    SeedFactionOnFactionIntel = seedOptions.SeedFactionOnFactionIntel,
+                    SeedFactionRelations = seedOptions.SeedFactionRelations,
+
+                    SeedPassengerGroups = seedOptions.SeedPassengerGroups,
+                    SeedModdedUnits = seedOptions.SeedModdedUnits,
+                    SeedDepletedAsteroids = seedOptions.SeedDepletedAsteroids,
+                    SeedTraderCargo = seedOptions.SeedTraderCargo,
+                    SeedShipDamage = seedOptions.SeedShipDamage,
+
+                    SeedRandomizedFleets = seedOptions.SeedRandomizedFleets,
+                    SeedBounty = seedOptions.SeedBounty,
+
+                    SeedSmallAsteroids = seedOptions.SeedSmallAsteroids,
+                    SeedAbandonedCargo = seedOptions.SeedAbandonedCargo,
+                    SeedAbandonedShips = seedOptions.SeedAbandonedShips,
+
+                    SeedPilotPromotions = seedOptions.SeedPilotPromotions,
+                };
+            }
         }
 
         private void ExportTriggers()
