@@ -9,6 +9,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Model
     {
         public ModelHeader Header { get; set; }
 
+        /// <summary>
+        /// Optional long description of the scenario that is displayed in the mission log part of the scenarios list
+        /// </summary>
+        public string MissionLog { get; set; } = null;
+
         public List<ModelPerson> People { get; } = new List<ModelPerson>(1000);
         public List<ModelSector> Sectors { get; } = new List<ModelSector>(128);
 

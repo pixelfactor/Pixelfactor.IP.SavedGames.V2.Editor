@@ -52,6 +52,8 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
             savedGame.Header = (ModelHeader)this.headerReader.Read(reader);
             PrintStatus("Loaded header", reader);
 
+            savedGame.MissionLog = reader.ReadString();
+
             reader.ReadString(); // Heading
             savedGame.Sectors.AddRange(ReadSectors(reader));
             foreach (var sector in savedGame.Sectors)

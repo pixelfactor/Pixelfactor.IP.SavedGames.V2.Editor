@@ -61,6 +61,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
 
             this.ExportHeader();
 
+            savedGame.MissionLog = editorScenario.MissionLog;
+
             if (settings.Export_AutoAddIntel)
             { 
                 this.SeedFactionIntel();

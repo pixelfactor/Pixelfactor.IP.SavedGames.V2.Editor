@@ -21,12 +21,22 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor
         /// <summary>
         /// Change this to your name if required
         /// </summary>
+        [Tooltip("The optional author of the scenario. Reserved for future use")]
         public string Author = "";
 
         /// <summary>
-        /// Changes this to a description of the scenario.
+        /// An optional short description of the scenario. Reserved for future use
         /// </summary>
+        [Tooltip("An optional short description of the scenario. Reserved for future use")]
+        [Multiline(3)]
         public string Description = "";
+
+        /// <summary>
+        /// An optional mission log for the scenario. Reserved for future use
+        /// </summary>
+        [Tooltip("An optional mission log for the scenario. Reserved for future use")]
+        [Multiline(5)]
+        public string MissionLog = "";
 
         public int DateYear = 2236;
         public int DateMonth = 1;

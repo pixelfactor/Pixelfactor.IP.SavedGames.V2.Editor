@@ -40,6 +40,8 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
             this.headerWriter.Write(writer, _savedGame.Header);
             PrintStatus("Saved header", writer, logger);
 
+            writer.WriteStringOrEmpty(_savedGame.MissionLog);
+
             writer.Write("[Sectors]");
             WriteSectors(writer, _savedGame.Sectors);
             PrintStatus("Saved sectors", writer, logger);
