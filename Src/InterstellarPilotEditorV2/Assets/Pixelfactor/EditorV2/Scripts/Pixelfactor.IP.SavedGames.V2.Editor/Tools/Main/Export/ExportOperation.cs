@@ -722,7 +722,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                     // For reasons of laziness, if a pilot is in a ship, just set it to be the pilot and not require it to be linked.
                     const bool autoPilot = true;
 
-                    if (editorComponentUnit != null && (editorComponentUnit.Pilot == editorPerson || autoPilot))
+                    if (editorComponentUnit != null && !editorUnit.IsStation() && (editorComponentUnit.Pilot == editorPerson || autoPilot))
                     {
                         if (modelPerson.Faction == null)
                         {
