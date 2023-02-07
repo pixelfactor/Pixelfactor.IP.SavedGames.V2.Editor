@@ -19,10 +19,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Model
         public Vec3 Position { get; set; }
         public Vec3 Rotation { get; set; }
         public ModelFaction Faction { get; set; }
-        /// <summary>
-        /// Requisition point provision. Provides faction with chance to build more units
-        /// </summary>
-        public int RpProvision { get; set; }
 
         /// <summary>
         /// If this unit is a piece of cargo, this will be populated

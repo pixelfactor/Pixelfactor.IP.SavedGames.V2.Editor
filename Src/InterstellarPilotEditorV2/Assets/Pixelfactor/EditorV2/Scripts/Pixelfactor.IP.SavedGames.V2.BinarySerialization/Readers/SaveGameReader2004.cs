@@ -2105,7 +2105,8 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
                 Logging.UnknownFactionMessage(factionId, $"loading unit {unit.Id}");
             }
 
-            unit.RpProvision = reader.ReadInt32();
+            // RP Provision no longer used as of v2.0.58 save file
+            reader.ReadInt32();
 
             var hasCargo = reader.ReadBoolean();
             if (hasCargo)

@@ -1573,7 +1573,6 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
             writer.WriteVec3(unit.Position);
             writer.WriteVec3(unit.Rotation);
             writer.WriteFactionId(unit.Faction);
-            writer.Write(unit.RpProvision);
             writer.Write(unit.CargoData != null);
             if (unit.CargoData != null)
             {

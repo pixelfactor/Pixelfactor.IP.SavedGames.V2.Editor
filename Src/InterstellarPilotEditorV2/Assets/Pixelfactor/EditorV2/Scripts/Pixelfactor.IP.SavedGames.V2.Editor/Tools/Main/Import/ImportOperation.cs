@@ -321,8 +321,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Main.Import
 
             editorUnit.Faction = GetEditorFaction(modelUnit.Faction);
 
-            editorUnit.RpProvision = modelUnit.RpProvision;
-
             if (modelUnit.CargoData != null)
             {
                 ImportUnitCargoData(editorUnit, modelUnit.CargoData);

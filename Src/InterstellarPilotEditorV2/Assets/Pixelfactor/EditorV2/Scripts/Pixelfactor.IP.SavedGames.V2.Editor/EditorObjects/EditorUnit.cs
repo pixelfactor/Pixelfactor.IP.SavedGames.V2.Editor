@@ -64,9 +64,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         [Tooltip("Whether the unit can be damaged during normal gameplay")]
         public bool IsInvulnerable = false;
 
-        [HideInInspector]
-        public int RpProvision = 0;
-
         [Tooltip("The current health of the unit. When the value is < 0, the unit has full health")]
         public float Health = -1.0f;
 

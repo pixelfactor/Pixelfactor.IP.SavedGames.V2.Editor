@@ -855,27 +855,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                         };
                     }
 
-                    // HACK: Requisition Point weirdness
-                    // Only stations provide RP
-                    // I can't be arsed to populate all the RP values. But it must be exported
-                    // This system is likely to be removed in the future
-                    if (unit.IsStation() && !unit.IsTurret())
-                    {
-                        switch (unit.Class)
-                        {
-                            case ModelUnitClass.Station_TradeStation:
-                                unit.RpProvision = 2000;
-                                break;
-                            default:
-                                unit.RpProvision = 1000;
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        unit.RpProvision = 0;
-                    }
-
                     unit.Rotation = editorUnit.transform.localRotation.ToVec3();
                     if (unit.Sector != null)
                     {
