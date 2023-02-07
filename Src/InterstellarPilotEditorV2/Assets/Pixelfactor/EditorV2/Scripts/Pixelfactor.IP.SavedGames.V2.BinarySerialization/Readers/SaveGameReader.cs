@@ -1026,6 +1026,7 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
             scenarioData.AllowStationCapture = reader.ReadBoolean();
             scenarioData.AllowAbandonShip = reader.ReadBoolean();
             scenarioData.AllowGodMode = reader.ReadBoolean();
+            scenarioData.PlayerPropertyAttackNotifications = reader.ReadBoolean();
 
             return scenarioData;
         }

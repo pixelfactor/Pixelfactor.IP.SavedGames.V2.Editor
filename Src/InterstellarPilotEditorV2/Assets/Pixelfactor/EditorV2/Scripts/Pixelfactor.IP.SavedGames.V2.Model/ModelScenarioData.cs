@@ -24,8 +24,24 @@ namespace Pixelfactor.IP.SavedGames.V2.Model
         public float AsteroidRespawnTime { get; set; } = 0.5f;
         public float NextProcessOtherEventsTime { get; set; } = 0.0f;
 
+        /// <summary>
+        /// Gets or sets if any station can be captured
+        /// </summary>
         public bool AllowStationCapture { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets if NPC pilots may abandon their ship during combat
+        /// </summary>
         public bool AllowAbandonShip { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets if god mode can be accessed during the scenario
+        /// </summary>
         public bool AllowGodMode { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets if the player receives notifications when property is under attack. This can be turned off when the scenario is a skirmish
+        /// </summary>
+        public bool PlayerPropertyAttackNotifications { get; set; } = true;
     }
 }

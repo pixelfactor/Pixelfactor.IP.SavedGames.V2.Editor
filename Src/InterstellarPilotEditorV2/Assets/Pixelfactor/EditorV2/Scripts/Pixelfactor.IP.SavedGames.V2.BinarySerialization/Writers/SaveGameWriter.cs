@@ -783,6 +783,7 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
             writer.Write(scenarioData.AllowStationCapture);
             writer.Write(scenarioData.AllowAbandonShip);
             writer.Write(scenarioData.AllowGodMode);
+            writer.Write(scenarioData.PlayerPropertyAttackNotifications);
         }
 
         private void WriteAllFactionTransactions(

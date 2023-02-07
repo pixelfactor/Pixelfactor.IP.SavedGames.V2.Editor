@@ -562,6 +562,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 savedGame.ScenarioData.AsteroidRespawnTime = customScenarioOptions.AsteroidRespawnTime;
                 savedGame.ScenarioData.Permadeath = customScenarioOptions.Permadeath;
                 savedGame.ScenarioData.RespawnOnDeath = customScenarioOptions.RespawnOnDeath;
+                savedGame.ScenarioData.PlayerPropertyAttackNotifications = customScenarioOptions.PlayerPropertyAttackNotifications;
 
             }
         }

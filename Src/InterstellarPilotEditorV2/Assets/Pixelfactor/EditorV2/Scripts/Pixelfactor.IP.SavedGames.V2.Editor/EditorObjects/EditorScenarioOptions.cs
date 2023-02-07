@@ -41,5 +41,11 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 
         [Tooltip("Whether the player can access god mode")]
         public bool AllowGodMode = true;
+
+        /// <summary>
+        /// Gets or sets if the player receives notifications when property is under attack. This can be turned off when the scenario is a skirmish
+        /// </summary>
+        [Tooltip("Whether the player receives notifications when property is under attack. This can be turned off when the scenario is a skirmish")]
+        public bool PlayerPropertyAttackNotifications { get; set; } = true;
     }
 }
