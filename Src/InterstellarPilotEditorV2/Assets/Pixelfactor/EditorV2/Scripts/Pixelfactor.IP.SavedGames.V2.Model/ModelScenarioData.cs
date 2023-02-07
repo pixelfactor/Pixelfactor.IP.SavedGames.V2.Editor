@@ -26,5 +26,6 @@ namespace Pixelfactor.IP.SavedGames.V2.Model
 
         public bool AllowStationCapture { get; set; } = true;
         public bool AllowAbandonShip { get; set; } = true;
+        public bool AllowGodMode { get; set; } = true;
     }
 }

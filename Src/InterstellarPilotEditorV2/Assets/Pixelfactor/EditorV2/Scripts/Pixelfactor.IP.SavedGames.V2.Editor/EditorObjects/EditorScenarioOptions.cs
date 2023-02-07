@@ -38,5 +38,8 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
 
         [Tooltip("Whether NPCs can abandoned ships")]
         public bool AllowAbandonShip = true;
+
+        [Tooltip("Whether the player can access god mode")]
+        public bool AllowGodMode = true;
     }
 }

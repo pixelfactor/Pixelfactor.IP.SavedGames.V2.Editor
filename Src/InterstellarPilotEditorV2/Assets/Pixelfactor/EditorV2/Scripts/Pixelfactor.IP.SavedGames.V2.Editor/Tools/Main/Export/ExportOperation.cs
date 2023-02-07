@@ -554,6 +554,7 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                     };
                 }
 
+                savedGame.ScenarioData.AllowGodMode = customScenarioOptions.AllowGodMode;
                 savedGame.ScenarioData.AllowAbandonShip = customScenarioOptions.AllowAbandonShip;
                 savedGame.ScenarioData.AllowStationCapture = customScenarioOptions.AllowStationCapture;
                 savedGame.ScenarioData.AllowTeleporting = customScenarioOptions.AllowTeleporting;

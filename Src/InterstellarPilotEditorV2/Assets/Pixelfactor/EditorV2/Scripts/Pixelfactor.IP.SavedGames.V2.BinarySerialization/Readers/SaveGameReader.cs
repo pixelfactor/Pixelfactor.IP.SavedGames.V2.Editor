@@ -1025,6 +1025,7 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
             scenarioData.NextProcessOtherEventsTime = reader.ReadSingle();
             scenarioData.AllowStationCapture = reader.ReadBoolean();
             scenarioData.AllowAbandonShip = reader.ReadBoolean();
+            scenarioData.AllowGodMode = reader.ReadBoolean();
 
             return scenarioData;
         }
