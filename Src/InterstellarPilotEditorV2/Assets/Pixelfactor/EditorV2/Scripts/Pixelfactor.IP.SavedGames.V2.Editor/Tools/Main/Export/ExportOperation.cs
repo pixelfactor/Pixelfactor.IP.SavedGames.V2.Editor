@@ -552,8 +552,28 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.Tools.Export
                 {
                     savedGame.ScenarioData.FactionSpawner = new ModelFactionSpawner
                     {
-                        NextUpdate = customScenarioOptions.MinTimeBeforeFactionSpawn
+                        NextFactionSpawnTime = customScenarioOptions.NextFactionSpawnTime,
+                        NextFreelancerSpawnTime = customScenarioOptions.NextFreelancerSpawnTime
                     };
+
+                    var editorFactionSpawnSettings = this.editorScenario.GetComponentInChildren<EditorFactionSpawnSettings>();
+                    if (editorFactionSpawnSettings != null)
+                    {
+                        if (savedGame.ScenarioData.FactionSpawner.FactionTypeSpawnSettings == null)
+                        {
+                            savedGame.ScenarioData.FactionSpawner.FactionTypeSpawnSettings = new List<ModelFactionTypeSpawnSetting>();
+                        }
+
+                        foreach (var editorFactionTypesSpawn in editorFactionSpawnSettings.FactionTypeSettings)
+                        {
+                            savedGame.ScenarioData.FactionSpawner.FactionTypeSpawnSettings.Add(new ModelFactionTypeSpawnSetting
+                            {
+                                AllowSpawn = editorFactionTypesSpawn.AllowSpawn,
+                                FreelancerType = editorFactionTypesSpawn.FreelancerType,
+                                FactionType = editorFactionTypesSpawn.FactionType
+                            });
+                        }
+                    }
                 }
 
                 savedGame.ScenarioData.AllowGodMode = customScenarioOptions.AllowGodMode;

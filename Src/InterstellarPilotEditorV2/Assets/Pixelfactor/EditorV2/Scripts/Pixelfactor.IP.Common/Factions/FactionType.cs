@@ -1,5 +1,6 @@
 ﻿namespace Pixelfactor.IP.Common.Factions
 {
+    [System.Flags]
     public enum FactionType
     {
         None,

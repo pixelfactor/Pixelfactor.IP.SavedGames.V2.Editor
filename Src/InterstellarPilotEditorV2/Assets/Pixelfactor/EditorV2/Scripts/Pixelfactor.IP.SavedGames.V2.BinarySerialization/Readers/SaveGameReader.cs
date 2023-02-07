@@ -1008,7 +1008,19 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
             if (hasFactionSpawner)
             {
                 scenarioData.FactionSpawner = new ModelFactionSpawner();
-                scenarioData.FactionSpawner.NextUpdate = reader.ReadDouble();
+                scenarioData.FactionSpawner.NextFactionSpawnTime = reader.ReadDouble();
+                scenarioData.FactionSpawner.NextFreelancerSpawnTime = reader.ReadDouble();
+
+                var factionTypeSpawnItemCount = reader.ReadInt32();
+                for (int i = 0; i < factionTypeSpawnItemCount; i++)
+                {
+                    var factionTypeSpawnItem = new ModelFactionTypeSpawnSetting();
+                    factionTypeSpawnItem.FactionType = (FactionType)reader.ReadInt32();
+                    factionTypeSpawnItem.FreelancerType = (FactionFreelancerType)reader.ReadInt32();
+                    factionTypeSpawnItem.AllowSpawn = reader.ReadBoolean();
+
+                    scenarioData.FactionSpawner.FactionTypeSpawnSettings.Add(factionTypeSpawnItem);
+                }
             }
 
             var hasTradeRouteScenarioData = reader.ReadBoolean();

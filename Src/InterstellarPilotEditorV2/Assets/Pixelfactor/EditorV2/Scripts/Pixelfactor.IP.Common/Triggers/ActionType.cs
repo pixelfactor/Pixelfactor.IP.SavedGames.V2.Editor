@@ -22,6 +22,7 @@
         Faction_SetOpinionWith = 40200,
         Faction_SetRpMultiplier = 40300,
         Faction_DiscoverFactionUnits = 41000,
+        Faction_DiscoverUnits = 42000,
 
         Unit_ChangeFleet = 30000,
         Unit_ChangeCargo = 30100,

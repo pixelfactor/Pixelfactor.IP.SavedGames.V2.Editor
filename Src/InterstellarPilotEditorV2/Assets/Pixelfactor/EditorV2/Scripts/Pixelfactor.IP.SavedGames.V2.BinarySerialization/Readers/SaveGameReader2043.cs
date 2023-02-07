@@ -1006,7 +1006,7 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Readers
             if (hasFactionSpawner)
             {
                 scenarioData.FactionSpawner = new ModelFactionSpawner();
-                scenarioData.FactionSpawner.NextUpdate = reader.ReadDouble();
+                scenarioData.FactionSpawner.NextFactionSpawnTime = reader.ReadDouble();
             }
 
             var hasTradeRouteScenarioData = reader.ReadBoolean();

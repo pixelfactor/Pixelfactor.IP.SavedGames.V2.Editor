@@ -766,7 +766,24 @@ namespace Pixelfactor.IP.SavedGames.V2.BinarySerialization.Writers
             writer.Write(scenarioData.FactionSpawner != null);
             if (scenarioData.FactionSpawner != null)
             {
-                writer.Write(scenarioData.FactionSpawner.NextUpdate);
+                writer.Write(scenarioData.FactionSpawner.NextFactionSpawnTime);
+                writer.Write(scenarioData.FactionSpawner.NextFreelancerSpawnTime);
+
+                if (scenarioData.FactionSpawner.FactionTypeSpawnSettings != null)
+                {
+                    writer.Write(scenarioData.FactionSpawner.FactionTypeSpawnSettings.Count);
+
+                    for (int i = 0; i < scenarioData.FactionSpawner.FactionTypeSpawnSettings.Count; i++)
+                    {
+                        writer.Write((int)scenarioData.FactionSpawner.FactionTypeSpawnSettings[i].FactionType);
+                        writer.Write((int)scenarioData.FactionSpawner.FactionTypeSpawnSettings[i].FreelancerType);
+                        writer.Write(scenarioData.FactionSpawner.FactionTypeSpawnSettings[i].AllowSpawn);
+                    }
+                }
+                else
+                {
+                    writer.Write(0);
+                }
             }
 
             writer.Write(scenarioData.TradeRouteScenarioData != null);

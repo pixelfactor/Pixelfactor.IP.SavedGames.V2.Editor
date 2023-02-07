@@ -8,11 +8,15 @@ namespace Pixelfactor.IP.SavedGames.V2.Editor.EditorObjects
         [Tooltip("Not currently implemented in engine - likely to be re-implemented in the future. Would control events like randomly spawned abandoned ships")]
         public bool RandomEventsEnabled = true;
 
-        [Tooltip("Whether new factions (freelancer and major) can be spawned in the game")]
+        [Tooltip("Whether new factions (freelancer and major) can be spawned in the game. Note: To fine-tune which factions can spawn use EditorFactionSpawnSettings")]
         public bool FactionSpawningEnabled = true;
 
-        [Tooltip("Min scenarion time in seconds before a new faction can be spawned")]
-        public double MinTimeBeforeFactionSpawn = 0.0;
+        [Tooltip("Scenario time in seconds when a new faction can be spawned")]
+        [UnityEngine.Serialization.FormerlySerializedAs("MinTimeBeforeFactionSpawn")]
+        public double NextFactionSpawnTime = 0.0;
+
+        [Tooltip("Scenario time in seconds when a new freelancer can be spawned")]
+        public double NextFreelancerSpawnTime = 0.0;
 
         [Tooltip("Whether asteroids can ever respawn")]
         public bool AsteroidRespawningEnabled = true;
