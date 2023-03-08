@@ -60,6 +60,7 @@
         Equipment_LS1TestMissile = 8010,
         Equipment_MineI = 10000,
         Equipment_MineII = 11000,
-        Equipment_SmallRockets = 17000
+        Equipment_SmallRockets = 17000,
+        Equipment_SonarPulse = 11005,
     }
 }

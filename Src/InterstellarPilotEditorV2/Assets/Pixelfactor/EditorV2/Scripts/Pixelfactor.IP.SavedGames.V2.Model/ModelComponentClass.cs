@@ -139,6 +139,7 @@
         Plasma_Pulse_3 = 71400,
         Small_Launcher = 71500,
         Test_Launcher = 71505,
-        Tractor_Mk1 = 71600
+        Tractor_Mk1 = 71600,
+        Sentinel = 70820
     }
 }
